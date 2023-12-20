@@ -15,8 +15,8 @@ https://yccoin.github.io/categories/index.html
 https://yccoin.github.io/tags/index.html
 https://yccoin.github.io/
 https://yccoin.github.io/tags/nginx/
-https://yccoin.github.io/tags/linux/
 https://yccoin.github.io/tags/rewrite/
+https://yccoin.github.io/tags/linux/
 https://yccoin.github.io/tags/shell/
 https://yccoin.github.io/tags/windows/
 https://yccoin.github.io/tags/python/
@@ -24,8 +24,8 @@ https://yccoin.github.io/tags/tools/
 https://yccoin.github.io/tags/bat/
 https://yccoin.github.io/tags/mssql/
 https://yccoin.github.io/categories/nginx/
-https://yccoin.github.io/categories/linux/
 https://yccoin.github.io/categories/rewrite/
+https://yccoin.github.io/categories/linux/
 https://yccoin.github.io/categories/shell/
 https://yccoin.github.io/categories/windows/
 https://yccoin.github.io/categories/python/

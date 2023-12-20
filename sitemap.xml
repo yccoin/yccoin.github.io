@@ -153,14 +153,14 @@
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/tags/linux/</loc>
+    <loc>https://yccoin.github.io/tags/rewrite/</loc>
     <lastmod>2023-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/tags/rewrite/</loc>
+    <loc>https://yccoin.github.io/tags/linux/</loc>
     <lastmod>2023-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -218,14 +218,14 @@
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/categories/linux/</loc>
+    <loc>https://yccoin.github.io/categories/rewrite/</loc>
     <lastmod>2023-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/categories/rewrite/</loc>
+    <loc>https://yccoin.github.io/categories/linux/</loc>
     <lastmod>2023-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

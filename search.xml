@@ -73,40 +73,6 @@ $sent_http_transfer_encoding```
       </tags>
   </entry>
   <entry>
-    <title>centos 8安装mysql</title>
-    <url>/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/</url>
-    <content><![CDATA[<h5 id="centos-8-安装mysql"><a href="#centos-8-安装mysql" class="headerlink" title="centos 8 安装mysql"></a>centos 8 安装mysql</h5><span id="more"></span>
-<h5 id="添加-MySQL-Yum-存储库"><a href="#添加-MySQL-Yum-存储库" class="headerlink" title="添加 MySQL Yum 存储库"></a>添加 MySQL Yum 存储库</h5><p>首先，将 MySQL Yum 存储库添加到系统的存储库列表中。这是一次性操作，可以通过安装 MySQL 提供的 RPM 来执行。按着这些次序:  </p>
-<ol>
-<li>转到 MySQL 开发人员专区中的下载 MySQL Yum 存储库页面(官方存储库)</li>
-<li>为您的平台选择并下载发布包<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">wget https://link.zhihu.com/?<span class="keyword">target</span><span class="operator">=</span>https<span class="variable">%3</span>A//repo.mysql.com//mysql<span class="number">80</span>-community-<span class="keyword">release</span>-el<span class="number">7</span><span class="number">-1</span>.noarch.rpm</span><br><span class="line">rpm -ivh mysql<span class="number">80</span>-community-<span class="keyword">release</span>-el<span class="number">7</span><span class="number">-1</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">yum repolist <span class="keyword">all</span> |<span class="keyword">grep</span> mysql</span><br></pre></td></tr></table></figure>
-<img src="/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/1703038728264.jpg"><br>上面可以看到,默认启用的是80,因为我是要57版本的所以要设置一下,启用57,禁用80  <figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">[root<span class="symbol">@ebs</span><span class="number">-132999</span> mysql]<span class="meta"># dnf config-manager --disable mysql80-community</span></span><br><span class="line">[root<span class="symbol">@ebs</span><span class="number">-132999</span> mysql]<span class="meta"># dnf config-manager --enable mysql57-community</span></span><br></pre></td></tr></table></figure>
-<img src="/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/1703038804134.jpg"></li>
-</ol>
-<h5 id="禁用默认-MySQL-模块"><a href="#禁用默认-MySQL-模块" class="headerlink" title="禁用默认 MySQL 模块"></a>禁用默认 MySQL 模块</h5><blockquote>
-<p>官方解释<br>(仅限 EL8 系统）基于 EL8 的系统（例如 RHEL8 和 Oracle Linux 8）包含默认启用的 MySQL 模块。除非禁用此模块，否则它会屏蔽 MySQL 存储库提供的包。要禁用包含的模块并使 MySQL 存储库包可见，请使用以下命令（对于启用 dnf 的系统， 将命令中的 yum替换为dnf）：</p>
-</blockquote>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">yum module <span class="built_in">disable</span> mysql</span><br></pre></td></tr></table></figure>
-<p>安装mysql  </p>
-<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line">dnf install  mysql-community-<span class="keyword">server</span></span><br></pre></td></tr></table></figure>
-<p>安装时提示证书异常<br><img src="/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/1703038858140.jpg"></p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">rpm --<span class="keyword">import</span> https:<span class="comment">//repo.mysql.com/RPM-GPG-KEY-mysql-2022</span></span><br></pre></td></tr></table></figure>
-<p>官方解决办法(<a href="https://dev.mysql.com/doc/refman/8.0/en/checking-rpm-signature.html">https://dev.mysql.com/doc/refman/8.0/en/checking-rpm-signature.html</a>)</p>
-<h5 id="启动并修改设置"><a href="#启动并修改设置" class="headerlink" title="启动并修改设置"></a>启动并修改设置</h5><p>修改data目录路径指向home  </p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">datadir</span>=/home/mysql</span><br><span class="line"><span class="attr">socket</span>=/home/mysql/mysql.sock</span><br><span class="line"></span><br><span class="line"><span class="comment"># Disabling symbolic-links is recommended to prevent assorted security risks</span></span><br><span class="line"><span class="attr">symbolic-links</span>=<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="attr">log-error</span>=/home/mysql/log/mysqld.log</span><br><span class="line"><span class="attr">pid-file</span>=/home/mysql/run/mysqld/mysqld.pid</span><br></pre></td></tr></table></figure>
-<p>查看root初始密码  </p>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">grep <span class="string">&#x27;password&#x27;</span> /<span class="keyword">var</span>/<span class="built_in">log</span>/mysqld.<span class="built_in">log</span></span><br></pre></td></tr></table></figure>
-<p>本地或者远程连接不上，提示socket错误，注意是my.cnf中没有配置client  </p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[client]</span></span><br><span class="line"><span class="attr">socket</span>=/home/mysql/mysql.sock</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>rewrite总结</title>
     <url>/2023/12/15/rewrite%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>rewrite总结</p>
@@ -179,6 +145,40 @@ $sent_http_transfer_encoding```
       </categories>
       <tags>
         <tag>rewrite</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>centos 8安装mysql</title>
+    <url>/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/</url>
+    <content><![CDATA[<h5 id="centos-8-安装mysql"><a href="#centos-8-安装mysql" class="headerlink" title="centos 8 安装mysql"></a>centos 8 安装mysql</h5><span id="more"></span>
+<h5 id="添加-MySQL-Yum-存储库"><a href="#添加-MySQL-Yum-存储库" class="headerlink" title="添加 MySQL Yum 存储库"></a>添加 MySQL Yum 存储库</h5><p>首先，将 MySQL Yum 存储库添加到系统的存储库列表中。这是一次性操作，可以通过安装 MySQL 提供的 RPM 来执行。按着这些次序:  </p>
+<ol>
+<li>转到 MySQL 开发人员专区中的下载 MySQL Yum 存储库页面(官方存储库)</li>
+<li>为您的平台选择并下载发布包<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">wget https://link.zhihu.com/?<span class="keyword">target</span><span class="operator">=</span>https<span class="variable">%3</span>A//repo.mysql.com//mysql<span class="number">80</span>-community-<span class="keyword">release</span>-el<span class="number">7</span><span class="number">-1</span>.noarch.rpm</span><br><span class="line">rpm -ivh mysql<span class="number">80</span>-community-<span class="keyword">release</span>-el<span class="number">7</span><span class="number">-1</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">yum repolist <span class="keyword">all</span> |<span class="keyword">grep</span> mysql</span><br></pre></td></tr></table></figure>
+<img src="/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/1703038728264.jpg"><br>上面可以看到,默认启用的是80,因为我是要57版本的所以要设置一下,启用57,禁用80  <figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">[root<span class="symbol">@ebs</span><span class="number">-132999</span> mysql]<span class="meta"># dnf config-manager --disable mysql80-community</span></span><br><span class="line">[root<span class="symbol">@ebs</span><span class="number">-132999</span> mysql]<span class="meta"># dnf config-manager --enable mysql57-community</span></span><br></pre></td></tr></table></figure>
+<img src="/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/1703038804134.jpg"></li>
+</ol>
+<h5 id="禁用默认-MySQL-模块"><a href="#禁用默认-MySQL-模块" class="headerlink" title="禁用默认 MySQL 模块"></a>禁用默认 MySQL 模块</h5><blockquote>
+<p>官方解释<br>(仅限 EL8 系统）基于 EL8 的系统（例如 RHEL8 和 Oracle Linux 8）包含默认启用的 MySQL 模块。除非禁用此模块，否则它会屏蔽 MySQL 存储库提供的包。要禁用包含的模块并使 MySQL 存储库包可见，请使用以下命令（对于启用 dnf 的系统， 将命令中的 yum替换为dnf）：</p>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">yum module <span class="built_in">disable</span> mysql</span><br></pre></td></tr></table></figure>
+<p>安装mysql  </p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line">dnf install  mysql-community-<span class="keyword">server</span></span><br></pre></td></tr></table></figure>
+<p>安装时提示证书异常<br><img src="/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/1703038858140.jpg"></p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">rpm --<span class="keyword">import</span> https:<span class="comment">//repo.mysql.com/RPM-GPG-KEY-mysql-2022</span></span><br></pre></td></tr></table></figure>
+<p>官方解决办法(<a href="https://dev.mysql.com/doc/refman/8.0/en/checking-rpm-signature.html">https://dev.mysql.com/doc/refman/8.0/en/checking-rpm-signature.html</a>)</p>
+<h5 id="启动并修改设置"><a href="#启动并修改设置" class="headerlink" title="启动并修改设置"></a>启动并修改设置</h5><p>修改data目录路径指向home  </p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">datadir</span>=/home/mysql</span><br><span class="line"><span class="attr">socket</span>=/home/mysql/mysql.sock</span><br><span class="line"></span><br><span class="line"><span class="comment"># Disabling symbolic-links is recommended to prevent assorted security risks</span></span><br><span class="line"><span class="attr">symbolic-links</span>=<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="attr">log-error</span>=/home/mysql/log/mysqld.log</span><br><span class="line"><span class="attr">pid-file</span>=/home/mysql/run/mysqld/mysqld.pid</span><br></pre></td></tr></table></figure>
+<p>查看root初始密码  </p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">grep <span class="string">&#x27;password&#x27;</span> /<span class="keyword">var</span>/<span class="built_in">log</span>/mysqld.<span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+<p>本地或者远程连接不上，提示socket错误，注意是my.cnf中没有配置client  </p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[client]</span></span><br><span class="line"><span class="attr">socket</span>=/home/mysql/mysql.sock</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -303,25 +303,6 @@ fi
       </tags>
   </entry>
   <entry>
-    <title>ssh密钥登录以及ssh-agent管理密钥</title>
-    <url>/2023/12/18/ssh%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95%E4%BB%A5%E5%8F%8Assh-agent%E7%AE%A1%E7%90%86%E5%AF%86%E9%92%A5/</url>
-    <content><![CDATA[<blockquote>
-<p>ssh密钥登录以及ssh-agent管理密钥 </p>
-</blockquote>
-<span id="more"></span>
-<h5 id="1-生成密钥"><a href="#1-生成密钥" class="headerlink" title="1.生成密钥"></a>1.生成密钥</h5><figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ssh-keygen -t rsa</span></span><br></pre></td></tr></table></figure>
-<h5 id="2-安装密钥"><a href="#2-安装密钥" class="headerlink" title="2.安装密钥"></a>2.安装密钥</h5><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">ssh-<span class="keyword">copy</span><span class="language-bash">-<span class="built_in">id</span> -i ~/.ssh/id_rsa.pub zsy@10.1.0.3</span></span><br></pre></td></tr></table></figure>
-<h5 id="3-取消密码登录"><a href="#3-取消密码登录" class="headerlink" title="3.取消密码登录"></a>3.取消密码登录</h5><figure class="highlight gams"><table><tr><td class="code"><pre><span class="line">vi /etc/ssh/sshd_config  </span><br><span class="line"></span><br><span class="line"> <span class="keyword">yes</span>       #RSA身份验证:<span class="keyword">yes</span>开启<span class="keyword">no</span>关闭  若这项没有可忽略</span><br><span class="line">PubkeyAuthentication <span class="keyword">yes</span>    #公钥身份验证:<span class="keyword">yes</span>开启<span class="keyword">no</span>关闭</span><br><span class="line">PermitRootLogin <span class="keyword">yes</span>          #允许root登录:<span class="keyword">yes</span>开启<span class="keyword">no</span>关闭</span><br><span class="line">PasswordAuthentication <span class="keyword">no</span>   #密码登录方式:<span class="keyword">yes</span>开启<span class="keyword">no</span>关闭</span><br><span class="line"></span><br><span class="line">cat id_rsa.pub &gt;&gt; authorized_keys</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>win7系统下Update更新出现错误代码80073712的解决方法</title>
     <url>/2023/12/18/win7%E7%B3%BB%E7%BB%9F%E4%B8%8BUpdate%E6%9B%B4%E6%96%B0%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E4%BB%A3%E7%A0%8180073712%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<blockquote>
@@ -341,6 +322,25 @@ fi
       </categories>
       <tags>
         <tag>windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ssh密钥登录以及ssh-agent管理密钥</title>
+    <url>/2023/12/18/ssh%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95%E4%BB%A5%E5%8F%8Assh-agent%E7%AE%A1%E7%90%86%E5%AF%86%E9%92%A5/</url>
+    <content><![CDATA[<blockquote>
+<p>ssh密钥登录以及ssh-agent管理密钥 </p>
+</blockquote>
+<span id="more"></span>
+<h5 id="1-生成密钥"><a href="#1-生成密钥" class="headerlink" title="1.生成密钥"></a>1.生成密钥</h5><figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ssh-keygen -t rsa</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-安装密钥"><a href="#2-安装密钥" class="headerlink" title="2.安装密钥"></a>2.安装密钥</h5><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">ssh-<span class="keyword">copy</span><span class="language-bash">-<span class="built_in">id</span> -i ~/.ssh/id_rsa.pub zsy@10.1.0.3</span></span><br></pre></td></tr></table></figure>
+<h5 id="3-取消密码登录"><a href="#3-取消密码登录" class="headerlink" title="3.取消密码登录"></a>3.取消密码登录</h5><figure class="highlight gams"><table><tr><td class="code"><pre><span class="line">vi /etc/ssh/sshd_config  </span><br><span class="line"></span><br><span class="line"> <span class="keyword">yes</span>       #RSA身份验证:<span class="keyword">yes</span>开启<span class="keyword">no</span>关闭  若这项没有可忽略</span><br><span class="line">PubkeyAuthentication <span class="keyword">yes</span>    #公钥身份验证:<span class="keyword">yes</span>开启<span class="keyword">no</span>关闭</span><br><span class="line">PermitRootLogin <span class="keyword">yes</span>          #允许root登录:<span class="keyword">yes</span>开启<span class="keyword">no</span>关闭</span><br><span class="line">PasswordAuthentication <span class="keyword">no</span>   #密码登录方式:<span class="keyword">yes</span>开启<span class="keyword">no</span>关闭</span><br><span class="line"></span><br><span class="line">cat id_rsa.pub &gt;&gt; authorized_keys</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -444,6 +444,23 @@ fi
       </tags>
   </entry>
   <entry>
+    <title>查询mssql对应bak版本</title>
+    <url>/2023/12/18/%E6%9F%A5%E8%AF%A2mssql%E5%AF%B9%E5%BA%94bak%E7%89%88%E6%9C%AC/</url>
+    <content><![CDATA[<blockquote>
+<p>SQLServer 的备份文件是以.bak 为后缀的文件，如果想要通过备份文件查看数据库版本，通常的做法就是把数据库还原，但是在还原的过程，如果不是相同的数据库版本，就会导致无法还原；<br>在数据库中，低版本的备份文件是可以还原到高版本的数据库中，高的就不可以了，比如SQLSERVER 2008 的备份文件可以在SQLSERVER 2012 中还原，2012就不能在2008中还原</p>
+</blockquote>
+<span id="more"></span>
+
+<p>这时候，我们就可以用一段脚本来查看，如下：<br><code>RESTORE HEADERONLY  FROM DISK =&#39;D:\mssqlupload\53office_data.bak&#39; WITH NOUNLOAD;</code><br><img src="/2023/12/18/%E6%9F%A5%E8%AF%A2mssql%E5%AF%B9%E5%BA%94bak%E7%89%88%E6%9C%AC/image.jpg"></p>
+]]></content>
+      <categories>
+        <category>mssql</category>
+      </categories>
+      <tags>
+        <tag>mssql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>装饰器</title>
     <url>/2023/12/18/%E8%A3%85%E9%A5%B0%E5%99%A8/</url>
     <content><![CDATA[<blockquote>
@@ -460,23 +477,6 @@ fi
       </categories>
       <tags>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>查询mssql对应bak版本</title>
-    <url>/2023/12/18/%E6%9F%A5%E8%AF%A2mssql%E5%AF%B9%E5%BA%94bak%E7%89%88%E6%9C%AC/</url>
-    <content><![CDATA[<blockquote>
-<p>SQLServer 的备份文件是以.bak 为后缀的文件，如果想要通过备份文件查看数据库版本，通常的做法就是把数据库还原，但是在还原的过程，如果不是相同的数据库版本，就会导致无法还原；<br>在数据库中，低版本的备份文件是可以还原到高版本的数据库中，高的就不可以了，比如SQLSERVER 2008 的备份文件可以在SQLSERVER 2012 中还原，2012就不能在2008中还原</p>
-</blockquote>
-<span id="more"></span>
-
-<p>这时候，我们就可以用一段脚本来查看，如下：<br><code>RESTORE HEADERONLY  FROM DISK =&#39;D:\mssqlupload\53office_data.bak&#39; WITH NOUNLOAD;</code><br><img src="/2023/12/18/%E6%9F%A5%E8%AF%A2mssql%E5%AF%B9%E5%BA%94bak%E7%89%88%E6%9C%AC/image.jpg"></p>
-]]></content>
-      <categories>
-        <category>mssql</category>
-      </categories>
-      <tags>
-        <tag>mssql</tag>
       </tags>
   </entry>
   <entry>

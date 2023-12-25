@@ -107,6 +107,42 @@ $sent_http_transfer_encoding```
       </tags>
   </entry>
   <entry>
+    <title>centos 8安装php-fpm</title>
+    <url>/2023/12/25/centos%208%E5%AE%89%E8%A3%85php-fpm/</url>
+    <content><![CDATA[<p>centos 8安装php-fpm</p>
+<span id="more"></span>
+<h6 id="1-安装依赖包"><a href="#1-安装依赖包" class="headerlink" title="1. 安装依赖包"></a>1. 安装依赖包</h6><figure class="highlight nsis"><table><tr><td class="code"><pre><span class="line">yum install -y gcc gcc-c++  make <span class="literal">zlib</span> <span class="literal">zlib</span>-devel pcre pcre-devel  libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel glibc glibc-devel glib2 glib2-devel <span class="literal">bzip2</span> <span class="literal">bzip2</span>-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel openssl openssl-devel openldap openldap-devel nss_ldap openldap-clients openldap-servers automake libtool</span><br></pre></td></tr></table></figure>
+<h6 id="2-解压安装php"><a href="#2-解压安装php" class="headerlink" title="2. 解压安装php"></a>2. 解压安装php</h6><p>下载php</p>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="symbol">https:</span><span class="comment">//www.php.net/downloads.php)</span></span><br></pre></td></tr></table></figure>
+<p>编译时出错oniguruma<br>Centos 8 安装 oniguruma</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://down.24kplus.com/linux/oniguruma/oniguruma-6.9.4.tar.gz</span><br><span class="line">tar -zxf oniguruma-6.9.4.tar.gz</span><br><span class="line"><span class="built_in">cd</span> oniguruma-6.9.4</span><br><span class="line">./autogen.sh &amp;&amp; ./configure --prefix=/usr</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h6 id="3-编译php"><a href="#3-编译php" class="headerlink" title="3.编译php"></a>3.编译php</h6><figure class="highlight crystal"><table><tr><td class="code"><pre><span class="line">./configure \</span><br><span class="line">--prefix=<span class="regexp">/usr/local</span><span class="regexp">/php \</span></span><br><span class="line"><span class="regexp">--exec-prefix=/usr</span><span class="regexp">/local/php</span> \</span><br><span class="line">--bindir=<span class="regexp">/usr/local</span><span class="regexp">/php/bin</span> \</span><br><span class="line">--sbindir=<span class="regexp">/usr/local</span><span class="regexp">/php/sbin</span> \</span><br><span class="line">--includedir=<span class="regexp">/usr/local</span><span class="regexp">/php/include</span> \</span><br><span class="line">--libdir=<span class="regexp">/usr/local</span><span class="regexp">/php/lib</span><span class="regexp">/php \</span></span><br><span class="line"><span class="regexp">--mandir=/usr</span><span class="regexp">/local/php</span><span class="regexp">/php/man</span> \</span><br><span class="line">--<span class="keyword">with</span>-config-file-path=<span class="regexp">/usr/local</span><span class="regexp">/php/etc</span> \</span><br><span class="line">--<span class="keyword">with</span>-openssl \</span><br><span class="line">--enable-mbstring \</span><br><span class="line">--enable-fpm</span><br></pre></td></tr></table></figure>
+<figure class="highlight gauss"><table><tr><td class="code"><pre><span class="line"><span class="built_in">make</span> &amp;&amp; <span class="built_in">make</span> install</span><br></pre></td></tr></table></figure>
+<p>在之前编译的源码包中，找到 php.ini-production，复制到&#x2F;usr&#x2F;local&#x2F;php&#x2F;etc下，并改名为php.ini：</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">cp php.ini-production <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>etc/php.ini</span><br></pre></td></tr></table></figure>
+<p>将php源码编译目录下的 sapi&#x2F;fpm&#x2F;init.d.php-fpm 文件拷贝到系统配置 &#x2F;etc&#x2F;init.d 目录下并重命名为 php-fpm</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">[root<span class="meta">@localhost</span> php<span class="operator">-</span><span class="number">7.3</span>.<span class="number">4</span>]# cp sapi<span class="regexp">/fpm/</span><span class="keyword">init</span>.d.php<span class="operator">-</span>fpm <span class="regexp">/etc/</span><span class="keyword">init</span>.d<span class="operator">/</span>php<span class="operator">-</span>fpm </span><br><span class="line">[root<span class="meta">@localhost</span> php<span class="operator">-</span><span class="number">7.3</span>.<span class="number">4</span>]# chmod <span class="operator">+</span>x <span class="regexp">/etc/</span><span class="keyword">init</span>.d<span class="operator">/</span>php<span class="operator">-</span>fpm</span><br></pre></td></tr></table></figure>
+<h6 id="4-添加-php-fpm-配置文件"><a href="#4-添加-php-fpm-配置文件" class="headerlink" title="4.添加 php-fpm 配置文件"></a>4.添加 php-fpm 配置文件</h6><p>将php安装目录下的 &#x2F;usr&#x2F;local&#x2F;php&#x2F;etc&#x2F;php-fpm.conf.default 文件拷贝同目录下并重命名为 php-fpm.conf</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">[root<span class="meta">@localhost</span> php<span class="operator">-</span><span class="number">7.3</span>.<span class="number">4</span>]# cp <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>etc<span class="regexp">/php-fpm.conf.default /</span>usr<span class="regexp">/local/</span>php<span class="regexp">/etc/</span>php<span class="operator">-</span>fpm.conf</span><br></pre></td></tr></table></figure>
+<p>添加 <a href="http://www.conf/">www.conf</a> 配置文件<br>将php安装目录下的 &#x2F;usr&#x2F;local&#x2F;php&#x2F;etc&#x2F;php-fpm.d&#x2F;<a href="http://www.conf.default/">www.conf.default</a> 文件拷贝同目录下并重命名为 <a href="http://www.conf/">www.conf</a></p>
+<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">[root@localhost php-<span class="number">7.3</span>.<span class="number">4</span>]# cp <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>etc<span class="regexp">/php-fpm.d/</span>www.conf.<span class="keyword">default</span> <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>etc<span class="regexp">/php-fpm.d/</span>www.conf </span><br></pre></td></tr></table></figure>
+<h6 id="5-添加php安装目录到系统环境变量"><a href="#5-添加php安装目录到系统环境变量" class="headerlink" title="5.添加php安装目录到系统环境变量"></a>5.添加php安装目录到系统环境变量</h6><p>创建并打开文件php.sh<br>[root@localhost php-7.3.4]# vim &#x2F;etc&#x2F;profile.d&#x2F;php.sh<br>添加内容如下:</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">export <span class="title class_">PATH</span>=<span class="variable">$PATH</span><span class="symbol">:/usr/local/php/bin/</span><span class="symbol">:/usr/local/php/sbin/</span> </span><br></pre></td></tr></table></figure>
+<h6 id="6-使用source立即生效刚刚添加的php环境变量"><a href="#6-使用source立即生效刚刚添加的php环境变量" class="headerlink" title="6.使用source立即生效刚刚添加的php环境变量"></a>6.使用source立即生效刚刚添加的php环境变量</h6><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">[root@localhost php-<span class="number">7.3</span>.<span class="number">4</span>]# <span class="keyword">source</span> /etc/<span class="keyword">profile</span>.d/php.<span class="keyword">sh</span> </span><br></pre></td></tr></table></figure>
+<h6 id="7-启动php-fpm"><a href="#7-启动php-fpm" class="headerlink" title="7.启动php-fpm"></a>7.启动php-fpm</h6><figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> php<span class="number">-7.3</span><span class="number">.4</span>]<span class="meta"># service php-fpm start</span></span><br></pre></td></tr></table></figure>
+<p>看到9000端口也就成功了！！！<br>设置php开机启动</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> php-fpm</span><br></pre></td></tr></table></figure>
+<p>重启后查看端口看看是否存在！<br>然后php中添加如下内容</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">location</span> <span class="regexp">~ \.php$</span> &#123;</span><br><span class="line">    <span class="attribute">root</span>           html;</span><br><span class="line">    <span class="attribute">fastcgi_pass</span>   <span class="number">127.0.0.1:9000</span>;</span><br><span class="line">    <span class="attribute">fastcgi_index</span>  index.php;</span><br><span class="line">    <span class="attribute">fastcgi_param</span>  SCRIPT_FILENAME  <span class="variable">$document_root</span><span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">    <span class="attribute">include</span>        fastcgi_params;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>php</category>
+      </categories>
+      <tags>
+        <tag>php</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>centos nginx安装</title>
     <url>/2023/12/25/centos%20nginx%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<p>centos nginx安装</p>
@@ -258,6 +294,24 @@ $sent_http_transfer_encoding```
       </categories>
       <tags>
         <tag>rewrite</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nginx和php-fpm两种通信方式对比UnixSocket和TcpSocket</title>
+    <url>/2023/12/25/nginx%E5%92%8Cphp-fpm%E4%B8%A4%E7%A7%8D%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94UnixSocket%E5%92%8CTcpSocket/</url>
+    <content><![CDATA[<blockquote>
+<p>tcp socket  允许通过网络进程之间的通信，也可以通过loopback进行本地进程之间通信。<br>unix socket<br>允许在本地运行的进程之间进行通信。</p>
+</blockquote>
+<span id="more"></span>
+<p>unix socket减少了不必要的tcp开销，而tcp需要经过loopback，还要申请临时端口和tcp相关资源。但是，unix socket高并发时候不稳定，连接数爆发时，会产生大量的长时缓存，在没有面向连接协议的支撑下，大数据包可能会直接出错不返回异常。tcp这样的面向连接的协议，多少可以保证通信的正确性和完整性。</p>
+<p>Unix domain socket和Tcp socket，在性能上没有显著差距。 当访问压力较小时（1），可以使用UnixSocket，因为不会占用额外的端口、且理论上效率较高。 当高并发的时候，Tcp Socket能表现出更高的稳定性，且性能并不差于UnixSocket，缺点是会占用大量的临时端口<br>tcp socket 切换到unix</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">PHP配置文件：</span><br><span class="line">[global]</span><br><span class="line">pid = /run/php-fpm/php-fpm.pid</span><br><span class="line">error_log = /var/log/php-fpm/php-fpm.log</span><br><span class="line">log_level = notice</span><br><span class="line">[www] </span><br><span class="line">listen = /dev/shm/php-cgi.sock</span><br><span class="line">listen.backlog = -<span class="number">1</span></span><br><span class="line">listen.allowed_clients = <span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line">listen.owner = www</span><br><span class="line">listen.<span class="keyword">group</span> <span class="title">= www</span></span><br><span class="line">listen.mode = <span class="number">0666</span></span><br><span class="line"><span class="keyword">user</span> <span class="title">= www</span></span><br><span class="line"><span class="keyword">group</span> <span class="title">= www</span></span><br><span class="line"> </span><br><span class="line">nginx配置</span><br><span class="line"><span class="keyword">location</span> <span class="title">~ .*\.(php</span>|php5)?$</span><br><span class="line">&#123;</span><br><span class="line">　　fastcgi_pass unix:/dev/shm/php-cgi.sock;</span><br><span class="line">　　<span class="comment">#fastcgi_pass 127.0.0.1:9000;</span></span><br><span class="line">　　fastcgi_index index.php;</span><br><span class="line">　　fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">　　include fastcgi.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>php</category>
+      </categories>
+      <tags>
+        <tag>php</tag>
       </tags>
   </entry>
   <entry>
@@ -489,19 +543,6 @@ fi
       </tags>
   </entry>
   <entry>
-    <title>批处理查找畸形文件并删除</title>
-    <url>/2023/12/15/%E6%89%B9%E5%A4%84%E7%90%86%E6%9F%A5%E6%89%BE%E7%95%B8%E5%BD%A2%E6%96%87%E4%BB%B6%E5%B9%B6%E5%88%A0%E9%99%A4/</url>
-    <content><![CDATA[<h3 id="批处理查找畸形文件并删除"><a href="#批处理查找畸形文件并删除" class="headerlink" title="批处理查找畸形文件并删除"></a>批处理查找畸形文件并删除</h3><span id="more"></span>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@echo off</span><br><span class="line">setlocal enabledelayedexpansion</span><br><span class="line">title 畸形文件查杀</span><br><span class="line">::文件匹配正则</span><br><span class="line">set &quot;reg=\\nul \\nul\.[^\\]* \\com[1-9] \\com[1-9]\.[^\\]* \\aux \\aux\.[^\\]* \\con \\con\.[^\\]* \\prn \\prn\.[^\\]* \.&quot;</span><br><span class="line">::设置窗口颜色</span><br><span class="line">color 6b</span><br><span class="line">::检测路径是否存在</span><br><span class="line">:checkexist</span><br><span class="line">set /p dir=请输入需要查杀的路径:</span><br><span class="line">if &quot;%dir%&quot; ==&quot;&quot; (</span><br><span class="line">echo 输入为空，请重新输入</span><br><span class="line">call :checkexist</span><br><span class="line">)else (</span><br><span class="line">call :listdir</span><br><span class="line">)</span><br><span class="line">::列出畸形文件名和所在目录</span><br><span class="line">:listdir</span><br><span class="line">cd /d %dir%</span><br><span class="line">for /f &quot;delims=&quot; %%i in (&#x27;dir /b /a /s ^| findstr /i /r /e &quot;%reg%&quot;&#x27;) do (</span><br><span class="line">    echo  &quot;%%i&quot;</span><br><span class="line">    rd /s /q &quot;\\?\%%i&quot;</span><br><span class="line">    del /q /f /a &quot;\\?\%%i&quot;</span><br><span class="line">    echo 已经删除</span><br><span class="line">    pause</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>bat</category>
-      </categories>
-      <tags>
-        <tag>bat</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何在 Linux/Unix/Windows 中发现隐藏的进程和端口</title>
     <url>/2023/12/15/%E5%A6%82%E4%BD%95%E5%9C%A8%20LinuxUnixWindows%20%E4%B8%AD%E5%8F%91%E7%8E%B0%E9%9A%90%E8%97%8F%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%AB%AF%E5%8F%A3/</url>
     <content><![CDATA[<h4 id="如何在-Linux-Unix-Windows-中发现隐藏的进程和端口"><a href="#如何在-Linux-Unix-Windows-中发现隐藏的进程和端口" class="headerlink" title="如何在 Linux&#x2F;Unix&#x2F;Windows 中发现隐藏的进程和端口"></a>如何在 Linux&#x2F;Unix&#x2F;Windows 中发现隐藏的进程和端口</h4><span id="more"></span>
@@ -535,6 +576,19 @@ fi
       </categories>
       <tags>
         <tag>tools</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>批处理查找畸形文件并删除</title>
+    <url>/2023/12/15/%E6%89%B9%E5%A4%84%E7%90%86%E6%9F%A5%E6%89%BE%E7%95%B8%E5%BD%A2%E6%96%87%E4%BB%B6%E5%B9%B6%E5%88%A0%E9%99%A4/</url>
+    <content><![CDATA[<h3 id="批处理查找畸形文件并删除"><a href="#批处理查找畸形文件并删除" class="headerlink" title="批处理查找畸形文件并删除"></a>批处理查找畸形文件并删除</h3><span id="more"></span>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@echo off</span><br><span class="line">setlocal enabledelayedexpansion</span><br><span class="line">title 畸形文件查杀</span><br><span class="line">::文件匹配正则</span><br><span class="line">set &quot;reg=\\nul \\nul\.[^\\]* \\com[1-9] \\com[1-9]\.[^\\]* \\aux \\aux\.[^\\]* \\con \\con\.[^\\]* \\prn \\prn\.[^\\]* \.&quot;</span><br><span class="line">::设置窗口颜色</span><br><span class="line">color 6b</span><br><span class="line">::检测路径是否存在</span><br><span class="line">:checkexist</span><br><span class="line">set /p dir=请输入需要查杀的路径:</span><br><span class="line">if &quot;%dir%&quot; ==&quot;&quot; (</span><br><span class="line">echo 输入为空，请重新输入</span><br><span class="line">call :checkexist</span><br><span class="line">)else (</span><br><span class="line">call :listdir</span><br><span class="line">)</span><br><span class="line">::列出畸形文件名和所在目录</span><br><span class="line">:listdir</span><br><span class="line">cd /d %dir%</span><br><span class="line">for /f &quot;delims=&quot; %%i in (&#x27;dir /b /a /s ^| findstr /i /r /e &quot;%reg%&quot;&#x27;) do (</span><br><span class="line">    echo  &quot;%%i&quot;</span><br><span class="line">    rd /s /q &quot;\\?\%%i&quot;</span><br><span class="line">    del /q /f /a &quot;\\?\%%i&quot;</span><br><span class="line">    echo 已经删除</span><br><span class="line">    pause</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>bat</category>
+      </categories>
+      <tags>
+        <tag>bat</tag>
       </tags>
   </entry>
   <entry>

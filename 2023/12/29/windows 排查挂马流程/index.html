@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,300italic,400,400italic,700,700italic%7Cmonospace:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yccoin.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="攻击者入侵windows系统往往从弱口令、系统漏洞以及服务漏洞进行切入，获得一个普通的系统权限，再经过提权后进行创建启动项、修改注册表、植入病毒和木马等一系列操作，从而维持对目标主机的控制权。而与此同时操作系统也会出现异常，包括账户、端口、进程、网络、启动、服务、任务以及文件等，系统运维人员可以根据以上异常情况来知道攻击者从何处入侵、攻击者以何种方式入侵以及攻击者在入侵后做了什么这几个问题的答案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windows 排查挂马流程">
+<meta property="og:url" content="https://yccoin.github.io/2023/12/29/windows%20%E6%8E%92%E6%9F%A5%E6%8C%82%E9%A9%AC%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="技术搬运工">
+<meta property="og:description" content="攻击者入侵windows系统往往从弱口令、系统漏洞以及服务漏洞进行切入，获得一个普通的系统权限，再经过提权后进行创建启动项、修改注册表、植入病毒和木马等一系列操作，从而维持对目标主机的控制权。而与此同时操作系统也会出现异常，包括账户、端口、进程、网络、启动、服务、任务以及文件等，系统运维人员可以根据以上异常情况来知道攻击者从何处入侵、攻击者以何种方式入侵以及攻击者在入侵后做了什么这几个问题的答案">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-29T03:37:00.000Z">
+<meta property="article:modified_time" content="2023-12-29T03:56:07.360Z">
+<meta property="article:author" content="yccoin">
+<meta property="article:tag" content="windows">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://yccoin.github.io/2023/12/29/windows%20%E6%8E%92%E6%9F%A5%E6%8C%82%E9%A9%AC%E6%B5%81%E7%A8%8B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://yccoin.github.io/2023/12/29/windows%20%E6%8E%92%E6%9F%A5%E6%8C%82%E9%A9%AC%E6%B5%81%E7%A8%8B/","path":"2023/12/29/windows 排查挂马流程/","title":"windows 排查挂马流程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>windows 排查挂马流程 | 技术搬运工</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">技术搬运工</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">我们不生产技术，只是技术的搬运工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">21</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%A5%E4%BE%B5%E6%8E%92%E6%9F%A5%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">入侵排查方法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%A3%80%E6%9F%A5%E7%B3%BB%E7%BB%9F%E8%B4%A6%E5%8F%B7%E5%AE%89%E5%85%A8"><span class="nav-number">1.1.</span> <span class="nav-text">一、检查系统账号安全</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%A3%80%E6%9F%A5%E5%BC%82%E5%B8%B8%E7%AB%AF%E5%8F%A3%E3%80%81%E8%BF%9B%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">二、检查异常端口、进程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%A3%80%E6%9F%A5%E5%90%AF%E5%8A%A8%E9%A1%B9%E3%80%81%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E5%92%8C%E6%9C%8D%E5%8A%A1"><span class="nav-number">3.</span> <span class="nav-text">三、检查启动项、计划任务和服务</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yccoin</p>
+  <div class="site-description" itemprop="description">我们不生产技术，只是技术的搬运工</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yccoin/yccoin.github.io" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yccoin&#x2F;yccoin.github.io" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1346400161@qq.com" title="E-Mail → mailto:1346400161@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-Hans" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yccoin.github.io/2023/12/29/windows%20%E6%8E%92%E6%9F%A5%E6%8C%82%E9%A9%AC%E6%B5%81%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yccoin">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术搬运工">
+      <meta itemprop="description" content="我们不生产技术，只是技术的搬运工">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="windows 排查挂马流程 | 技术搬运工">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          windows 排查挂马流程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-12-29 11:37:00 / 修改时间：11:56:07" itemprop="dateCreated datePublished" datetime="2023-12-29T11:37:00+08:00">2023-12-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/windows/" itemprop="url" rel="index"><span itemprop="name">windows</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>攻击者入侵windows系统往往从弱口令、系统漏洞以及服务漏洞进行切入，获得一个普通的系统权限，再经过提权后进行创建启动项、修改注册表、植入病毒和木马等一系列操作，从而维持对目标主机的控制权。而与此同时操作系统也会出现异常，包括账户、端口、进程、网络、启动、服务、任务以及文件等，系统运维人员可以根据以上异常情况来知道攻击者从何处入侵、攻击者以何种方式入侵以及攻击者在入侵后做了什么这几个问题的答案，从而为之后的系统加固、安全防护提供针对性建议。<br>暴力破解：针对系统有包括rdp、ssh、telnet等，针对服务有包括mysql、ftp等，一般可以通过超级弱口令工具、hydra进行爆破<br>漏洞利用：通过系统、服务的漏洞进行攻击，如永恒之蓝、Redis未授权访问等<br>流量攻击：主要是对目标机器进行dos攻击，从而导致服务器瘫痪<br>木马控制：主要分为webshell和PC木马，webshell是存在于网站应用中，而PC木马是进入系统进行植入。目的都是对操作系统进行持久控制<br>病毒感染：主要分挖矿病毒、蠕虫病毒、勒索病毒等，植入病毒后往往会影响受感染电脑的正常运作，或是被控制而不自知，电脑正常运作仅盗窃资料、或者被利用做其他用途等用户非自发引导的行为</p>
+</blockquote>
+<span id="more"></span>
+
+<h5 id="入侵排查方法"><a href="#入侵排查方法" class="headerlink" title="入侵排查方法"></a>入侵排查方法</h5><h6 id="一、检查系统账号安全"><a href="#一、检查系统账号安全" class="headerlink" title="一、检查系统账号安全"></a>一、检查系统账号安全</h6><ul>
+<li>排查可疑账号、新增账号<br>检查方法：<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、打开<span class="keyword">cmd</span><span class="language-bash">窗口，输入 lusrmgr.msc</span></span><br><span class="line"><span class="number">2</span>、查看是否存在可疑账号，特别是管理员群组（Administrators）中的新增账号，如果存在需要立即删除或禁用</span><br></pre></td></tr></table></figure></li>
+<li>排查隐藏账号<br>检查方法1<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">打开注册表，查看管理员对应键值</span><br><span class="line"><span class="number">1</span>、在桌面打开运行（可使用快捷键 win+R），输入 regedit，打开注册表编辑器</span><br><span class="line"><span class="number">2</span>、选择 HKEY_LOCAL_MACHINE<span class="regexp">/SAM/</span>SAM，默认无法查看该选项内容，右键菜单选择权限，打开权限管理窗口</span><br><span class="line"><span class="number">3</span>、选择当前用户（一般为 administrator），将权限勾选为完全控制，然后确定并关闭注册表编辑器</span><br><span class="line"><span class="number">4</span>、再次打开注册表编辑器，即可选择 HKEY_LOCAL_MACHINE<span class="regexp">/SAM/</span>SAM<span class="regexp">/Domains/</span>Account/Users</span><br><span class="line"><span class="number">5</span>、在 Names 项下可以看到实例所有用户名，如出现本地账户中没有的账户，即为隐藏账户，在确认为非系统用户的前提下，可删除此用户</span><br></pre></td></tr></table></figure>
+检查方法2<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过<span class="built_in">D</span>盾<span class="variable">web</span>查杀工具进行检测，其中集成了对克隆账号、隐藏账号检测的功能</span><br></pre></td></tr></table></figure>
+结合日志排查用户是否出现异常<br>检查方法1<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、在桌面打开运行（可使用快捷键 win+<span class="built_in">R</span>），输入 eventvwr.msc 命令</span><br><span class="line"><span class="number">2</span>、打开时间查看器，分析用户登录日志</span><br></pre></td></tr></table></figure>
+检查方法2：<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过LogFusion查看日志记录</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="二、检查异常端口、进程"><a href="#二、检查异常端口、进程" class="headerlink" title="二、检查异常端口、进程"></a>二、检查异常端口、进程</h5><blockquote>
+<p>端口作为计算机内部与外部数据交互的窗口，在攻击者眼里也是作为<br>香饽饽的存在，在入侵系统后，攻击者可以在计算机上开启专属的端口来访问被害主机或植入病毒用于挖矿等，熟悉计算机的朋友应该都知道常用的端口也就那么几个，所以通过排查可疑端口能确定主机是否存在后门、是否被植入挖矿病毒等，再根据端口的PID对可疑进程对应的程序排查，确定是否为恶意程序<br>排查可疑端口<br>检查方法1：</p>
+</blockquote>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、使用netstat命令查看当前网络连接，定位可疑的ESTABLISHED连接</span><br><span class="line">netstat -<span class="keyword">ano</span></span><br><span class="line">2、根据PID编号通过tasklist对进程进行定位</span><br><span class="line">tasklist ｜ findstr <span class="string">&quot;PID&quot;</span></span><br></pre></td></tr></table></figure>
+<p>检查方法2:</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过<span class="built_in">D</span>盾<span class="variable">web</span>查杀工具进行端口查看</span><br></pre></td></tr></table></figure>
+<p>排查可疑进程<br>检查方法1：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、在桌面打开运行（可使用快捷键 win+<span class="built_in">R</span>），输入 msinfo32 命令</span><br><span class="line"><span class="number">2</span>、依次点击 “软件环境 – 正在运行任务” 就可以查看到进程的详细信息，比如进程路径、进程ID、文件创建日期以及启动时间等。</span><br></pre></td></tr></table></figure>
+<p>检查方法2：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">打开<span class="built_in">D</span>盾<span class="type">_web</span>查杀工具的进程查看，关注没有签名信息的进程</span><br></pre></td></tr></table></figure>
+<p>检查方法3：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过微软官方提供的 <span class="built_in">Process</span> Explorer 等工具进行排查</span><br></pre></td></tr></table></figure>
+<p>在查看可疑的进程及其子进程。可以重点观察以下内容：</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、没有签名验证信息的进程</span><br><span class="line"><span class="number">2</span>、没有描述信息的进程</span><br><span class="line"><span class="number">3</span>、进程的属主</span><br><span class="line"><span class="number">4</span>、进程的路径是否合法</span><br><span class="line"><span class="number">5</span>、<span class="meta">CPU</span> 或内存资源占用长时间过高的进程</span><br></pre></td></tr></table></figure>
+<h5 id="三、检查启动项、计划任务和服务"><a href="#三、检查启动项、计划任务和服务" class="headerlink" title="三、检查启动项、计划任务和服务"></a>三、检查启动项、计划任务和服务</h5><blockquote>
+<p>启动项、计划任务、服务是攻击者维持权限的惯用手段。在入侵windows计算机后，攻击者可以通过修改注册表、替换粘滞键程序在系统启动时就获得权限，也能够在管理员权限下设置计划任务，因为计划任务后门分为管理员权限和普通用户权限两种。管理员权限可以设置更多的计划任务，例如重启后运行等。也可以通过meterpreter创建后门服务。<br>排查异常启动项<br>检查方法1</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">单击【开始】&gt;【所有程序】&gt;【启动】，默认情况下此目录在是一个空目录，确认是否有非业务程序在该目录下。</span><br></pre></td></tr></table></figure>
+<p>检查方法2：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在桌面打开运行（可使用快捷键 win+<span class="built_in">R</span>），输入 msconfig，查看是否存在命名异常的启动项目，是则取消勾选命名异常的启动项目，并到命令中显示的路径删除文件。</span><br></pre></td></tr></table></figure>
+<p>检查方法3:</p>
+<figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在桌面打开运行（可使用快捷键 win+R），输入 regedit，打开注册表，查看开机启动项是否正常，特别注意如下三个注册表项：</span><br><span class="line">HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\runHKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunHKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Runonce</span><br></pre></td></tr></table></figure>
+<p>检查右侧是否有启动异常的项目，如有请删除，并建议安装杀毒软件进行病毒查杀，清除残留病毒或木马</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>yccoin
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://yccoin.github.io/2023/12/29/windows%20%E6%8E%92%E6%9F%A5%E6%8C%82%E9%A9%AC%E6%B5%81%E7%A8%8B/" title="windows 排查挂马流程">https://yccoin.github.io/2023/12/29/windows 排查挂马流程/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-Hans" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/windows/" rel="tag"># windows</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/12/25/nginx%E5%92%8Cphp-fpm%E4%B8%A4%E7%A7%8D%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94UnixSocket%E5%92%8CTcpSocket/" rel="prev" title="nginx和php-fpm两种通信方式对比UnixSocket和TcpSocket">
+                  <i class="fa fa-angle-left"></i> nginx和php-fpm两种通信方式对比UnixSocket和TcpSocket
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/12/29/shell%20%E8%84%9A%E6%9C%AC%E6%95%B4%E7%90%86/" rel="next" title="shell 脚本整理">
+                  shell 脚本整理 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">技术搬运工</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/yccoin/yccoin.github.io" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.umd.js" integrity="sha256-ytMJGN3toR+a84u7g7NuHm91VIR06Q41kMWDr2pq7Zo=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+</body>
+</html>

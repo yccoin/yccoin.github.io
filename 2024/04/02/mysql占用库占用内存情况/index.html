@@ -22,26 +22,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"yccoin.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="我们不生产技术，只是技术的搬运工">
-<meta property="og:type" content="website">
-<meta property="og:title" content="技术搬运工">
-<meta property="og:url" content="https://yccoin.github.io/archives/2023/index.html">
+    <meta name="description" content="查看哪个库占用内存情况1234567SELECT table_schema AS &#96;Database&#96;,SUM(data_length + index_length) &#x2F; 1024 &#x2F; 1024 AS &#96;Size (MB)&#96;FROM information_schema.TABLESGROUP BY table_schema;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql占用库占用内存情况">
+<meta property="og:url" content="https://yccoin.github.io/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/index.html">
 <meta property="og:site_name" content="技术搬运工">
-<meta property="og:description" content="我们不生产技术，只是技术的搬运工">
+<meta property="og:description" content="查看哪个库占用内存情况1234567SELECT table_schema AS &#96;Database&#96;,SUM(data_length + index_length) &#x2F; 1024 &#x2F; 1024 AS &#96;Size (MB)&#96;FROM information_schema.TABLESGROUP BY table_schema;">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-02T07:35:14.000Z">
+<meta property="article:modified_time" content="2024-04-02T07:48:35.634Z">
 <meta property="article:author" content="yccoin">
-<meta property="article:tag" content="我们不生产技术，只是技术的搬运工">
+<meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://yccoin.github.io/archives/2023/">
+<link rel="canonical" href="https://yccoin.github.io/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"archives/2023/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://yccoin.github.io/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/","path":"2024/04/02/mysql占用库占用内存情况/","title":"mysql占用库占用内存情况"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>归档 | 技术搬运工</title>
+<title>mysql占用库占用内存情况 | 技术搬运工</title>
   
 
 
@@ -74,7 +76,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">技术搬运工</h1>
+      <p class="site-title">技术搬运工</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">我们不生产技术，只是技术的搬运工</p>
@@ -128,7 +130,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -141,6 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%93%AA%E4%B8%AA%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5"><span class="nav-number">1.</span> <span class="nav-text">查看哪个库占用内存情况</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -195,232 +198,117 @@
 
     </div>
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 23 篇日志。 继续努力。</span>
-      </div>
 
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yccoin.github.io/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yccoin">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术搬运工">
+      <meta itemprop="description" content="我们不生产技术，只是技术的搬运工">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="mysql占用库占用内存情况 | 技术搬运工">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mysql占用库占用内存情况
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+
+      <time title="创建时间：2024-04-02 15:35:14 / 修改时间：15:48:35" itemprop="dateCreated datePublished" datetime="2024-04-02T15:35:14+08:00">2024-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="查看哪个库占用内存情况"><a href="#查看哪个库占用内存情况" class="headerlink" title="查看哪个库占用内存情况"></a>查看哪个库占用内存情况</h3><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> <span class="symbol">`Database`</span>,</span><br><span class="line"><span class="built_in">SUM</span>(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> <span class="symbol">`Size (MB)`</span></span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.TABLES</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> </span><br><span class="line">table_schema;</span><br></pre></td></tr></table></figure>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-12-29T11:58:30+08:00"
-              content="2023-12-29">
-          12-29
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/12/29/shell%20%E8%84%9A%E6%9C%AC%E6%95%B4%E7%90%86/" itemprop="url">
-          <span itemprop="name">shell 脚本整理</span>
-        </a>
-      </div>
+    <footer class="post-footer">
+          
 
-      
-    </header>
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>yccoin
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://yccoin.github.io/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/" title="mysql占用库占用内存情况">https://yccoin.github.io/2024/04/02/mysql占用库占用内存情况/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-Hans" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/mysql/" rel="tag"># mysql</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/02/nginx%E5%A6%82%E4%BD%95%E7%A6%81%E6%AD%A2%E8%AE%BF%E9%97%AEphp/" rel="prev" title="nginx如何禁止访问php">
+                  <i class="fa fa-angle-left"></i> nginx如何禁止访问php
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-12-29T11:37:00+08:00"
-              content="2023-12-29">
-          12-29
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/12/29/windows%20%E6%8E%92%E6%9F%A5%E6%8C%82%E9%A9%AC%E6%B5%81%E7%A8%8B/" itemprop="url">
-          <span itemprop="name">windows 排查挂马流程</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-12-25T14:49:02+08:00"
-              content="2023-12-25">
-          12-25
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/12/25/nginx%E5%92%8Cphp-fpm%E4%B8%A4%E7%A7%8D%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94UnixSocket%E5%92%8CTcpSocket/" itemprop="url">
-          <span itemprop="name">nginx和php-fpm两种通信方式对比UnixSocket和TcpSocket</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-12-25T14:41:41+08:00"
-              content="2023-12-25">
-          12-25
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/12/25/centos%208%E5%AE%89%E8%A3%85php-fpm/" itemprop="url">
-          <span itemprop="name">centos 8安装php-fpm</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-12-25T08:59:11+08:00"
-              content="2023-12-25">
-          12-25
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/12/25/mysql%E7%9A%84proxy%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E5%92%8C%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/" itemprop="url">
-          <span itemprop="name">mysql的proxy机制实现读写分离和主从同步</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-12-25T08:50:27+08:00"
-              content="2023-12-25">
-          12-25
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/12/25/centos%20nginx%E5%AE%89%E8%A3%85/" itemprop="url">
-          <span itemprop="name">centos nginx安装</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-12-25T08:46:51+08:00"
-              content="2023-12-25">
-          12-25
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/12/25/nginx%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1/" itemprop="url">
-          <span itemprop="name">nginx修改服务</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-12-25T08:42:10+08:00"
-              content="2023-12-25">
-          12-25
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/12/25/tcp-ip%E5%8E%9F%E7%90%86%E5%92%8C%E6%8A%93%E5%8C%85/" itemprop="url">
-          <span itemprop="name">tcp,ip原理和抓包</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-12-20T10:42:22+08:00"
-              content="2023-12-20">
-          12-20
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/12/20/%E9%AB%98%E5%B9%B6%E5%8F%91%E8%B8%A9%E8%BF%87%E7%9A%84%E5%9D%91%E5%8F%8A%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" itemprop="url">
-          <span itemprop="name">高并发踩过的坑及性能优化</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-12-20T10:16:14+08:00"
-              content="2023-12-20">
-          12-20
-        </time>
-      </div>
-
-      <div class="post-title">
-        <a class="post-title-link" href="/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/" itemprop="url">
-          <span itemprop="name">centos 8安装mysql</span>
-        </a>
-      </div>
-
-      
-    </header>
-  </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2023/page/2/">2</a><a class="page-number" href="/archives/2023/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/archives/2023/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+
+
+
 
 </div>
   </main>

@@ -30,8 +30,8 @@ https://yccoin.github.io/tags/nginx/
 https://yccoin.github.io/tags/linux/
 https://yccoin.github.io/tags/php/
 https://yccoin.github.io/tags/mysql/
-https://yccoin.github.io/tags/rewrite/
 https://yccoin.github.io/tags/shell/
+https://yccoin.github.io/tags/rewrite/
 https://yccoin.github.io/tags/system/
 https://yccoin.github.io/tags/windows/
 https://yccoin.github.io/tags/python/
@@ -42,12 +42,12 @@ https://yccoin.github.io/categories/nginx/
 https://yccoin.github.io/categories/linux/
 https://yccoin.github.io/categories/php/
 https://yccoin.github.io/categories/mysql/
-https://yccoin.github.io/categories/rewrite/
 https://yccoin.github.io/categories/shell/
+https://yccoin.github.io/categories/rewrite/
 https://yccoin.github.io/categories/system/
 https://yccoin.github.io/categories/windows/
 https://yccoin.github.io/categories/python/
 https://yccoin.github.io/categories/tools/
-https://yccoin.github.io/categories/ngnix/
 https://yccoin.github.io/categories/bat/
 https://yccoin.github.io/categories/mssql/
+https://yccoin.github.io/categories/ngnix/

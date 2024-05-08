@@ -282,14 +282,14 @@
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/tags/rewrite/</loc>
+    <loc>https://yccoin.github.io/tags/shell/</loc>
     <lastmod>2024-05-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/tags/shell/</loc>
+    <loc>https://yccoin.github.io/tags/rewrite/</loc>
     <lastmod>2024-05-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -368,14 +368,14 @@
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/categories/rewrite/</loc>
+    <loc>https://yccoin.github.io/categories/shell/</loc>
     <lastmod>2024-05-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/categories/shell/</loc>
+    <loc>https://yccoin.github.io/categories/rewrite/</loc>
     <lastmod>2024-05-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -410,13 +410,6 @@
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/categories/ngnix/</loc>
-    <lastmod>2024-05-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://yccoin.github.io/categories/bat/</loc>
     <lastmod>2024-05-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -425,6 +418,13 @@
   
   <url>
     <loc>https://yccoin.github.io/categories/mssql/</loc>
+    <lastmod>2024-05-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yccoin.github.io/categories/ngnix/</loc>
     <lastmod>2024-05-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

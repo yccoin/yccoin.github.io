@@ -39,8 +39,8 @@ https://yccoin.github.io/tags/python/
 https://yccoin.github.io/tags/tools/
 https://yccoin.github.io/tags/bat/
 https://yccoin.github.io/tags/mssql/
-https://yccoin.github.io/categories/nginx/
 https://yccoin.github.io/categories/linux/
+https://yccoin.github.io/categories/nginx/
 https://yccoin.github.io/categories/php/
 https://yccoin.github.io/categories/mysql/
 https://yccoin.github.io/categories/rewrite/

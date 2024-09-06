@@ -22,28 +22,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"yccoin.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="查看哪个库占用内存情况1234567SELECT table_schema AS &#96;Database&#96;,SUM(data_length + index_length) &#x2F; 1024 &#x2F; 1024 AS &#96;Size (MB)&#96;FROM information_schema.TABLESGROUP BY table_schema; 如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：12345">
+    <meta name="description" content="HTTPS 是 HTTP over Secure Socket Layer，以安全为目标的 HTTP 通道，所以在 HTTPS 承载的页面上不允许出现 http 请求，一旦出现就是提示或报错：  Mixed Content: The page at ‘https:&#x2F;&#x2F;www.taobao.com&#x2F;‘ was loaded over HTTPS, but requested an insecure">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql占用库占用内存情况">
-<meta property="og:url" content="https://yccoin.github.io/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/index.html">
+<meta property="og:title" content="部署https后有资源使用http时解决办法">
+<meta property="og:url" content="https://yccoin.github.io/2024/09/06/%E9%83%A8%E7%BD%B2https%E5%90%8E%E6%9C%89%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8http%E6%97%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/index.html">
 <meta property="og:site_name" content="技术搬运工">
-<meta property="og:description" content="查看哪个库占用内存情况1234567SELECT table_schema AS &#96;Database&#96;,SUM(data_length + index_length) &#x2F; 1024 &#x2F; 1024 AS &#96;Size (MB)&#96;FROM information_schema.TABLESGROUP BY table_schema; 如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：12345">
+<meta property="og:description" content="HTTPS 是 HTTP over Secure Socket Layer，以安全为目标的 HTTP 通道，所以在 HTTPS 承载的页面上不允许出现 http 请求，一旦出现就是提示或报错：  Mixed Content: The page at ‘https:&#x2F;&#x2F;www.taobao.com&#x2F;‘ was loaded over HTTPS, but requested an insecure">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-04-02T07:35:14.000Z">
-<meta property="article:modified_time" content="2024-04-02T07:51:16.912Z">
+<meta property="article:published_time" content="2024-09-06T05:40:23.000Z">
+<meta property="article:modified_time" content="2024-09-06T05:46:53.456Z">
 <meta property="article:author" content="yccoin">
-<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="nginx">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://yccoin.github.io/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/">
+<link rel="canonical" href="https://yccoin.github.io/2024/09/06/%E9%83%A8%E7%BD%B2https%E5%90%8E%E6%9C%89%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8http%E6%97%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://yccoin.github.io/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/","path":"2024/04/02/mysql占用库占用内存情况/","title":"mysql占用库占用内存情况"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://yccoin.github.io/2024/09/06/%E9%83%A8%E7%BD%B2https%E5%90%8E%E6%9C%89%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8http%E6%97%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/","path":"2024/09/06/部署https后有资源使用http时解决办法/","title":"部署https后有资源使用http时解决办法"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>mysql占用库占用内存情况 | 技术搬运工</title>
+<title>部署https后有资源使用http时解决办法 | 技术搬运工</title>
   
 
 
@@ -143,7 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%93%AA%E4%B8%AA%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5"><span class="nav-number">1.</span> <span class="nav-text">查看哪个库占用内存情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E4%BD%A0%E6%83%B3%E8%A6%81%E6%9F%A5%E7%9C%8B%E5%85%B7%E4%BD%93%E6%98%AF%E5%93%AA%E4%BA%9B%E8%A1%A8%E5%8D%A0%E7%94%A8%E4%BA%86%E5%86%85%E5%AD%98%EF%BC%8C%E5%8F%AF%E4%BB%A5%E8%BF%9B%E4%B8%80%E6%AD%A5%E5%8A%A0%E5%85%A5%E8%A1%A8%E5%90%8D%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%8A%9E%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">处理办法</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -209,7 +209,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://yccoin.github.io/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/">
+    <link itemprop="mainEntityOfPage" href="https://yccoin.github.io/2024/09/06/%E9%83%A8%E7%BD%B2https%E5%90%8E%E6%9C%89%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8http%E6%97%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -222,12 +222,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="mysql占用库占用内存情况 | 技术搬运工">
+      <meta itemprop="name" content="部署https后有资源使用http时解决办法 | 技术搬运工">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          mysql占用库占用内存情况
+          部署https后有资源使用http时解决办法
         </h1>
 
         <div class="post-meta-container">
@@ -239,7 +239,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-04-02 15:35:14 / 修改时间：15:51:16" itemprop="dateCreated datePublished" datetime="2024-04-02T15:35:14+08:00">2024-04-02</time>
+      <time title="创建时间：2024-09-06 13:40:23 / 修改时间：13:46:53" itemprop="dateCreated datePublished" datetime="2024-09-06T13:40:23+08:00">2024-09-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -247,7 +247,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+          <a href="/categories/nginx/" itemprop="url" rel="index"><span itemprop="name">nginx</span></a>
         </span>
     </span>
 
@@ -260,10 +260,21 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><span id="more"></span>
-<h3 id="查看哪个库占用内存情况"><a href="#查看哪个库占用内存情况" class="headerlink" title="查看哪个库占用内存情况"></a>查看哪个库占用内存情况</h3><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> <span class="symbol">`Database`</span>,</span><br><span class="line"><span class="built_in">SUM</span>(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> <span class="symbol">`Size (MB)`</span></span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.TABLES</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> </span><br><span class="line">table_schema;</span><br></pre></td></tr></table></figure>
-<h3 id="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："><a href="#如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：" class="headerlink" title="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："></a>如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> `<span class="keyword">Database</span>`,</span><br><span class="line"><span class="built_in">table_name</span> <span class="keyword">AS</span> `<span class="keyword">Table</span>`,</span><br><span class="line">(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> `Size (MB)`</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.<span class="keyword">TABLES</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> </span><br><span class="line">(data_length + index_length) <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>HTTPS 是 HTTP over Secure Socket Layer，以安全为目标的 HTTP 通道，所以在 HTTPS 承载的页面上不允许出现 http 请求，一旦出现就是提示或报错：</p>
+<blockquote>
+<p>Mixed Content: The page at ‘<a target="_blank" rel="noopener" href="https://www.taobao.com/%E2%80%98">https://www.taobao.com/‘</a> was loaded over HTTPS, but requested an insecure image ‘<a target="_blank" rel="noopener" href="http://g.alicdn.com/s.gif%E2%80%99">http://g.alicdn.com/s.gif’</a>. This content should also be served over HTTPS.<br>upgrade-insecure-requests CSP 指令的作用就是让浏览器自动升级请求，防止访问者访问不安全的内容。<br>该指令用于让浏览器自动升级请求从http到https,用于大量包含http资源的http网页直接升级到https而不会报错.简洁的来讲,就相当于在http和https之间起的一个过渡作用.</p>
+</blockquote>
+</blockquote>
+<span id="more"></span>
+<h3 id="处理办法"><a href="#处理办法" class="headerlink" title="处理办法"></a>处理办法</h3><p>html强制让http的访问Https</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="attribute">http-equiv</span>=<span class="string">&quot;Content-Security-Policy&quot;</span> <span class="attribute">content</span>=<span class="string">&quot;upgrade-insecure-requests&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p>php强制让http的访问Https</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">&quot;Content-Security-Policy: upgrade-insecure-requests&quot;</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 
+<p>nginx 强制让http的访问Https</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">#HTTP_TO_HTTPS_END</span></span><br><span class="line">    <span class="attribute">ssl_certificate</span>    /etc/letsencrypt/live/yogayx.com/fullchain.pem;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span>    /etc/letsencrypt/live/yogayx.com/privkey.pem;</span><br><span class="line">    <span class="attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</span><br><span class="line">    <span class="attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;</span><br><span class="line">    <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">ssl_session_cache</span> shared:SSL:<span class="number">10m</span>;</span><br><span class="line">    <span class="attribute">ssl_session_timeout</span> <span class="number">10m</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">add_header</span> Content-Security-Policy <span class="string">&quot;upgrade-insecure-requests;connect-src *&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">error_page</span> <span class="number">497</span>  https://<span class="variable">$host</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">add_header Content-<span class="keyword">Security</span>-<span class="keyword">Policy</span> &quot;upgrade-insecure-requests;connect-src *&quot;;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -280,7 +291,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://yccoin.github.io/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/" title="mysql占用库占用内存情况">https://yccoin.github.io/2024/04/02/mysql占用库占用内存情况/</a>
+      <a href="https://yccoin.github.io/2024/09/06/%E9%83%A8%E7%BD%B2https%E5%90%8E%E6%9C%89%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8http%E6%97%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" title="部署https后有资源使用http时解决办法">https://yccoin.github.io/2024/09/06/部署https后有资源使用http时解决办法/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-Hans" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -289,21 +300,18 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/mysql/" rel="tag"># mysql</a>
+              <a href="/tags/nginx/" rel="tag"># nginx</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/04/02/nginx%E5%A6%82%E4%BD%95%E7%A6%81%E6%AD%A2%E8%AE%BF%E9%97%AEphp/" rel="prev" title="nginx如何禁止访问php">
-                  <i class="fa fa-angle-left"></i> nginx如何禁止访问php
+                <a href="/2024/09/06/ASP%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81%E4%BD%BF%E7%94%A8Microsoft-XMLHTTP%E5%AF%B9%E8%B1%A1%E8%AF%B7%E6%B1%82https%E6%97%B6%E5%87%BA%E9%94%99%E8%A7%A3%E5%86%B3/" rel="prev" title="ASP程序代码使用Microsoft.XMLHTTP对象请求https时出错解决">
+                  <i class="fa fa-angle-left"></i> ASP程序代码使用Microsoft.XMLHTTP对象请求https时出错解决
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/05/08/%E5%B8%9D%E5%9B%BDCMS%E4%BB%8EHTTP%E5%8D%87%E7%BA%A7%E5%88%B0HTTPS%20%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E7%A9%BA%E7%99%BD/" rel="next" title="帝国CMS从HTTP升级到HTTPS 登录网站后台空白">
-                  帝国CMS从HTTP升级到HTTPS 登录网站后台空白 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>

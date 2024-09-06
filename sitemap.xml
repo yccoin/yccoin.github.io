@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://yccoin.github.io/2024/09/06/%E9%83%A8%E7%BD%B2https%E5%90%8E%E6%9C%89%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8http%E6%97%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</loc>
+    
+    <lastmod>2024-09-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yccoin.github.io/2024/09/06/ASP%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81%E4%BD%BF%E7%94%A8Microsoft-XMLHTTP%E5%AF%B9%E8%B1%A1%E8%AF%B7%E6%B1%82https%E6%97%B6%E5%87%BA%E9%94%99%E8%A7%A3%E5%86%B3/</loc>
+    
+    <lastmod>2024-09-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yccoin.github.io/2023/12/15/rewrite%E6%80%BB%E7%BB%93/</loc>
     
     <lastmod>2024-08-29</lastmod>
@@ -256,7 +274,7 @@
 
   <url>
     <loc>https://yccoin.github.io/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -264,84 +282,91 @@
   
   <url>
     <loc>https://yccoin.github.io/tags/nginx/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yccoin.github.io/tags/software/</loc>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/tags/linux/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/tags/php/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/tags/mysql/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/tags/rewrite/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/tags/shell/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/tags/system/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/tags/windows/</loc>
-    <lastmod>2024-08-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://yccoin.github.io/tags/python/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/tags/tools/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yccoin.github.io/tags/python/</loc>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/tags/bat/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/tags/mssql/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -350,91 +375,98 @@
   
   <url>
     <loc>https://yccoin.github.io/categories/linux/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yccoin.github.io/categories/software/</loc>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/categories/nginx/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/categories/php/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/categories/mysql/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/categories/rewrite/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/categories/shell/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/categories/system/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/categories/windows/</loc>
-    <lastmod>2024-08-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://yccoin.github.io/categories/python/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/categories/tools/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yccoin.github.io/categories/python/</loc>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/categories/ngnix/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/categories/bat/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://yccoin.github.io/categories/mssql/</loc>
-    <lastmod>2024-08-29</lastmod>
+    <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

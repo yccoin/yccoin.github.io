@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://yccoin.github.io/2024/09/06/%E9%83%A8%E7%BD%B2https%E5%90%8E%E6%9C%89%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8http%E6%97%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</loc>
+    <loc>https://yccoin.github.io/2024/09/06/ASP%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81%E4%BD%BF%E7%94%A8Microsoft-XMLHTTP%E5%AF%B9%E8%B1%A1%E8%AF%B7%E6%B1%82https%E6%97%B6%E5%87%BA%E9%94%99%E8%A7%A3%E5%86%B3/</loc>
     
     <lastmod>2024-09-06</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/2024/09/06/ASP%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81%E4%BD%BF%E7%94%A8Microsoft-XMLHTTP%E5%AF%B9%E8%B1%A1%E8%AF%B7%E6%B1%82https%E6%97%B6%E5%87%BA%E9%94%99%E8%A7%A3%E5%86%B3/</loc>
+    <loc>https://yccoin.github.io/2024/09/06/%E9%83%A8%E7%BD%B2https%E5%90%8E%E6%9C%89%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8http%E6%97%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</loc>
     
     <lastmod>2024-09-06</lastmod>
     
@@ -281,14 +281,14 @@
 
   
   <url>
-    <loc>https://yccoin.github.io/tags/nginx/</loc>
+    <loc>https://yccoin.github.io/tags/software/</loc>
     <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/tags/software/</loc>
+    <loc>https://yccoin.github.io/tags/nginx/</loc>
     <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -374,14 +374,14 @@
 
   
   <url>
-    <loc>https://yccoin.github.io/categories/linux/</loc>
+    <loc>https://yccoin.github.io/categories/software/</loc>
     <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/categories/software/</loc>
+    <loc>https://yccoin.github.io/categories/linux/</loc>
     <lastmod>2024-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

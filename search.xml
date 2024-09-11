@@ -221,20 +221,6 @@ $sent_http_transfer_encoding```
       </tags>
   </entry>
   <entry>
-    <title>mysql占用库占用内存情况</title>
-    <url>/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/</url>
-    <content><![CDATA[<span id="more"></span>
-<h3 id="查看哪个库占用内存情况"><a href="#查看哪个库占用内存情况" class="headerlink" title="查看哪个库占用内存情况"></a>查看哪个库占用内存情况</h3><figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> <span class="symbol">`Database`</span>,</span><br><span class="line"><span class="built_in">SUM</span>(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> <span class="symbol">`Size (MB)`</span></span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.TABLES</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> </span><br><span class="line">table_schema;</span><br></pre></td></tr></table></figure>
-<h3 id="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："><a href="#如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：" class="headerlink" title="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："></a>如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：</h3><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> `<span class="keyword">Database</span>`,</span><br><span class="line"><span class="built_in">table_name</span> <span class="keyword">AS</span> `<span class="keyword">Table</span>`,</span><br><span class="line">(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> `Size (MB)`</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.<span class="keyword">TABLES</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> </span><br><span class="line">(data_length + index_length) <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>mysql的proxy机制实现读写分离和主从同步</title>
     <url>/2023/12/25/mysql%E7%9A%84proxy%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E5%92%8C%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</url>
     <content><![CDATA[<blockquote>
@@ -303,6 +289,39 @@ $sent_http_transfer_encoding```
       </categories>
       <tags>
         <tag>php</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nginx如何禁止访问php</title>
+    <url>/2024/04/02/nginx%E5%A6%82%E4%BD%95%E7%A6%81%E6%AD%A2%E8%AE%BF%E9%97%AEphp/</url>
+    <content><![CDATA[<blockquote>
+<p>nginx禁止访问php的方法：1、配置nginx，禁止解析指定目录下的指定程序；2、将“location ~^&#x2F;images&#x2F;.*.(php|php5|sh|pl|py)${deny all…}”语句放置在server标签内即可。</p>
+</blockquote>
+<p>nginx站点目录及文件URL访问控制</p>
+<p>一、根据扩展名限制程序和文件访问</p>
+<p>利用nginx配置禁止访问上传资源目录下的PHP、Shell、Perl、Python程序文件。</p>
+<p>配置nginx，禁止解析指定目录下的指定程序。</p>
+<figure class="highlight coq"><table><tr><td class="code"><pre><span class="line">location ~ ^/(images|<span class="type">image</span>|<span class="type">template</span>|<span class="type">uploads</span>|<span class="type">excel</span>|<span class="type">css</span>|<span class="type">banner</span>|<span class="type">js</span>)/.*\.(php|<span class="type">php5</span>|<span class="type">sh</span>|<span class="type">p1</span>|<span class="type">py</span>)$ &#123;</span><br><span class="line">    deny all;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql占用库占用内存情况</title>
+    <url>/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/</url>
+    <content><![CDATA[<span id="more"></span>
+<h3 id="查看哪个库占用内存情况"><a href="#查看哪个库占用内存情况" class="headerlink" title="查看哪个库占用内存情况"></a>查看哪个库占用内存情况</h3><figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> <span class="symbol">`Database`</span>,</span><br><span class="line"><span class="built_in">SUM</span>(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> <span class="symbol">`Size (MB)`</span></span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.TABLES</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> </span><br><span class="line">table_schema;</span><br></pre></td></tr></table></figure>
+<h3 id="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："><a href="#如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：" class="headerlink" title="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："></a>如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：</h3><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> `<span class="keyword">Database</span>`,</span><br><span class="line"><span class="built_in">table_name</span> <span class="keyword">AS</span> `<span class="keyword">Table</span>`,</span><br><span class="line">(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> `Size (MB)`</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.<span class="keyword">TABLES</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> </span><br><span class="line">(data_length + index_length) <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -379,25 +398,6 @@ $sent_http_transfer_encoding```
       </categories>
       <tags>
         <tag>rewrite</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>nginx如何禁止访问php</title>
-    <url>/2024/04/02/nginx%E5%A6%82%E4%BD%95%E7%A6%81%E6%AD%A2%E8%AE%BF%E9%97%AEphp/</url>
-    <content><![CDATA[<blockquote>
-<p>nginx禁止访问php的方法：1、配置nginx，禁止解析指定目录下的指定程序；2、将“location ~^&#x2F;images&#x2F;.*.(php|php5|sh|pl|py)${deny all…}”语句放置在server标签内即可。</p>
-</blockquote>
-<p>nginx站点目录及文件URL访问控制</p>
-<p>一、根据扩展名限制程序和文件访问</p>
-<p>利用nginx配置禁止访问上传资源目录下的PHP、Shell、Perl、Python程序文件。</p>
-<p>配置nginx，禁止解析指定目录下的指定程序。</p>
-<figure class="highlight coq"><table><tr><td class="code"><pre><span class="line">location ~ ^/(images|<span class="type">image</span>|<span class="type">template</span>|<span class="type">uploads</span>|<span class="type">excel</span>|<span class="type">css</span>|<span class="type">banner</span>|<span class="type">js</span>)/.*\.(php|<span class="type">php5</span>|<span class="type">sh</span>|<span class="type">p1</span>|<span class="type">py</span>)$ &#123;</span><br><span class="line">    deny all;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -557,21 +557,6 @@ fi
       </tags>
   </entry>
   <entry>
-    <title>tcp,ip原理和抓包</title>
-    <url>/2023/12/25/tcp-ip%E5%8E%9F%E7%90%86%E5%92%8C%E6%8A%93%E5%8C%85/</url>
-    <content><![CDATA[<p><img src="/2023/12/25/tcp-ip%E5%8E%9F%E7%90%86%E5%92%8C%E6%8A%93%E5%8C%85/1703464967937.jpg"></p>
-<span id="more"></span>
-<h5 id="TCP连接-SYN-ACK-RST-UTG-PSH-FIN"><a href="#TCP连接-SYN-ACK-RST-UTG-PSH-FIN" class="headerlink" title="TCP连接:SYN ACK RST UTG PSH FIN"></a>TCP连接:SYN ACK RST UTG PSH FIN</h5><p>三次握手：发送端发送一个SYN&#x3D;1，ACK&#x3D;0标志的数据包给接收端，请求进行连接，这是第一次握手；<br>接收端收到请求并且允许连接的话，就会发送一个SYN&#x3D;1，ACK&#x3D;1标志的数据包给发送端，告诉它，可以通讯了，并且让发送端发送一个确认数据包，这是第二次握手；<br>最后，发送端发送一个SYN&#x3D;0，ACK&#x3D;1的数据包给接收端，告诉它连接已被确认，这就是第三次握手。之后，一个TCP连接建立，开始通讯。<br>*<strong>SYN：同步标志</strong><br>同步序列编号(Synchronize Sequence Numbers)栏有效。该标志仅在三次握手建立TCP连接时有效。它提示TCP连接的服务端检查序列编号，该序列编号为TCP连接初始端(一般是客户端)的初始序列编号。<br>在这里，可以把 TCP序列编号看作是一个范围从0到4，294，967，295的32位计数器。通过TCP连接交换的数据中每一个字节都经过序列编号。<br>在TCP报头中的序列编号栏包括了TCP分段中第一个字节的序列编号。</p>
-<p>*<strong>ACK：确认标志</strong><br>确认编号(Acknowledgement Number)栏有效。大多数情况下该标志位是置位的。TCP报头内的确认编号栏内包含的确认编号(w+1，Figure-1)为下一个预期的序列编号，同时提示远端系统已经成功接收所有数据。<br>*<strong>RST：复位标志</strong><br>复位标志有效。用于复位相应的TCP连接。<br>*<strong>URG：紧急标志</strong><br>紧急(The urgent pointer) 标志有效。紧急标志置位，<br>*<strong>PSH：推标志</strong><br>该标志置位时，接收端不将该数据进行队列处理，而是尽可能快将数据转由应用处理。在处理 telnet 或 rlogin 等交互模式的连接时，该标志总是置位的。<br>*<strong>FIN：结束标志</strong><br>带有该标志置位的数据包用来结束一个TCP回话，但对应端口仍处于开放状态，准备接收后续数据。<br>TCP的几个状态对于我们分析所起的作用。在TCP层，有个FLAGS字段，这个字段有以下几个标识：SYN, FIN, ACK, PSH, RST, URG.其中，对于我们日常的分析有用的就是前面的五个字段。它们的含义是：SYN表示建立连接，FIN表示关闭连接，ACK表示响应，PSH表示有 DATA数据传输，RST表示连接重置。<br>其中，ACK是可能与SYN，FIN等同时使用的，比如SYN和ACK可能同时为1，它表示的就是建立连接之后的响应，如果只是单个的一个SYN，它表示的只是建立连接。<br>TCP的几次握手就是通过这样的ACK表现出来的。但SYN与FIN是不会同时为1的，因为前者表示的是建立连接，而后者表示的是断开连接。<br>RST一般是在FIN之后才会出现为1的情况，表示的是连接重置。一般地，当出现FIN包或RST包时，我们便认为客户端与服务器端断开了连接；<br>而当出现SYN和SYN＋ACK包时，我们认为客户端与服务器建立了一个连接。<br>PSH为1的情况，一般只出现在DATA内容不为0的包中，也就是说PSH为1表示的是有真正的TCP数据包内容被传递。TCP的连接建立和连接关闭，都是通过请求－响应的模式完成的。</p>
-]]></content>
-      <categories>
-        <category>system</category>
-      </categories>
-      <tags>
-        <tag>system</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>win7系统下Update更新出现错误代码80073712的解决方法</title>
     <url>/2023/12/18/win7%E7%B3%BB%E7%BB%9F%E4%B8%8BUpdate%E6%9B%B4%E6%96%B0%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E4%BB%A3%E7%A0%8180073712%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<blockquote>
@@ -591,6 +576,21 @@ fi
       </categories>
       <tags>
         <tag>windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>tcp,ip原理和抓包</title>
+    <url>/2023/12/25/tcp-ip%E5%8E%9F%E7%90%86%E5%92%8C%E6%8A%93%E5%8C%85/</url>
+    <content><![CDATA[<p><img src="/2023/12/25/tcp-ip%E5%8E%9F%E7%90%86%E5%92%8C%E6%8A%93%E5%8C%85/1703464967937.jpg"></p>
+<span id="more"></span>
+<h5 id="TCP连接-SYN-ACK-RST-UTG-PSH-FIN"><a href="#TCP连接-SYN-ACK-RST-UTG-PSH-FIN" class="headerlink" title="TCP连接:SYN ACK RST UTG PSH FIN"></a>TCP连接:SYN ACK RST UTG PSH FIN</h5><p>三次握手：发送端发送一个SYN&#x3D;1，ACK&#x3D;0标志的数据包给接收端，请求进行连接，这是第一次握手；<br>接收端收到请求并且允许连接的话，就会发送一个SYN&#x3D;1，ACK&#x3D;1标志的数据包给发送端，告诉它，可以通讯了，并且让发送端发送一个确认数据包，这是第二次握手；<br>最后，发送端发送一个SYN&#x3D;0，ACK&#x3D;1的数据包给接收端，告诉它连接已被确认，这就是第三次握手。之后，一个TCP连接建立，开始通讯。<br>*<strong>SYN：同步标志</strong><br>同步序列编号(Synchronize Sequence Numbers)栏有效。该标志仅在三次握手建立TCP连接时有效。它提示TCP连接的服务端检查序列编号，该序列编号为TCP连接初始端(一般是客户端)的初始序列编号。<br>在这里，可以把 TCP序列编号看作是一个范围从0到4，294，967，295的32位计数器。通过TCP连接交换的数据中每一个字节都经过序列编号。<br>在TCP报头中的序列编号栏包括了TCP分段中第一个字节的序列编号。</p>
+<p>*<strong>ACK：确认标志</strong><br>确认编号(Acknowledgement Number)栏有效。大多数情况下该标志位是置位的。TCP报头内的确认编号栏内包含的确认编号(w+1，Figure-1)为下一个预期的序列编号，同时提示远端系统已经成功接收所有数据。<br>*<strong>RST：复位标志</strong><br>复位标志有效。用于复位相应的TCP连接。<br>*<strong>URG：紧急标志</strong><br>紧急(The urgent pointer) 标志有效。紧急标志置位，<br>*<strong>PSH：推标志</strong><br>该标志置位时，接收端不将该数据进行队列处理，而是尽可能快将数据转由应用处理。在处理 telnet 或 rlogin 等交互模式的连接时，该标志总是置位的。<br>*<strong>FIN：结束标志</strong><br>带有该标志置位的数据包用来结束一个TCP回话，但对应端口仍处于开放状态，准备接收后续数据。<br>TCP的几个状态对于我们分析所起的作用。在TCP层，有个FLAGS字段，这个字段有以下几个标识：SYN, FIN, ACK, PSH, RST, URG.其中，对于我们日常的分析有用的就是前面的五个字段。它们的含义是：SYN表示建立连接，FIN表示关闭连接，ACK表示响应，PSH表示有 DATA数据传输，RST表示连接重置。<br>其中，ACK是可能与SYN，FIN等同时使用的，比如SYN和ACK可能同时为1，它表示的就是建立连接之后的响应，如果只是单个的一个SYN，它表示的只是建立连接。<br>TCP的几次握手就是通过这样的ACK表现出来的。但SYN与FIN是不会同时为1的，因为前者表示的是建立连接，而后者表示的是断开连接。<br>RST一般是在FIN之后才会出现为1的情况，表示的是连接重置。一般地，当出现FIN包或RST包时，我们便认为客户端与服务器端断开了连接；<br>而当出现SYN和SYN＋ACK包时，我们认为客户端与服务器建立了一个连接。<br>PSH为1的情况，一般只出现在DATA内容不为0的包中，也就是说PSH为1表示的是有真正的TCP数据包内容被传递。TCP的连接建立和连接关闭，都是通过请求－响应的模式完成的。</p>
+]]></content>
+      <categories>
+        <category>system</category>
+      </categories>
+      <tags>
+        <tag>system</tag>
       </tags>
   </entry>
   <entry>
@@ -637,42 +637,6 @@ fi
       </categories>
       <tags>
         <tag>windows</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何在 Linux/Unix/Windows 中发现隐藏的进程和端口</title>
-    <url>/2023/12/15/%E5%A6%82%E4%BD%95%E5%9C%A8%20LinuxUnixWindows%20%E4%B8%AD%E5%8F%91%E7%8E%B0%E9%9A%90%E8%97%8F%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%AB%AF%E5%8F%A3/</url>
-    <content><![CDATA[<h4 id="如何在-Linux-Unix-Windows-中发现隐藏的进程和端口"><a href="#如何在-Linux-Unix-Windows-中发现隐藏的进程和端口" class="headerlink" title="如何在 Linux&#x2F;Unix&#x2F;Windows 中发现隐藏的进程和端口"></a>如何在 Linux&#x2F;Unix&#x2F;Windows 中发现隐藏的进程和端口</h4><span id="more"></span>
-<blockquote>
-<p>unhide 是一个小巧的网络取证工具，能够发现那些借助 rootkit、LKM 及其它技术隐藏的进程和 TCP&#x2F;UDP 端口。这个工具在 Linux、UNIX 类、MS-Windows 等操作系统下都可以工作。<br>根据其 man 页面的说明：</p>
-<blockquote>
-<p>Unhide 通过下述三项技术来发现隐藏的进程。<br>进程相关的技术，包括将 &#x2F;proc 目录与 &#x2F;bin&#x2F;ps[1] 命令的输出进行比较。<br>系统相关的技术，包括将 &#x2F;bin&#x2F;ps[2] 命令的输出结果同从系统调用方面得到的信息进行比较。<br>穷举法相关的技术，包括对所有的进程 ID 进行暴力求解，该技术仅限于在基于 Linux2.6 内核的系统中使用。</p>
-</blockquote>
-</blockquote>
-<h5 id="如何安装-unhide"><a href="#如何安装-unhide" class="headerlink" title="如何安装 unhide"></a>如何安装 unhide</h5><p>首先建议你在只读介质上运行这个工具。如果使用的是 Ubuntu 或者 Debian 发行版，输入下述的 apt-get 命令以安装 Unhide<br><code>$ sudo apt-get install unhide</code><br>一切顺利的话你的命令行会输出以下内容  </p>
-<figure class="highlight plaintext"><figcaption><span>password for vivek:</span></figcaption><table><tr><td class="code"><pre><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree       </span><br><span class="line">Reading state information... Done</span><br><span class="line">Suggested packages:</span><br><span class="line">  rkhunter</span><br><span class="line">The following NEW packages will be installed:</span><br><span class="line">  unhide</span><br><span class="line">0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.</span><br><span class="line">Need to get 46.6 kB of archives.</span><br><span class="line">After this operation, 136 kB of additional disk space will be used.</span><br><span class="line">Get:1 http://in.archive.ubuntu.com/ubuntu artful/universe amd64 unhide amd64 20130526-1 [46.6 kB]</span><br><span class="line">Fetched 46.6 kB in 0s (49.0 kB/s)</span><br><span class="line">Selecting previously unselected package unhide.</span><br><span class="line">(Reading database ... 205367 files and directories currently installed.)</span><br><span class="line">Preparing to unpack .../unhide_20130526-1_amd64.deb ...</span><br><span class="line">Unpacking unhide (20130526-1) ...</span><br><span class="line">Setting up unhide (20130526-1) ...</span><br><span class="line">Processing triggers for man-db (2.7.6.1-2) ...</span><br></pre></td></tr></table></figure>
-<h5 id="如何在-RHEL-CentOS-Oracle-Scientific-Fedora-上安装-unhide"><a href="#如何在-RHEL-CentOS-Oracle-Scientific-Fedora-上安装-unhide" class="headerlink" title="如何在 RHEL&#x2F;CentOS&#x2F;Oracle&#x2F;Scientific&#x2F;Fedora 上安装 unhide"></a>如何在 RHEL&#x2F;CentOS&#x2F;Oracle&#x2F;Scientific&#x2F;Fedora 上安装 unhide</h5><p>入以下的 yum 命令（CentOS&#x2F;RHEL 6.x 或 7.x 上首先打开 EPEL 仓库）：<br><code>sudo yum install unhide</code><br>在 Fedora 上则使用以下 dnf 命令：<br><code>sudo dnf install unhide</code></p>
-<h5 id="如何使用-unhide-工具？"><a href="#如何使用-unhide-工具？" class="headerlink" title="如何使用 unhide 工具？"></a>如何使用 unhide 工具？</h5><p>unhide 的语法是：<br><code>unhide [options] test_list</code><br>test_list 参数可以是以下测试列表中的一个或者多个标准测试：<br>brute<br>proc<br>procall<br>procfs<br>quick<br>reverse<br>sys<br>或基本测试：<br>checkbrute<br>checkchdir<br>checkgetaffinity<br>checkgetparam<br>checkgetpgid<br>checkgetprio<br>checkRRgetinterval<br>checkgetsched<br>checkgetsid<br>checkkill<br>checknoprocps<br>checkopendir<br>checkproc<br>checkquick<br>checkreaddir<br>checkreverse<br>checksysinfo<br>checksysinfo2<br>checksysinfo3<br>你可以通过以下示例命令使用 unhide：  </p>
-<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># unhide proc</span></span><br><span class="line"><span class="meta"># unhide sys</span></span><br><span class="line"><span class="meta"># unhide quick</span></span><br></pre></td></tr></table></figure>
-<p>示例输出：  </p>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">Unhide <span class="number">20130526</span></span><br><span class="line">Copyright © <span class="number">2013</span> Yago Jesus &amp; Patrick Gouin</span><br><span class="line">License GPLv3+ : GNU GPL <span class="keyword">version</span> <span class="number">3</span> <span class="built_in">or</span> <span class="keyword">later</span></span><br><span class="line">http://www.<span class="keyword">unhide</span>-forensics.info</span><br><span class="line">NOTE : This <span class="keyword">version</span> of <span class="keyword">unhide</span> <span class="keyword">is</span> <span class="keyword">for</span> systems using Linux &gt;= <span class="number">2.6</span> </span><br><span class="line">Used <span class="keyword">options</span>: </span><br><span class="line">[*]Searching <span class="keyword">for</span> Hidden processes through  comparison of results of <span class="built_in">system</span> calls, proc, dir <span class="built_in">and</span> <span class="keyword">ps</span></span><br></pre></td></tr></table></figure>
-<h5 id="如何使用-unhide-tcp-工具辨明-TCP-UDP-端口的身份"><a href="#如何使用-unhide-tcp-工具辨明-TCP-UDP-端口的身份" class="headerlink" title="如何使用 unhide-tcp 工具辨明 TCP&#x2F;UDP 端口的身份"></a>如何使用 unhide-tcp 工具辨明 TCP&#x2F;UDP 端口的身份</h5><p>以下是来自 man 页面的介绍  </p>
-<blockquote>
-<p>unhide-tcp 取证工具通过对所有可用的 TCP&#x2F;IP 端口进行暴力求解的方式，辨别所有正在监听，却没有列入 &#x2F;bin&#x2F;netstat[9] 或者 &#x2F;bin&#x2F;ss[10] 命令输出的 TCP&#x2F;IP 端口身份。<br>注一：对于 FreeBSD、OpenBSD系统，一般使用 netstat 命令取代在这些操作系统上不存在的 iproute2，此外，sockstat 命令也用于替代 fuser。<br>注二：如果操作系统不支持 iproute2 命令，在使用 unhide 时需要在命令上加上 -n 或者 -s 选项。</p>
-</blockquote>
-<p><code>unhide-tcp</code><br>示例输出：  </p>
-<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line">Unhide <span class="number">20100201</span></span><br><span class="line"><span class="symbol">http:</span><span class="comment">//www.security-projects.com/?Unhide</span></span><br><span class="line">Starting TCP checking</span><br><span class="line">Starting UDP checking</span><br></pre></td></tr></table></figure>
-<p>上述操作中，没有发现隐藏的端口。<br>但在下述示例中，我展示了一些有趣的事。  </p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">unhide-tcp</span></span><br><span class="line"><span class="string">示例输出：</span></span><br><span class="line"><span class="string">Unhide</span> <span class="number">20100201</span></span><br><span class="line"><span class="string">http://www.security-projects.com/?Unhide</span></span><br><span class="line"><span class="string">Starting</span> <span class="string">TCP</span> <span class="string">checking</span></span><br><span class="line"><span class="attr">Found Hidden port that not appears in netstat:</span> <span class="number">1048</span></span><br><span class="line"><span class="attr">Found Hidden port that not appears in netstat:</span> <span class="number">1049</span></span><br><span class="line"><span class="attr">Found Hidden port that not appears in netstat:</span> <span class="number">1050</span></span><br><span class="line"><span class="string">Starting</span> <span class="string">UDP</span> <span class="string">checking</span></span><br></pre></td></tr></table></figure>
-<p>可以看到 netstat -tulpn 和 ss 命令确实没有反映出这三个隐藏的端口：  </p>
-<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># netstat -tulpn | grep 1048</span></span><br><span class="line"><span class="meta"># ss -lp</span></span><br><span class="line"><span class="meta"># ss -l | grep 1048</span></span><br></pre></td></tr></table></figure>
-<h5 id="Windows-用户如何安装使用-unhide"><a href="#Windows-用户如何安装使用-unhide" class="headerlink" title="Windows 用户如何安装使用 unhide"></a>Windows 用户如何安装使用 unhide</h5><p>你可以通过这个页面获取 Windows 版本的 unhide<br><a href="https://www.cyberciti.biz/tips/linux-unix-windows-find-hidden-processes-tcp-udp-ports.html">unhide</a></p>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-      <tags>
-        <tag>tools</tag>
       </tags>
   </entry>
   <entry>
@@ -724,6 +688,71 @@ fi
       </categories>
       <tags>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何在 Linux/Unix/Windows 中发现隐藏的进程和端口</title>
+    <url>/2023/12/15/%E5%A6%82%E4%BD%95%E5%9C%A8%20LinuxUnixWindows%20%E4%B8%AD%E5%8F%91%E7%8E%B0%E9%9A%90%E8%97%8F%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%AB%AF%E5%8F%A3/</url>
+    <content><![CDATA[<h4 id="如何在-Linux-Unix-Windows-中发现隐藏的进程和端口"><a href="#如何在-Linux-Unix-Windows-中发现隐藏的进程和端口" class="headerlink" title="如何在 Linux&#x2F;Unix&#x2F;Windows 中发现隐藏的进程和端口"></a>如何在 Linux&#x2F;Unix&#x2F;Windows 中发现隐藏的进程和端口</h4><span id="more"></span>
+<blockquote>
+<p>unhide 是一个小巧的网络取证工具，能够发现那些借助 rootkit、LKM 及其它技术隐藏的进程和 TCP&#x2F;UDP 端口。这个工具在 Linux、UNIX 类、MS-Windows 等操作系统下都可以工作。<br>根据其 man 页面的说明：</p>
+<blockquote>
+<p>Unhide 通过下述三项技术来发现隐藏的进程。<br>进程相关的技术，包括将 &#x2F;proc 目录与 &#x2F;bin&#x2F;ps[1] 命令的输出进行比较。<br>系统相关的技术，包括将 &#x2F;bin&#x2F;ps[2] 命令的输出结果同从系统调用方面得到的信息进行比较。<br>穷举法相关的技术，包括对所有的进程 ID 进行暴力求解，该技术仅限于在基于 Linux2.6 内核的系统中使用。</p>
+</blockquote>
+</blockquote>
+<h5 id="如何安装-unhide"><a href="#如何安装-unhide" class="headerlink" title="如何安装 unhide"></a>如何安装 unhide</h5><p>首先建议你在只读介质上运行这个工具。如果使用的是 Ubuntu 或者 Debian 发行版，输入下述的 apt-get 命令以安装 Unhide<br><code>$ sudo apt-get install unhide</code><br>一切顺利的话你的命令行会输出以下内容  </p>
+<figure class="highlight plaintext"><figcaption><span>password for vivek:</span></figcaption><table><tr><td class="code"><pre><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree       </span><br><span class="line">Reading state information... Done</span><br><span class="line">Suggested packages:</span><br><span class="line">  rkhunter</span><br><span class="line">The following NEW packages will be installed:</span><br><span class="line">  unhide</span><br><span class="line">0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.</span><br><span class="line">Need to get 46.6 kB of archives.</span><br><span class="line">After this operation, 136 kB of additional disk space will be used.</span><br><span class="line">Get:1 http://in.archive.ubuntu.com/ubuntu artful/universe amd64 unhide amd64 20130526-1 [46.6 kB]</span><br><span class="line">Fetched 46.6 kB in 0s (49.0 kB/s)</span><br><span class="line">Selecting previously unselected package unhide.</span><br><span class="line">(Reading database ... 205367 files and directories currently installed.)</span><br><span class="line">Preparing to unpack .../unhide_20130526-1_amd64.deb ...</span><br><span class="line">Unpacking unhide (20130526-1) ...</span><br><span class="line">Setting up unhide (20130526-1) ...</span><br><span class="line">Processing triggers for man-db (2.7.6.1-2) ...</span><br></pre></td></tr></table></figure>
+<h5 id="如何在-RHEL-CentOS-Oracle-Scientific-Fedora-上安装-unhide"><a href="#如何在-RHEL-CentOS-Oracle-Scientific-Fedora-上安装-unhide" class="headerlink" title="如何在 RHEL&#x2F;CentOS&#x2F;Oracle&#x2F;Scientific&#x2F;Fedora 上安装 unhide"></a>如何在 RHEL&#x2F;CentOS&#x2F;Oracle&#x2F;Scientific&#x2F;Fedora 上安装 unhide</h5><p>入以下的 yum 命令（CentOS&#x2F;RHEL 6.x 或 7.x 上首先打开 EPEL 仓库）：<br><code>sudo yum install unhide</code><br>在 Fedora 上则使用以下 dnf 命令：<br><code>sudo dnf install unhide</code></p>
+<h5 id="如何使用-unhide-工具？"><a href="#如何使用-unhide-工具？" class="headerlink" title="如何使用 unhide 工具？"></a>如何使用 unhide 工具？</h5><p>unhide 的语法是：<br><code>unhide [options] test_list</code><br>test_list 参数可以是以下测试列表中的一个或者多个标准测试：<br>brute<br>proc<br>procall<br>procfs<br>quick<br>reverse<br>sys<br>或基本测试：<br>checkbrute<br>checkchdir<br>checkgetaffinity<br>checkgetparam<br>checkgetpgid<br>checkgetprio<br>checkRRgetinterval<br>checkgetsched<br>checkgetsid<br>checkkill<br>checknoprocps<br>checkopendir<br>checkproc<br>checkquick<br>checkreaddir<br>checkreverse<br>checksysinfo<br>checksysinfo2<br>checksysinfo3<br>你可以通过以下示例命令使用 unhide：  </p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># unhide proc</span></span><br><span class="line"><span class="meta"># unhide sys</span></span><br><span class="line"><span class="meta"># unhide quick</span></span><br></pre></td></tr></table></figure>
+<p>示例输出：  </p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">Unhide <span class="number">20130526</span></span><br><span class="line">Copyright © <span class="number">2013</span> Yago Jesus &amp; Patrick Gouin</span><br><span class="line">License GPLv3+ : GNU GPL <span class="keyword">version</span> <span class="number">3</span> <span class="built_in">or</span> <span class="keyword">later</span></span><br><span class="line">http://www.<span class="keyword">unhide</span>-forensics.info</span><br><span class="line">NOTE : This <span class="keyword">version</span> of <span class="keyword">unhide</span> <span class="keyword">is</span> <span class="keyword">for</span> systems using Linux &gt;= <span class="number">2.6</span> </span><br><span class="line">Used <span class="keyword">options</span>: </span><br><span class="line">[*]Searching <span class="keyword">for</span> Hidden processes through  comparison of results of <span class="built_in">system</span> calls, proc, dir <span class="built_in">and</span> <span class="keyword">ps</span></span><br></pre></td></tr></table></figure>
+<h5 id="如何使用-unhide-tcp-工具辨明-TCP-UDP-端口的身份"><a href="#如何使用-unhide-tcp-工具辨明-TCP-UDP-端口的身份" class="headerlink" title="如何使用 unhide-tcp 工具辨明 TCP&#x2F;UDP 端口的身份"></a>如何使用 unhide-tcp 工具辨明 TCP&#x2F;UDP 端口的身份</h5><p>以下是来自 man 页面的介绍  </p>
+<blockquote>
+<p>unhide-tcp 取证工具通过对所有可用的 TCP&#x2F;IP 端口进行暴力求解的方式，辨别所有正在监听，却没有列入 &#x2F;bin&#x2F;netstat[9] 或者 &#x2F;bin&#x2F;ss[10] 命令输出的 TCP&#x2F;IP 端口身份。<br>注一：对于 FreeBSD、OpenBSD系统，一般使用 netstat 命令取代在这些操作系统上不存在的 iproute2，此外，sockstat 命令也用于替代 fuser。<br>注二：如果操作系统不支持 iproute2 命令，在使用 unhide 时需要在命令上加上 -n 或者 -s 选项。</p>
+</blockquote>
+<p><code>unhide-tcp</code><br>示例输出：  </p>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line">Unhide <span class="number">20100201</span></span><br><span class="line"><span class="symbol">http:</span><span class="comment">//www.security-projects.com/?Unhide</span></span><br><span class="line">Starting TCP checking</span><br><span class="line">Starting UDP checking</span><br></pre></td></tr></table></figure>
+<p>上述操作中，没有发现隐藏的端口。<br>但在下述示例中，我展示了一些有趣的事。  </p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">unhide-tcp</span></span><br><span class="line"><span class="string">示例输出：</span></span><br><span class="line"><span class="string">Unhide</span> <span class="number">20100201</span></span><br><span class="line"><span class="string">http://www.security-projects.com/?Unhide</span></span><br><span class="line"><span class="string">Starting</span> <span class="string">TCP</span> <span class="string">checking</span></span><br><span class="line"><span class="attr">Found Hidden port that not appears in netstat:</span> <span class="number">1048</span></span><br><span class="line"><span class="attr">Found Hidden port that not appears in netstat:</span> <span class="number">1049</span></span><br><span class="line"><span class="attr">Found Hidden port that not appears in netstat:</span> <span class="number">1050</span></span><br><span class="line"><span class="string">Starting</span> <span class="string">UDP</span> <span class="string">checking</span></span><br></pre></td></tr></table></figure>
+<p>可以看到 netstat -tulpn 和 ss 命令确实没有反映出这三个隐藏的端口：  </p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># netstat -tulpn | grep 1048</span></span><br><span class="line"><span class="meta"># ss -lp</span></span><br><span class="line"><span class="meta"># ss -l | grep 1048</span></span><br></pre></td></tr></table></figure>
+<h5 id="Windows-用户如何安装使用-unhide"><a href="#Windows-用户如何安装使用-unhide" class="headerlink" title="Windows 用户如何安装使用 unhide"></a>Windows 用户如何安装使用 unhide</h5><p>你可以通过这个页面获取 Windows 版本的 unhide<br><a href="https://www.cyberciti.biz/tips/linux-unix-windows-find-hidden-processes-tcp-udp-ports.html">unhide</a></p>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>tools</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>宝塔面板环境站点开启CDN后如何获取真实IP地址（多设置方法）</title>
+    <url>/2024/09/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%8E%AF%E5%A2%83%E7%AB%99%E7%82%B9%E5%BC%80%E5%90%AFCDN%E5%90%8E%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80%EF%BC%88%E5%A4%9A%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%89/</url>
+    <content><![CDATA[<blockquote>
+<p>宝塔面板环境站点开启CDN后如何获取真实IP地址（多设置方法）</p>
+</blockquote>
+<span id="more"></span>
+<blockquote>
+<p>使用宝塔面板搭建的WEB环境，且他的网站有开启和使用CDN加速，但是在加速之后呢日志中看不到真实的访客IP地址，而是CDN的节点IP，这个就不利于分析数据。所以，需要确保CDN能正常使用，而且日志的IP地址也能看到真实的IP。</p>
+</blockquote>
+<p>这里介绍几个可能用到的办法。</p>
+<h4 id="第一种代码修改方法："><a href="#第一种代码修改方法：" class="headerlink" title="第一种代码修改方法："></a>第一种代码修改方法：</h4><p>NGINX<br>登录宝塔面板后台 &gt;&gt; 软件商店 &gt;&gt; 运行环境 &gt;&gt; 点击 nginx 右侧对应的“设置”&gt;&gt; 在 nginx 管理中点击左侧“配置修改”&gt;&gt; 在 http{ 后加入以下两行代码，具体如下图所示：</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">set_real_ip_from</span> <span class="number">0.0.0.0</span>/<span class="number">0</span>;<span class="attribute">real_ip_header</span> X-Forwarded-For;</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/09/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%8E%AF%E5%A2%83%E7%AB%99%E7%82%B9%E5%BC%80%E5%90%AFCDN%E5%90%8E%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80%EF%BC%88%E5%A4%9A%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%89/20240911-140238.png"><br>保存之后再重载配置即可</p>
+<h4 id="防火墙设置办法"><a href="#防火墙设置办法" class="headerlink" title="防火墙设置办法"></a>防火墙设置办法</h4><p><img src="/2024/09/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%8E%AF%E5%A2%83%E7%AB%99%E7%82%B9%E5%BC%80%E5%90%AFCDN%E5%90%8E%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80%EF%BC%88%E5%A4%9A%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%89/20240911-140451.png"><br>如果我们有使用防火墙插件的话，需要在防火墙插件中CDN开启</p>
+<h4 id="第二种码修改方法"><a href="#第二种码修改方法" class="headerlink" title="第二种码修改方法"></a>第二种码修改方法</h4><p>如果懂修改代码的直接在NGINX中修改。</p>
+<p>我们需要找到”Nginx.conf”文件，然后修改。（这个文件需要看我们对应的环境工具，有一些偏差）<br><img src="/2024/09/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%8E%AF%E5%A2%83%E7%AB%99%E7%82%B9%E5%BC%80%E5%90%AFCDN%E5%90%8E%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80%EF%BC%88%E5%A4%9A%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%89/20240911-150449.png"><br>这里这个用的宝塔面板，所以在他NGINX软件管理找到上图，直接在可视化界面修改</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">log_format</span>  access  <span class="string">&#x27;<span class="variable">$http_x_forwarded_for</span> - <span class="variable">$remote_user</span> [<span class="variable">$time_local</span>] &quot;<span class="variable">$request</span>&quot; &#x27;</span><span class="string">&#x27;<span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> &quot;<span class="variable">$http_referer</span>&quot; &#x27;</span><span class="string">&#x27;&quot;<span class="variable">$http_user_agent</span>&quot; &#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>我们需要在nginx.conf的http中插入上面的代码。如果是LNMP是在：</p>
+<figure class="highlight stata"><table><tr><td class="code"><pre><span class="line">/usr/<span class="keyword">local</span>/nginx/<span class="keyword">conf</span>/nginx.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
+<p>然后需要到当前站点的.conf文件中</p>
+<figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line">access_log /www/wwwlogs/laobuluo.com_nginx.<span class="built_in">log</span> <span class="keyword">access</span>;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>

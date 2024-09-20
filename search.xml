@@ -221,6 +221,20 @@ $sent_http_transfer_encoding```
       </tags>
   </entry>
   <entry>
+    <title>mysql占用库占用内存情况</title>
+    <url>/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/</url>
+    <content><![CDATA[<span id="more"></span>
+<h3 id="查看哪个库占用内存情况"><a href="#查看哪个库占用内存情况" class="headerlink" title="查看哪个库占用内存情况"></a>查看哪个库占用内存情况</h3><figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> <span class="symbol">`Database`</span>,</span><br><span class="line"><span class="built_in">SUM</span>(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> <span class="symbol">`Size (MB)`</span></span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.TABLES</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> </span><br><span class="line">table_schema;</span><br></pre></td></tr></table></figure>
+<h3 id="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："><a href="#如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：" class="headerlink" title="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："></a>如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：</h3><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> `<span class="keyword">Database</span>`,</span><br><span class="line"><span class="built_in">table_name</span> <span class="keyword">AS</span> `<span class="keyword">Table</span>`,</span><br><span class="line">(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> `Size (MB)`</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.<span class="keyword">TABLES</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> </span><br><span class="line">(data_length + index_length) <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>mysql的proxy机制实现读写分离和主从同步</title>
     <url>/2023/12/25/mysql%E7%9A%84proxy%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E5%92%8C%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</url>
     <content><![CDATA[<blockquote>
@@ -308,20 +322,6 @@ $sent_http_transfer_encoding```
       </categories>
       <tags>
         <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mysql占用库占用内存情况</title>
-    <url>/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/</url>
-    <content><![CDATA[<span id="more"></span>
-<h3 id="查看哪个库占用内存情况"><a href="#查看哪个库占用内存情况" class="headerlink" title="查看哪个库占用内存情况"></a>查看哪个库占用内存情况</h3><figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> <span class="symbol">`Database`</span>,</span><br><span class="line"><span class="built_in">SUM</span>(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> <span class="symbol">`Size (MB)`</span></span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.TABLES</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> </span><br><span class="line">table_schema;</span><br></pre></td></tr></table></figure>
-<h3 id="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："><a href="#如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：" class="headerlink" title="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："></a>如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：</h3><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> `<span class="keyword">Database</span>`,</span><br><span class="line"><span class="built_in">table_name</span> <span class="keyword">AS</span> `<span class="keyword">Table</span>`,</span><br><span class="line">(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> `Size (MB)`</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.<span class="keyword">TABLES</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> </span><br><span class="line">(data_length + index_length) <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -557,6 +557,21 @@ fi
       </tags>
   </entry>
   <entry>
+    <title>tcp,ip原理和抓包</title>
+    <url>/2023/12/25/tcp-ip%E5%8E%9F%E7%90%86%E5%92%8C%E6%8A%93%E5%8C%85/</url>
+    <content><![CDATA[<p><img src="/2023/12/25/tcp-ip%E5%8E%9F%E7%90%86%E5%92%8C%E6%8A%93%E5%8C%85/1703464967937.jpg"></p>
+<span id="more"></span>
+<h5 id="TCP连接-SYN-ACK-RST-UTG-PSH-FIN"><a href="#TCP连接-SYN-ACK-RST-UTG-PSH-FIN" class="headerlink" title="TCP连接:SYN ACK RST UTG PSH FIN"></a>TCP连接:SYN ACK RST UTG PSH FIN</h5><p>三次握手：发送端发送一个SYN&#x3D;1，ACK&#x3D;0标志的数据包给接收端，请求进行连接，这是第一次握手；<br>接收端收到请求并且允许连接的话，就会发送一个SYN&#x3D;1，ACK&#x3D;1标志的数据包给发送端，告诉它，可以通讯了，并且让发送端发送一个确认数据包，这是第二次握手；<br>最后，发送端发送一个SYN&#x3D;0，ACK&#x3D;1的数据包给接收端，告诉它连接已被确认，这就是第三次握手。之后，一个TCP连接建立，开始通讯。<br>*<strong>SYN：同步标志</strong><br>同步序列编号(Synchronize Sequence Numbers)栏有效。该标志仅在三次握手建立TCP连接时有效。它提示TCP连接的服务端检查序列编号，该序列编号为TCP连接初始端(一般是客户端)的初始序列编号。<br>在这里，可以把 TCP序列编号看作是一个范围从0到4，294，967，295的32位计数器。通过TCP连接交换的数据中每一个字节都经过序列编号。<br>在TCP报头中的序列编号栏包括了TCP分段中第一个字节的序列编号。</p>
+<p>*<strong>ACK：确认标志</strong><br>确认编号(Acknowledgement Number)栏有效。大多数情况下该标志位是置位的。TCP报头内的确认编号栏内包含的确认编号(w+1，Figure-1)为下一个预期的序列编号，同时提示远端系统已经成功接收所有数据。<br>*<strong>RST：复位标志</strong><br>复位标志有效。用于复位相应的TCP连接。<br>*<strong>URG：紧急标志</strong><br>紧急(The urgent pointer) 标志有效。紧急标志置位，<br>*<strong>PSH：推标志</strong><br>该标志置位时，接收端不将该数据进行队列处理，而是尽可能快将数据转由应用处理。在处理 telnet 或 rlogin 等交互模式的连接时，该标志总是置位的。<br>*<strong>FIN：结束标志</strong><br>带有该标志置位的数据包用来结束一个TCP回话，但对应端口仍处于开放状态，准备接收后续数据。<br>TCP的几个状态对于我们分析所起的作用。在TCP层，有个FLAGS字段，这个字段有以下几个标识：SYN, FIN, ACK, PSH, RST, URG.其中，对于我们日常的分析有用的就是前面的五个字段。它们的含义是：SYN表示建立连接，FIN表示关闭连接，ACK表示响应，PSH表示有 DATA数据传输，RST表示连接重置。<br>其中，ACK是可能与SYN，FIN等同时使用的，比如SYN和ACK可能同时为1，它表示的就是建立连接之后的响应，如果只是单个的一个SYN，它表示的只是建立连接。<br>TCP的几次握手就是通过这样的ACK表现出来的。但SYN与FIN是不会同时为1的，因为前者表示的是建立连接，而后者表示的是断开连接。<br>RST一般是在FIN之后才会出现为1的情况，表示的是连接重置。一般地，当出现FIN包或RST包时，我们便认为客户端与服务器端断开了连接；<br>而当出现SYN和SYN＋ACK包时，我们认为客户端与服务器建立了一个连接。<br>PSH为1的情况，一般只出现在DATA内容不为0的包中，也就是说PSH为1表示的是有真正的TCP数据包内容被传递。TCP的连接建立和连接关闭，都是通过请求－响应的模式完成的。</p>
+]]></content>
+      <categories>
+        <category>system</category>
+      </categories>
+      <tags>
+        <tag>system</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>win7系统下Update更新出现错误代码80073712的解决方法</title>
     <url>/2023/12/18/win7%E7%B3%BB%E7%BB%9F%E4%B8%8BUpdate%E6%9B%B4%E6%96%B0%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AF%E4%BB%A3%E7%A0%8180073712%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<blockquote>
@@ -576,21 +591,6 @@ fi
       </categories>
       <tags>
         <tag>windows</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>tcp,ip原理和抓包</title>
-    <url>/2023/12/25/tcp-ip%E5%8E%9F%E7%90%86%E5%92%8C%E6%8A%93%E5%8C%85/</url>
-    <content><![CDATA[<p><img src="/2023/12/25/tcp-ip%E5%8E%9F%E7%90%86%E5%92%8C%E6%8A%93%E5%8C%85/1703464967937.jpg"></p>
-<span id="more"></span>
-<h5 id="TCP连接-SYN-ACK-RST-UTG-PSH-FIN"><a href="#TCP连接-SYN-ACK-RST-UTG-PSH-FIN" class="headerlink" title="TCP连接:SYN ACK RST UTG PSH FIN"></a>TCP连接:SYN ACK RST UTG PSH FIN</h5><p>三次握手：发送端发送一个SYN&#x3D;1，ACK&#x3D;0标志的数据包给接收端，请求进行连接，这是第一次握手；<br>接收端收到请求并且允许连接的话，就会发送一个SYN&#x3D;1，ACK&#x3D;1标志的数据包给发送端，告诉它，可以通讯了，并且让发送端发送一个确认数据包，这是第二次握手；<br>最后，发送端发送一个SYN&#x3D;0，ACK&#x3D;1的数据包给接收端，告诉它连接已被确认，这就是第三次握手。之后，一个TCP连接建立，开始通讯。<br>*<strong>SYN：同步标志</strong><br>同步序列编号(Synchronize Sequence Numbers)栏有效。该标志仅在三次握手建立TCP连接时有效。它提示TCP连接的服务端检查序列编号，该序列编号为TCP连接初始端(一般是客户端)的初始序列编号。<br>在这里，可以把 TCP序列编号看作是一个范围从0到4，294，967，295的32位计数器。通过TCP连接交换的数据中每一个字节都经过序列编号。<br>在TCP报头中的序列编号栏包括了TCP分段中第一个字节的序列编号。</p>
-<p>*<strong>ACK：确认标志</strong><br>确认编号(Acknowledgement Number)栏有效。大多数情况下该标志位是置位的。TCP报头内的确认编号栏内包含的确认编号(w+1，Figure-1)为下一个预期的序列编号，同时提示远端系统已经成功接收所有数据。<br>*<strong>RST：复位标志</strong><br>复位标志有效。用于复位相应的TCP连接。<br>*<strong>URG：紧急标志</strong><br>紧急(The urgent pointer) 标志有效。紧急标志置位，<br>*<strong>PSH：推标志</strong><br>该标志置位时，接收端不将该数据进行队列处理，而是尽可能快将数据转由应用处理。在处理 telnet 或 rlogin 等交互模式的连接时，该标志总是置位的。<br>*<strong>FIN：结束标志</strong><br>带有该标志置位的数据包用来结束一个TCP回话，但对应端口仍处于开放状态，准备接收后续数据。<br>TCP的几个状态对于我们分析所起的作用。在TCP层，有个FLAGS字段，这个字段有以下几个标识：SYN, FIN, ACK, PSH, RST, URG.其中，对于我们日常的分析有用的就是前面的五个字段。它们的含义是：SYN表示建立连接，FIN表示关闭连接，ACK表示响应，PSH表示有 DATA数据传输，RST表示连接重置。<br>其中，ACK是可能与SYN，FIN等同时使用的，比如SYN和ACK可能同时为1，它表示的就是建立连接之后的响应，如果只是单个的一个SYN，它表示的只是建立连接。<br>TCP的几次握手就是通过这样的ACK表现出来的。但SYN与FIN是不会同时为1的，因为前者表示的是建立连接，而后者表示的是断开连接。<br>RST一般是在FIN之后才会出现为1的情况，表示的是连接重置。一般地，当出现FIN包或RST包时，我们便认为客户端与服务器端断开了连接；<br>而当出现SYN和SYN＋ACK包时，我们认为客户端与服务器建立了一个连接。<br>PSH为1的情况，一般只出现在DATA内容不为0的包中，也就是说PSH为1表示的是有真正的TCP数据包内容被传递。TCP的连接建立和连接关闭，都是通过请求－响应的模式完成的。</p>
-]]></content>
-      <categories>
-        <category>system</category>
-      </categories>
-      <tags>
-        <tag>system</tag>
       </tags>
   </entry>
   <entry>
@@ -753,6 +753,22 @@ fi
       </categories>
       <tags>
         <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>宝塔任务计划不执行原因排查</title>
+    <url>/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/</url>
+    <content><![CDATA[<blockquote>
+<p>宝塔设置任务计划以后不执行，手动执行是成功的</p>
+</blockquote>
+<span id="more"></span>
+<h4 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h4><p>vi &#x2F;var&#x2F;log&#x2F;cron 查看任务计划执行日志如下<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132221.png"><br><strong>(root) FAILED to authorize user with PAM (Authentication token is no longer valid; new one required)</strong><br>发现是认证过期了，通过chage -l root可以查看到如下内容<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132530.png"><br>如果不需要设置过期可以使用chage -M 99999 root为永不过期<br>修改密码以后再测试cron执行成功了</p>
+]]></content>
+      <categories>
+        <category>software</category>
+      </categories>
+      <tags>
+        <tag>software</tag>
       </tags>
   </entry>
   <entry>

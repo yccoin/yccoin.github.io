@@ -288,6 +288,28 @@ $sent_http_transfer_encoding```
       </tags>
   </entry>
   <entry>
+    <title>set指令的作用</title>
+    <url>/2024/09/28/nginx%20set%E6%8C%87%E4%BB%A4%E7%9A%84%E4%BD%9C%E7%94%A8/</url>
+    <content><![CDATA[<blockquote>
+<p>在配置文件中通常是在server{}中，要基于多条件判断进行跳转&#x2F;拦截&#x2F;回源等需求时，可以通过使用nginx set指令来实现。<br>set指令是用于定义一个变量，并且赋值。<br>条件判断可以根据nginx内置的全局变量进行判断然后使用set 赋值。</p>
+</blockquote>
+<span id="more"></span>
+<h4 id="在nginx配置文件中使用如下："><a href="#在nginx配置文件中使用如下：" class="headerlink" title="在nginx配置文件中使用如下："></a>在nginx配置文件中使用如下：</h4><p><code>set $rewriteFlag 0;</code></p>
+<p>#这里可以加上条件判断，比如客户端ip为12.34.56.78&#x2F;24时set 1<br><code>set $rewriteFlag &#39;$&#123;rewriteFlag&#125;1&#39;;</code></p>
+<p>#这里可以加上条件判断，比如根据$http_referer&#x2F;$cookie_name&#x2F;$request_uri等判断进行赋值set 2<br><code>set $rewriteFlag &#39;$&#123;rewriteFlag&#125;2&#39;;</code></p>
+<p>#这里的意思是当请求ip为12.34.56.78&#x2F;24，且$http_referer&#x2F;$cookie_name&#x2F;$request_uri为你设置的条件</p>
+<p>#那么进行跳转，看见了吧这就是利用多条件进行操作的过程。更复杂的多条件情况下可以自行判断构造。</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">if</span> (<span class="variable">$rewriteFlag</span>= <span class="string">&#x27;012&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">#    rewrite ^(.*) https://www.mywebsite.com$request_uri break;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>举例</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">if</span> (<span class="variable">$http_user_agent</span> <span class="regexp">~ &quot;CensysInspect|meta-externalagent|facebookexternalhit|DotBot|YisouSpider|PetalBot|GPTBot|serpstatbot|BLEXBot|bingbot|DataForSeoBot|Friendly_Crawler|Go-http-client|Bytespider|Java|PhantomJS|SemrushBot|Scrapy|Webdup|AcoonBot|AhrefsBot|Ezooms|EdisterBot|EC2LinkFinder|jikespider|Purebot|MJ12bot|WangIDSpider|WBSearchBot|Wotbox|xbfMozilla|Yottaa|YandexBot|Jorgee|SWEBot|spbot|TurnitinBot-Agent|mail.RU|perl|Python|Wget|Xenu|ZmEu|Googlebot|facebookexternalhit|^$&quot;</span>   )</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="attribute">set</span> <span class="variable">$flag</span> <span class="string">&quot;<span class="variable">$&#123;flag&#125;</span>1&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="attribute">if</span> ( <span class="variable">$remote_addr</span> !<span class="regexp">~* &#x27;60.247.158.19|127.0.0.1&#x27;)</span> </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attribute">set</span> <span class="variable">$flag</span> <span class="string">&quot;<span class="variable">$&#123;flag&#125;</span>1&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="attribute">if</span> (<span class="variable">$flag</span> = <span class="string">&quot;011&quot;</span>)&#123;</span><br><span class="line">      <span class="attribute">return</span> <span class="number">444</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>nginx和php-fpm两种通信方式对比UnixSocket和TcpSocket</title>
     <url>/2023/12/25/nginx%E5%92%8Cphp-fpm%E4%B8%A4%E7%A7%8D%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94UnixSocket%E5%92%8CTcpSocket/</url>
     <content><![CDATA[<blockquote>
@@ -640,54 +662,19 @@ fi
       </tags>
   </entry>
   <entry>
-    <title>多线程，多进程，携程，异步</title>
-    <url>/2023/12/18/%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%8C%E6%90%BA%E7%A8%8B%EF%BC%8C%E5%BC%82%E6%AD%A5/</url>
-    <content><![CDATA[<h4 id="multiprocessing-多进程"><a href="#multiprocessing-多进程" class="headerlink" title="multiprocessing 多进程"></a>multiprocessing 多进程</h4><blockquote>
-<p>multiprocessing是一个用于产生多进程的包，与threading模块的API类似。multiprocessing既可以实现本地的多进程，也可以实现远程的多进程。通过使用多个子进程而非线程可以绕开Python的全局解释器锁(GIL)，同时允许在多种系统平台使用</p>
+    <title>宝塔任务计划不执行原因排查</title>
+    <url>/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/</url>
+    <content><![CDATA[<blockquote>
+<p>宝塔设置任务计划以后不执行，手动执行是成功的</p>
 </blockquote>
 <span id="more"></span>
-<h5 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h5><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line">import multiprocessing as mp</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line">def <span class="built_in">info</span>(title):</span><br><span class="line">    <span class="built_in">print</span>(title)</span><br><span class="line">    <span class="built_in">print</span>(f<span class="string">&#x27;父进程:&#123;os.getppid()&#125;&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(f<span class="string">&#x27;进程:&#123;os.getpid()&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">def func(name):</span><br><span class="line">    <span class="built_in">info</span>(<span class="string">&#x27;function func&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>,name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="attribute">__name__</span>==&#x27;__main__&#x27;:</span><br><span class="line">    <span class="built_in">info</span>(<span class="string">&#x27;main line&#x27;</span>)</span><br><span class="line">    <span class="attribute">p</span>=mp.Process(target=func,args=(&#x27;gdd&#x27;,))</span><br><span class="line">    p.start()</span><br><span class="line">    p.join()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>在Python中，进程是通过multiprocessing多进程模块来创建的，multiprocessing模块提供了⼀个Process类来创建进程对象。Process类可以单独调用，也可以继承使用。主要操作如下：  </p>
-<ol>
-<li>Process.start() 启动子进程</li>
-<li>Process.join() 等待子进程结束(阻塞等待)</li>
-<li>Process.is_alive() 判断子进程是否在运行(运行中返回True)</li>
-<li>Process.close() 结束子进程(不推荐使用，会抛出异常)<br>根据不同的平台， multiprocessing支持三种启动进程的方法。这些启动方法有:  </li>
-<li>spawn:父进程会启动一个全新的Python解释器进程。子进程将只继承那些运行进程对象的run()方法所必需的资源。 特别地，来自父进程的非必需文件描述符和句柄将不会被继承。 使用此方法启动进程相比使用fork或 forkserver要慢上许多。可在Unix和Windows上使用。 Windows上的默认设置</li>
-<li>fork:父进程使用os.fork()来产生Python解释器分叉。子进程在开始时实际上与父进程相同。父进程的所有资源都由子进程继承。请注意，安全分叉多线程进程是棘手的。只存在于Unix。Unix中的默认值</li>
-<li>forkserver:程序启动并选择forkserver启动方法时，将启动服务器进程。从那时起，每当需要一个新进程时，父进程就会连接到服务器并请求它分叉一个新进程。分叉服务器进程是单线程的，因此使用os.fork()是安全的。没有不必要的资源被继承。可在Unix平台上使用，支持通过Unix管道传递文件描述符<br>要选择一个启动方法，你应该在主模块的if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘子句中调用 set_start_method()。  <figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    multiprocessing<span class="selector-class">.set_start_method</span>(<span class="string">&#x27;spawn&#x27;</span>)</span><br><span class="line">    <span class="built_in">info</span>(<span class="string">&#x27;main line&#x27;</span>)</span><br><span class="line">    <span class="selector-tag">p</span> = <span class="built_in">Process</span>(target=func, args=(<span class="string">&#x27;gdd&#x27;</span>,))</span><br><span class="line">    <span class="selector-tag">p</span><span class="selector-class">.start</span>()</span><br><span class="line">    <span class="selector-tag">p</span><span class="selector-class">.join</span>()</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h5 id="POOL"><a href="#POOL" class="headerlink" title="POOL"></a>POOL</h5><blockquote>
-<p>当需要创建的⼦进程数量不多时， 可以直接利⽤multiprocessing.Process动态生成多个进程， 但如果要创建很多进程时，⼿动创建的话⼯作量会非常大，此时就可以⽤到multiprocessing模块提供的Pool去创建一个进程池。当需要创建的⼦进程数量不多时， 可以直接利⽤multiprocessing.Process动态生成多个进程， 但如果要创建很多进程时，⼿动创建的话⼯作量会非常大，此时就可以⽤到multiprocessing模块提供的Pool去创建一个进程池。使用进程池的好处就是可以，创建有限的进程来自动并行处理大量的任务。Pool类的主要方法:</p>
-</blockquote>
-<ol>
-<li>Pool.apply()启动任务(阻塞等待任务完成)</li>
-<li>Pool.map()批量启动任务(阻塞等待所有任务完成)</li>
-<li>Pool.apply_async()启动任务(非阻塞)</li>
-<li>Pool.map_async()批量启动任务(非阻塞)</li>
-</ol>
-<h5 id="QUEUE"><a href="#QUEUE" class="headerlink" title="QUEUE"></a>QUEUE</h5><blockquote>
-<p>Queue创建共享的进程队列，是多进程安全的队列，可以使用Queue实现多进程之间的数据传递。通常在生产者消费者模式中经常使用，一个进程向队列中写数据，另一个进程从队列中取数据。无论主进程或子进程，都能访问到队列，放进去的对象都经过了深拷贝</p>
-</blockquote>
-<p>Queue([maxsize]:返回一个使用一个管道和少量锁和信号量实现的共享队列实例。当一个进程将一个对象放进队列中时，一个写入线程会启动并将对象从缓冲区写入管道中。Queue模块的方法有：  </p>
-<ol>
-<li>qsize()：返回当前队列包含的消息数量；</li>
-<li>empty()：如果队列为空，返回True，反之False ；</li>
-<li>full()：如果队列满了，返回True,反之False；</li>
-<li>get():获取队列中的一条消息，然后将其从列队中移除，可传参超时时长；</li>
-<li>get_nowait()：相当Queue.get(False),取不到值时触发异常：Empty；</li>
-<li>put():将一个值添加进数列，可传参超时时长；</li>
-<li>put_nowait():相当于Queue.get(False),当队列满了时报错：Full；</li>
-</ol>
-<h5 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h5><h6 id="进程锁"><a href="#进程锁" class="headerlink" title="进程锁"></a>进程锁</h6><blockquote>
-<p>进程锁和线程锁的用法基本一致。进程锁的诞生是为了避免多进程之间抢占共享数据，进而造成多进程之间混乱修改共享内存的局面</p>
-</blockquote>
+<h4 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h4><p>vi &#x2F;var&#x2F;log&#x2F;cron 查看任务计划执行日志如下<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132221.png"><br><strong>(root) FAILED to authorize user with PAM (Authentication token is no longer valid; new one required)</strong><br>发现是认证过期了，通过chage -l root可以查看到如下内容<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132530.png"><br>如果不需要设置过期可以使用chage -M 99999 root为永不过期<br>修改密码以后再测试cron执行成功了</p>
 ]]></content>
       <categories>
-        <category>python</category>
+        <category>software</category>
       </categories>
       <tags>
-        <tag>python</tag>
+        <tag>software</tag>
       </tags>
   </entry>
   <entry>
@@ -756,44 +743,54 @@ fi
       </tags>
   </entry>
   <entry>
-    <title>宝塔任务计划不执行原因排查</title>
-    <url>/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/</url>
-    <content><![CDATA[<blockquote>
-<p>宝塔设置任务计划以后不执行，手动执行是成功的</p>
+    <title>多线程，多进程，携程，异步</title>
+    <url>/2023/12/18/%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%8C%E6%90%BA%E7%A8%8B%EF%BC%8C%E5%BC%82%E6%AD%A5/</url>
+    <content><![CDATA[<h4 id="multiprocessing-多进程"><a href="#multiprocessing-多进程" class="headerlink" title="multiprocessing 多进程"></a>multiprocessing 多进程</h4><blockquote>
+<p>multiprocessing是一个用于产生多进程的包，与threading模块的API类似。multiprocessing既可以实现本地的多进程，也可以实现远程的多进程。通过使用多个子进程而非线程可以绕开Python的全局解释器锁(GIL)，同时允许在多种系统平台使用</p>
 </blockquote>
 <span id="more"></span>
-<h4 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h4><p>vi &#x2F;var&#x2F;log&#x2F;cron 查看任务计划执行日志如下<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132221.png"><br><strong>(root) FAILED to authorize user with PAM (Authentication token is no longer valid; new one required)</strong><br>发现是认证过期了，通过chage -l root可以查看到如下内容<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132530.png"><br>如果不需要设置过期可以使用chage -M 99999 root为永不过期<br>修改密码以后再测试cron执行成功了</p>
-]]></content>
-      <categories>
-        <category>software</category>
-      </categories>
-      <tags>
-        <tag>software</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>帝国CMS从HTTP升级到HTTPS 登录网站后台空白</title>
-    <url>/2024/05/08/%E5%B8%9D%E5%9B%BDCMS%E4%BB%8EHTTP%E5%8D%87%E7%BA%A7%E5%88%B0HTTPS%20%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E7%A9%BA%E7%99%BD/</url>
-    <content><![CDATA[<blockquote>
-<p>通常网站一般采用HTTP传输协议即可，但为了网站更加安全，建议大家给域名申请SSL证书，然后给网站启用https协议进行访问。<br>帝国CMS7.5版新增支持HTTPS传输协议，更安全</p>
-</blockquote>
-<span id="more"></span>
-<h4 id="帝国CMS7-5"><a href="#帝国CMS7-5" class="headerlink" title="帝国CMS7.5"></a>帝国CMS7.5</h4><p>帝国CMS7.5版完美支持HTTPS传输协议，可以做如下设置：<br>帝国CMS后台进行设置，传输协议改为全站https:&#x2F;&#x2F;，网站地址设为https:&#x2F;&#x2F;<br><img src="/2024/05/08/%E5%B8%9D%E5%9B%BDCMS%E4%BB%8EHTTP%E5%8D%87%E7%BA%A7%E5%88%B0HTTPS%20%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E7%A9%BA%E7%99%BD/8e92ab44aae07b63bbddce87658d1283.png"><br>帝国CMS7.5 可以设置的五种传输协议（如下图）：<br><img src="/2024/05/08/%E5%B8%9D%E5%9B%BDCMS%E4%BB%8EHTTP%E5%8D%87%E7%BA%A7%E5%88%B0HTTPS%20%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E7%A9%BA%E7%99%BD/5d86055e4572c16a81cca3eff314b105.png"><br>帝国CMS7.5版可自行灵活选择是否使用https：</p>
+<h5 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h5><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line">import multiprocessing as mp</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line">def <span class="built_in">info</span>(title):</span><br><span class="line">    <span class="built_in">print</span>(title)</span><br><span class="line">    <span class="built_in">print</span>(f<span class="string">&#x27;父进程:&#123;os.getppid()&#125;&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(f<span class="string">&#x27;进程:&#123;os.getpid()&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">def func(name):</span><br><span class="line">    <span class="built_in">info</span>(<span class="string">&#x27;function func&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>,name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="attribute">__name__</span>==&#x27;__main__&#x27;:</span><br><span class="line">    <span class="built_in">info</span>(<span class="string">&#x27;main line&#x27;</span>)</span><br><span class="line">    <span class="attribute">p</span>=mp.Process(target=func,args=(&#x27;gdd&#x27;,))</span><br><span class="line">    p.start()</span><br><span class="line">    p.join()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在Python中，进程是通过multiprocessing多进程模块来创建的，multiprocessing模块提供了⼀个Process类来创建进程对象。Process类可以单独调用，也可以继承使用。主要操作如下：  </p>
 <ol>
-<li>由系统自动识别当前服务器是否使用https；</li>
-<li>设置全站使用http；</li>
-<li>设置全站使用https；</li>
-<li>设置后台https,前台http；</li>
-<li>设置后台http,前台https；<br>品自行建议使用全站https，或者后台http，前台https，这两种</li>
+<li>Process.start() 启动子进程</li>
+<li>Process.join() 等待子进程结束(阻塞等待)</li>
+<li>Process.is_alive() 判断子进程是否在运行(运行中返回True)</li>
+<li>Process.close() 结束子进程(不推荐使用，会抛出异常)<br>根据不同的平台， multiprocessing支持三种启动进程的方法。这些启动方法有:  </li>
+<li>spawn:父进程会启动一个全新的Python解释器进程。子进程将只继承那些运行进程对象的run()方法所必需的资源。 特别地，来自父进程的非必需文件描述符和句柄将不会被继承。 使用此方法启动进程相比使用fork或 forkserver要慢上许多。可在Unix和Windows上使用。 Windows上的默认设置</li>
+<li>fork:父进程使用os.fork()来产生Python解释器分叉。子进程在开始时实际上与父进程相同。父进程的所有资源都由子进程继承。请注意，安全分叉多线程进程是棘手的。只存在于Unix。Unix中的默认值</li>
+<li>forkserver:程序启动并选择forkserver启动方法时，将启动服务器进程。从那时起，每当需要一个新进程时，父进程就会连接到服务器并请求它分叉一个新进程。分叉服务器进程是单线程的，因此使用os.fork()是安全的。没有不必要的资源被继承。可在Unix平台上使用，支持通过Unix管道传递文件描述符<br>要选择一个启动方法，你应该在主模块的if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘子句中调用 set_start_method()。  <figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    multiprocessing<span class="selector-class">.set_start_method</span>(<span class="string">&#x27;spawn&#x27;</span>)</span><br><span class="line">    <span class="built_in">info</span>(<span class="string">&#x27;main line&#x27;</span>)</span><br><span class="line">    <span class="selector-tag">p</span> = <span class="built_in">Process</span>(target=func, args=(<span class="string">&#x27;gdd&#x27;</span>,))</span><br><span class="line">    <span class="selector-tag">p</span><span class="selector-class">.start</span>()</span><br><span class="line">    <span class="selector-tag">p</span><span class="selector-class">.join</span>()</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p><strong>这里说明一下，帝国cms7.5版支持https，7.2版及一下要支持https要改e&#x2F;class&#x2F;connect.php两处http:&#x2F;&#x2F;为https:&#x2F;&#x2F;才可以支持<br>一般修改完成，网址会从<a href="http://qinshining.com转变成https//qinshining.com">http://qinshining.com转变成https://qinshining.com</a></strong></p>
-<h4 id="后台启用https协议后无法登录"><a href="#后台启用https协议后无法登录" class="headerlink" title="后台启用https协议后无法登录"></a>后台启用https协议后无法登录</h4><p>帝国7.5在后台启用了https协议，输入账号和密码登录就是一片空白，登录不进去了，<br>解决方法：<br>修改e&#x2F;config&#x2F;config.php文件，搜索httptype修改回默认的0，然后登录后台后把https设置为默认的自动即可。</p>
+<h5 id="POOL"><a href="#POOL" class="headerlink" title="POOL"></a>POOL</h5><blockquote>
+<p>当需要创建的⼦进程数量不多时， 可以直接利⽤multiprocessing.Process动态生成多个进程， 但如果要创建很多进程时，⼿动创建的话⼯作量会非常大，此时就可以⽤到multiprocessing模块提供的Pool去创建一个进程池。当需要创建的⼦进程数量不多时， 可以直接利⽤multiprocessing.Process动态生成多个进程， 但如果要创建很多进程时，⼿动创建的话⼯作量会非常大，此时就可以⽤到multiprocessing模块提供的Pool去创建一个进程池。使用进程池的好处就是可以，创建有限的进程来自动并行处理大量的任务。Pool类的主要方法:</p>
+</blockquote>
+<ol>
+<li>Pool.apply()启动任务(阻塞等待任务完成)</li>
+<li>Pool.map()批量启动任务(阻塞等待所有任务完成)</li>
+<li>Pool.apply_async()启动任务(非阻塞)</li>
+<li>Pool.map_async()批量启动任务(非阻塞)</li>
+</ol>
+<h5 id="QUEUE"><a href="#QUEUE" class="headerlink" title="QUEUE"></a>QUEUE</h5><blockquote>
+<p>Queue创建共享的进程队列，是多进程安全的队列，可以使用Queue实现多进程之间的数据传递。通常在生产者消费者模式中经常使用，一个进程向队列中写数据，另一个进程从队列中取数据。无论主进程或子进程，都能访问到队列，放进去的对象都经过了深拷贝</p>
+</blockquote>
+<p>Queue([maxsize]:返回一个使用一个管道和少量锁和信号量实现的共享队列实例。当一个进程将一个对象放进队列中时，一个写入线程会启动并将对象从缓冲区写入管道中。Queue模块的方法有：  </p>
+<ol>
+<li>qsize()：返回当前队列包含的消息数量；</li>
+<li>empty()：如果队列为空，返回True，反之False ；</li>
+<li>full()：如果队列满了，返回True,反之False；</li>
+<li>get():获取队列中的一条消息，然后将其从列队中移除，可传参超时时长；</li>
+<li>get_nowait()：相当Queue.get(False),取不到值时触发异常：Empty；</li>
+<li>put():将一个值添加进数列，可传参超时时长；</li>
+<li>put_nowait():相当于Queue.get(False),当队列满了时报错：Full；</li>
+</ol>
+<h5 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h5><h6 id="进程锁"><a href="#进程锁" class="headerlink" title="进程锁"></a>进程锁</h6><blockquote>
+<p>进程锁和线程锁的用法基本一致。进程锁的诞生是为了避免多进程之间抢占共享数据，进而造成多进程之间混乱修改共享内存的局面</p>
+</blockquote>
 ]]></content>
       <categories>
-        <category>ngnix</category>
+        <category>python</category>
       </categories>
       <tags>
-        <tag>nginx</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -846,30 +843,6 @@ fi
       </tags>
   </entry>
   <entry>
-    <title>解决宝塔面板启用SSL后Https窜站问题</title>
-    <url>/2023/12/15/%E8%A7%A3%E5%86%B3%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E5%90%AF%E7%94%A8SSL%E5%90%8EHttps%E7%AA%9C%E7%AB%99%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>解决宝塔面板启用SSL后Https窜站问题</p>
-<span id="more"></span>
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><blockquote>
-<p>宝塔面板 https 串站<br>在这里引用宝塔官方说法：在未指定 SSL 默认站点时,未开启 SSL 的站点使用 HTTPS 会直接访问到已开启 SSL 的站点<br>【重要安全】解决宝塔面板启用 SSL 后 Https 窜站问题，防止源站 IP 泄露<br>相信使用宝塔面板的盆友，应该都遇到过宝塔这个 https 串站问题。很多盆友遇到了，但忽略了它，觉得没啥影响的，就置之不理了…<br>置之不理肯定是不行的，不能有掩耳盗铃侥幸心理，通过这个漏洞，“大有可为”了！先不说串站可能会影响收录 SEO 这一点了，更重要的是它会导致一个不小的安全问题：你的源站 IP 正在泄露，即便你使用了CDN也不行！<br>至于怎么泄露源站 IP，这里只简单的说一下：可以直接通过 https:&#x2F;&#x2F;你服务器 IP 地址来访问，nginx 会向浏览器发送默认的 SSL 证书，通过查看证书详情可以找到对应的域名。详细了解请见下面的参考文章<br>下面小菜就来说下本文重点了，怎么堵上这个串站、泄露源站 IP 的漏洞。使用宝塔面板的，跟着下面步骤一步步做就 OJBK 了；使用 LNMP 一键包或其它程序的，也可以参考着处理下。</p>
-</blockquote>
-<h3 id="新建站点"><a href="#新建站点" class="headerlink" title="新建站点"></a>新建站点</h3><p>新建一个不存在的站点，域名填写为：1.com （你随便搞一个就行），提交</p>
-<h3 id="配置证书"><a href="#配置证书" class="headerlink" title="配置证书"></a>配置证书</h3><p>回到宝塔“网站管理”，找到 1.com，点“设置”进入网站配置，然后点击“SSL”，如下图：</p>
-<p>【重要安全】解决宝塔面板启用 SSL 后 Https 窜站问题，防止源站 IP 泄露<br>然后密钥和证书填写如下，填写完毕，点保存：</p>
-<p>密钥(KEY)</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">-----BEGIN PRIVATE KEY-----</span><br><span class="line">MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCtReHP3YxdNqaC</span><br><span class="line">HNIVnSiriemyyVF7vGhILIn5ZvBAC9UvzbgL7K4wO8P2CxK3n4wh3g23UKx5EX+a</span><br><span class="line">5at+J9U26Rquhoa57cyvPkJGJDmvoLyPiS2pgP3tlJQ4frza6D7WI/nCoo42L79x</span><br><span class="line">nY9rfkhygcu3VeUoCriYjNM30l/bg4VhSoRVLa9dDDxCOa4A+gYxetCe9u382rcs</span><br><span class="line">nrsarPMEJq3+7sbRk1r9KyBIfplbV/hCK+0CGxnGCYDedpL1WfACgnpKLigeFKGS</span><br><span class="line">5/ZukD80O4qjMJNA9cKP8rO0hegsHh4zjrfkvFYlWouvFsJDTNWfl7PC+2uP/9Bk</span><br><span class="line">rWMWGe4RAgMBAAECggEAbUkRNqC+oiAQ/ymcW6OG/kJ60pflO8zGXRcyYspJJ6wO</span><br><span class="line">5xqyRVsfNi7L1wh+4q/Pm6DJN+C7F5UwzYqkEmqfMQXvHTqeCPDyU2lKNaEtfRc9</span><br><span class="line">Nq7HzQwdnFZE8ikFhnBLCZchNWB/n6+X6Nn+lkbM/OPekCCt6wZwDU9s/N1ENld/</span><br><span class="line">7r4keq/nKyTsFdbJVFb7HAJ73XeendDFbG9oyG14sf1rEQB3tXESiemF7bD30uwP</span><br><span class="line">t0OwbVMTuN4OO8NVH8yx3EJykn1c7e9QLTVIFLlv0cp/p7R9eVqc1uZ5lkoNJ2i2</span><br><span class="line">VTxsu3RXEE6QyLOJ6wabIcGvse35Lv8R4rwDCF/0wQKBgQDmYAnPwX8kY1n99cRS</span><br><span class="line">g+C+9TUjLfjyDmnBDKUGt07/cjE0n9kEITuRhbQ2UukdWbHF441Pd/IM9k7Lf/yv</span><br><span class="line">f1MtZHq52FPjX9fxbjvibXzkqTWqmZKvIolaMY9hndULQNAZBD1nXO9sAye5fEGf</span><br><span class="line">3rQe1F7CFrkxvTrySJ6TnefBmQKBgQDAi9okmjHd0Q+8aHi09/piIHXpZI8l+AUX</span><br><span class="line">XPF6hNvZGnPJPNOZatF8RGzWoPJq+CfUt/4ZcVc28Ehd/r++UaqrAKaEmwBUd09V</span><br><span class="line">3D0ca71U4x1NN8yeUKzkIE+C78fWXSHZ6zSKa4Pkc0iSRp/Uu0/WJfSUYSE9WosK</span><br><span class="line">oNSWswhLOQKBgQCQk4r0yCFri7JJb/iCNGNSU/7CEjLebe8uiSnz+gxowZhhx0Nh</span><br><span class="line">lR2WKQu83/GOSuEHKNRhIAxW2CkBC1RgKw7fOOTQRxP2aQrTaHPKmR29PvgAFZr5</span><br><span class="line">sDn00Y+DGpM+GbG/UWrbuHZFGgHPJUzl8NSnWG4TbkFRFsmsjah/SaTNWQKBgQCf</span><br><span class="line">zjLyOAv1NwOhcu/j+wCTmq9iUzS/5ZaMKna9IjG5gcvhlJtmdJKDWeMfS5uHjoi4</span><br><span class="line">czDw+vHQxiK56KpJkkxc+wA5hNAESrXM5CrQQNd18b2rDgnEx96GxA5Z9Rrd3pQu</span><br><span class="line">4pjL3aos3EW6KeWT0RbU/NF+qRLGcjR+ULfAj7zteQKBgQDXmSRC5QQarS7cGTYJ</span><br><span class="line">eDtbsD8+OrRdnBtuWHERwiZO7FdHSPqHW6O3mv8mwNy6I9BElZ7KVtbGcdEGZ7K8</span><br><span class="line">B+JWVwaJhoy5+OeB50ZotP25Os65mNIOM0tXRFxk0g5nYlHk5mOBvs2djhtoUk9U</span><br><span class="line">m/7lxvx7SYU06GS5u8jCYCdEKQ==</span><br><span class="line">-----END PRIVATE KEY-----</span><br></pre></td></tr></table></figure>
-<p>证书(PEM格式)</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">-----<span class="keyword">BEGIN</span> CERTIFICATE-----</span><br><span class="line">MIIDijCCAnKgAwIBAgIUClvoB19SvWxhHXsdPBYCVXdGGXIwDQYJKoZIhvcNAQEF</span><br><span class="line">BQAwUDEPMA0GA1UEAwwGTmV0anVlMTAwLgYDVQQKDCfmsrPljZfnnIHnvZHniLXn</span><br><span class="line">vZHnu5znp5HmioDmnInpmZDlhazlj7gxCzAJBgNVBAYTAkNOMCAXDTk4MTEyODAz</span><br><span class="line">MTAwMFoYDzIyMjIwMjAyMTgyMDAwWjCBjDELMAkGA1UEBhMCQ04xDzANBgNVBAgM</span><br><span class="line">Buays+WNlzESMBAGA1UEBwwJ5bmz6aG25bGxMTAwLgYDVQQKDCfmsrPljZfnnIHn</span><br><span class="line">vZHniLXnvZHnu5znp5HmioDmnInpmZDlhazlj7gxFTATBgNVBAsMDOivgeS5puS8</span><br><span class="line">quijhTEPMA0GA1UEAwwGN3p6LmNuMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB</span><br><span class="line">CgKCAQEArUXhz92MXTamghzSFZ0oq4npsslRe7xoSCyJ+WbwQAvVL824C+yuMDvD</span><br><span class="line"><span class="number">9</span>gsSt5+MId4Nt1CseRF/muWrfifVNukaroaGue3Mrz5CRiQ5r6C8j4ktqYD97ZSU</span><br><span class="line">OH682ug+<span class="number">1</span>iP5wqKONi+/cZ2Pa35IcoHLt1XlKAq4mIzTN9Jf24OFYUqEVS2vXQw8</span><br><span class="line">QjmuAPoGMXrQnvbt<span class="regexp">/Nq3LJ67GqzzBCat/u</span>7G0ZNa/SsgSH6ZW1f4QivtAhsZxgmA</span><br><span class="line"><span class="number">3</span>naS9VnwAoJ6Si4oHhShkuf2bpA<span class="regexp">/NDuKozCTQPXCj/</span>KztIXoLB4eM4635LxWJVqL</span><br><span class="line">rxbCQ0zVn5ezwvtrj<span class="regexp">//</span>QZK1jFhnuEQIDAQABox0wGzALBgNVHREEBDACggAwDAYD</span><br><span class="line">VR0TAQH<span class="regexp">/BAIwADANBgkqhkiG9w0BAQUFAAOCAQEAKy1rxnFOM601qumQ4qyn0/</span>oK</span><br><span class="line">uymElxz47vDM4unYGqvaZl8aSPwFrXjI1FvJxr+oM8iOmT4ZIULi9mucjbErGKfk</span><br><span class="line">cB+duc8cZ5HNIzepl3UddvTw8XdruJDpAa53TdZ35fyn0DGhQN3tqba9vVo/ROj5</span><br><span class="line"><span class="regexp">/4nXkZvv1h+HAz12Iutol4oXYiWaNsN8vVHPy8bqx5WHKhm8X8FrLhxrms2NtF/</span>O</span><br><span class="line">ejU5JULcUq9ipbZ7SDPn<span class="regexp">/RbQ+AcFNs234SLfRX3dj8pi8wcq9291/</span>hCyPS3jnlfU</span><br><span class="line"><span class="number">0</span>d0IPdmjPIBLEY5odwl83SJ8+z2+nR1EwLAPnHjf6MjaUT0ZSmDZeWTzHPyclA==</span><br><span class="line">-----<span class="keyword">END</span> CERTIFICATE-----</span><br></pre></td></tr></table></figure>
-<h3 id="设置默认站点"><a href="#设置默认站点" class="headerlink" title="设置默认站点"></a>设置默认站点</h3><p>回到宝塔“网站管理”，如下图，将上面建立的这个站点设置为默认站点</p>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>部署https后有资源使用http时解决办法</title>
     <url>/2024/09/06/%E9%83%A8%E7%BD%B2https%E5%90%8E%E6%9C%89%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8http%E6%97%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
     <content><![CDATA[<blockquote>
@@ -887,6 +860,30 @@ fi
 <p>nginx 强制让http的访问Https</p>
 <figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">#HTTP_TO_HTTPS_END</span></span><br><span class="line">    <span class="attribute">ssl_certificate</span>    /etc/letsencrypt/live/yogayx.com/fullchain.pem;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span>    /etc/letsencrypt/live/yogayx.com/privkey.pem;</span><br><span class="line">    <span class="attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</span><br><span class="line">    <span class="attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;</span><br><span class="line">    <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">ssl_session_cache</span> shared:SSL:<span class="number">10m</span>;</span><br><span class="line">    <span class="attribute">ssl_session_timeout</span> <span class="number">10m</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">add_header</span> Content-Security-Policy <span class="string">&quot;upgrade-insecure-requests;connect-src *&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">error_page</span> <span class="number">497</span>  https://<span class="variable">$host</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">add_header Content-<span class="keyword">Security</span>-<span class="keyword">Policy</span> &quot;upgrade-insecure-requests;connect-src *&quot;;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决宝塔面板启用SSL后Https窜站问题</title>
+    <url>/2023/12/15/%E8%A7%A3%E5%86%B3%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E5%90%AF%E7%94%A8SSL%E5%90%8EHttps%E7%AA%9C%E7%AB%99%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>解决宝塔面板启用SSL后Https窜站问题</p>
+<span id="more"></span>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><blockquote>
+<p>宝塔面板 https 串站<br>在这里引用宝塔官方说法：在未指定 SSL 默认站点时,未开启 SSL 的站点使用 HTTPS 会直接访问到已开启 SSL 的站点<br>【重要安全】解决宝塔面板启用 SSL 后 Https 窜站问题，防止源站 IP 泄露<br>相信使用宝塔面板的盆友，应该都遇到过宝塔这个 https 串站问题。很多盆友遇到了，但忽略了它，觉得没啥影响的，就置之不理了…<br>置之不理肯定是不行的，不能有掩耳盗铃侥幸心理，通过这个漏洞，“大有可为”了！先不说串站可能会影响收录 SEO 这一点了，更重要的是它会导致一个不小的安全问题：你的源站 IP 正在泄露，即便你使用了CDN也不行！<br>至于怎么泄露源站 IP，这里只简单的说一下：可以直接通过 https:&#x2F;&#x2F;你服务器 IP 地址来访问，nginx 会向浏览器发送默认的 SSL 证书，通过查看证书详情可以找到对应的域名。详细了解请见下面的参考文章<br>下面小菜就来说下本文重点了，怎么堵上这个串站、泄露源站 IP 的漏洞。使用宝塔面板的，跟着下面步骤一步步做就 OJBK 了；使用 LNMP 一键包或其它程序的，也可以参考着处理下。</p>
+</blockquote>
+<h3 id="新建站点"><a href="#新建站点" class="headerlink" title="新建站点"></a>新建站点</h3><p>新建一个不存在的站点，域名填写为：1.com （你随便搞一个就行），提交</p>
+<h3 id="配置证书"><a href="#配置证书" class="headerlink" title="配置证书"></a>配置证书</h3><p>回到宝塔“网站管理”，找到 1.com，点“设置”进入网站配置，然后点击“SSL”，如下图：</p>
+<p>【重要安全】解决宝塔面板启用 SSL 后 Https 窜站问题，防止源站 IP 泄露<br>然后密钥和证书填写如下，填写完毕，点保存：</p>
+<p>密钥(KEY)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">-----BEGIN PRIVATE KEY-----</span><br><span class="line">MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCtReHP3YxdNqaC</span><br><span class="line">HNIVnSiriemyyVF7vGhILIn5ZvBAC9UvzbgL7K4wO8P2CxK3n4wh3g23UKx5EX+a</span><br><span class="line">5at+J9U26Rquhoa57cyvPkJGJDmvoLyPiS2pgP3tlJQ4frza6D7WI/nCoo42L79x</span><br><span class="line">nY9rfkhygcu3VeUoCriYjNM30l/bg4VhSoRVLa9dDDxCOa4A+gYxetCe9u382rcs</span><br><span class="line">nrsarPMEJq3+7sbRk1r9KyBIfplbV/hCK+0CGxnGCYDedpL1WfACgnpKLigeFKGS</span><br><span class="line">5/ZukD80O4qjMJNA9cKP8rO0hegsHh4zjrfkvFYlWouvFsJDTNWfl7PC+2uP/9Bk</span><br><span class="line">rWMWGe4RAgMBAAECggEAbUkRNqC+oiAQ/ymcW6OG/kJ60pflO8zGXRcyYspJJ6wO</span><br><span class="line">5xqyRVsfNi7L1wh+4q/Pm6DJN+C7F5UwzYqkEmqfMQXvHTqeCPDyU2lKNaEtfRc9</span><br><span class="line">Nq7HzQwdnFZE8ikFhnBLCZchNWB/n6+X6Nn+lkbM/OPekCCt6wZwDU9s/N1ENld/</span><br><span class="line">7r4keq/nKyTsFdbJVFb7HAJ73XeendDFbG9oyG14sf1rEQB3tXESiemF7bD30uwP</span><br><span class="line">t0OwbVMTuN4OO8NVH8yx3EJykn1c7e9QLTVIFLlv0cp/p7R9eVqc1uZ5lkoNJ2i2</span><br><span class="line">VTxsu3RXEE6QyLOJ6wabIcGvse35Lv8R4rwDCF/0wQKBgQDmYAnPwX8kY1n99cRS</span><br><span class="line">g+C+9TUjLfjyDmnBDKUGt07/cjE0n9kEITuRhbQ2UukdWbHF441Pd/IM9k7Lf/yv</span><br><span class="line">f1MtZHq52FPjX9fxbjvibXzkqTWqmZKvIolaMY9hndULQNAZBD1nXO9sAye5fEGf</span><br><span class="line">3rQe1F7CFrkxvTrySJ6TnefBmQKBgQDAi9okmjHd0Q+8aHi09/piIHXpZI8l+AUX</span><br><span class="line">XPF6hNvZGnPJPNOZatF8RGzWoPJq+CfUt/4ZcVc28Ehd/r++UaqrAKaEmwBUd09V</span><br><span class="line">3D0ca71U4x1NN8yeUKzkIE+C78fWXSHZ6zSKa4Pkc0iSRp/Uu0/WJfSUYSE9WosK</span><br><span class="line">oNSWswhLOQKBgQCQk4r0yCFri7JJb/iCNGNSU/7CEjLebe8uiSnz+gxowZhhx0Nh</span><br><span class="line">lR2WKQu83/GOSuEHKNRhIAxW2CkBC1RgKw7fOOTQRxP2aQrTaHPKmR29PvgAFZr5</span><br><span class="line">sDn00Y+DGpM+GbG/UWrbuHZFGgHPJUzl8NSnWG4TbkFRFsmsjah/SaTNWQKBgQCf</span><br><span class="line">zjLyOAv1NwOhcu/j+wCTmq9iUzS/5ZaMKna9IjG5gcvhlJtmdJKDWeMfS5uHjoi4</span><br><span class="line">czDw+vHQxiK56KpJkkxc+wA5hNAESrXM5CrQQNd18b2rDgnEx96GxA5Z9Rrd3pQu</span><br><span class="line">4pjL3aos3EW6KeWT0RbU/NF+qRLGcjR+ULfAj7zteQKBgQDXmSRC5QQarS7cGTYJ</span><br><span class="line">eDtbsD8+OrRdnBtuWHERwiZO7FdHSPqHW6O3mv8mwNy6I9BElZ7KVtbGcdEGZ7K8</span><br><span class="line">B+JWVwaJhoy5+OeB50ZotP25Os65mNIOM0tXRFxk0g5nYlHk5mOBvs2djhtoUk9U</span><br><span class="line">m/7lxvx7SYU06GS5u8jCYCdEKQ==</span><br><span class="line">-----END PRIVATE KEY-----</span><br></pre></td></tr></table></figure>
+<p>证书(PEM格式)</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">-----<span class="keyword">BEGIN</span> CERTIFICATE-----</span><br><span class="line">MIIDijCCAnKgAwIBAgIUClvoB19SvWxhHXsdPBYCVXdGGXIwDQYJKoZIhvcNAQEF</span><br><span class="line">BQAwUDEPMA0GA1UEAwwGTmV0anVlMTAwLgYDVQQKDCfmsrPljZfnnIHnvZHniLXn</span><br><span class="line">vZHnu5znp5HmioDmnInpmZDlhazlj7gxCzAJBgNVBAYTAkNOMCAXDTk4MTEyODAz</span><br><span class="line">MTAwMFoYDzIyMjIwMjAyMTgyMDAwWjCBjDELMAkGA1UEBhMCQ04xDzANBgNVBAgM</span><br><span class="line">Buays+WNlzESMBAGA1UEBwwJ5bmz6aG25bGxMTAwLgYDVQQKDCfmsrPljZfnnIHn</span><br><span class="line">vZHniLXnvZHnu5znp5HmioDmnInpmZDlhazlj7gxFTATBgNVBAsMDOivgeS5puS8</span><br><span class="line">quijhTEPMA0GA1UEAwwGN3p6LmNuMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB</span><br><span class="line">CgKCAQEArUXhz92MXTamghzSFZ0oq4npsslRe7xoSCyJ+WbwQAvVL824C+yuMDvD</span><br><span class="line"><span class="number">9</span>gsSt5+MId4Nt1CseRF/muWrfifVNukaroaGue3Mrz5CRiQ5r6C8j4ktqYD97ZSU</span><br><span class="line">OH682ug+<span class="number">1</span>iP5wqKONi+/cZ2Pa35IcoHLt1XlKAq4mIzTN9Jf24OFYUqEVS2vXQw8</span><br><span class="line">QjmuAPoGMXrQnvbt<span class="regexp">/Nq3LJ67GqzzBCat/u</span>7G0ZNa/SsgSH6ZW1f4QivtAhsZxgmA</span><br><span class="line"><span class="number">3</span>naS9VnwAoJ6Si4oHhShkuf2bpA<span class="regexp">/NDuKozCTQPXCj/</span>KztIXoLB4eM4635LxWJVqL</span><br><span class="line">rxbCQ0zVn5ezwvtrj<span class="regexp">//</span>QZK1jFhnuEQIDAQABox0wGzALBgNVHREEBDACggAwDAYD</span><br><span class="line">VR0TAQH<span class="regexp">/BAIwADANBgkqhkiG9w0BAQUFAAOCAQEAKy1rxnFOM601qumQ4qyn0/</span>oK</span><br><span class="line">uymElxz47vDM4unYGqvaZl8aSPwFrXjI1FvJxr+oM8iOmT4ZIULi9mucjbErGKfk</span><br><span class="line">cB+duc8cZ5HNIzepl3UddvTw8XdruJDpAa53TdZ35fyn0DGhQN3tqba9vVo/ROj5</span><br><span class="line"><span class="regexp">/4nXkZvv1h+HAz12Iutol4oXYiWaNsN8vVHPy8bqx5WHKhm8X8FrLhxrms2NtF/</span>O</span><br><span class="line">ejU5JULcUq9ipbZ7SDPn<span class="regexp">/RbQ+AcFNs234SLfRX3dj8pi8wcq9291/</span>hCyPS3jnlfU</span><br><span class="line"><span class="number">0</span>d0IPdmjPIBLEY5odwl83SJ8+z2+nR1EwLAPnHjf6MjaUT0ZSmDZeWTzHPyclA==</span><br><span class="line">-----<span class="keyword">END</span> CERTIFICATE-----</span><br></pre></td></tr></table></figure>
+<h3 id="设置默认站点"><a href="#设置默认站点" class="headerlink" title="设置默认站点"></a>设置默认站点</h3><p>回到宝塔“网站管理”，如下图，将上面建立的这个站点设置为默认站点</p>
+]]></content>
       <categories>
         <category>nginx</category>
       </categories>
@@ -936,6 +933,31 @@ fi
       </categories>
       <tags>
         <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>帝国CMS从HTTP升级到HTTPS 登录网站后台空白</title>
+    <url>/2024/05/08/%E5%B8%9D%E5%9B%BDCMS%E4%BB%8EHTTP%E5%8D%87%E7%BA%A7%E5%88%B0HTTPS%20%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E7%A9%BA%E7%99%BD/</url>
+    <content><![CDATA[<blockquote>
+<p>通常网站一般采用HTTP传输协议即可，但为了网站更加安全，建议大家给域名申请SSL证书，然后给网站启用https协议进行访问。<br>帝国CMS7.5版新增支持HTTPS传输协议，更安全</p>
+</blockquote>
+<span id="more"></span>
+<h4 id="帝国CMS7-5"><a href="#帝国CMS7-5" class="headerlink" title="帝国CMS7.5"></a>帝国CMS7.5</h4><p>帝国CMS7.5版完美支持HTTPS传输协议，可以做如下设置：<br>帝国CMS后台进行设置，传输协议改为全站https:&#x2F;&#x2F;，网站地址设为https:&#x2F;&#x2F;<br><img src="/2024/05/08/%E5%B8%9D%E5%9B%BDCMS%E4%BB%8EHTTP%E5%8D%87%E7%BA%A7%E5%88%B0HTTPS%20%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E7%A9%BA%E7%99%BD/8e92ab44aae07b63bbddce87658d1283.png"><br>帝国CMS7.5 可以设置的五种传输协议（如下图）：<br><img src="/2024/05/08/%E5%B8%9D%E5%9B%BDCMS%E4%BB%8EHTTP%E5%8D%87%E7%BA%A7%E5%88%B0HTTPS%20%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E7%A9%BA%E7%99%BD/5d86055e4572c16a81cca3eff314b105.png"><br>帝国CMS7.5版可自行灵活选择是否使用https：</p>
+<ol>
+<li>由系统自动识别当前服务器是否使用https；</li>
+<li>设置全站使用http；</li>
+<li>设置全站使用https；</li>
+<li>设置后台https,前台http；</li>
+<li>设置后台http,前台https；<br>品自行建议使用全站https，或者后台http，前台https，这两种</li>
+</ol>
+<p><strong>这里说明一下，帝国cms7.5版支持https，7.2版及一下要支持https要改e&#x2F;class&#x2F;connect.php两处http:&#x2F;&#x2F;为https:&#x2F;&#x2F;才可以支持<br>一般修改完成，网址会从<a href="http://qinshining.com转变成https//qinshining.com">http://qinshining.com转变成https://qinshining.com</a></strong></p>
+<h4 id="后台启用https协议后无法登录"><a href="#后台启用https协议后无法登录" class="headerlink" title="后台启用https协议后无法登录"></a>后台启用https协议后无法登录</h4><p>帝国7.5在后台启用了https协议，输入账号和密码登录就是一片空白，登录不进去了，<br>解决方法：<br>修改e&#x2F;config&#x2F;config.php文件，搜索httptype修改回默认的0，然后登录后台后把https设置为默认的自动即可。</p>
+]]></content>
+      <categories>
+        <category>ngnix</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
       </tags>
   </entry>
 </search>

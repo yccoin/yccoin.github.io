@@ -22,26 +22,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"yccoin.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="我们不生产技术，只是技术的搬运工">
-<meta property="og:type" content="website">
-<meta property="og:title" content="技术搬运工">
-<meta property="og:url" content="https://yccoin.github.io/tags/software/index.html">
+    <meta name="description" content="在配置文件中通常是在server{}中，要基于多条件判断进行跳转&#x2F;拦截&#x2F;回源等需求时，可以通过使用nginx set指令来实现。set指令是用于定义一个变量，并且赋值。条件判断可以根据nginx内置的全局变量进行判断然后使用set 赋值。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="set指令的作用">
+<meta property="og:url" content="https://yccoin.github.io/2024/09/28/nginx%20set%E6%8C%87%E4%BB%A4%E7%9A%84%E4%BD%9C%E7%94%A8/index.html">
 <meta property="og:site_name" content="技术搬运工">
-<meta property="og:description" content="我们不生产技术，只是技术的搬运工">
+<meta property="og:description" content="在配置文件中通常是在server{}中，要基于多条件判断进行跳转&#x2F;拦截&#x2F;回源等需求时，可以通过使用nginx set指令来实现。set指令是用于定义一个变量，并且赋值。条件判断可以根据nginx内置的全局变量进行判断然后使用set 赋值。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-28T10:02:31.000Z">
+<meta property="article:modified_time" content="2024-09-28T10:07:40.284Z">
 <meta property="article:author" content="yccoin">
-<meta property="article:tag" content="我们不生产技术，只是技术的搬运工">
+<meta property="article:tag" content="nginx">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://yccoin.github.io/tags/software/">
+<link rel="canonical" href="https://yccoin.github.io/2024/09/28/nginx%20set%E6%8C%87%E4%BB%A4%E7%9A%84%E4%BD%9C%E7%94%A8/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"tags/software/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://yccoin.github.io/2024/09/28/nginx%20set%E6%8C%87%E4%BB%A4%E7%9A%84%E4%BD%9C%E7%94%A8/","path":"2024/09/28/nginx set指令的作用/","title":"set指令的作用"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>标签: software | 技术搬运工</title>
+<title>set指令的作用 | 技术搬运工</title>
   
 
 
@@ -128,7 +130,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -141,6 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%A6%82%E4%B8%8B%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">在nginx配置文件中使用如下：</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -195,70 +198,127 @@
 
     </div>
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">software
-          <small>标签</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://yccoin.github.io/2024/09/28/nginx%20set%E6%8C%87%E4%BB%A4%E7%9A%84%E4%BD%9C%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yccoin">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术搬运工">
+      <meta itemprop="description" content="我们不生产技术，只是技术的搬运工">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="set指令的作用 | 技术搬运工">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          set指令的作用
         </h1>
-      </div>
 
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2024</span>
+
+      <time title="创建时间：2024-09-28 18:02:31 / 修改时间：18:07:40" itemprop="dateCreated datePublished" datetime="2024-09-28T18:02:31+08:00">2024-09-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/nginx/" itemprop="url" rel="index"><span itemprop="name">nginx</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>在配置文件中通常是在server{}中，要基于多条件判断进行跳转&#x2F;拦截&#x2F;回源等需求时，可以通过使用nginx set指令来实现。<br>set指令是用于定义一个变量，并且赋值。<br>条件判断可以根据nginx内置的全局变量进行判断然后使用set 赋值。</p>
+</blockquote>
+<span id="more"></span>
+<h4 id="在nginx配置文件中使用如下："><a href="#在nginx配置文件中使用如下：" class="headerlink" title="在nginx配置文件中使用如下："></a>在nginx配置文件中使用如下：</h4><p><code>set $rewriteFlag 0;</code></p>
+<p>#这里可以加上条件判断，比如客户端ip为12.34.56.78&#x2F;24时set 1<br><code>set $rewriteFlag &#39;$&#123;rewriteFlag&#125;1&#39;;</code></p>
+<p>#这里可以加上条件判断，比如根据$http_referer&#x2F;$cookie_name&#x2F;$request_uri等判断进行赋值set 2<br><code>set $rewriteFlag &#39;$&#123;rewriteFlag&#125;2&#39;;</code></p>
+<p>#这里的意思是当请求ip为12.34.56.78&#x2F;24，且$http_referer&#x2F;$cookie_name&#x2F;$request_uri为你设置的条件</p>
+<p>#那么进行跳转，看见了吧这就是利用多条件进行操作的过程。更复杂的多条件情况下可以自行判断构造。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">if</span> (<span class="variable">$rewriteFlag</span>= <span class="string">&#x27;012&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">#    rewrite ^(.*) https://www.mywebsite.com$request_uri break;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>举例</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">if</span> (<span class="variable">$http_user_agent</span> <span class="regexp">~ &quot;CensysInspect|meta-externalagent|facebookexternalhit|DotBot|YisouSpider|PetalBot|GPTBot|serpstatbot|BLEXBot|bingbot|DataForSeoBot|Friendly_Crawler|Go-http-client|Bytespider|Java|PhantomJS|SemrushBot|Scrapy|Webdup|AcoonBot|AhrefsBot|Ezooms|EdisterBot|EC2LinkFinder|jikespider|Purebot|MJ12bot|WangIDSpider|WBSearchBot|Wotbox|xbfMozilla|Yottaa|YandexBot|Jorgee|SWEBot|spbot|TurnitinBot-Agent|mail.RU|perl|Python|Wget|Xenu|ZmEu|Googlebot|facebookexternalhit|^$&quot;</span>   )</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="attribute">set</span> <span class="variable">$flag</span> <span class="string">&quot;<span class="variable">$&#123;flag&#125;</span>1&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="attribute">if</span> ( <span class="variable">$remote_addr</span> !<span class="regexp">~* &#x27;60.247.158.19|127.0.0.1&#x27;)</span> </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attribute">set</span> <span class="variable">$flag</span> <span class="string">&quot;<span class="variable">$&#123;flag&#125;</span>1&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="attribute">if</span> (<span class="variable">$flag</span> = <span class="string">&quot;011&quot;</span>)&#123;</span><br><span class="line">      <span class="attribute">return</span> <span class="number">444</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-09-20T13:19:10+08:00"
-              content="2024-09-20">
-          09-20
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/" itemprop="url">
-          <span itemprop="name">宝塔任务计划不执行原因排查</span>
-        </a>
-      </div>
+    <footer class="post-footer">
+          
 
-      
-    </header>
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>yccoin
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://yccoin.github.io/2024/09/28/nginx%20set%E6%8C%87%E4%BB%A4%E7%9A%84%E4%BD%9C%E7%94%A8/" title="set指令的作用">https://yccoin.github.io/2024/09/28/nginx set指令的作用/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-Hans" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/nginx/" rel="tag"># nginx</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/" rel="prev" title="宝塔任务计划不执行原因排查">
+                  <i class="fa fa-angle-left"></i> 宝塔任务计划不执行原因排查
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-09-06T13:22:12+08:00"
-              content="2024-09-06">
-          09-06
-        </time>
-      </div>
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2024/09/06/ASP%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81%E4%BD%BF%E7%94%A8Microsoft-XMLHTTP%E5%AF%B9%E8%B1%A1%E8%AF%B7%E6%B1%82https%E6%97%B6%E5%87%BA%E9%94%99%E8%A7%A3%E5%86%B3/" itemprop="url">
-          <span itemprop="name">ASP程序代码使用Microsoft.XMLHTTP对象请求https时出错解决</span>
-        </a>
-      </div>
 
-      
-    </header>
-  </article>
 
-    </div>
-  </div>
-  
-  
-  
+
 
 </div>
   </main>

@@ -269,25 +269,6 @@ $sent_http_transfer_encoding```
       </tags>
   </entry>
   <entry>
-    <title>nginx修改服务</title>
-    <url>/2023/12/25/nginx%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1/</url>
-    <content><![CDATA[<p>nginx修改服务</p>
-<span id="more"></span>
-<h5 id="修改server"><a href="#修改server" class="headerlink" title="修改server"></a>修改server</h5><p>编辑srchttp&#x2F;ngx_http_header_filter_module.c</p>
-<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">static u_char ngx_http_server_string[] <span class="operator">=</span> <span class="string">&quot;Server: nginx&quot;</span> <span class="keyword">CRLF</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
-<p>修改为自定义字段</p>
-<h5 id="修改版本号"><a href="#修改版本号" class="headerlink" title="修改版本号"></a>修改版本号</h5><p>src&#x2F;core&#x2F;nginx.h</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> NGINX_VERSION      <span class="string">&quot;1.21.6&quot;</span></span></span><br></pre></td></tr></table></figure>
-<p>修改后重新编译，如果之前编译过，通过nginx -V查看编译参数，然后make<br><strong>切记不能make install 不然就覆盖安装现有nginx了</strong><br>make完之后在objs目录下就可以看到新编译的nginx文件了,复制到sbin目录测试<br><img src="/2023/12/25/nginx%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1/1703465240256.jpg"></p>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>set指令的作用</title>
     <url>/2024/09/28/nginx%20set%E6%8C%87%E4%BB%A4%E7%9A%84%E4%BD%9C%E7%94%A8/</url>
     <content><![CDATA[<blockquote>
@@ -302,6 +283,25 @@ $sent_http_transfer_encoding```
 <figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">if</span> (<span class="variable">$rewriteFlag</span>= <span class="string">&#x27;012&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">#    rewrite ^(.*) https://www.mywebsite.com$request_uri break;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>举例</p>
 <figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">if</span> (<span class="variable">$http_user_agent</span> <span class="regexp">~ &quot;CensysInspect|meta-externalagent|facebookexternalhit|DotBot|YisouSpider|PetalBot|GPTBot|serpstatbot|BLEXBot|bingbot|DataForSeoBot|Friendly_Crawler|Go-http-client|Bytespider|Java|PhantomJS|SemrushBot|Scrapy|Webdup|AcoonBot|AhrefsBot|Ezooms|EdisterBot|EC2LinkFinder|jikespider|Purebot|MJ12bot|WangIDSpider|WBSearchBot|Wotbox|xbfMozilla|Yottaa|YandexBot|Jorgee|SWEBot|spbot|TurnitinBot-Agent|mail.RU|perl|Python|Wget|Xenu|ZmEu|Googlebot|facebookexternalhit|^$&quot;</span>   )</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="attribute">set</span> <span class="variable">$flag</span> <span class="string">&quot;<span class="variable">$&#123;flag&#125;</span>1&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="attribute">if</span> ( <span class="variable">$remote_addr</span> !<span class="regexp">~* &#x27;60.247.158.19|127.0.0.1&#x27;)</span> </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attribute">set</span> <span class="variable">$flag</span> <span class="string">&quot;<span class="variable">$&#123;flag&#125;</span>1&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="attribute">if</span> (<span class="variable">$flag</span> = <span class="string">&quot;011&quot;</span>)&#123;</span><br><span class="line">      <span class="attribute">return</span> <span class="number">444</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nginx修改服务</title>
+    <url>/2023/12/25/nginx%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1/</url>
+    <content><![CDATA[<p>nginx修改服务</p>
+<span id="more"></span>
+<h5 id="修改server"><a href="#修改server" class="headerlink" title="修改server"></a>修改server</h5><p>编辑srchttp&#x2F;ngx_http_header_filter_module.c</p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">static u_char ngx_http_server_string[] <span class="operator">=</span> <span class="string">&quot;Server: nginx&quot;</span> <span class="keyword">CRLF</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>修改为自定义字段</p>
+<h5 id="修改版本号"><a href="#修改版本号" class="headerlink" title="修改版本号"></a>修改版本号</h5><p>src&#x2F;core&#x2F;nginx.h</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> NGINX_VERSION      <span class="string">&quot;1.21.6&quot;</span></span></span><br></pre></td></tr></table></figure>
+<p>修改后重新编译，如果之前编译过，通过nginx -V查看编译参数，然后make<br><strong>切记不能make install 不然就覆盖安装现有nginx了</strong><br>make完之后在objs目录下就可以看到新编译的nginx文件了,复制到sbin目录测试<br><img src="/2023/12/25/nginx%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1/1703465240256.jpg"></p>
+]]></content>
       <categories>
         <category>nginx</category>
       </categories>
@@ -662,22 +662,6 @@ fi
       </tags>
   </entry>
   <entry>
-    <title>宝塔任务计划不执行原因排查</title>
-    <url>/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/</url>
-    <content><![CDATA[<blockquote>
-<p>宝塔设置任务计划以后不执行，手动执行是成功的</p>
-</blockquote>
-<span id="more"></span>
-<h4 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h4><p>vi &#x2F;var&#x2F;log&#x2F;cron 查看任务计划执行日志如下<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132221.png"><br><strong>(root) FAILED to authorize user with PAM (Authentication token is no longer valid; new one required)</strong><br>发现是认证过期了，通过chage -l root可以查看到如下内容<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132530.png"><br>如果不需要设置过期可以使用chage -M 99999 root为永不过期<br>修改密码以后再测试cron执行成功了</p>
-]]></content>
-      <categories>
-        <category>software</category>
-      </categories>
-      <tags>
-        <tag>software</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何在 Linux/Unix/Windows 中发现隐藏的进程和端口</title>
     <url>/2023/12/15/%E5%A6%82%E4%BD%95%E5%9C%A8%20LinuxUnixWindows%20%E4%B8%AD%E5%8F%91%E7%8E%B0%E9%9A%90%E8%97%8F%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%AB%AF%E5%8F%A3/</url>
     <content><![CDATA[<h4 id="如何在-Linux-Unix-Windows-中发现隐藏的进程和端口"><a href="#如何在-Linux-Unix-Windows-中发现隐藏的进程和端口" class="headerlink" title="如何在 Linux&#x2F;Unix&#x2F;Windows 中发现隐藏的进程和端口"></a>如何在 Linux&#x2F;Unix&#x2F;Windows 中发现隐藏的进程和端口</h4><span id="more"></span>
@@ -711,35 +695,6 @@ fi
       </categories>
       <tags>
         <tag>tools</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>宝塔面板环境站点开启CDN后如何获取真实IP地址（多设置方法）</title>
-    <url>/2024/09/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%8E%AF%E5%A2%83%E7%AB%99%E7%82%B9%E5%BC%80%E5%90%AFCDN%E5%90%8E%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80%EF%BC%88%E5%A4%9A%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%89/</url>
-    <content><![CDATA[<blockquote>
-<p>宝塔面板环境站点开启CDN后如何获取真实IP地址（多设置方法）</p>
-</blockquote>
-<span id="more"></span>
-<blockquote>
-<p>使用宝塔面板搭建的WEB环境，且他的网站有开启和使用CDN加速，但是在加速之后呢日志中看不到真实的访客IP地址，而是CDN的节点IP，这个就不利于分析数据。所以，需要确保CDN能正常使用，而且日志的IP地址也能看到真实的IP。</p>
-</blockquote>
-<p>这里介绍几个可能用到的办法。</p>
-<h4 id="第一种代码修改方法："><a href="#第一种代码修改方法：" class="headerlink" title="第一种代码修改方法："></a>第一种代码修改方法：</h4><p>NGINX<br>登录宝塔面板后台 &gt;&gt; 软件商店 &gt;&gt; 运行环境 &gt;&gt; 点击 nginx 右侧对应的“设置”&gt;&gt; 在 nginx 管理中点击左侧“配置修改”&gt;&gt; 在 http{ 后加入以下两行代码，具体如下图所示：</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">set_real_ip_from</span> <span class="number">0.0.0.0</span>/<span class="number">0</span>;<span class="attribute">real_ip_header</span> X-Forwarded-For;</span><br></pre></td></tr></table></figure>
-<p><img src="/2024/09/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%8E%AF%E5%A2%83%E7%AB%99%E7%82%B9%E5%BC%80%E5%90%AFCDN%E5%90%8E%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80%EF%BC%88%E5%A4%9A%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%89/20240911-140238.png"><br>保存之后再重载配置即可</p>
-<h4 id="防火墙设置办法"><a href="#防火墙设置办法" class="headerlink" title="防火墙设置办法"></a>防火墙设置办法</h4><p><img src="/2024/09/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%8E%AF%E5%A2%83%E7%AB%99%E7%82%B9%E5%BC%80%E5%90%AFCDN%E5%90%8E%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80%EF%BC%88%E5%A4%9A%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%89/20240911-140451.png"><br>如果我们有使用防火墙插件的话，需要在防火墙插件中CDN开启</p>
-<h4 id="第二种码修改方法"><a href="#第二种码修改方法" class="headerlink" title="第二种码修改方法"></a>第二种码修改方法</h4><p>如果懂修改代码的直接在NGINX中修改。</p>
-<p>我们需要找到”Nginx.conf”文件，然后修改。（这个文件需要看我们对应的环境工具，有一些偏差）<br><img src="/2024/09/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%8E%AF%E5%A2%83%E7%AB%99%E7%82%B9%E5%BC%80%E5%90%AFCDN%E5%90%8E%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80%EF%BC%88%E5%A4%9A%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%89/20240911-150449.png"><br>这里这个用的宝塔面板，所以在他NGINX软件管理找到上图，直接在可视化界面修改</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">log_format</span>  access  <span class="string">&#x27;<span class="variable">$http_x_forwarded_for</span> - <span class="variable">$remote_user</span> [<span class="variable">$time_local</span>] &quot;<span class="variable">$request</span>&quot; &#x27;</span><span class="string">&#x27;<span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> &quot;<span class="variable">$http_referer</span>&quot; &#x27;</span><span class="string">&#x27;&quot;<span class="variable">$http_user_agent</span>&quot; &#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p>我们需要在nginx.conf的http中插入上面的代码。如果是LNMP是在：</p>
-<figure class="highlight stata"><table><tr><td class="code"><pre><span class="line">/usr/<span class="keyword">local</span>/nginx/<span class="keyword">conf</span>/nginx.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
-<p>然后需要到当前站点的.conf文件中</p>
-<figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line">access_log /www/wwwlogs/laobuluo.com_nginx.<span class="built_in">log</span> <span class="keyword">access</span>;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -794,6 +749,51 @@ fi
       </tags>
   </entry>
   <entry>
+    <title>宝塔任务计划不执行原因排查</title>
+    <url>/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/</url>
+    <content><![CDATA[<blockquote>
+<p>宝塔设置任务计划以后不执行，手动执行是成功的</p>
+</blockquote>
+<span id="more"></span>
+<h4 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h4><p>vi &#x2F;var&#x2F;log&#x2F;cron 查看任务计划执行日志如下<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132221.png"><br><strong>(root) FAILED to authorize user with PAM (Authentication token is no longer valid; new one required)</strong><br>发现是认证过期了，通过chage -l root可以查看到如下内容<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132530.png"><br>如果不需要设置过期可以使用chage -M 99999 root为永不过期<br>修改密码以后再测试cron执行成功了</p>
+]]></content>
+      <categories>
+        <category>software</category>
+      </categories>
+      <tags>
+        <tag>software</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>宝塔面板环境站点开启CDN后如何获取真实IP地址（多设置方法）</title>
+    <url>/2024/09/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%8E%AF%E5%A2%83%E7%AB%99%E7%82%B9%E5%BC%80%E5%90%AFCDN%E5%90%8E%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80%EF%BC%88%E5%A4%9A%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%89/</url>
+    <content><![CDATA[<blockquote>
+<p>宝塔面板环境站点开启CDN后如何获取真实IP地址（多设置方法）</p>
+</blockquote>
+<span id="more"></span>
+<blockquote>
+<p>使用宝塔面板搭建的WEB环境，且他的网站有开启和使用CDN加速，但是在加速之后呢日志中看不到真实的访客IP地址，而是CDN的节点IP，这个就不利于分析数据。所以，需要确保CDN能正常使用，而且日志的IP地址也能看到真实的IP。</p>
+</blockquote>
+<p>这里介绍几个可能用到的办法。</p>
+<h4 id="第一种代码修改方法："><a href="#第一种代码修改方法：" class="headerlink" title="第一种代码修改方法："></a>第一种代码修改方法：</h4><p>NGINX<br>登录宝塔面板后台 &gt;&gt; 软件商店 &gt;&gt; 运行环境 &gt;&gt; 点击 nginx 右侧对应的“设置”&gt;&gt; 在 nginx 管理中点击左侧“配置修改”&gt;&gt; 在 http{ 后加入以下两行代码，具体如下图所示：</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">set_real_ip_from</span> <span class="number">0.0.0.0</span>/<span class="number">0</span>;<span class="attribute">real_ip_header</span> X-Forwarded-For;</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/09/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%8E%AF%E5%A2%83%E7%AB%99%E7%82%B9%E5%BC%80%E5%90%AFCDN%E5%90%8E%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80%EF%BC%88%E5%A4%9A%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%89/20240911-140238.png"><br>保存之后再重载配置即可</p>
+<h4 id="防火墙设置办法"><a href="#防火墙设置办法" class="headerlink" title="防火墙设置办法"></a>防火墙设置办法</h4><p><img src="/2024/09/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%8E%AF%E5%A2%83%E7%AB%99%E7%82%B9%E5%BC%80%E5%90%AFCDN%E5%90%8E%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80%EF%BC%88%E5%A4%9A%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%89/20240911-140451.png"><br>如果我们有使用防火墙插件的话，需要在防火墙插件中CDN开启</p>
+<h4 id="第二种码修改方法"><a href="#第二种码修改方法" class="headerlink" title="第二种码修改方法"></a>第二种码修改方法</h4><p>如果懂修改代码的直接在NGINX中修改。</p>
+<p>我们需要找到”Nginx.conf”文件，然后修改。（这个文件需要看我们对应的环境工具，有一些偏差）<br><img src="/2024/09/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%8E%AF%E5%A2%83%E7%AB%99%E7%82%B9%E5%BC%80%E5%90%AFCDN%E5%90%8E%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80%EF%BC%88%E5%A4%9A%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%89/20240911-150449.png"><br>这里这个用的宝塔面板，所以在他NGINX软件管理找到上图，直接在可视化界面修改</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">log_format</span>  access  <span class="string">&#x27;<span class="variable">$http_x_forwarded_for</span> - <span class="variable">$remote_user</span> [<span class="variable">$time_local</span>] &quot;<span class="variable">$request</span>&quot; &#x27;</span><span class="string">&#x27;<span class="variable">$status</span> <span class="variable">$body_bytes_sent</span> &quot;<span class="variable">$http_referer</span>&quot; &#x27;</span><span class="string">&#x27;&quot;<span class="variable">$http_user_agent</span>&quot; &#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>我们需要在nginx.conf的http中插入上面的代码。如果是LNMP是在：</p>
+<figure class="highlight stata"><table><tr><td class="code"><pre><span class="line">/usr/<span class="keyword">local</span>/nginx/<span class="keyword">conf</span>/nginx.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
+<p>然后需要到当前站点的.conf文件中</p>
+<figure class="highlight fortran"><table><tr><td class="code"><pre><span class="line">access_log /www/wwwlogs/laobuluo.com_nginx.<span class="built_in">log</span> <span class="keyword">access</span>;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>批处理查找畸形文件并删除</title>
     <url>/2023/12/15/%E6%89%B9%E5%A4%84%E7%90%86%E6%9F%A5%E6%89%BE%E7%95%B8%E5%BD%A2%E6%96%87%E4%BB%B6%E5%B9%B6%E5%88%A0%E9%99%A4/</url>
     <content><![CDATA[<h3 id="批处理查找畸形文件并删除"><a href="#批处理查找畸形文件并删除" class="headerlink" title="批处理查找畸形文件并删除"></a>批处理查找畸形文件并删除</h3><span id="more"></span>
@@ -807,20 +807,28 @@ fi
       </tags>
   </entry>
   <entry>
-    <title>查询mssql对应bak版本</title>
-    <url>/2023/12/18/%E6%9F%A5%E8%AF%A2mssql%E5%AF%B9%E5%BA%94bak%E7%89%88%E6%9C%AC/</url>
+    <title>帝国CMS从HTTP升级到HTTPS 登录网站后台空白</title>
+    <url>/2024/05/08/%E5%B8%9D%E5%9B%BDCMS%E4%BB%8EHTTP%E5%8D%87%E7%BA%A7%E5%88%B0HTTPS%20%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E7%A9%BA%E7%99%BD/</url>
     <content><![CDATA[<blockquote>
-<p>SQLServer 的备份文件是以.bak 为后缀的文件，如果想要通过备份文件查看数据库版本，通常的做法就是把数据库还原，但是在还原的过程，如果不是相同的数据库版本，就会导致无法还原；<br>在数据库中，低版本的备份文件是可以还原到高版本的数据库中，高的就不可以了，比如SQLSERVER 2008 的备份文件可以在SQLSERVER 2012 中还原，2012就不能在2008中还原</p>
+<p>通常网站一般采用HTTP传输协议即可，但为了网站更加安全，建议大家给域名申请SSL证书，然后给网站启用https协议进行访问。<br>帝国CMS7.5版新增支持HTTPS传输协议，更安全</p>
 </blockquote>
 <span id="more"></span>
-
-<p>这时候，我们就可以用一段脚本来查看，如下：<br><code>RESTORE HEADERONLY  FROM DISK =&#39;D:\mssqlupload\53office_data.bak&#39; WITH NOUNLOAD;</code><br><img src="/2023/12/18/%E6%9F%A5%E8%AF%A2mssql%E5%AF%B9%E5%BA%94bak%E7%89%88%E6%9C%AC/image.jpg"></p>
+<h4 id="帝国CMS7-5"><a href="#帝国CMS7-5" class="headerlink" title="帝国CMS7.5"></a>帝国CMS7.5</h4><p>帝国CMS7.5版完美支持HTTPS传输协议，可以做如下设置：<br>帝国CMS后台进行设置，传输协议改为全站https:&#x2F;&#x2F;，网站地址设为https:&#x2F;&#x2F;<br><img src="/2024/05/08/%E5%B8%9D%E5%9B%BDCMS%E4%BB%8EHTTP%E5%8D%87%E7%BA%A7%E5%88%B0HTTPS%20%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E7%A9%BA%E7%99%BD/8e92ab44aae07b63bbddce87658d1283.png"><br>帝国CMS7.5 可以设置的五种传输协议（如下图）：<br><img src="/2024/05/08/%E5%B8%9D%E5%9B%BDCMS%E4%BB%8EHTTP%E5%8D%87%E7%BA%A7%E5%88%B0HTTPS%20%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E7%A9%BA%E7%99%BD/5d86055e4572c16a81cca3eff314b105.png"><br>帝国CMS7.5版可自行灵活选择是否使用https：</p>
+<ol>
+<li>由系统自动识别当前服务器是否使用https；</li>
+<li>设置全站使用http；</li>
+<li>设置全站使用https；</li>
+<li>设置后台https,前台http；</li>
+<li>设置后台http,前台https；<br>品自行建议使用全站https，或者后台http，前台https，这两种</li>
+</ol>
+<p><strong>这里说明一下，帝国cms7.5版支持https，7.2版及一下要支持https要改e&#x2F;class&#x2F;connect.php两处http:&#x2F;&#x2F;为https:&#x2F;&#x2F;才可以支持<br>一般修改完成，网址会从<a href="http://qinshining.com转变成https//qinshining.com">http://qinshining.com转变成https://qinshining.com</a></strong></p>
+<h4 id="后台启用https协议后无法登录"><a href="#后台启用https协议后无法登录" class="headerlink" title="后台启用https协议后无法登录"></a>后台启用https协议后无法登录</h4><p>帝国7.5在后台启用了https协议，输入账号和密码登录就是一片空白，登录不进去了，<br>解决方法：<br>修改e&#x2F;config&#x2F;config.php文件，搜索httptype修改回默认的0，然后登录后台后把https设置为默认的自动即可。</p>
 ]]></content>
       <categories>
-        <category>mssql</category>
+        <category>ngnix</category>
       </categories>
       <tags>
-        <tag>mssql</tag>
+        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -840,6 +848,23 @@ fi
       </categories>
       <tags>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>查询mssql对应bak版本</title>
+    <url>/2023/12/18/%E6%9F%A5%E8%AF%A2mssql%E5%AF%B9%E5%BA%94bak%E7%89%88%E6%9C%AC/</url>
+    <content><![CDATA[<blockquote>
+<p>SQLServer 的备份文件是以.bak 为后缀的文件，如果想要通过备份文件查看数据库版本，通常的做法就是把数据库还原，但是在还原的过程，如果不是相同的数据库版本，就会导致无法还原；<br>在数据库中，低版本的备份文件是可以还原到高版本的数据库中，高的就不可以了，比如SQLSERVER 2008 的备份文件可以在SQLSERVER 2012 中还原，2012就不能在2008中还原</p>
+</blockquote>
+<span id="more"></span>
+
+<p>这时候，我们就可以用一段脚本来查看，如下：<br><code>RESTORE HEADERONLY  FROM DISK =&#39;D:\mssqlupload\53office_data.bak&#39; WITH NOUNLOAD;</code><br><img src="/2023/12/18/%E6%9F%A5%E8%AF%A2mssql%E5%AF%B9%E5%BA%94bak%E7%89%88%E6%9C%AC/image.jpg"></p>
+]]></content>
+      <categories>
+        <category>mssql</category>
+      </categories>
+      <tags>
+        <tag>mssql</tag>
       </tags>
   </entry>
   <entry>
@@ -933,31 +958,6 @@ fi
       </categories>
       <tags>
         <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>帝国CMS从HTTP升级到HTTPS 登录网站后台空白</title>
-    <url>/2024/05/08/%E5%B8%9D%E5%9B%BDCMS%E4%BB%8EHTTP%E5%8D%87%E7%BA%A7%E5%88%B0HTTPS%20%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E7%A9%BA%E7%99%BD/</url>
-    <content><![CDATA[<blockquote>
-<p>通常网站一般采用HTTP传输协议即可，但为了网站更加安全，建议大家给域名申请SSL证书，然后给网站启用https协议进行访问。<br>帝国CMS7.5版新增支持HTTPS传输协议，更安全</p>
-</blockquote>
-<span id="more"></span>
-<h4 id="帝国CMS7-5"><a href="#帝国CMS7-5" class="headerlink" title="帝国CMS7.5"></a>帝国CMS7.5</h4><p>帝国CMS7.5版完美支持HTTPS传输协议，可以做如下设置：<br>帝国CMS后台进行设置，传输协议改为全站https:&#x2F;&#x2F;，网站地址设为https:&#x2F;&#x2F;<br><img src="/2024/05/08/%E5%B8%9D%E5%9B%BDCMS%E4%BB%8EHTTP%E5%8D%87%E7%BA%A7%E5%88%B0HTTPS%20%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E7%A9%BA%E7%99%BD/8e92ab44aae07b63bbddce87658d1283.png"><br>帝国CMS7.5 可以设置的五种传输协议（如下图）：<br><img src="/2024/05/08/%E5%B8%9D%E5%9B%BDCMS%E4%BB%8EHTTP%E5%8D%87%E7%BA%A7%E5%88%B0HTTPS%20%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E7%A9%BA%E7%99%BD/5d86055e4572c16a81cca3eff314b105.png"><br>帝国CMS7.5版可自行灵活选择是否使用https：</p>
-<ol>
-<li>由系统自动识别当前服务器是否使用https；</li>
-<li>设置全站使用http；</li>
-<li>设置全站使用https；</li>
-<li>设置后台https,前台http；</li>
-<li>设置后台http,前台https；<br>品自行建议使用全站https，或者后台http，前台https，这两种</li>
-</ol>
-<p><strong>这里说明一下，帝国cms7.5版支持https，7.2版及一下要支持https要改e&#x2F;class&#x2F;connect.php两处http:&#x2F;&#x2F;为https:&#x2F;&#x2F;才可以支持<br>一般修改完成，网址会从<a href="http://qinshining.com转变成https//qinshining.com">http://qinshining.com转变成https://qinshining.com</a></strong></p>
-<h4 id="后台启用https协议后无法登录"><a href="#后台启用https协议后无法登录" class="headerlink" title="后台启用https协议后无法登录"></a>后台启用https协议后无法登录</h4><p>帝国7.5在后台启用了https协议，输入账号和密码登录就是一片空白，登录不进去了，<br>解决方法：<br>修改e&#x2F;config&#x2F;config.php文件，搜索httptype修改回默认的0，然后登录后台后把https设置为默认的自动即可。</p>
-]]></content>
-      <categories>
-        <category>ngnix</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
       </tags>
   </entry>
 </search>

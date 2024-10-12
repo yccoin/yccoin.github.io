@@ -125,6 +125,22 @@ $sent_http_transfer_encoding```
       </tags>
   </entry>
   <entry>
+    <title>centos 7.9更换阿里源</title>
+    <url>/2024/10/12/centos%207.9%E6%9B%B4%E6%8D%A2%E9%98%BF%E9%87%8C%E6%BA%90/</url>
+    <content><![CDATA[<h5 id="centos-7-9更换阿里源"><a href="#centos-7-9更换阿里源" class="headerlink" title="centos 7.9更换阿里源"></a>centos 7.9更换阿里源</h5><span id="more"></span>
+<p>在CentOS 7.9上更换为阿里云源的步骤如下：</p>
+<h5 id="备份原有的YUM源配置文件"><a href="#备份原有的YUM源配置文件" class="headerlink" title="备份原有的YUM源配置文件"></a>备份原有的YUM源配置文件</h5><p><code>sudo cp -a /etc/yum.repos.d /etc/yum.repos.d.backup</code></p>
+<h5 id="清理原有的YUM源配置文件"><a href="#清理原有的YUM源配置文件" class="headerlink" title="清理原有的YUM源配置文件"></a>清理原有的YUM源配置文件</h5><p><code>sudo rm -f /etc/yum.repos.d/*.repo</code></p>
+<h5 id="下载阿里云CentOS-7源配置文件"><a href="#下载阿里云CentOS-7源配置文件" class="headerlink" title="下载阿里云CentOS 7源配置文件"></a>下载阿里云CentOS 7源配置文件</h5><p><code>sudo curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</code></p>
+<h5 id="清除缓存并生成新的缓存"><a href="#清除缓存并生成新的缓存" class="headerlink" title="清除缓存并生成新的缓存"></a>清除缓存并生成新的缓存</h5><figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">sudo yum clean <span class="keyword">all</span></span><br><span class="line">sudo yum makecache</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>centos 8安装mysql</title>
     <url>/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/</url>
     <content><![CDATA[<h5 id="centos-8-安装mysql"><a href="#centos-8-安装mysql" class="headerlink" title="centos 8 安装mysql"></a>centos 8 安装mysql</h5><span id="more"></span>
@@ -662,42 +678,6 @@ fi
       </tags>
   </entry>
   <entry>
-    <title>如何在 Linux/Unix/Windows 中发现隐藏的进程和端口</title>
-    <url>/2023/12/15/%E5%A6%82%E4%BD%95%E5%9C%A8%20LinuxUnixWindows%20%E4%B8%AD%E5%8F%91%E7%8E%B0%E9%9A%90%E8%97%8F%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%AB%AF%E5%8F%A3/</url>
-    <content><![CDATA[<h4 id="如何在-Linux-Unix-Windows-中发现隐藏的进程和端口"><a href="#如何在-Linux-Unix-Windows-中发现隐藏的进程和端口" class="headerlink" title="如何在 Linux&#x2F;Unix&#x2F;Windows 中发现隐藏的进程和端口"></a>如何在 Linux&#x2F;Unix&#x2F;Windows 中发现隐藏的进程和端口</h4><span id="more"></span>
-<blockquote>
-<p>unhide 是一个小巧的网络取证工具，能够发现那些借助 rootkit、LKM 及其它技术隐藏的进程和 TCP&#x2F;UDP 端口。这个工具在 Linux、UNIX 类、MS-Windows 等操作系统下都可以工作。<br>根据其 man 页面的说明：</p>
-<blockquote>
-<p>Unhide 通过下述三项技术来发现隐藏的进程。<br>进程相关的技术，包括将 &#x2F;proc 目录与 &#x2F;bin&#x2F;ps[1] 命令的输出进行比较。<br>系统相关的技术，包括将 &#x2F;bin&#x2F;ps[2] 命令的输出结果同从系统调用方面得到的信息进行比较。<br>穷举法相关的技术，包括对所有的进程 ID 进行暴力求解，该技术仅限于在基于 Linux2.6 内核的系统中使用。</p>
-</blockquote>
-</blockquote>
-<h5 id="如何安装-unhide"><a href="#如何安装-unhide" class="headerlink" title="如何安装 unhide"></a>如何安装 unhide</h5><p>首先建议你在只读介质上运行这个工具。如果使用的是 Ubuntu 或者 Debian 发行版，输入下述的 apt-get 命令以安装 Unhide<br><code>$ sudo apt-get install unhide</code><br>一切顺利的话你的命令行会输出以下内容  </p>
-<figure class="highlight plaintext"><figcaption><span>password for vivek:</span></figcaption><table><tr><td class="code"><pre><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree       </span><br><span class="line">Reading state information... Done</span><br><span class="line">Suggested packages:</span><br><span class="line">  rkhunter</span><br><span class="line">The following NEW packages will be installed:</span><br><span class="line">  unhide</span><br><span class="line">0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.</span><br><span class="line">Need to get 46.6 kB of archives.</span><br><span class="line">After this operation, 136 kB of additional disk space will be used.</span><br><span class="line">Get:1 http://in.archive.ubuntu.com/ubuntu artful/universe amd64 unhide amd64 20130526-1 [46.6 kB]</span><br><span class="line">Fetched 46.6 kB in 0s (49.0 kB/s)</span><br><span class="line">Selecting previously unselected package unhide.</span><br><span class="line">(Reading database ... 205367 files and directories currently installed.)</span><br><span class="line">Preparing to unpack .../unhide_20130526-1_amd64.deb ...</span><br><span class="line">Unpacking unhide (20130526-1) ...</span><br><span class="line">Setting up unhide (20130526-1) ...</span><br><span class="line">Processing triggers for man-db (2.7.6.1-2) ...</span><br></pre></td></tr></table></figure>
-<h5 id="如何在-RHEL-CentOS-Oracle-Scientific-Fedora-上安装-unhide"><a href="#如何在-RHEL-CentOS-Oracle-Scientific-Fedora-上安装-unhide" class="headerlink" title="如何在 RHEL&#x2F;CentOS&#x2F;Oracle&#x2F;Scientific&#x2F;Fedora 上安装 unhide"></a>如何在 RHEL&#x2F;CentOS&#x2F;Oracle&#x2F;Scientific&#x2F;Fedora 上安装 unhide</h5><p>入以下的 yum 命令（CentOS&#x2F;RHEL 6.x 或 7.x 上首先打开 EPEL 仓库）：<br><code>sudo yum install unhide</code><br>在 Fedora 上则使用以下 dnf 命令：<br><code>sudo dnf install unhide</code></p>
-<h5 id="如何使用-unhide-工具？"><a href="#如何使用-unhide-工具？" class="headerlink" title="如何使用 unhide 工具？"></a>如何使用 unhide 工具？</h5><p>unhide 的语法是：<br><code>unhide [options] test_list</code><br>test_list 参数可以是以下测试列表中的一个或者多个标准测试：<br>brute<br>proc<br>procall<br>procfs<br>quick<br>reverse<br>sys<br>或基本测试：<br>checkbrute<br>checkchdir<br>checkgetaffinity<br>checkgetparam<br>checkgetpgid<br>checkgetprio<br>checkRRgetinterval<br>checkgetsched<br>checkgetsid<br>checkkill<br>checknoprocps<br>checkopendir<br>checkproc<br>checkquick<br>checkreaddir<br>checkreverse<br>checksysinfo<br>checksysinfo2<br>checksysinfo3<br>你可以通过以下示例命令使用 unhide：  </p>
-<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># unhide proc</span></span><br><span class="line"><span class="meta"># unhide sys</span></span><br><span class="line"><span class="meta"># unhide quick</span></span><br></pre></td></tr></table></figure>
-<p>示例输出：  </p>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">Unhide <span class="number">20130526</span></span><br><span class="line">Copyright © <span class="number">2013</span> Yago Jesus &amp; Patrick Gouin</span><br><span class="line">License GPLv3+ : GNU GPL <span class="keyword">version</span> <span class="number">3</span> <span class="built_in">or</span> <span class="keyword">later</span></span><br><span class="line">http://www.<span class="keyword">unhide</span>-forensics.info</span><br><span class="line">NOTE : This <span class="keyword">version</span> of <span class="keyword">unhide</span> <span class="keyword">is</span> <span class="keyword">for</span> systems using Linux &gt;= <span class="number">2.6</span> </span><br><span class="line">Used <span class="keyword">options</span>: </span><br><span class="line">[*]Searching <span class="keyword">for</span> Hidden processes through  comparison of results of <span class="built_in">system</span> calls, proc, dir <span class="built_in">and</span> <span class="keyword">ps</span></span><br></pre></td></tr></table></figure>
-<h5 id="如何使用-unhide-tcp-工具辨明-TCP-UDP-端口的身份"><a href="#如何使用-unhide-tcp-工具辨明-TCP-UDP-端口的身份" class="headerlink" title="如何使用 unhide-tcp 工具辨明 TCP&#x2F;UDP 端口的身份"></a>如何使用 unhide-tcp 工具辨明 TCP&#x2F;UDP 端口的身份</h5><p>以下是来自 man 页面的介绍  </p>
-<blockquote>
-<p>unhide-tcp 取证工具通过对所有可用的 TCP&#x2F;IP 端口进行暴力求解的方式，辨别所有正在监听，却没有列入 &#x2F;bin&#x2F;netstat[9] 或者 &#x2F;bin&#x2F;ss[10] 命令输出的 TCP&#x2F;IP 端口身份。<br>注一：对于 FreeBSD、OpenBSD系统，一般使用 netstat 命令取代在这些操作系统上不存在的 iproute2，此外，sockstat 命令也用于替代 fuser。<br>注二：如果操作系统不支持 iproute2 命令，在使用 unhide 时需要在命令上加上 -n 或者 -s 选项。</p>
-</blockquote>
-<p><code>unhide-tcp</code><br>示例输出：  </p>
-<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line">Unhide <span class="number">20100201</span></span><br><span class="line"><span class="symbol">http:</span><span class="comment">//www.security-projects.com/?Unhide</span></span><br><span class="line">Starting TCP checking</span><br><span class="line">Starting UDP checking</span><br></pre></td></tr></table></figure>
-<p>上述操作中，没有发现隐藏的端口。<br>但在下述示例中，我展示了一些有趣的事。  </p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">unhide-tcp</span></span><br><span class="line"><span class="string">示例输出：</span></span><br><span class="line"><span class="string">Unhide</span> <span class="number">20100201</span></span><br><span class="line"><span class="string">http://www.security-projects.com/?Unhide</span></span><br><span class="line"><span class="string">Starting</span> <span class="string">TCP</span> <span class="string">checking</span></span><br><span class="line"><span class="attr">Found Hidden port that not appears in netstat:</span> <span class="number">1048</span></span><br><span class="line"><span class="attr">Found Hidden port that not appears in netstat:</span> <span class="number">1049</span></span><br><span class="line"><span class="attr">Found Hidden port that not appears in netstat:</span> <span class="number">1050</span></span><br><span class="line"><span class="string">Starting</span> <span class="string">UDP</span> <span class="string">checking</span></span><br></pre></td></tr></table></figure>
-<p>可以看到 netstat -tulpn 和 ss 命令确实没有反映出这三个隐藏的端口：  </p>
-<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># netstat -tulpn | grep 1048</span></span><br><span class="line"><span class="meta"># ss -lp</span></span><br><span class="line"><span class="meta"># ss -l | grep 1048</span></span><br></pre></td></tr></table></figure>
-<h5 id="Windows-用户如何安装使用-unhide"><a href="#Windows-用户如何安装使用-unhide" class="headerlink" title="Windows 用户如何安装使用 unhide"></a>Windows 用户如何安装使用 unhide</h5><p>你可以通过这个页面获取 Windows 版本的 unhide<br><a href="https://www.cyberciti.biz/tips/linux-unix-windows-find-hidden-processes-tcp-udp-ports.html">unhide</a></p>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-      <tags>
-        <tag>tools</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>多线程，多进程，携程，异步</title>
     <url>/2023/12/18/%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%8C%E6%90%BA%E7%A8%8B%EF%BC%8C%E5%BC%82%E6%AD%A5/</url>
     <content><![CDATA[<h4 id="multiprocessing-多进程"><a href="#multiprocessing-多进程" class="headerlink" title="multiprocessing 多进程"></a>multiprocessing 多进程</h4><blockquote>
@@ -749,6 +729,42 @@ fi
       </tags>
   </entry>
   <entry>
+    <title>如何在 Linux/Unix/Windows 中发现隐藏的进程和端口</title>
+    <url>/2023/12/15/%E5%A6%82%E4%BD%95%E5%9C%A8%20LinuxUnixWindows%20%E4%B8%AD%E5%8F%91%E7%8E%B0%E9%9A%90%E8%97%8F%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%AB%AF%E5%8F%A3/</url>
+    <content><![CDATA[<h4 id="如何在-Linux-Unix-Windows-中发现隐藏的进程和端口"><a href="#如何在-Linux-Unix-Windows-中发现隐藏的进程和端口" class="headerlink" title="如何在 Linux&#x2F;Unix&#x2F;Windows 中发现隐藏的进程和端口"></a>如何在 Linux&#x2F;Unix&#x2F;Windows 中发现隐藏的进程和端口</h4><span id="more"></span>
+<blockquote>
+<p>unhide 是一个小巧的网络取证工具，能够发现那些借助 rootkit、LKM 及其它技术隐藏的进程和 TCP&#x2F;UDP 端口。这个工具在 Linux、UNIX 类、MS-Windows 等操作系统下都可以工作。<br>根据其 man 页面的说明：</p>
+<blockquote>
+<p>Unhide 通过下述三项技术来发现隐藏的进程。<br>进程相关的技术，包括将 &#x2F;proc 目录与 &#x2F;bin&#x2F;ps[1] 命令的输出进行比较。<br>系统相关的技术，包括将 &#x2F;bin&#x2F;ps[2] 命令的输出结果同从系统调用方面得到的信息进行比较。<br>穷举法相关的技术，包括对所有的进程 ID 进行暴力求解，该技术仅限于在基于 Linux2.6 内核的系统中使用。</p>
+</blockquote>
+</blockquote>
+<h5 id="如何安装-unhide"><a href="#如何安装-unhide" class="headerlink" title="如何安装 unhide"></a>如何安装 unhide</h5><p>首先建议你在只读介质上运行这个工具。如果使用的是 Ubuntu 或者 Debian 发行版，输入下述的 apt-get 命令以安装 Unhide<br><code>$ sudo apt-get install unhide</code><br>一切顺利的话你的命令行会输出以下内容  </p>
+<figure class="highlight plaintext"><figcaption><span>password for vivek:</span></figcaption><table><tr><td class="code"><pre><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree       </span><br><span class="line">Reading state information... Done</span><br><span class="line">Suggested packages:</span><br><span class="line">  rkhunter</span><br><span class="line">The following NEW packages will be installed:</span><br><span class="line">  unhide</span><br><span class="line">0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.</span><br><span class="line">Need to get 46.6 kB of archives.</span><br><span class="line">After this operation, 136 kB of additional disk space will be used.</span><br><span class="line">Get:1 http://in.archive.ubuntu.com/ubuntu artful/universe amd64 unhide amd64 20130526-1 [46.6 kB]</span><br><span class="line">Fetched 46.6 kB in 0s (49.0 kB/s)</span><br><span class="line">Selecting previously unselected package unhide.</span><br><span class="line">(Reading database ... 205367 files and directories currently installed.)</span><br><span class="line">Preparing to unpack .../unhide_20130526-1_amd64.deb ...</span><br><span class="line">Unpacking unhide (20130526-1) ...</span><br><span class="line">Setting up unhide (20130526-1) ...</span><br><span class="line">Processing triggers for man-db (2.7.6.1-2) ...</span><br></pre></td></tr></table></figure>
+<h5 id="如何在-RHEL-CentOS-Oracle-Scientific-Fedora-上安装-unhide"><a href="#如何在-RHEL-CentOS-Oracle-Scientific-Fedora-上安装-unhide" class="headerlink" title="如何在 RHEL&#x2F;CentOS&#x2F;Oracle&#x2F;Scientific&#x2F;Fedora 上安装 unhide"></a>如何在 RHEL&#x2F;CentOS&#x2F;Oracle&#x2F;Scientific&#x2F;Fedora 上安装 unhide</h5><p>入以下的 yum 命令（CentOS&#x2F;RHEL 6.x 或 7.x 上首先打开 EPEL 仓库）：<br><code>sudo yum install unhide</code><br>在 Fedora 上则使用以下 dnf 命令：<br><code>sudo dnf install unhide</code></p>
+<h5 id="如何使用-unhide-工具？"><a href="#如何使用-unhide-工具？" class="headerlink" title="如何使用 unhide 工具？"></a>如何使用 unhide 工具？</h5><p>unhide 的语法是：<br><code>unhide [options] test_list</code><br>test_list 参数可以是以下测试列表中的一个或者多个标准测试：<br>brute<br>proc<br>procall<br>procfs<br>quick<br>reverse<br>sys<br>或基本测试：<br>checkbrute<br>checkchdir<br>checkgetaffinity<br>checkgetparam<br>checkgetpgid<br>checkgetprio<br>checkRRgetinterval<br>checkgetsched<br>checkgetsid<br>checkkill<br>checknoprocps<br>checkopendir<br>checkproc<br>checkquick<br>checkreaddir<br>checkreverse<br>checksysinfo<br>checksysinfo2<br>checksysinfo3<br>你可以通过以下示例命令使用 unhide：  </p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># unhide proc</span></span><br><span class="line"><span class="meta"># unhide sys</span></span><br><span class="line"><span class="meta"># unhide quick</span></span><br></pre></td></tr></table></figure>
+<p>示例输出：  </p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">Unhide <span class="number">20130526</span></span><br><span class="line">Copyright © <span class="number">2013</span> Yago Jesus &amp; Patrick Gouin</span><br><span class="line">License GPLv3+ : GNU GPL <span class="keyword">version</span> <span class="number">3</span> <span class="built_in">or</span> <span class="keyword">later</span></span><br><span class="line">http://www.<span class="keyword">unhide</span>-forensics.info</span><br><span class="line">NOTE : This <span class="keyword">version</span> of <span class="keyword">unhide</span> <span class="keyword">is</span> <span class="keyword">for</span> systems using Linux &gt;= <span class="number">2.6</span> </span><br><span class="line">Used <span class="keyword">options</span>: </span><br><span class="line">[*]Searching <span class="keyword">for</span> Hidden processes through  comparison of results of <span class="built_in">system</span> calls, proc, dir <span class="built_in">and</span> <span class="keyword">ps</span></span><br></pre></td></tr></table></figure>
+<h5 id="如何使用-unhide-tcp-工具辨明-TCP-UDP-端口的身份"><a href="#如何使用-unhide-tcp-工具辨明-TCP-UDP-端口的身份" class="headerlink" title="如何使用 unhide-tcp 工具辨明 TCP&#x2F;UDP 端口的身份"></a>如何使用 unhide-tcp 工具辨明 TCP&#x2F;UDP 端口的身份</h5><p>以下是来自 man 页面的介绍  </p>
+<blockquote>
+<p>unhide-tcp 取证工具通过对所有可用的 TCP&#x2F;IP 端口进行暴力求解的方式，辨别所有正在监听，却没有列入 &#x2F;bin&#x2F;netstat[9] 或者 &#x2F;bin&#x2F;ss[10] 命令输出的 TCP&#x2F;IP 端口身份。<br>注一：对于 FreeBSD、OpenBSD系统，一般使用 netstat 命令取代在这些操作系统上不存在的 iproute2，此外，sockstat 命令也用于替代 fuser。<br>注二：如果操作系统不支持 iproute2 命令，在使用 unhide 时需要在命令上加上 -n 或者 -s 选项。</p>
+</blockquote>
+<p><code>unhide-tcp</code><br>示例输出：  </p>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line">Unhide <span class="number">20100201</span></span><br><span class="line"><span class="symbol">http:</span><span class="comment">//www.security-projects.com/?Unhide</span></span><br><span class="line">Starting TCP checking</span><br><span class="line">Starting UDP checking</span><br></pre></td></tr></table></figure>
+<p>上述操作中，没有发现隐藏的端口。<br>但在下述示例中，我展示了一些有趣的事。  </p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">unhide-tcp</span></span><br><span class="line"><span class="string">示例输出：</span></span><br><span class="line"><span class="string">Unhide</span> <span class="number">20100201</span></span><br><span class="line"><span class="string">http://www.security-projects.com/?Unhide</span></span><br><span class="line"><span class="string">Starting</span> <span class="string">TCP</span> <span class="string">checking</span></span><br><span class="line"><span class="attr">Found Hidden port that not appears in netstat:</span> <span class="number">1048</span></span><br><span class="line"><span class="attr">Found Hidden port that not appears in netstat:</span> <span class="number">1049</span></span><br><span class="line"><span class="attr">Found Hidden port that not appears in netstat:</span> <span class="number">1050</span></span><br><span class="line"><span class="string">Starting</span> <span class="string">UDP</span> <span class="string">checking</span></span><br></pre></td></tr></table></figure>
+<p>可以看到 netstat -tulpn 和 ss 命令确实没有反映出这三个隐藏的端口：  </p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line"><span class="meta"># netstat -tulpn | grep 1048</span></span><br><span class="line"><span class="meta"># ss -lp</span></span><br><span class="line"><span class="meta"># ss -l | grep 1048</span></span><br></pre></td></tr></table></figure>
+<h5 id="Windows-用户如何安装使用-unhide"><a href="#Windows-用户如何安装使用-unhide" class="headerlink" title="Windows 用户如何安装使用 unhide"></a>Windows 用户如何安装使用 unhide</h5><p>你可以通过这个页面获取 Windows 版本的 unhide<br><a href="https://www.cyberciti.biz/tips/linux-unix-windows-find-hidden-processes-tcp-udp-ports.html">unhide</a></p>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>tools</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>宝塔任务计划不执行原因排查</title>
     <url>/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/</url>
     <content><![CDATA[<blockquote>
@@ -794,19 +810,6 @@ fi
       </tags>
   </entry>
   <entry>
-    <title>批处理查找畸形文件并删除</title>
-    <url>/2023/12/15/%E6%89%B9%E5%A4%84%E7%90%86%E6%9F%A5%E6%89%BE%E7%95%B8%E5%BD%A2%E6%96%87%E4%BB%B6%E5%B9%B6%E5%88%A0%E9%99%A4/</url>
-    <content><![CDATA[<h3 id="批处理查找畸形文件并删除"><a href="#批处理查找畸形文件并删除" class="headerlink" title="批处理查找畸形文件并删除"></a>批处理查找畸形文件并删除</h3><span id="more"></span>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@echo off</span><br><span class="line">setlocal enabledelayedexpansion</span><br><span class="line">title 畸形文件查杀</span><br><span class="line">::文件匹配正则</span><br><span class="line">set &quot;reg=\\nul \\nul\.[^\\]* \\com[1-9] \\com[1-9]\.[^\\]* \\aux \\aux\.[^\\]* \\con \\con\.[^\\]* \\prn \\prn\.[^\\]* \.&quot;</span><br><span class="line">::设置窗口颜色</span><br><span class="line">color 6b</span><br><span class="line">::检测路径是否存在</span><br><span class="line">:checkexist</span><br><span class="line">set /p dir=请输入需要查杀的路径:</span><br><span class="line">if &quot;%dir%&quot; ==&quot;&quot; (</span><br><span class="line">echo 输入为空，请重新输入</span><br><span class="line">call :checkexist</span><br><span class="line">)else (</span><br><span class="line">call :listdir</span><br><span class="line">)</span><br><span class="line">::列出畸形文件名和所在目录</span><br><span class="line">:listdir</span><br><span class="line">cd /d %dir%</span><br><span class="line">for /f &quot;delims=&quot; %%i in (&#x27;dir /b /a /s ^| findstr /i /r /e &quot;%reg%&quot;&#x27;) do (</span><br><span class="line">    echo  &quot;%%i&quot;</span><br><span class="line">    rd /s /q &quot;\\?\%%i&quot;</span><br><span class="line">    del /q /f /a &quot;\\?\%%i&quot;</span><br><span class="line">    echo 已经删除</span><br><span class="line">    pause</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>bat</category>
-      </categories>
-      <tags>
-        <tag>bat</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>帝国CMS从HTTP升级到HTTPS 登录网站后台空白</title>
     <url>/2024/05/08/%E5%B8%9D%E5%9B%BDCMS%E4%BB%8EHTTP%E5%8D%87%E7%BA%A7%E5%88%B0HTTPS%20%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E7%A9%BA%E7%99%BD/</url>
     <content><![CDATA[<blockquote>
@@ -832,22 +835,16 @@ fi
       </tags>
   </entry>
   <entry>
-    <title>装饰器</title>
-    <url>/2023/12/18/%E8%A3%85%E9%A5%B0%E5%99%A8/</url>
-    <content><![CDATA[<blockquote>
-<p>python中的装饰器(decorator)一般采用语法糖的形式，是一种语法格式。<br>比如：@classmethod，@staticmethod，@property，@xxx.setter，@wraps()，@func_name等都是python中的装饰器</p>
-</blockquote>
-<span id="more"></span>
-<p>装饰器本质上是一个Python函数(其实就是闭包)，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。装饰器用于有以下场景，比如:插入日志、性能测试、事务处理、缓存、权限校验等场景</p>
-<hr>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">import <span class="selector-tag">time</span></span><br><span class="line">import threading</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">how_much_time</span>(func):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;how_much_time&quot;</span>)</span><br><span class="line">    def <span class="built_in">inner</span>():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;how_much_time start&quot;</span>)</span><br><span class="line">        start_time = time.<span class="built_in">time</span>()</span><br><span class="line">        <span class="built_in">func</span>()</span><br><span class="line">        end_time = time.<span class="built_in">time</span>()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;一共花了&#123;0&#125;时间&quot;</span>.<span class="built_in">format</span>(end_time - start_time))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;how_much_time end&quot;</span>)</span><br><span class="line">    return inner</span><br><span class="line"></span><br><span class="line">def <span class="built_in">another_info</span>(func):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;another_info&quot;</span>)</span><br><span class="line">    def <span class="built_in">inner_1</span>():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;another_info start&quot;</span>)</span><br><span class="line">        <span class="built_in">func</span>()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;another_info end&quot;</span>)</span><br><span class="line">    return inner_1</span><br><span class="line"></span><br><span class="line">@how_much_time</span><br><span class="line">@another_info</span><br><span class="line">def <span class="built_in">sleep_5</span>():</span><br><span class="line">    time.<span class="built_in">sleep</span>(<span class="number">5</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;%d结束了&quot;</span> % (<span class="number">5</span>, ))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">t1=threading.<span class="built_in">Thread</span>(target=sleep_5)</span><br><span class="line">t1.<span class="built_in">start</span>()</span><br></pre></td></tr></table></figure>
-<p>执行结果如下：<br>another_info<br>how_much_time<br>how_much_time start<br>another_info start<br>5结束了<br>another_info end<br>一共花了5.003912687301636时间<br>how_much_time end</p>
+    <title>批处理查找畸形文件并删除</title>
+    <url>/2023/12/15/%E6%89%B9%E5%A4%84%E7%90%86%E6%9F%A5%E6%89%BE%E7%95%B8%E5%BD%A2%E6%96%87%E4%BB%B6%E5%B9%B6%E5%88%A0%E9%99%A4/</url>
+    <content><![CDATA[<h3 id="批处理查找畸形文件并删除"><a href="#批处理查找畸形文件并删除" class="headerlink" title="批处理查找畸形文件并删除"></a>批处理查找畸形文件并删除</h3><span id="more"></span>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@echo off</span><br><span class="line">setlocal enabledelayedexpansion</span><br><span class="line">title 畸形文件查杀</span><br><span class="line">::文件匹配正则</span><br><span class="line">set &quot;reg=\\nul \\nul\.[^\\]* \\com[1-9] \\com[1-9]\.[^\\]* \\aux \\aux\.[^\\]* \\con \\con\.[^\\]* \\prn \\prn\.[^\\]* \.&quot;</span><br><span class="line">::设置窗口颜色</span><br><span class="line">color 6b</span><br><span class="line">::检测路径是否存在</span><br><span class="line">:checkexist</span><br><span class="line">set /p dir=请输入需要查杀的路径:</span><br><span class="line">if &quot;%dir%&quot; ==&quot;&quot; (</span><br><span class="line">echo 输入为空，请重新输入</span><br><span class="line">call :checkexist</span><br><span class="line">)else (</span><br><span class="line">call :listdir</span><br><span class="line">)</span><br><span class="line">::列出畸形文件名和所在目录</span><br><span class="line">:listdir</span><br><span class="line">cd /d %dir%</span><br><span class="line">for /f &quot;delims=&quot; %%i in (&#x27;dir /b /a /s ^| findstr /i /r /e &quot;%reg%&quot;&#x27;) do (</span><br><span class="line">    echo  &quot;%%i&quot;</span><br><span class="line">    rd /s /q &quot;\\?\%%i&quot;</span><br><span class="line">    del /q /f /a &quot;\\?\%%i&quot;</span><br><span class="line">    echo 已经删除</span><br><span class="line">    pause</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>python</category>
+        <category>bat</category>
       </categories>
       <tags>
-        <tag>python</tag>
+        <tag>bat</tag>
       </tags>
   </entry>
   <entry>
@@ -868,28 +865,22 @@ fi
       </tags>
   </entry>
   <entry>
-    <title>部署https后有资源使用http时解决办法</title>
-    <url>/2024/09/06/%E9%83%A8%E7%BD%B2https%E5%90%8E%E6%9C%89%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8http%E6%97%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
+    <title>装饰器</title>
+    <url>/2023/12/18/%E8%A3%85%E9%A5%B0%E5%99%A8/</url>
     <content><![CDATA[<blockquote>
-<p>HTTPS 是 HTTP over Secure Socket Layer，以安全为目标的 HTTP 通道，所以在 HTTPS 承载的页面上不允许出现 http 请求，一旦出现就是提示或报错：</p>
-<blockquote>
-<p>Mixed Content: The page at ‘<a href="https://www.taobao.com/%E2%80%98">https://www.taobao.com/‘</a> was loaded over HTTPS, but requested an insecure image ‘<a href="http://g.alicdn.com/s.gif%E2%80%99">http://g.alicdn.com/s.gif’</a>. This content should also be served over HTTPS.<br>upgrade-insecure-requests CSP 指令的作用就是让浏览器自动升级请求，防止访问者访问不安全的内容。<br>该指令用于让浏览器自动升级请求从http到https,用于大量包含http资源的http网页直接升级到https而不会报错.简洁的来讲,就相当于在http和https之间起的一个过渡作用.</p>
-</blockquote>
+<p>python中的装饰器(decorator)一般采用语法糖的形式，是一种语法格式。<br>比如：@classmethod，@staticmethod，@property，@xxx.setter，@wraps()，@func_name等都是python中的装饰器</p>
 </blockquote>
 <span id="more"></span>
-<h3 id="处理办法"><a href="#处理办法" class="headerlink" title="处理办法"></a>处理办法</h3><p>html强制让http的访问Https</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">&lt;meta <span class="attribute">http-equiv</span>=<span class="string">&quot;Content-Security-Policy&quot;</span> <span class="attribute">content</span>=<span class="string">&quot;upgrade-insecure-requests&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
-<p>php强制让http的访问Https</p>
-<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">header(<span class="string">&quot;Content-Security-Policy: upgrade-insecure-requests&quot;</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-
-<p>nginx 强制让http的访问Https</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">#HTTP_TO_HTTPS_END</span></span><br><span class="line">    <span class="attribute">ssl_certificate</span>    /etc/letsencrypt/live/yogayx.com/fullchain.pem;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span>    /etc/letsencrypt/live/yogayx.com/privkey.pem;</span><br><span class="line">    <span class="attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</span><br><span class="line">    <span class="attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;</span><br><span class="line">    <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">ssl_session_cache</span> shared:SSL:<span class="number">10m</span>;</span><br><span class="line">    <span class="attribute">ssl_session_timeout</span> <span class="number">10m</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">add_header</span> Content-Security-Policy <span class="string">&quot;upgrade-insecure-requests;connect-src *&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">error_page</span> <span class="number">497</span>  https://<span class="variable">$host</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">add_header Content-<span class="keyword">Security</span>-<span class="keyword">Policy</span> &quot;upgrade-insecure-requests;connect-src *&quot;;</span><br></pre></td></tr></table></figure>]]></content>
+<p>装饰器本质上是一个Python函数(其实就是闭包)，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。装饰器用于有以下场景，比如:插入日志、性能测试、事务处理、缓存、权限校验等场景</p>
+<hr>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">import <span class="selector-tag">time</span></span><br><span class="line">import threading</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">how_much_time</span>(func):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;how_much_time&quot;</span>)</span><br><span class="line">    def <span class="built_in">inner</span>():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;how_much_time start&quot;</span>)</span><br><span class="line">        start_time = time.<span class="built_in">time</span>()</span><br><span class="line">        <span class="built_in">func</span>()</span><br><span class="line">        end_time = time.<span class="built_in">time</span>()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;一共花了&#123;0&#125;时间&quot;</span>.<span class="built_in">format</span>(end_time - start_time))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;how_much_time end&quot;</span>)</span><br><span class="line">    return inner</span><br><span class="line"></span><br><span class="line">def <span class="built_in">another_info</span>(func):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;another_info&quot;</span>)</span><br><span class="line">    def <span class="built_in">inner_1</span>():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;another_info start&quot;</span>)</span><br><span class="line">        <span class="built_in">func</span>()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;another_info end&quot;</span>)</span><br><span class="line">    return inner_1</span><br><span class="line"></span><br><span class="line">@how_much_time</span><br><span class="line">@another_info</span><br><span class="line">def <span class="built_in">sleep_5</span>():</span><br><span class="line">    time.<span class="built_in">sleep</span>(<span class="number">5</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;%d结束了&quot;</span> % (<span class="number">5</span>, ))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">t1=threading.<span class="built_in">Thread</span>(target=sleep_5)</span><br><span class="line">t1.<span class="built_in">start</span>()</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：<br>another_info<br>how_much_time<br>how_much_time start<br>another_info start<br>5结束了<br>another_info end<br>一共花了5.003912687301636时间<br>how_much_time end</p>
+]]></content>
       <categories>
-        <category>nginx</category>
+        <category>python</category>
       </categories>
       <tags>
-        <tag>nginx</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -909,6 +900,31 @@ fi
 <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">-----<span class="keyword">BEGIN</span> CERTIFICATE-----</span><br><span class="line">MIIDijCCAnKgAwIBAgIUClvoB19SvWxhHXsdPBYCVXdGGXIwDQYJKoZIhvcNAQEF</span><br><span class="line">BQAwUDEPMA0GA1UEAwwGTmV0anVlMTAwLgYDVQQKDCfmsrPljZfnnIHnvZHniLXn</span><br><span class="line">vZHnu5znp5HmioDmnInpmZDlhazlj7gxCzAJBgNVBAYTAkNOMCAXDTk4MTEyODAz</span><br><span class="line">MTAwMFoYDzIyMjIwMjAyMTgyMDAwWjCBjDELMAkGA1UEBhMCQ04xDzANBgNVBAgM</span><br><span class="line">Buays+WNlzESMBAGA1UEBwwJ5bmz6aG25bGxMTAwLgYDVQQKDCfmsrPljZfnnIHn</span><br><span class="line">vZHniLXnvZHnu5znp5HmioDmnInpmZDlhazlj7gxFTATBgNVBAsMDOivgeS5puS8</span><br><span class="line">quijhTEPMA0GA1UEAwwGN3p6LmNuMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB</span><br><span class="line">CgKCAQEArUXhz92MXTamghzSFZ0oq4npsslRe7xoSCyJ+WbwQAvVL824C+yuMDvD</span><br><span class="line"><span class="number">9</span>gsSt5+MId4Nt1CseRF/muWrfifVNukaroaGue3Mrz5CRiQ5r6C8j4ktqYD97ZSU</span><br><span class="line">OH682ug+<span class="number">1</span>iP5wqKONi+/cZ2Pa35IcoHLt1XlKAq4mIzTN9Jf24OFYUqEVS2vXQw8</span><br><span class="line">QjmuAPoGMXrQnvbt<span class="regexp">/Nq3LJ67GqzzBCat/u</span>7G0ZNa/SsgSH6ZW1f4QivtAhsZxgmA</span><br><span class="line"><span class="number">3</span>naS9VnwAoJ6Si4oHhShkuf2bpA<span class="regexp">/NDuKozCTQPXCj/</span>KztIXoLB4eM4635LxWJVqL</span><br><span class="line">rxbCQ0zVn5ezwvtrj<span class="regexp">//</span>QZK1jFhnuEQIDAQABox0wGzALBgNVHREEBDACggAwDAYD</span><br><span class="line">VR0TAQH<span class="regexp">/BAIwADANBgkqhkiG9w0BAQUFAAOCAQEAKy1rxnFOM601qumQ4qyn0/</span>oK</span><br><span class="line">uymElxz47vDM4unYGqvaZl8aSPwFrXjI1FvJxr+oM8iOmT4ZIULi9mucjbErGKfk</span><br><span class="line">cB+duc8cZ5HNIzepl3UddvTw8XdruJDpAa53TdZ35fyn0DGhQN3tqba9vVo/ROj5</span><br><span class="line"><span class="regexp">/4nXkZvv1h+HAz12Iutol4oXYiWaNsN8vVHPy8bqx5WHKhm8X8FrLhxrms2NtF/</span>O</span><br><span class="line">ejU5JULcUq9ipbZ7SDPn<span class="regexp">/RbQ+AcFNs234SLfRX3dj8pi8wcq9291/</span>hCyPS3jnlfU</span><br><span class="line"><span class="number">0</span>d0IPdmjPIBLEY5odwl83SJ8+z2+nR1EwLAPnHjf6MjaUT0ZSmDZeWTzHPyclA==</span><br><span class="line">-----<span class="keyword">END</span> CERTIFICATE-----</span><br></pre></td></tr></table></figure>
 <h3 id="设置默认站点"><a href="#设置默认站点" class="headerlink" title="设置默认站点"></a>设置默认站点</h3><p>回到宝塔“网站管理”，如下图，将上面建立的这个站点设置为默认站点</p>
 ]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>部署https后有资源使用http时解决办法</title>
+    <url>/2024/09/06/%E9%83%A8%E7%BD%B2https%E5%90%8E%E6%9C%89%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8http%E6%97%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
+    <content><![CDATA[<blockquote>
+<p>HTTPS 是 HTTP over Secure Socket Layer，以安全为目标的 HTTP 通道，所以在 HTTPS 承载的页面上不允许出现 http 请求，一旦出现就是提示或报错：</p>
+<blockquote>
+<p>Mixed Content: The page at ‘<a href="https://www.taobao.com/%E2%80%98">https://www.taobao.com/‘</a> was loaded over HTTPS, but requested an insecure image ‘<a href="http://g.alicdn.com/s.gif%E2%80%99">http://g.alicdn.com/s.gif’</a>. This content should also be served over HTTPS.<br>upgrade-insecure-requests CSP 指令的作用就是让浏览器自动升级请求，防止访问者访问不安全的内容。<br>该指令用于让浏览器自动升级请求从http到https,用于大量包含http资源的http网页直接升级到https而不会报错.简洁的来讲,就相当于在http和https之间起的一个过渡作用.</p>
+</blockquote>
+</blockquote>
+<span id="more"></span>
+<h3 id="处理办法"><a href="#处理办法" class="headerlink" title="处理办法"></a>处理办法</h3><p>html强制让http的访问Https</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">&lt;meta <span class="attribute">http-equiv</span>=<span class="string">&quot;Content-Security-Policy&quot;</span> <span class="attribute">content</span>=<span class="string">&quot;upgrade-insecure-requests&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p>php强制让http的访问Https</p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">header(<span class="string">&quot;Content-Security-Policy: upgrade-insecure-requests&quot;</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+
+<p>nginx 强制让http的访问Https</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">#HTTP_TO_HTTPS_END</span></span><br><span class="line">    <span class="attribute">ssl_certificate</span>    /etc/letsencrypt/live/yogayx.com/fullchain.pem;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span>    /etc/letsencrypt/live/yogayx.com/privkey.pem;</span><br><span class="line">    <span class="attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</span><br><span class="line">    <span class="attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;</span><br><span class="line">    <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">ssl_session_cache</span> shared:SSL:<span class="number">10m</span>;</span><br><span class="line">    <span class="attribute">ssl_session_timeout</span> <span class="number">10m</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">add_header</span> Content-Security-Policy <span class="string">&quot;upgrade-insecure-requests;connect-src *&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">error_page</span> <span class="number">497</span>  https://<span class="variable">$host</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">add_header Content-<span class="keyword">Security</span>-<span class="keyword">Policy</span> &quot;upgrade-insecure-requests;connect-src *&quot;;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>nginx</category>
       </categories>

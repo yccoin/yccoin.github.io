@@ -317,14 +317,14 @@
 
   
   <url>
-    <loc>https://yccoin.github.io/tags/software/</loc>
+    <loc>https://yccoin.github.io/tags/nginx/</loc>
     <lastmod>2024-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/tags/nginx/</loc>
+    <loc>https://yccoin.github.io/tags/software/</loc>
     <lastmod>2024-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -380,13 +380,6 @@
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/tags/python/</loc>
-    <lastmod>2024-10-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://yccoin.github.io/tags/tools/</loc>
     <lastmod>2024-10-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -407,17 +400,24 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://yccoin.github.io/tags/python/</loc>
+    <lastmod>2024-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
-    <loc>https://yccoin.github.io/categories/software/</loc>
+    <loc>https://yccoin.github.io/categories/linux/</loc>
     <lastmod>2024-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/categories/linux/</loc>
+    <loc>https://yccoin.github.io/categories/software/</loc>
     <lastmod>2024-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -473,13 +473,6 @@
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/categories/python/</loc>
-    <lastmod>2024-10-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://yccoin.github.io/categories/tools/</loc>
     <lastmod>2024-10-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -502,6 +495,13 @@
   
   <url>
     <loc>https://yccoin.github.io/categories/mssql/</loc>
+    <lastmod>2024-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yccoin.github.io/categories/python/</loc>
     <lastmod>2024-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

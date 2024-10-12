@@ -1,29 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>ASP程序代码使用Microsoft.XMLHTTP对象请求https时出错解决</title>
-    <url>/2024/09/06/ASP%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81%E4%BD%BF%E7%94%A8Microsoft-XMLHTTP%E5%AF%B9%E8%B1%A1%E8%AF%B7%E6%B1%82https%E6%97%B6%E5%87%BA%E9%94%99%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[<p>asp启用https以后后台更新内容报错<br><img src="/2024/09/06/ASP%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81%E4%BD%BF%E7%94%A8Microsoft-XMLHTTP%E5%AF%B9%E8%B1%A1%E8%AF%B7%E6%B1%82https%E6%97%B6%E5%87%BA%E9%94%99%E8%A7%A3%E5%86%B3/20240906-132522.png"></p>
-<span id="more"></span>
-
-<p>出错程序代码示例：</p>
-<figure class="highlight vbscript"><table><tr><td class="code"><pre><span class="line">strUrl = <span class="string">&quot;https://www.xxx.com/xxx.asp?id=11&quot;</span></span><br><span class="line"><span class="keyword">dim</span> objXmlHttp</span><br><span class="line"><span class="keyword">set</span> objXmlHttp = <span class="built_in">Server</span>.<span class="built_in">CreateObject</span>(<span class="string">&quot;Microsoft.XMLHTTP&quot;</span>) </span><br><span class="line">objXmlHttp.open <span class="string">&quot;GET&quot;</span>,strUrl,<span class="literal">False</span>        </span><br><span class="line">objXmlHttp.send()</span><br></pre></td></tr></table></figure>
-<p>解决：更换Microsoft.XMLHTTP，使用“WinHttp.WinHttpRequest.5.1”，即修改对应程序文件代码：</p>
-<figure class="highlight vbscript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> objXmlHttp = <span class="built_in">Server</span>.<span class="built_in">CreateObject</span>(<span class="string">&quot;Microsoft.XMLHTTP&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>改为：</p>
-<figure class="highlight vbscript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Set</span> objXmlHttp= <span class="built_in">Server</span>.<span class="built_in">CreateObject</span>(<span class="string">&quot;WinHttp.WinHttpRequest.5.1&quot;</span>)</span><br><span class="line">objXmlHttp.<span class="keyword">option</span>(<span class="number">9</span>) = <span class="number">2720</span></span><br></pre></td></tr></table></figure>
-<p>或者改为</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="attribute">http</span>=Server.createobject(&quot;MSXML2.ServerXMLHTTP&quot;)</span><br></pre></td></tr></table></figure>
-<p>保存后即可。<br>如果还有问题考虑<br>在web.config加了一个判断,如果来源ip是127.0.0.1(也就是程序请求域名),就不跳转https,其他普通访客访问就跳转来解决,<br>现在直接访问域名能跳转https,后台也能生成静态页面</p>
-]]></content>
-      <categories>
-        <category>software</category>
-      </categories>
-      <tags>
-        <tag>software</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux文件系统预留空间</title>
     <url>/2024/05/10/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A2%84%E7%95%99%E7%A9%BA%E9%97%B4/</url>
     <content><![CDATA[<blockquote>
@@ -50,6 +27,29 @@
       </categories>
       <tags>
         <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ASP程序代码使用Microsoft.XMLHTTP对象请求https时出错解决</title>
+    <url>/2024/09/06/ASP%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81%E4%BD%BF%E7%94%A8Microsoft-XMLHTTP%E5%AF%B9%E8%B1%A1%E8%AF%B7%E6%B1%82https%E6%97%B6%E5%87%BA%E9%94%99%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p>asp启用https以后后台更新内容报错<br><img src="/2024/09/06/ASP%E7%A8%8B%E5%BA%8F%E4%BB%A3%E7%A0%81%E4%BD%BF%E7%94%A8Microsoft-XMLHTTP%E5%AF%B9%E8%B1%A1%E8%AF%B7%E6%B1%82https%E6%97%B6%E5%87%BA%E9%94%99%E8%A7%A3%E5%86%B3/20240906-132522.png"></p>
+<span id="more"></span>
+
+<p>出错程序代码示例：</p>
+<figure class="highlight vbscript"><table><tr><td class="code"><pre><span class="line">strUrl = <span class="string">&quot;https://www.xxx.com/xxx.asp?id=11&quot;</span></span><br><span class="line"><span class="keyword">dim</span> objXmlHttp</span><br><span class="line"><span class="keyword">set</span> objXmlHttp = <span class="built_in">Server</span>.<span class="built_in">CreateObject</span>(<span class="string">&quot;Microsoft.XMLHTTP&quot;</span>) </span><br><span class="line">objXmlHttp.open <span class="string">&quot;GET&quot;</span>,strUrl,<span class="literal">False</span>        </span><br><span class="line">objXmlHttp.send()</span><br></pre></td></tr></table></figure>
+<p>解决：更换Microsoft.XMLHTTP，使用“WinHttp.WinHttpRequest.5.1”，即修改对应程序文件代码：</p>
+<figure class="highlight vbscript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> objXmlHttp = <span class="built_in">Server</span>.<span class="built_in">CreateObject</span>(<span class="string">&quot;Microsoft.XMLHTTP&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>改为：</p>
+<figure class="highlight vbscript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">Set</span> objXmlHttp= <span class="built_in">Server</span>.<span class="built_in">CreateObject</span>(<span class="string">&quot;WinHttp.WinHttpRequest.5.1&quot;</span>)</span><br><span class="line">objXmlHttp.<span class="keyword">option</span>(<span class="number">9</span>) = <span class="number">2720</span></span><br></pre></td></tr></table></figure>
+<p>或者改为</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="attribute">http</span>=Server.createobject(&quot;MSXML2.ServerXMLHTTP&quot;)</span><br></pre></td></tr></table></figure>
+<p>保存后即可。<br>如果还有问题考虑<br>在web.config加了一个判断,如果来源ip是127.0.0.1(也就是程序请求域名),就不跳转https,其他普通访客访问就跳转来解决,<br>现在直接访问域名能跳转https,后台也能生成静态页面</p>
+]]></content>
+      <categories>
+        <category>software</category>
+      </categories>
+      <tags>
+        <tag>software</tag>
       </tags>
   </entry>
   <entry>
@@ -678,57 +678,6 @@ fi
       </tags>
   </entry>
   <entry>
-    <title>多线程，多进程，携程，异步</title>
-    <url>/2023/12/18/%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%8C%E6%90%BA%E7%A8%8B%EF%BC%8C%E5%BC%82%E6%AD%A5/</url>
-    <content><![CDATA[<h4 id="multiprocessing-多进程"><a href="#multiprocessing-多进程" class="headerlink" title="multiprocessing 多进程"></a>multiprocessing 多进程</h4><blockquote>
-<p>multiprocessing是一个用于产生多进程的包，与threading模块的API类似。multiprocessing既可以实现本地的多进程，也可以实现远程的多进程。通过使用多个子进程而非线程可以绕开Python的全局解释器锁(GIL)，同时允许在多种系统平台使用</p>
-</blockquote>
-<span id="more"></span>
-<h5 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h5><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line">import multiprocessing as mp</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line">def <span class="built_in">info</span>(title):</span><br><span class="line">    <span class="built_in">print</span>(title)</span><br><span class="line">    <span class="built_in">print</span>(f<span class="string">&#x27;父进程:&#123;os.getppid()&#125;&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(f<span class="string">&#x27;进程:&#123;os.getpid()&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">def func(name):</span><br><span class="line">    <span class="built_in">info</span>(<span class="string">&#x27;function func&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>,name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="attribute">__name__</span>==&#x27;__main__&#x27;:</span><br><span class="line">    <span class="built_in">info</span>(<span class="string">&#x27;main line&#x27;</span>)</span><br><span class="line">    <span class="attribute">p</span>=mp.Process(target=func,args=(&#x27;gdd&#x27;,))</span><br><span class="line">    p.start()</span><br><span class="line">    p.join()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>在Python中，进程是通过multiprocessing多进程模块来创建的，multiprocessing模块提供了⼀个Process类来创建进程对象。Process类可以单独调用，也可以继承使用。主要操作如下：  </p>
-<ol>
-<li>Process.start() 启动子进程</li>
-<li>Process.join() 等待子进程结束(阻塞等待)</li>
-<li>Process.is_alive() 判断子进程是否在运行(运行中返回True)</li>
-<li>Process.close() 结束子进程(不推荐使用，会抛出异常)<br>根据不同的平台， multiprocessing支持三种启动进程的方法。这些启动方法有:  </li>
-<li>spawn:父进程会启动一个全新的Python解释器进程。子进程将只继承那些运行进程对象的run()方法所必需的资源。 特别地，来自父进程的非必需文件描述符和句柄将不会被继承。 使用此方法启动进程相比使用fork或 forkserver要慢上许多。可在Unix和Windows上使用。 Windows上的默认设置</li>
-<li>fork:父进程使用os.fork()来产生Python解释器分叉。子进程在开始时实际上与父进程相同。父进程的所有资源都由子进程继承。请注意，安全分叉多线程进程是棘手的。只存在于Unix。Unix中的默认值</li>
-<li>forkserver:程序启动并选择forkserver启动方法时，将启动服务器进程。从那时起，每当需要一个新进程时，父进程就会连接到服务器并请求它分叉一个新进程。分叉服务器进程是单线程的，因此使用os.fork()是安全的。没有不必要的资源被继承。可在Unix平台上使用，支持通过Unix管道传递文件描述符<br>要选择一个启动方法，你应该在主模块的if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘子句中调用 set_start_method()。  <figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    multiprocessing<span class="selector-class">.set_start_method</span>(<span class="string">&#x27;spawn&#x27;</span>)</span><br><span class="line">    <span class="built_in">info</span>(<span class="string">&#x27;main line&#x27;</span>)</span><br><span class="line">    <span class="selector-tag">p</span> = <span class="built_in">Process</span>(target=func, args=(<span class="string">&#x27;gdd&#x27;</span>,))</span><br><span class="line">    <span class="selector-tag">p</span><span class="selector-class">.start</span>()</span><br><span class="line">    <span class="selector-tag">p</span><span class="selector-class">.join</span>()</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h5 id="POOL"><a href="#POOL" class="headerlink" title="POOL"></a>POOL</h5><blockquote>
-<p>当需要创建的⼦进程数量不多时， 可以直接利⽤multiprocessing.Process动态生成多个进程， 但如果要创建很多进程时，⼿动创建的话⼯作量会非常大，此时就可以⽤到multiprocessing模块提供的Pool去创建一个进程池。当需要创建的⼦进程数量不多时， 可以直接利⽤multiprocessing.Process动态生成多个进程， 但如果要创建很多进程时，⼿动创建的话⼯作量会非常大，此时就可以⽤到multiprocessing模块提供的Pool去创建一个进程池。使用进程池的好处就是可以，创建有限的进程来自动并行处理大量的任务。Pool类的主要方法:</p>
-</blockquote>
-<ol>
-<li>Pool.apply()启动任务(阻塞等待任务完成)</li>
-<li>Pool.map()批量启动任务(阻塞等待所有任务完成)</li>
-<li>Pool.apply_async()启动任务(非阻塞)</li>
-<li>Pool.map_async()批量启动任务(非阻塞)</li>
-</ol>
-<h5 id="QUEUE"><a href="#QUEUE" class="headerlink" title="QUEUE"></a>QUEUE</h5><blockquote>
-<p>Queue创建共享的进程队列，是多进程安全的队列，可以使用Queue实现多进程之间的数据传递。通常在生产者消费者模式中经常使用，一个进程向队列中写数据，另一个进程从队列中取数据。无论主进程或子进程，都能访问到队列，放进去的对象都经过了深拷贝</p>
-</blockquote>
-<p>Queue([maxsize]:返回一个使用一个管道和少量锁和信号量实现的共享队列实例。当一个进程将一个对象放进队列中时，一个写入线程会启动并将对象从缓冲区写入管道中。Queue模块的方法有：  </p>
-<ol>
-<li>qsize()：返回当前队列包含的消息数量；</li>
-<li>empty()：如果队列为空，返回True，反之False ；</li>
-<li>full()：如果队列满了，返回True,反之False；</li>
-<li>get():获取队列中的一条消息，然后将其从列队中移除，可传参超时时长；</li>
-<li>get_nowait()：相当Queue.get(False),取不到值时触发异常：Empty；</li>
-<li>put():将一个值添加进数列，可传参超时时长；</li>
-<li>put_nowait():相当于Queue.get(False),当队列满了时报错：Full；</li>
-</ol>
-<h5 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h5><h6 id="进程锁"><a href="#进程锁" class="headerlink" title="进程锁"></a>进程锁</h6><blockquote>
-<p>进程锁和线程锁的用法基本一致。进程锁的诞生是为了避免多进程之间抢占共享数据，进而造成多进程之间混乱修改共享内存的局面</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何在 Linux/Unix/Windows 中发现隐藏的进程和端口</title>
     <url>/2023/12/15/%E5%A6%82%E4%BD%95%E5%9C%A8%20LinuxUnixWindows%20%E4%B8%AD%E5%8F%91%E7%8E%B0%E9%9A%90%E8%97%8F%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%AB%AF%E5%8F%A3/</url>
     <content><![CDATA[<h4 id="如何在-Linux-Unix-Windows-中发现隐藏的进程和端口"><a href="#如何在-Linux-Unix-Windows-中发现隐藏的进程和端口" class="headerlink" title="如何在 Linux&#x2F;Unix&#x2F;Windows 中发现隐藏的进程和端口"></a>如何在 Linux&#x2F;Unix&#x2F;Windows 中发现隐藏的进程和端口</h4><span id="more"></span>
@@ -765,6 +714,22 @@ fi
       </tags>
   </entry>
   <entry>
+    <title>宝塔任务计划不执行原因排查</title>
+    <url>/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/</url>
+    <content><![CDATA[<blockquote>
+<p>宝塔设置任务计划以后不执行，手动执行是成功的</p>
+</blockquote>
+<span id="more"></span>
+<h4 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h4><p>vi &#x2F;var&#x2F;log&#x2F;cron 查看任务计划执行日志如下<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132221.png"><br><strong>(root) FAILED to authorize user with PAM (Authentication token is no longer valid; new one required)</strong><br>发现是认证过期了，通过chage -l root可以查看到如下内容<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132530.png"><br>如果不需要设置过期可以使用chage -M 99999 root为永不过期<br>修改密码以后再测试cron执行成功了</p>
+]]></content>
+      <categories>
+        <category>software</category>
+      </categories>
+      <tags>
+        <tag>software</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>宝塔面板环境站点开启CDN后如何获取真实IP地址（多设置方法）</title>
     <url>/2024/09/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%8E%AF%E5%A2%83%E7%AB%99%E7%82%B9%E5%BC%80%E5%90%AFCDN%E5%90%8E%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80%EF%BC%88%E5%A4%9A%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%89/</url>
     <content><![CDATA[<blockquote>
@@ -791,22 +756,6 @@ fi
       </categories>
       <tags>
         <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>宝塔任务计划不执行原因排查</title>
-    <url>/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/</url>
-    <content><![CDATA[<blockquote>
-<p>宝塔设置任务计划以后不执行，手动执行是成功的</p>
-</blockquote>
-<span id="more"></span>
-<h4 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h4><p>vi &#x2F;var&#x2F;log&#x2F;cron 查看任务计划执行日志如下<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132221.png"><br><strong>(root) FAILED to authorize user with PAM (Authentication token is no longer valid; new one required)</strong><br>发现是认证过期了，通过chage -l root可以查看到如下内容<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132530.png"><br>如果不需要设置过期可以使用chage -M 99999 root为永不过期<br>修改密码以后再测试cron执行成功了</p>
-]]></content>
-      <categories>
-        <category>software</category>
-      </categories>
-      <tags>
-        <tag>software</tag>
       </tags>
   </entry>
   <entry>
@@ -862,6 +811,57 @@ fi
       </categories>
       <tags>
         <tag>mssql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>多线程，多进程，携程，异步</title>
+    <url>/2023/12/18/%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%8C%E6%90%BA%E7%A8%8B%EF%BC%8C%E5%BC%82%E6%AD%A5/</url>
+    <content><![CDATA[<h4 id="multiprocessing-多进程"><a href="#multiprocessing-多进程" class="headerlink" title="multiprocessing 多进程"></a>multiprocessing 多进程</h4><blockquote>
+<p>multiprocessing是一个用于产生多进程的包，与threading模块的API类似。multiprocessing既可以实现本地的多进程，也可以实现远程的多进程。通过使用多个子进程而非线程可以绕开Python的全局解释器锁(GIL)，同时允许在多种系统平台使用</p>
+</blockquote>
+<span id="more"></span>
+<h5 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h5><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line">import multiprocessing as mp</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line">def <span class="built_in">info</span>(title):</span><br><span class="line">    <span class="built_in">print</span>(title)</span><br><span class="line">    <span class="built_in">print</span>(f<span class="string">&#x27;父进程:&#123;os.getppid()&#125;&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(f<span class="string">&#x27;进程:&#123;os.getpid()&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">def func(name):</span><br><span class="line">    <span class="built_in">info</span>(<span class="string">&#x27;function func&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>,name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="attribute">__name__</span>==&#x27;__main__&#x27;:</span><br><span class="line">    <span class="built_in">info</span>(<span class="string">&#x27;main line&#x27;</span>)</span><br><span class="line">    <span class="attribute">p</span>=mp.Process(target=func,args=(&#x27;gdd&#x27;,))</span><br><span class="line">    p.start()</span><br><span class="line">    p.join()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在Python中，进程是通过multiprocessing多进程模块来创建的，multiprocessing模块提供了⼀个Process类来创建进程对象。Process类可以单独调用，也可以继承使用。主要操作如下：  </p>
+<ol>
+<li>Process.start() 启动子进程</li>
+<li>Process.join() 等待子进程结束(阻塞等待)</li>
+<li>Process.is_alive() 判断子进程是否在运行(运行中返回True)</li>
+<li>Process.close() 结束子进程(不推荐使用，会抛出异常)<br>根据不同的平台， multiprocessing支持三种启动进程的方法。这些启动方法有:  </li>
+<li>spawn:父进程会启动一个全新的Python解释器进程。子进程将只继承那些运行进程对象的run()方法所必需的资源。 特别地，来自父进程的非必需文件描述符和句柄将不会被继承。 使用此方法启动进程相比使用fork或 forkserver要慢上许多。可在Unix和Windows上使用。 Windows上的默认设置</li>
+<li>fork:父进程使用os.fork()来产生Python解释器分叉。子进程在开始时实际上与父进程相同。父进程的所有资源都由子进程继承。请注意，安全分叉多线程进程是棘手的。只存在于Unix。Unix中的默认值</li>
+<li>forkserver:程序启动并选择forkserver启动方法时，将启动服务器进程。从那时起，每当需要一个新进程时，父进程就会连接到服务器并请求它分叉一个新进程。分叉服务器进程是单线程的，因此使用os.fork()是安全的。没有不必要的资源被继承。可在Unix平台上使用，支持通过Unix管道传递文件描述符<br>要选择一个启动方法，你应该在主模块的if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘子句中调用 set_start_method()。  <figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    multiprocessing<span class="selector-class">.set_start_method</span>(<span class="string">&#x27;spawn&#x27;</span>)</span><br><span class="line">    <span class="built_in">info</span>(<span class="string">&#x27;main line&#x27;</span>)</span><br><span class="line">    <span class="selector-tag">p</span> = <span class="built_in">Process</span>(target=func, args=(<span class="string">&#x27;gdd&#x27;</span>,))</span><br><span class="line">    <span class="selector-tag">p</span><span class="selector-class">.start</span>()</span><br><span class="line">    <span class="selector-tag">p</span><span class="selector-class">.join</span>()</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h5 id="POOL"><a href="#POOL" class="headerlink" title="POOL"></a>POOL</h5><blockquote>
+<p>当需要创建的⼦进程数量不多时， 可以直接利⽤multiprocessing.Process动态生成多个进程， 但如果要创建很多进程时，⼿动创建的话⼯作量会非常大，此时就可以⽤到multiprocessing模块提供的Pool去创建一个进程池。当需要创建的⼦进程数量不多时， 可以直接利⽤multiprocessing.Process动态生成多个进程， 但如果要创建很多进程时，⼿动创建的话⼯作量会非常大，此时就可以⽤到multiprocessing模块提供的Pool去创建一个进程池。使用进程池的好处就是可以，创建有限的进程来自动并行处理大量的任务。Pool类的主要方法:</p>
+</blockquote>
+<ol>
+<li>Pool.apply()启动任务(阻塞等待任务完成)</li>
+<li>Pool.map()批量启动任务(阻塞等待所有任务完成)</li>
+<li>Pool.apply_async()启动任务(非阻塞)</li>
+<li>Pool.map_async()批量启动任务(非阻塞)</li>
+</ol>
+<h5 id="QUEUE"><a href="#QUEUE" class="headerlink" title="QUEUE"></a>QUEUE</h5><blockquote>
+<p>Queue创建共享的进程队列，是多进程安全的队列，可以使用Queue实现多进程之间的数据传递。通常在生产者消费者模式中经常使用，一个进程向队列中写数据，另一个进程从队列中取数据。无论主进程或子进程，都能访问到队列，放进去的对象都经过了深拷贝</p>
+</blockquote>
+<p>Queue([maxsize]:返回一个使用一个管道和少量锁和信号量实现的共享队列实例。当一个进程将一个对象放进队列中时，一个写入线程会启动并将对象从缓冲区写入管道中。Queue模块的方法有：  </p>
+<ol>
+<li>qsize()：返回当前队列包含的消息数量；</li>
+<li>empty()：如果队列为空，返回True，反之False ；</li>
+<li>full()：如果队列满了，返回True,反之False；</li>
+<li>get():获取队列中的一条消息，然后将其从列队中移除，可传参超时时长；</li>
+<li>get_nowait()：相当Queue.get(False),取不到值时触发异常：Empty；</li>
+<li>put():将一个值添加进数列，可传参超时时长；</li>
+<li>put_nowait():相当于Queue.get(False),当队列满了时报错：Full；</li>
+</ol>
+<h5 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h5><h6 id="进程锁"><a href="#进程锁" class="headerlink" title="进程锁"></a>进程锁</h6><blockquote>
+<p>进程锁和线程锁的用法基本一致。进程锁的诞生是为了避免多进程之间抢占共享数据，进而造成多进程之间混乱修改共享内存的局面</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>

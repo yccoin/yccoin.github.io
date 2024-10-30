@@ -57,7 +57,7 @@ https://yccoin.github.io/categories/shell/
 https://yccoin.github.io/categories/system/
 https://yccoin.github.io/categories/windows/
 https://yccoin.github.io/categories/python/
-https://yccoin.github.io/categories/ngnix/
 https://yccoin.github.io/categories/tools/
+https://yccoin.github.io/categories/ngnix/
 https://yccoin.github.io/categories/bat/
 https://yccoin.github.io/categories/mssql/

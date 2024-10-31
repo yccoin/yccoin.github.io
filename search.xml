@@ -522,6 +522,22 @@ $sent_http_transfer_encoding```
       </tags>
   </entry>
   <entry>
+    <title>shell 脚本整理</title>
+    <url>/2023/12/29/shell%20%E8%84%9A%E6%9C%AC%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<blockquote>
+<p>整理一些日常shell脚本</p>
+</blockquote>
+<span id="more"></span>
+<h6 id="centos-自动同步时间"><a href="#centos-自动同步时间" class="headerlink" title="centos 自动同步时间"></a>centos 自动同步时间</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#author:yc</span></span><br><span class="line"><span class="comment">#自动同步北京时间</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;当前时间:`date`&quot;</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;是否确认更新时间y/n？&quot;</span> st</span><br><span class="line"><span class="keyword">if</span> [ -f /usr/sbin/ntpdate ];<span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;ntpdate已经安装&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        yum install -y ntpdate</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$st</span> = <span class="string">&quot;y&quot;</span> ];<span class="keyword">then</span></span><br><span class="line">        /etc/init.d/iptables stop</span><br><span class="line">        sed -i <span class="string">&quot;/udp -j DROP/i\-A OUTPUT -p udp -m udp --dport 123 -j ACCEPT&quot;</span> /etc/sysconfig/iptables</span><br><span class="line">        /etc/init.d/iptables starta</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ $? -ne 0 ];<span class="keyword">then</span></span><br><span class="line">        ntpdate time2.aliyun.com</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;时间同步成功&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>shell</category>
+      </categories>
+      <tags>
+        <tag>shell</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>shell中${}和()的使用</title>
     <url>/2023/12/15/shell%E4%B8%AD$%7B%7D%E5%92%8C()%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<p>shell中${}和()的使用</p>
@@ -622,22 +638,6 @@ fi
 [ STRING1 != STRING2 ] 如果字符串不相同则为真 ；
 [ STRING1 ]　 如果字符串不为空则为真,与-n类似
 </code></pre>
-]]></content>
-      <categories>
-        <category>shell</category>
-      </categories>
-      <tags>
-        <tag>shell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>shell 脚本整理</title>
-    <url>/2023/12/29/shell%20%E8%84%9A%E6%9C%AC%E6%95%B4%E7%90%86/</url>
-    <content><![CDATA[<blockquote>
-<p>整理一些日常shell脚本</p>
-</blockquote>
-<span id="more"></span>
-<h6 id="centos-自动同步时间"><a href="#centos-自动同步时间" class="headerlink" title="centos 自动同步时间"></a>centos 自动同步时间</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#author:yc</span></span><br><span class="line"><span class="comment">#自动同步北京时间</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;当前时间:`date`&quot;</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;是否确认更新时间y/n？&quot;</span> st</span><br><span class="line"><span class="keyword">if</span> [ -f /usr/sbin/ntpdate ];<span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;ntpdate已经安装&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        yum install -y ntpdate</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$st</span> = <span class="string">&quot;y&quot;</span> ];<span class="keyword">then</span></span><br><span class="line">        /etc/init.d/iptables stop</span><br><span class="line">        sed -i <span class="string">&quot;/udp -j DROP/i\-A OUTPUT -p udp -m udp --dport 123 -j ACCEPT&quot;</span> /etc/sysconfig/iptables</span><br><span class="line">        /etc/init.d/iptables starta</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ $? -ne 0 ];<span class="keyword">then</span></span><br><span class="line">        ntpdate time2.aliyun.com</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;时间同步成功&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>shell</category>

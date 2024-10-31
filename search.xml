@@ -522,22 +522,6 @@ $sent_http_transfer_encoding```
       </tags>
   </entry>
   <entry>
-    <title>shell 脚本整理</title>
-    <url>/2023/12/29/shell%20%E8%84%9A%E6%9C%AC%E6%95%B4%E7%90%86/</url>
-    <content><![CDATA[<blockquote>
-<p>整理一些日常shell脚本</p>
-</blockquote>
-<span id="more"></span>
-<h6 id="centos-自动同步时间"><a href="#centos-自动同步时间" class="headerlink" title="centos 自动同步时间"></a>centos 自动同步时间</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#author:yc</span></span><br><span class="line"><span class="comment">#自动同步北京时间</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;当前时间:`date`&quot;</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;是否确认更新时间y/n？&quot;</span> st</span><br><span class="line"><span class="keyword">if</span> [ -f /usr/sbin/ntpdate ];<span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;ntpdate已经安装&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        yum install -y ntpdate</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$st</span> = <span class="string">&quot;y&quot;</span> ];<span class="keyword">then</span></span><br><span class="line">        /etc/init.d/iptables stop</span><br><span class="line">        sed -i <span class="string">&quot;/udp -j DROP/i\-A OUTPUT -p udp -m udp --dport 123 -j ACCEPT&quot;</span> /etc/sysconfig/iptables</span><br><span class="line">        /etc/init.d/iptables starta</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ $? -ne 0 ];<span class="keyword">then</span></span><br><span class="line">        ntpdate time2.aliyun.com</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;时间同步成功&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>shell</category>
-      </categories>
-      <tags>
-        <tag>shell</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>shell中${}和()的使用</title>
     <url>/2023/12/15/shell%E4%B8%AD$%7B%7D%E5%92%8C()%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<p>shell中${}和()的使用</p>
@@ -638,6 +622,22 @@ fi
 [ STRING1 != STRING2 ] 如果字符串不相同则为真 ；
 [ STRING1 ]　 如果字符串不为空则为真,与-n类似
 </code></pre>
+]]></content>
+      <categories>
+        <category>shell</category>
+      </categories>
+      <tags>
+        <tag>shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>shell 脚本整理</title>
+    <url>/2023/12/29/shell%20%E8%84%9A%E6%9C%AC%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<blockquote>
+<p>整理一些日常shell脚本</p>
+</blockquote>
+<span id="more"></span>
+<h6 id="centos-自动同步时间"><a href="#centos-自动同步时间" class="headerlink" title="centos 自动同步时间"></a>centos 自动同步时间</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#author:yc</span></span><br><span class="line"><span class="comment">#自动同步北京时间</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;当前时间:`date`&quot;</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;是否确认更新时间y/n？&quot;</span> st</span><br><span class="line"><span class="keyword">if</span> [ -f /usr/sbin/ntpdate ];<span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;ntpdate已经安装&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        yum install -y ntpdate</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$st</span> = <span class="string">&quot;y&quot;</span> ];<span class="keyword">then</span></span><br><span class="line">        /etc/init.d/iptables stop</span><br><span class="line">        sed -i <span class="string">&quot;/udp -j DROP/i\-A OUTPUT -p udp -m udp --dport 123 -j ACCEPT&quot;</span> /etc/sysconfig/iptables</span><br><span class="line">        /etc/init.d/iptables starta</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ $? -ne 0 ];<span class="keyword">then</span></span><br><span class="line">        ntpdate time2.aliyun.com</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;时间同步成功&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>shell</category>
@@ -948,6 +948,25 @@ fi
       </tags>
   </entry>
   <entry>
+    <title>装饰器</title>
+    <url>/2023/12/18/%E8%A3%85%E9%A5%B0%E5%99%A8/</url>
+    <content><![CDATA[<blockquote>
+<p>python中的装饰器(decorator)一般采用语法糖的形式，是一种语法格式。<br>比如：@classmethod，@staticmethod，@property，@xxx.setter，@wraps()，@func_name等都是python中的装饰器</p>
+</blockquote>
+<span id="more"></span>
+<p>装饰器本质上是一个Python函数(其实就是闭包)，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。装饰器用于有以下场景，比如:插入日志、性能测试、事务处理、缓存、权限校验等场景</p>
+<hr>
+<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">import <span class="selector-tag">time</span></span><br><span class="line">import threading</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">how_much_time</span>(func):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;how_much_time&quot;</span>)</span><br><span class="line">    def <span class="built_in">inner</span>():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;how_much_time start&quot;</span>)</span><br><span class="line">        start_time = time.<span class="built_in">time</span>()</span><br><span class="line">        <span class="built_in">func</span>()</span><br><span class="line">        end_time = time.<span class="built_in">time</span>()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;一共花了&#123;0&#125;时间&quot;</span>.<span class="built_in">format</span>(end_time - start_time))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;how_much_time end&quot;</span>)</span><br><span class="line">    return inner</span><br><span class="line"></span><br><span class="line">def <span class="built_in">another_info</span>(func):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;another_info&quot;</span>)</span><br><span class="line">    def <span class="built_in">inner_1</span>():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;another_info start&quot;</span>)</span><br><span class="line">        <span class="built_in">func</span>()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;another_info end&quot;</span>)</span><br><span class="line">    return inner_1</span><br><span class="line"></span><br><span class="line">@how_much_time</span><br><span class="line">@another_info</span><br><span class="line">def <span class="built_in">sleep_5</span>():</span><br><span class="line">    time.<span class="built_in">sleep</span>(<span class="number">5</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;%d结束了&quot;</span> % (<span class="number">5</span>, ))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">t1=threading.<span class="built_in">Thread</span>(target=sleep_5)</span><br><span class="line">t1.<span class="built_in">start</span>()</span><br></pre></td></tr></table></figure>
+<p>执行结果如下：<br>another_info<br>how_much_time<br>how_much_time start<br>another_info start<br>5结束了<br>another_info end<br>一共花了5.003912687301636时间<br>how_much_time end</p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>解决宝塔面板启用SSL后Https窜站问题</title>
     <url>/2023/12/15/%E8%A7%A3%E5%86%B3%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E5%90%AF%E7%94%A8SSL%E5%90%8EHttps%E7%AA%9C%E7%AB%99%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p>解决宝塔面板启用SSL后Https窜站问题</p>
@@ -974,25 +993,6 @@ fi
       </categories>
       <tags>
         <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>装饰器</title>
-    <url>/2023/12/18/%E8%A3%85%E9%A5%B0%E5%99%A8/</url>
-    <content><![CDATA[<blockquote>
-<p>python中的装饰器(decorator)一般采用语法糖的形式，是一种语法格式。<br>比如：@classmethod，@staticmethod，@property，@xxx.setter，@wraps()，@func_name等都是python中的装饰器</p>
-</blockquote>
-<span id="more"></span>
-<p>装饰器本质上是一个Python函数(其实就是闭包)，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。装饰器用于有以下场景，比如:插入日志、性能测试、事务处理、缓存、权限校验等场景</p>
-<hr>
-<figure class="highlight scss"><table><tr><td class="code"><pre><span class="line">import <span class="selector-tag">time</span></span><br><span class="line">import threading</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def <span class="built_in">how_much_time</span>(func):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;how_much_time&quot;</span>)</span><br><span class="line">    def <span class="built_in">inner</span>():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;how_much_time start&quot;</span>)</span><br><span class="line">        start_time = time.<span class="built_in">time</span>()</span><br><span class="line">        <span class="built_in">func</span>()</span><br><span class="line">        end_time = time.<span class="built_in">time</span>()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;一共花了&#123;0&#125;时间&quot;</span>.<span class="built_in">format</span>(end_time - start_time))</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;how_much_time end&quot;</span>)</span><br><span class="line">    return inner</span><br><span class="line"></span><br><span class="line">def <span class="built_in">another_info</span>(func):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;another_info&quot;</span>)</span><br><span class="line">    def <span class="built_in">inner_1</span>():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;another_info start&quot;</span>)</span><br><span class="line">        <span class="built_in">func</span>()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;another_info end&quot;</span>)</span><br><span class="line">    return inner_1</span><br><span class="line"></span><br><span class="line">@how_much_time</span><br><span class="line">@another_info</span><br><span class="line">def <span class="built_in">sleep_5</span>():</span><br><span class="line">    time.<span class="built_in">sleep</span>(<span class="number">5</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;%d结束了&quot;</span> % (<span class="number">5</span>, ))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">t1=threading.<span class="built_in">Thread</span>(target=sleep_5)</span><br><span class="line">t1.<span class="built_in">start</span>()</span><br></pre></td></tr></table></figure>
-<p>执行结果如下：<br>another_info<br>how_much_time<br>how_much_time start<br>another_info start<br>5结束了<br>another_info end<br>一共花了5.003912687301636时间<br>how_much_time end</p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
       </tags>
   </entry>
   <entry>

@@ -24,6 +24,107 @@
       </tags>
   </entry>
   <entry>
+    <title>Nginx内置变量</title>
+    <url>/2023/12/15/Nginx%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F/</url>
+    <content><![CDATA[<h2 id="Nginx内置变量"><a href="#Nginx内置变量" class="headerlink" title="Nginx内置变量"></a>Nginx内置变量</h2><span id="more"></span>
+<pre><code class="$args">$query_string            #同 $args
+$arg_NAME                #GET请求中NAME的值
+$is_args                 #如果请求中有参数，值为&quot;?&quot;，否则为空字符串
+$uri                     #请求中的当前URI(不带请求参数，参数位于$args)，可以不同于浏览器传递的$request_uri的值，它可以通过内部重定向，或者使用index指令进行修改，$uri不包含主机名，如&quot;/foo/bar.html&quot;。
+$document_uri            #同 $uri
+$document_root           #当前请求的文档根目录或别名
+$host                    #优先级：HTTP请求行的主机名&gt;&quot;HOST&quot;请求头字段&gt;符合请求的服务器名
+$hostname                #主机名
+$https                   #如果开启了SSL安全模式，值为&quot;on&quot;，否则为空字符串。
+$binary_remote_addr      #客户端地址的二进制形式，固定长度为4个字节
+$body_bytes_sent         #传输给客户端的字节数，响应头不计算在内；这个变量和Apache的mod_log_config模块中的&quot;%B&quot;参数保持兼容
+$bytes_sent              #传输给客户端的字节数
+$connection              #TCP连接的序列号
+$connection_requests     #TCP连接当前的请求数量
+$content_length          #&quot;Content-Length&quot; 请求头字段
+$content_type            #&quot;Content-Type&quot; 请求头字段
+$cookie_name             #cookie名称
+$limit_rate              #用于设置响应的速度限制
+$msec                    #当前的Unix时间戳
+$nginx_version           #nginx版本
+$pid                     #工作进程的PID
+$pipe                    #如果请求来自管道通信，值为&quot;p&quot;，否则为&quot;.&quot;
+$proxy_protocol_addr     #获取代理访问服务器的客户端地址，如果是直接访问，该值为空字符串
+$realpath_root           #当前请求的文档根目录或别名的真实路径，会将所有符号连接转换为真实路径
+$remote_addr             #客户端地址
+$remote_port             #客户端端口
+$remote_user             #用于HTTP基础认证服务的用户名
+$request                 #代表客户端的请求地址
+$request_body            #客户端的请求主体：此变量可在location中使用，将请求主体通过proxy_pass，fastcgi_pass，uwsgi_pass和scgi_pass传递给下一级的代理服务器
+$request_body_file       #将客户端请求主体保存在临时文件中。文件处理结束后，此文件需删除。如果需要之一开启此功能，需要设置client_body_in_file_only。如果将次文件传递给后端的代理服务器，需要禁用request body，即设置proxy_pass_request_body off，fastcgi_pass_request_body off，uwsgi_pass_request_body off，or scgi_pass_request_body off
+$request_completion      #如果请求成功，值为&quot;OK&quot;，如果请求未完成或者请求不是一个范围请求的最后一部分，则为空
+$request_filename        #当前连接请求的文件路径，由root或alias指令与URI请求生成
+$request_length          #请求的长度 (包括请求的地址，http请求头和请求主体)
+$request_method          #HTTP请求方法，通常为&quot;GET&quot;或&quot;POST&quot;
+$request_time            #处理客户端请求使用的时间; 从读取客户端的第一个字节开始计时
+$request_uri             #这个变量等于包含一些客户端请求参数的原始URI，它无法修改，请查看$uri更改或重写URI，不包含主机名，例如：&quot;/cnphp/test.php?arg=freemouse&quot;
+$scheme                  #请求使用的Web协议，&quot;http&quot; 或 &quot;https&quot;
+$server_addr             #服务器端地址，需要注意的是：为了避免访问linux系统内核，应将ip地址提前设置在配置文件中
+$server_name             #服务器名
+$server_port             #服务器端口
+$server_protocol         #服务器的HTTP版本，通常为 &quot;HTTP/1.0&quot; 或 &quot;HTTP/1.1&quot;
+$status                  #HTTP响应代码
+$time_iso8601            #服务器时间的ISO 8610格式
+$time_local              #服务器时间（LOG Format 格式）
+$cookie_NAME             #客户端请求Header头中的cookie变量，前缀&quot;$cookie_&quot;加上cookie名称的变量，该变量的值即为cookie名称的值
+$http_NAME               #匹配任意请求头字段；变量名中的后半部分NAME可以替换成任意请求头字段，如在配置文件中需要获取http请求头：&quot;Accept-Language&quot;，$http_accept_language即可
+$http_cookie
+$http_post
+$http_referer
+$http_user_agent
+$http_x_forwarded_for
+$sent_http_NAME          #可以设置任意http响应头字段；变量名中的后半部分NAME可以替换成任意响应头字段，如需要设置响应头Content-length，$sent_http_content_length即可
+$sent_http_cache_control
+$sent_http_connection
+$sent_http_content_type
+$sent_http_keep_alive
+$sent_http_last_modified
+$sent_http_location
+$sent_http_transfer_encoding```
+</code></pre>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux文件系统预留空间</title>
+    <url>/2024/05/10/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A2%84%E7%95%99%E7%A9%BA%E9%97%B4/</url>
+    <content><![CDATA[<blockquote>
+<p>如果磁盘是ext2，ext3，ext4文件格式，系统默认会为磁盘保留5%的预留空间，这样能保证有些关键应用（比如数据库）在硬盘满的时候有点余地，不致于马上就 crash，给监控系统和管理员一点时间去察觉。<br>xfs文件格式的磁盘不会划分预留空间</p>
+</blockquote>
+<span id="more"></span>
+
+<p>在Linux系统中，磁盘的可用空间、已用空间和容量之间的关系是相互依赖的，但也可能存在一些差异。主要的原因包括：</p>
+<ul>
+<li>文件系统的格式化和分配：在格式化磁盘并创建文件系统时，会为文件系统分配一部分空间作为文件系统的元数据、inode 表、日志等。这些分配给文件系统的空间将从总容量中减去，因此可用空间会小于磁盘的实际容量。</li>
+<li>保留空间：文件系统通常会保留一部分空间，用于特定操作和系统的需要。这些保留空间用于存储特殊文件、文件系统元数据或者为写入操作提供缓冲空间。因此，这部分空间不包含在可用空间中。</li>
+<li>超级用户权限：磁盘配额和权限设置可能导致某些空间仅对特定的用户或用户组可见和可用。超级用户(root)具有更高的权限，可能可以访问和使用其他用户没有权限的空间。<br>块大小：磁盘上的数据存储以块为单位进行管理。块大小的设置可能导致存储空间的浪费。当一个文件的大小不是块大小的整数倍时，将会浪费部分空间。<br><strong>这些因素导致可用空间、已用空间和容量之间存在差异。要了解更准确的磁盘使用情况，可以使用命令行工具如 df 命令来查看文件系统的实际使用情况，它会提供关于可用空间、已用空间和总容量的详细信息</strong><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">tune2fs -l <span class="regexp">/dev/</span>sda2</span><br></pre></td></tr></table></figure>
+<img src="/2024/05/10/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A2%84%E7%95%99%E7%A9%BA%E9%97%B4/20240510120122.jpg"><br>根据提供的输出，我可以看到以下关于文件系统的预留空间大小的信息：<br>文件系统位于 &#x2F;dev&#x2F;sda2 磁盘分区上。<br>预留块数量为 2555891。<br>块大小为 4096 字节。<br>要计算预留空间的实际大小，您可以使用以下公式：<br>预留空间大小 &#x3D; 预留块数量 × 块大小<br>在这种情况下，预留空间大小 &#x3D; 2555891 × 4096 &#x3D; 10,484,299,136 字节 或 9.77GB。<br>通过这个计算，您可以知道文件系统上的预留空间的实际大小。请注意，这个值是以字节为单位的，如果需要以其他单位表示，可以进行适当的转换。</li>
+</ul>
+<h5 id="如何调整这个预留空间的大小"><a href="#如何调整这个预留空间的大小" class="headerlink" title="如何调整这个预留空间的大小"></a>如何调整这个预留空间的大小</h5><p>使用 tune2fs 命令可以调整文件系统的预留空间大小。预留空间是为了给文件系统保留一些空间供系统管理员使用，在磁盘空间快满的时候防止系统崩溃。<br>以下是通过 tune2fs 命令来调整文件系统预留空间大小的步骤：</p>
+<p>1.打开终端或命令行界面。<br>2.运行以下命令，其中 &#x2F;dev&#x2F;sdX 是文件系统所在的磁盘设备。请将其替换为您实际使用的设备名称。</p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">tune2fs -m &lt;percentage&gt; <span class="regexp">/dev/</span>sdX</span><br></pre></td></tr></table></figure>
+<p>是您想要设置的预留空间的百分比。例如，如果您想要将预留空间设置为 10%，则将 替换为 10。</p>
+<p>3.输入管理员密码并确认命令。<br>4.命令执行成功后，文件系统的预留空间大小将被调整。</p>
+<p>请注意，调整文件系统的预留空间可能会对系统的稳定性和性能产生影响。建议在进行此操作之前备份重要数据，并仔细评估所需的空间和系统需求。<br>此外，不同的文件系统可能具有不同的默认预留空间大小。您可以使用 tune2fs -l 命令查看当前文件系统的预留空间大小，并据此进行调整。</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux 网络错误 TCP:too many orphaned sockets 分析与解决</title>
     <url>/2024/10/12/Linux%20%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF%20TCP%20too%20many%20orphaned%20sockets%20%E5%88%86%E6%9E%90%E4%B8%8E%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[<h5 id="Linux-网络错误-TCP-too-many-orphaned-sockets-分析与解决"><a href="#Linux-网络错误-TCP-too-many-orphaned-sockets-分析与解决" class="headerlink" title="Linux 网络错误 TCP:too many orphaned sockets 分析与解决"></a>Linux 网络错误 TCP:too many orphaned sockets 分析与解决</h5><span id="more"></span>
@@ -104,107 +205,6 @@
       </categories>
       <tags>
         <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux文件系统预留空间</title>
-    <url>/2024/05/10/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A2%84%E7%95%99%E7%A9%BA%E9%97%B4/</url>
-    <content><![CDATA[<blockquote>
-<p>如果磁盘是ext2，ext3，ext4文件格式，系统默认会为磁盘保留5%的预留空间，这样能保证有些关键应用（比如数据库）在硬盘满的时候有点余地，不致于马上就 crash，给监控系统和管理员一点时间去察觉。<br>xfs文件格式的磁盘不会划分预留空间</p>
-</blockquote>
-<span id="more"></span>
-
-<p>在Linux系统中，磁盘的可用空间、已用空间和容量之间的关系是相互依赖的，但也可能存在一些差异。主要的原因包括：</p>
-<ul>
-<li>文件系统的格式化和分配：在格式化磁盘并创建文件系统时，会为文件系统分配一部分空间作为文件系统的元数据、inode 表、日志等。这些分配给文件系统的空间将从总容量中减去，因此可用空间会小于磁盘的实际容量。</li>
-<li>保留空间：文件系统通常会保留一部分空间，用于特定操作和系统的需要。这些保留空间用于存储特殊文件、文件系统元数据或者为写入操作提供缓冲空间。因此，这部分空间不包含在可用空间中。</li>
-<li>超级用户权限：磁盘配额和权限设置可能导致某些空间仅对特定的用户或用户组可见和可用。超级用户(root)具有更高的权限，可能可以访问和使用其他用户没有权限的空间。<br>块大小：磁盘上的数据存储以块为单位进行管理。块大小的设置可能导致存储空间的浪费。当一个文件的大小不是块大小的整数倍时，将会浪费部分空间。<br><strong>这些因素导致可用空间、已用空间和容量之间存在差异。要了解更准确的磁盘使用情况，可以使用命令行工具如 df 命令来查看文件系统的实际使用情况，它会提供关于可用空间、已用空间和总容量的详细信息</strong><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">tune2fs -l <span class="regexp">/dev/</span>sda2</span><br></pre></td></tr></table></figure>
-<img src="/2024/05/10/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A2%84%E7%95%99%E7%A9%BA%E9%97%B4/20240510120122.jpg"><br>根据提供的输出，我可以看到以下关于文件系统的预留空间大小的信息：<br>文件系统位于 &#x2F;dev&#x2F;sda2 磁盘分区上。<br>预留块数量为 2555891。<br>块大小为 4096 字节。<br>要计算预留空间的实际大小，您可以使用以下公式：<br>预留空间大小 &#x3D; 预留块数量 × 块大小<br>在这种情况下，预留空间大小 &#x3D; 2555891 × 4096 &#x3D; 10,484,299,136 字节 或 9.77GB。<br>通过这个计算，您可以知道文件系统上的预留空间的实际大小。请注意，这个值是以字节为单位的，如果需要以其他单位表示，可以进行适当的转换。</li>
-</ul>
-<h5 id="如何调整这个预留空间的大小"><a href="#如何调整这个预留空间的大小" class="headerlink" title="如何调整这个预留空间的大小"></a>如何调整这个预留空间的大小</h5><p>使用 tune2fs 命令可以调整文件系统的预留空间大小。预留空间是为了给文件系统保留一些空间供系统管理员使用，在磁盘空间快满的时候防止系统崩溃。<br>以下是通过 tune2fs 命令来调整文件系统预留空间大小的步骤：</p>
-<p>1.打开终端或命令行界面。<br>2.运行以下命令，其中 &#x2F;dev&#x2F;sdX 是文件系统所在的磁盘设备。请将其替换为您实际使用的设备名称。</p>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">tune2fs -m &lt;percentage&gt; <span class="regexp">/dev/</span>sdX</span><br></pre></td></tr></table></figure>
-<p>是您想要设置的预留空间的百分比。例如，如果您想要将预留空间设置为 10%，则将 替换为 10。</p>
-<p>3.输入管理员密码并确认命令。<br>4.命令执行成功后，文件系统的预留空间大小将被调整。</p>
-<p>请注意，调整文件系统的预留空间可能会对系统的稳定性和性能产生影响。建议在进行此操作之前备份重要数据，并仔细评估所需的空间和系统需求。<br>此外，不同的文件系统可能具有不同的默认预留空间大小。您可以使用 tune2fs -l 命令查看当前文件系统的预留空间大小，并据此进行调整。</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Nginx内置变量</title>
-    <url>/2023/12/15/Nginx%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F/</url>
-    <content><![CDATA[<h2 id="Nginx内置变量"><a href="#Nginx内置变量" class="headerlink" title="Nginx内置变量"></a>Nginx内置变量</h2><span id="more"></span>
-<pre><code class="$args">$query_string            #同 $args
-$arg_NAME                #GET请求中NAME的值
-$is_args                 #如果请求中有参数，值为&quot;?&quot;，否则为空字符串
-$uri                     #请求中的当前URI(不带请求参数，参数位于$args)，可以不同于浏览器传递的$request_uri的值，它可以通过内部重定向，或者使用index指令进行修改，$uri不包含主机名，如&quot;/foo/bar.html&quot;。
-$document_uri            #同 $uri
-$document_root           #当前请求的文档根目录或别名
-$host                    #优先级：HTTP请求行的主机名&gt;&quot;HOST&quot;请求头字段&gt;符合请求的服务器名
-$hostname                #主机名
-$https                   #如果开启了SSL安全模式，值为&quot;on&quot;，否则为空字符串。
-$binary_remote_addr      #客户端地址的二进制形式，固定长度为4个字节
-$body_bytes_sent         #传输给客户端的字节数，响应头不计算在内；这个变量和Apache的mod_log_config模块中的&quot;%B&quot;参数保持兼容
-$bytes_sent              #传输给客户端的字节数
-$connection              #TCP连接的序列号
-$connection_requests     #TCP连接当前的请求数量
-$content_length          #&quot;Content-Length&quot; 请求头字段
-$content_type            #&quot;Content-Type&quot; 请求头字段
-$cookie_name             #cookie名称
-$limit_rate              #用于设置响应的速度限制
-$msec                    #当前的Unix时间戳
-$nginx_version           #nginx版本
-$pid                     #工作进程的PID
-$pipe                    #如果请求来自管道通信，值为&quot;p&quot;，否则为&quot;.&quot;
-$proxy_protocol_addr     #获取代理访问服务器的客户端地址，如果是直接访问，该值为空字符串
-$realpath_root           #当前请求的文档根目录或别名的真实路径，会将所有符号连接转换为真实路径
-$remote_addr             #客户端地址
-$remote_port             #客户端端口
-$remote_user             #用于HTTP基础认证服务的用户名
-$request                 #代表客户端的请求地址
-$request_body            #客户端的请求主体：此变量可在location中使用，将请求主体通过proxy_pass，fastcgi_pass，uwsgi_pass和scgi_pass传递给下一级的代理服务器
-$request_body_file       #将客户端请求主体保存在临时文件中。文件处理结束后，此文件需删除。如果需要之一开启此功能，需要设置client_body_in_file_only。如果将次文件传递给后端的代理服务器，需要禁用request body，即设置proxy_pass_request_body off，fastcgi_pass_request_body off，uwsgi_pass_request_body off，or scgi_pass_request_body off
-$request_completion      #如果请求成功，值为&quot;OK&quot;，如果请求未完成或者请求不是一个范围请求的最后一部分，则为空
-$request_filename        #当前连接请求的文件路径，由root或alias指令与URI请求生成
-$request_length          #请求的长度 (包括请求的地址，http请求头和请求主体)
-$request_method          #HTTP请求方法，通常为&quot;GET&quot;或&quot;POST&quot;
-$request_time            #处理客户端请求使用的时间; 从读取客户端的第一个字节开始计时
-$request_uri             #这个变量等于包含一些客户端请求参数的原始URI，它无法修改，请查看$uri更改或重写URI，不包含主机名，例如：&quot;/cnphp/test.php?arg=freemouse&quot;
-$scheme                  #请求使用的Web协议，&quot;http&quot; 或 &quot;https&quot;
-$server_addr             #服务器端地址，需要注意的是：为了避免访问linux系统内核，应将ip地址提前设置在配置文件中
-$server_name             #服务器名
-$server_port             #服务器端口
-$server_protocol         #服务器的HTTP版本，通常为 &quot;HTTP/1.0&quot; 或 &quot;HTTP/1.1&quot;
-$status                  #HTTP响应代码
-$time_iso8601            #服务器时间的ISO 8610格式
-$time_local              #服务器时间（LOG Format 格式）
-$cookie_NAME             #客户端请求Header头中的cookie变量，前缀&quot;$cookie_&quot;加上cookie名称的变量，该变量的值即为cookie名称的值
-$http_NAME               #匹配任意请求头字段；变量名中的后半部分NAME可以替换成任意请求头字段，如在配置文件中需要获取http请求头：&quot;Accept-Language&quot;，$http_accept_language即可
-$http_cookie
-$http_post
-$http_referer
-$http_user_agent
-$http_x_forwarded_for
-$sent_http_NAME          #可以设置任意http响应头字段；变量名中的后半部分NAME可以替换成任意响应头字段，如需要设置响应头Content-length，$sent_http_content_length即可
-$sent_http_cache_control
-$sent_http_connection
-$sent_http_content_type
-$sent_http_keep_alive
-$sent_http_last_modified
-$sent_http_location
-$sent_http_transfer_encoding```
-</code></pre>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -332,6 +332,63 @@ $sent_http_transfer_encoding```
       <tags>
         <tag>mysql</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>docker的安装和应用</title>
+    <url>/2025/03/17/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%BA%94%E7%94%A8/</url>
+    <content><![CDATA[<blockquote>
+<p>Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从 Apache2.0 协议开源。<br>Docker 可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。<br>容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低。</p>
+</blockquote>
+<span id="more"></span>
+<p>Docker的应用场景<br>Web 应用的自动化打包和发布。</p>
+<ul>
+<li>自动化测试和持续集成、发布。</li>
+<li>在服务型环境中部署和调整数据库或其他的后台应用。</li>
+<li>从头编译或者扩展现有的 OpenShift 或 Cloud Foundry 平台来搭建自己的 PaaS 环境。</li>
+</ul>
+<h4 id="安装-以centos为例"><a href="#安装-以centos为例" class="headerlink" title="安装(以centos为例)"></a>安装(以centos为例)</h4><h6 id="使用官方安装脚本自动安装"><a href="#使用官方安装脚本自动安装" class="headerlink" title="使用官方安装脚本自动安装"></a>使用官方安装脚本自动安装</h6><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> <span class="built_in">curl</span> <span class="literal">-fsSL</span> https://get.docker.com <span class="literal">-o</span> <span class="built_in">install-docker</span>.sh</span><br><span class="line"><span class="variable">$</span> sudo sh <span class="built_in">install-docker</span>.sh</span><br></pre></td></tr></table></figure>
+<h6 id="手动安装"><a href="#手动安装" class="headerlink" title="手动安装"></a>手动安装</h6><p>在新主机上首次安装 Docker 之前，需要设置 Docker 仓库。之后，您可以从仓库安装和更新 Docker。<br>设置仓库<br>安装 dnf-plugins-core 包（提供管理 DNF 仓库的命令），并设置仓库。</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">sudo dnf -y <span class="keyword">install</span> dnf-plugins-core</span><br></pre></td></tr></table></figure>
+<p>使用以下命令来设置稳定的仓库</p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">sudo dnf config-manager --<span class="built_in">add</span>-repo https://download.docker.<span class="keyword">com</span>/linux/centos/docker-<span class="keyword">ce</span>.repo</span><br></pre></td></tr></table></figure>
+<p>可以执行以下命令换成清华大学的镜像源：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line">sed -i &#x27;s+https:<span class="string">//download.docker.com</span>+https:<span class="string">//mirrors.tuna.tsinghua.edu.cn/docker-ce</span>+&#x27; <span class="string">/etc/yum.repos.d/docker-ce.repo</span></span><br></pre></td></tr></table></figure>
+<p>运行以下命令安装Docker</p>
+<figure class="highlight stata"><table><tr><td class="code"><pre><span class="line">sudo dnf install docker-ce docker-ce-<span class="keyword">cli</span> containerd.io docker-buildx-<span class="keyword">plugin</span> docker-compose-<span class="keyword">plugin</span></span><br></pre></td></tr></table></figure>
+<p>如果提示接受 GPG 密钥，验证指纹是否与 060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35 匹配，如果匹配则接受。<br>安装成功后，启动 Docker 引擎：</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">sudo systemctl <span class="literal">start</span> docker</span><br></pre></td></tr></table></figure>
+<p>如果希望 Docker 在系统启动时也启动可以使用以下命令</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">sudo systemctl <span class="keyword">enable</span> <span class="comment">--now docker</span></span><br></pre></td></tr></table></figure>
+<p>国内从 DockerHub 拉取镜像有时会遇到困难，此时可以配置镜像加速器<br>在 &#x2F;etc&#x2F;docker&#x2F;daemon.json 中写入如下内容</p>
+<figure class="highlight prolog"><table><tr><td class="code"><pre><span class="line">&#123;<span class="string">&quot;registry-mirrors&quot;</span>:[<span class="string">&quot;https://docker.1panel.live&quot;</span>]&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="卸载-docker"><a href="#卸载-docker" class="headerlink" title="卸载 docker"></a>卸载 docker</h6><p>删除安装包</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">yum <span class="built_in">remove</span> docker-ce</span><br></pre></td></tr></table></figure>
+<p>删除镜像、容器、配置文件等内容</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="Docker使用"><a href="#Docker使用" class="headerlink" title="Docker使用"></a>Docker使用</h4><h6 id="常用的-Docker-客户端命令"><a href="#常用的-Docker-客户端命令" class="headerlink" title="常用的 Docker 客户端命令"></a>常用的 Docker 客户端命令</h6><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">docker run  启动一个新的容器并运行命令   docker run -d ubuntu</span><br><span class="line">docker <span class="keyword">ps</span>   列出当前正在运行的容器 docker <span class="keyword">ps</span></span><br><span class="line">docker <span class="keyword">ps</span> -<span class="keyword">a</span>    列出所有容器（包括已停止的容器）    docker <span class="keyword">ps</span> -<span class="keyword">a</span></span><br><span class="line">docker build    使用 Dockerfile 构建镜像  docker build -t my-image .</span><br><span class="line">docker images   列出本地存储的所有镜像 docker images</span><br><span class="line">docker pull 从 Docker 仓库拉取镜像 docker pull ubuntu</span><br><span class="line">docker push 将镜像推送到 Docker 仓库    docker push my-image</span><br><span class="line">docker exec 在运行的容器中执行命令 docker exec -it container_name bash</span><br><span class="line">docker <span class="keyword">stop</span> 停止一个或多个容器   docker <span class="keyword">stop</span> container_name</span><br><span class="line">docker start    启动已停止的容器    docker start container_name</span><br><span class="line">docker restart  重启一个容器  docker restart container_name</span><br><span class="line">docker rm   删除一个或多个容器   docker rm container_name</span><br><span class="line">docker rmi  删除一个或多个镜像   docker rmi my-image</span><br><span class="line">docker logs 查看容器的日志 docker logs container_name</span><br><span class="line">docker inspect  获取容器或镜像的详细信息    docker inspect container_name</span><br><span class="line">docker exec -it 进入容器的交互式终端  docker exec -it container_name /bin/bash</span><br><span class="line">docker network <span class="keyword">ls</span>   列出所有 Docker 网络  docker network <span class="keyword">ls</span></span><br><span class="line">docker volume <span class="keyword">ls</span>    列出所有 Docker 卷   docker volume <span class="keyword">ls</span></span><br><span class="line">docker-compose <span class="keyword">up</span>   启动多容器应用（从 docker-compose.yml 文件）    docker-compose <span class="keyword">up</span></span><br><span class="line">docker-compose down 停止并删除由 docker-compose 启动的容器、网络等 docker-compose down</span><br><span class="line">docker info 显示 Docker 系统的详细信息   docker info</span><br><span class="line">docker <span class="keyword">version</span>  显示 Docker 客户端和守护进程的版本信息 docker <span class="keyword">version</span></span><br><span class="line">docker stats    显示容器的实时资源使用情况   docker stats</span><br><span class="line">docker login    登录 Docker 仓库    docker login</span><br><span class="line">docker logout   登出 Docker 仓库    docker logout</span><br></pre></td></tr></table></figure>
+<h6 id="拉取并启动镜像"><a href="#拉取并启动镜像" class="headerlink" title="拉取并启动镜像"></a>拉取并启动镜像</h6><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker pull ubuntu</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run -it ubuntu /bin/bash</span></span><br></pre></td></tr></table></figure>
+<h6 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h6><p>在大部分的场景下，我们希望 docker 的服务是在后台运行的，我们可以过 -d 指定容器的运行模式</p>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">$ docker <span class="built_in">run</span> -itd <span class="comment">--name ubuntu-test ubuntu /bin/bash</span></span><br></pre></td></tr></table></figure>
+<p>加了 -d 参数默认不会进入容器，想要进入容器需要使用指令 docker exec<br>在使用 -d 参数时启动容器时，容器会运行在后台，这时如果要进入容器，可以通过以下命令进入</p>
+<ul>
+<li>docker attach：允许你与容器的标准输入（stdin）、输出（stdout）和标准错误（stderr）进行交互。</li>
+<li>docker exec：推荐大家使用 docker exec 命令，因为此命令会退出容器终端，但不会导致容器的停止<br>使用 docker exec 命令实例<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">docker exec -it 8609b96bacf9 /bin/bash</span><br><span class="line"></span><br><span class="line">root@8609b96bacf9:/# cat /etc/os-release</span><br><span class="line"><span class="attribute">PRETTY_NAME</span>=<span class="string">&quot;Ubuntu 24.04.1 LTS&quot;</span></span><br><span class="line"><span class="attribute">NAME</span>=<span class="string">&quot;Ubuntu&quot;</span></span><br><span class="line"><span class="attribute">VERSION_ID</span>=<span class="string">&quot;24.04&quot;</span></span><br><span class="line"><span class="attribute">VERSION</span>=<span class="string">&quot;24.04.1 LTS (Noble Numbat)&quot;</span></span><br><span class="line"><span class="attribute">VERSION_CODENAME</span>=noble</span><br><span class="line"><span class="attribute">ID</span>=ubuntu</span><br><span class="line"><span class="attribute">ID_LIKE</span>=debian</span><br><span class="line"><span class="attribute">HOME_URL</span>=<span class="string">&quot;https://www.ubuntu.com/&quot;</span></span><br><span class="line"><span class="attribute">SUPPORT_URL</span>=<span class="string">&quot;https://help.ubuntu.com/&quot;</span></span><br><span class="line"><span class="attribute">BUG_REPORT_URL</span>=<span class="string">&quot;https://bugs.launchpad.net/ubuntu/&quot;</span></span><br><span class="line"><span class="attribute">PRIVACY_POLICY_URL</span>=<span class="string">&quot;https://www.ubuntu.com/legal/terms-and-policies/privacy-policy&quot;</span></span><br><span class="line"><span class="attribute">UBUNTU_CODENAME</span>=noble</span><br><span class="line"><span class="attribute">LOGO</span>=ubuntu-logo</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h6 id="导出和导入容器"><a href="#导出和导入容器" class="headerlink" title="导出和导入容器"></a>导出和导入容器</h6><p>如果要导出本地某个容器，可以使用 docker export 命令</p>
+<figure class="highlight elm"><table><tr><td class="code"><pre><span class="line">$ docker ex<span class="keyword">port</span> 1e560fca3906 &gt; ubuntu.tar</span><br></pre></td></tr></table></figure>
+<p>这样将导出容器快照到本地文件<br>可以使用 docker import 从容器快照文件中再导入为镜像，以下实例将快照文件 ubuntu.tar 导入到镜像 test&#x2F;ubuntu:v1:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cat</span> docker/ubuntu.tar | docker import - <span class="built_in">test</span>/ubuntu:v1</span></span><br></pre></td></tr></table></figure>
+<p>此外，也可以通过指定 URL 或者某个目录来导入，例如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker import http://example.com/exampleimage.tgz example/imagerepo</span></span><br></pre></td></tr></table></figure>
+<p>删除容器<br>删除容器使用 docker rm 命令</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> docker <span class="built_in">rm</span> <span class="operator">-f</span> <span class="number">1</span>e560fca3906</span><br></pre></td></tr></table></figure>
+<p>下面的命令可以清理掉所有处于终止状态的容器。</p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line">$ docker <span class="built_in">container</span> prune</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>mysql的proxy机制实现读写分离和主从同步</title>
@@ -623,18 +680,6 @@ xtrabackup 进行增量备份<figure class="highlight mel"><table><tr><td class=
       </tags>
   </entry>
   <entry>
-    <title>shell安装脚本</title>
-    <url>/2023/12/15/shell%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</url>
-    <content><![CDATA[<h4 id="shell安装脚本"><a href="#shell安装脚本" class="headerlink" title="shell安装脚本"></a>shell安装脚本</h4><span id="more"></span>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#! /bin/bash</span></span><br><span class="line"><span class="comment">#nginx 安装脚本</span></span><br><span class="line"><span class="comment">#解压和编译不能是同一个目录</span></span><br><span class="line"></span><br><span class="line">basedir=<span class="string">&#x27;/usr/local/&#x27;</span></span><br><span class="line">user=nginx</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">Echo</span></span>()&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">    success)  flag=<span class="string">&quot;\033[1;32m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">    failure)  flag=<span class="string">&quot;\033[1;31m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">    warning)  flag=<span class="string">&quot;\033[1;33m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">    msg)  flag=<span class="string">&quot;\033[1;34m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">    *)  flag=<span class="string">&quot;\033[1;34m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">checkenv</span></span>()&#123;</span><br><span class="line">    <span class="comment">#环境预安装</span></span><br><span class="line">    yum -y install gcc gcc-c++ automake pcre pcre-devel zlib-devel openssl openssl-devel</span><br><span class="line">    <span class="built_in">mkdir</span> -p /var/tmp/nginx/client</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">install</span></span>()&#123;</span><br><span class="line">    <span class="comment">#编译安装</span></span><br><span class="line">    checkenv</span><br><span class="line">    <span class="keyword">for</span> file <span class="keyword">in</span> $(<span class="built_in">ls</span> ./)</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">if</span>  [ <span class="string">&quot;<span class="variable">$&#123;file:0:5&#125;</span>&quot;</span> = <span class="string">&quot;nginx&quot;</span> ];<span class="keyword">then</span></span><br><span class="line">                nginxdir=<span class="variable">$&#123;file&#125;</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">    wget -O nginx.tar.gz http://nginx.org/download/nginx-1.20.1.tar.gz &amp;&amp; tar -zxvf nginx.tar.gz &amp;&amp; <span class="built_in">rm</span> -rf nginx.tar.gz</span><br><span class="line">    <span class="built_in">pushd</span> <span class="variable">$&#123;nginxdir&#125;</span></span><br><span class="line">    ./configure --prefix=<span class="variable">$basedir</span>/nginx --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module\</span><br><span class="line">    --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module\</span><br><span class="line">    --with-http_stub_status_module --with-http_auth_request_module --with-threads --with-stream --with-stream_ssl_module --with-http_slice_module --with-mail --with-mail_ssl_module\</span><br><span class="line">    --with-file-aio --with-http_v2_module --with-pcre</span><br><span class="line"></span><br><span class="line">    make -j<span class="variable">$&#123;Thread:-4&#125;</span> &amp;&amp; make install</span><br><span class="line">    <span class="built_in">ln</span> -sf <span class="variable">$basedir</span>/nginx/sbin/nginx /sbin/nginx</span><br><span class="line">    useradd -s /sbin/nologin -M <span class="variable">$user</span></span><br><span class="line">    <span class="comment">##启动脚本</span></span><br><span class="line">    <span class="built_in">cat</span> &gt; /usr/lib/systemd/system/nginx.service &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">    [Unit]</span></span><br><span class="line"><span class="string">    Description=nginx.service</span></span><br><span class="line"><span class="string">    After=network.target</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    [Service]</span></span><br><span class="line"><span class="string">    Type=forking</span></span><br><span class="line"><span class="string">    ExecStart=/usr/local/nginx/sbin/nginx</span></span><br><span class="line"><span class="string">    ExecReload=/usr/local/nginx/sbin/nginx -s reload</span></span><br><span class="line"><span class="string">    ExecStop=/usr/local/nginx/sbin/nginx -s stop</span></span><br><span class="line"><span class="string">    PrivateTmp=true</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    [Install]</span></span><br><span class="line"><span class="string">    WantedBy=multi-user.target</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">    <span class="comment">##开机启动</span></span><br><span class="line">    systemctl <span class="built_in">enable</span> nginx.service</span><br><span class="line">    systemctl start nginx.service</span><br><span class="line">    <span class="comment">## 更改/etc/profile文件</span></span><br><span class="line">    [ -z <span class="string">&quot;`grep ^&#x27;export PATH=&#x27; /etc/profile`&quot;</span> ] &amp;&amp; <span class="built_in">echo</span> <span class="string">&quot;export PATH=<span class="variable">$&#123;basedir&#125;</span>/nginx/sbin:\$PATH&quot;</span> &gt;&gt; /etc/profile</span><br><span class="line">    <span class="built_in">sleep</span> 1</span><br><span class="line">    <span class="keyword">if</span> [ $? -ne 0 ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;nginx install success&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;error，安装失败！&quot;</span></span><br><span class="line">        make clean</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line">install</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>shell中${}和()的使用</title>
     <url>/2023/12/15/shell%E4%B8%AD$%7B%7D%E5%92%8C()%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<p>shell中${}和()的使用</p>
@@ -741,6 +786,18 @@ fi
       </categories>
       <tags>
         <tag>shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>shell安装脚本</title>
+    <url>/2023/12/15/shell%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</url>
+    <content><![CDATA[<h4 id="shell安装脚本"><a href="#shell安装脚本" class="headerlink" title="shell安装脚本"></a>shell安装脚本</h4><span id="more"></span>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#! /bin/bash</span></span><br><span class="line"><span class="comment">#nginx 安装脚本</span></span><br><span class="line"><span class="comment">#解压和编译不能是同一个目录</span></span><br><span class="line"></span><br><span class="line">basedir=<span class="string">&#x27;/usr/local/&#x27;</span></span><br><span class="line">user=nginx</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">Echo</span></span>()&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">    success)  flag=<span class="string">&quot;\033[1;32m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">    failure)  flag=<span class="string">&quot;\033[1;31m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">    warning)  flag=<span class="string">&quot;\033[1;33m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">    msg)  flag=<span class="string">&quot;\033[1;34m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">    *)  flag=<span class="string">&quot;\033[1;34m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">checkenv</span></span>()&#123;</span><br><span class="line">    <span class="comment">#环境预安装</span></span><br><span class="line">    yum -y install gcc gcc-c++ automake pcre pcre-devel zlib-devel openssl openssl-devel</span><br><span class="line">    <span class="built_in">mkdir</span> -p /var/tmp/nginx/client</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">install</span></span>()&#123;</span><br><span class="line">    <span class="comment">#编译安装</span></span><br><span class="line">    checkenv</span><br><span class="line">    <span class="keyword">for</span> file <span class="keyword">in</span> $(<span class="built_in">ls</span> ./)</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">if</span>  [ <span class="string">&quot;<span class="variable">$&#123;file:0:5&#125;</span>&quot;</span> = <span class="string">&quot;nginx&quot;</span> ];<span class="keyword">then</span></span><br><span class="line">                nginxdir=<span class="variable">$&#123;file&#125;</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">    wget -O nginx.tar.gz http://nginx.org/download/nginx-1.20.1.tar.gz &amp;&amp; tar -zxvf nginx.tar.gz &amp;&amp; <span class="built_in">rm</span> -rf nginx.tar.gz</span><br><span class="line">    <span class="built_in">pushd</span> <span class="variable">$&#123;nginxdir&#125;</span></span><br><span class="line">    ./configure --prefix=<span class="variable">$basedir</span>/nginx --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module\</span><br><span class="line">    --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module\</span><br><span class="line">    --with-http_stub_status_module --with-http_auth_request_module --with-threads --with-stream --with-stream_ssl_module --with-http_slice_module --with-mail --with-mail_ssl_module\</span><br><span class="line">    --with-file-aio --with-http_v2_module --with-pcre</span><br><span class="line"></span><br><span class="line">    make -j<span class="variable">$&#123;Thread:-4&#125;</span> &amp;&amp; make install</span><br><span class="line">    <span class="built_in">ln</span> -sf <span class="variable">$basedir</span>/nginx/sbin/nginx /sbin/nginx</span><br><span class="line">    useradd -s /sbin/nologin -M <span class="variable">$user</span></span><br><span class="line">    <span class="comment">##启动脚本</span></span><br><span class="line">    <span class="built_in">cat</span> &gt; /usr/lib/systemd/system/nginx.service &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">    [Unit]</span></span><br><span class="line"><span class="string">    Description=nginx.service</span></span><br><span class="line"><span class="string">    After=network.target</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    [Service]</span></span><br><span class="line"><span class="string">    Type=forking</span></span><br><span class="line"><span class="string">    ExecStart=/usr/local/nginx/sbin/nginx</span></span><br><span class="line"><span class="string">    ExecReload=/usr/local/nginx/sbin/nginx -s reload</span></span><br><span class="line"><span class="string">    ExecStop=/usr/local/nginx/sbin/nginx -s stop</span></span><br><span class="line"><span class="string">    PrivateTmp=true</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    [Install]</span></span><br><span class="line"><span class="string">    WantedBy=multi-user.target</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">    <span class="comment">##开机启动</span></span><br><span class="line">    systemctl <span class="built_in">enable</span> nginx.service</span><br><span class="line">    systemctl start nginx.service</span><br><span class="line">    <span class="comment">## 更改/etc/profile文件</span></span><br><span class="line">    [ -z <span class="string">&quot;`grep ^&#x27;export PATH=&#x27; /etc/profile`&quot;</span> ] &amp;&amp; <span class="built_in">echo</span> <span class="string">&quot;export PATH=<span class="variable">$&#123;basedir&#125;</span>/nginx/sbin:\$PATH&quot;</span> &gt;&gt; /etc/profile</span><br><span class="line">    <span class="built_in">sleep</span> 1</span><br><span class="line">    <span class="keyword">if</span> [ $? -ne 0 ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;nginx install success&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;error，安装失败！&quot;</span></span><br><span class="line">        make clean</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line">install</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>

@@ -24,107 +24,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Nginx内置变量</title>
-    <url>/2023/12/15/Nginx%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F/</url>
-    <content><![CDATA[<h2 id="Nginx内置变量"><a href="#Nginx内置变量" class="headerlink" title="Nginx内置变量"></a>Nginx内置变量</h2><span id="more"></span>
-<pre><code class="$args">$query_string            #同 $args
-$arg_NAME                #GET请求中NAME的值
-$is_args                 #如果请求中有参数，值为&quot;?&quot;，否则为空字符串
-$uri                     #请求中的当前URI(不带请求参数，参数位于$args)，可以不同于浏览器传递的$request_uri的值，它可以通过内部重定向，或者使用index指令进行修改，$uri不包含主机名，如&quot;/foo/bar.html&quot;。
-$document_uri            #同 $uri
-$document_root           #当前请求的文档根目录或别名
-$host                    #优先级：HTTP请求行的主机名&gt;&quot;HOST&quot;请求头字段&gt;符合请求的服务器名
-$hostname                #主机名
-$https                   #如果开启了SSL安全模式，值为&quot;on&quot;，否则为空字符串。
-$binary_remote_addr      #客户端地址的二进制形式，固定长度为4个字节
-$body_bytes_sent         #传输给客户端的字节数，响应头不计算在内；这个变量和Apache的mod_log_config模块中的&quot;%B&quot;参数保持兼容
-$bytes_sent              #传输给客户端的字节数
-$connection              #TCP连接的序列号
-$connection_requests     #TCP连接当前的请求数量
-$content_length          #&quot;Content-Length&quot; 请求头字段
-$content_type            #&quot;Content-Type&quot; 请求头字段
-$cookie_name             #cookie名称
-$limit_rate              #用于设置响应的速度限制
-$msec                    #当前的Unix时间戳
-$nginx_version           #nginx版本
-$pid                     #工作进程的PID
-$pipe                    #如果请求来自管道通信，值为&quot;p&quot;，否则为&quot;.&quot;
-$proxy_protocol_addr     #获取代理访问服务器的客户端地址，如果是直接访问，该值为空字符串
-$realpath_root           #当前请求的文档根目录或别名的真实路径，会将所有符号连接转换为真实路径
-$remote_addr             #客户端地址
-$remote_port             #客户端端口
-$remote_user             #用于HTTP基础认证服务的用户名
-$request                 #代表客户端的请求地址
-$request_body            #客户端的请求主体：此变量可在location中使用，将请求主体通过proxy_pass，fastcgi_pass，uwsgi_pass和scgi_pass传递给下一级的代理服务器
-$request_body_file       #将客户端请求主体保存在临时文件中。文件处理结束后，此文件需删除。如果需要之一开启此功能，需要设置client_body_in_file_only。如果将次文件传递给后端的代理服务器，需要禁用request body，即设置proxy_pass_request_body off，fastcgi_pass_request_body off，uwsgi_pass_request_body off，or scgi_pass_request_body off
-$request_completion      #如果请求成功，值为&quot;OK&quot;，如果请求未完成或者请求不是一个范围请求的最后一部分，则为空
-$request_filename        #当前连接请求的文件路径，由root或alias指令与URI请求生成
-$request_length          #请求的长度 (包括请求的地址，http请求头和请求主体)
-$request_method          #HTTP请求方法，通常为&quot;GET&quot;或&quot;POST&quot;
-$request_time            #处理客户端请求使用的时间; 从读取客户端的第一个字节开始计时
-$request_uri             #这个变量等于包含一些客户端请求参数的原始URI，它无法修改，请查看$uri更改或重写URI，不包含主机名，例如：&quot;/cnphp/test.php?arg=freemouse&quot;
-$scheme                  #请求使用的Web协议，&quot;http&quot; 或 &quot;https&quot;
-$server_addr             #服务器端地址，需要注意的是：为了避免访问linux系统内核，应将ip地址提前设置在配置文件中
-$server_name             #服务器名
-$server_port             #服务器端口
-$server_protocol         #服务器的HTTP版本，通常为 &quot;HTTP/1.0&quot; 或 &quot;HTTP/1.1&quot;
-$status                  #HTTP响应代码
-$time_iso8601            #服务器时间的ISO 8610格式
-$time_local              #服务器时间（LOG Format 格式）
-$cookie_NAME             #客户端请求Header头中的cookie变量，前缀&quot;$cookie_&quot;加上cookie名称的变量，该变量的值即为cookie名称的值
-$http_NAME               #匹配任意请求头字段；变量名中的后半部分NAME可以替换成任意请求头字段，如在配置文件中需要获取http请求头：&quot;Accept-Language&quot;，$http_accept_language即可
-$http_cookie
-$http_post
-$http_referer
-$http_user_agent
-$http_x_forwarded_for
-$sent_http_NAME          #可以设置任意http响应头字段；变量名中的后半部分NAME可以替换成任意响应头字段，如需要设置响应头Content-length，$sent_http_content_length即可
-$sent_http_cache_control
-$sent_http_connection
-$sent_http_content_type
-$sent_http_keep_alive
-$sent_http_last_modified
-$sent_http_location
-$sent_http_transfer_encoding```
-</code></pre>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux文件系统预留空间</title>
-    <url>/2024/05/10/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A2%84%E7%95%99%E7%A9%BA%E9%97%B4/</url>
-    <content><![CDATA[<blockquote>
-<p>如果磁盘是ext2，ext3，ext4文件格式，系统默认会为磁盘保留5%的预留空间，这样能保证有些关键应用（比如数据库）在硬盘满的时候有点余地，不致于马上就 crash，给监控系统和管理员一点时间去察觉。<br>xfs文件格式的磁盘不会划分预留空间</p>
-</blockquote>
-<span id="more"></span>
-
-<p>在Linux系统中，磁盘的可用空间、已用空间和容量之间的关系是相互依赖的，但也可能存在一些差异。主要的原因包括：</p>
-<ul>
-<li>文件系统的格式化和分配：在格式化磁盘并创建文件系统时，会为文件系统分配一部分空间作为文件系统的元数据、inode 表、日志等。这些分配给文件系统的空间将从总容量中减去，因此可用空间会小于磁盘的实际容量。</li>
-<li>保留空间：文件系统通常会保留一部分空间，用于特定操作和系统的需要。这些保留空间用于存储特殊文件、文件系统元数据或者为写入操作提供缓冲空间。因此，这部分空间不包含在可用空间中。</li>
-<li>超级用户权限：磁盘配额和权限设置可能导致某些空间仅对特定的用户或用户组可见和可用。超级用户(root)具有更高的权限，可能可以访问和使用其他用户没有权限的空间。<br>块大小：磁盘上的数据存储以块为单位进行管理。块大小的设置可能导致存储空间的浪费。当一个文件的大小不是块大小的整数倍时，将会浪费部分空间。<br><strong>这些因素导致可用空间、已用空间和容量之间存在差异。要了解更准确的磁盘使用情况，可以使用命令行工具如 df 命令来查看文件系统的实际使用情况，它会提供关于可用空间、已用空间和总容量的详细信息</strong><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">tune2fs -l <span class="regexp">/dev/</span>sda2</span><br></pre></td></tr></table></figure>
-<img src="/2024/05/10/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A2%84%E7%95%99%E7%A9%BA%E9%97%B4/20240510120122.jpg"><br>根据提供的输出，我可以看到以下关于文件系统的预留空间大小的信息：<br>文件系统位于 &#x2F;dev&#x2F;sda2 磁盘分区上。<br>预留块数量为 2555891。<br>块大小为 4096 字节。<br>要计算预留空间的实际大小，您可以使用以下公式：<br>预留空间大小 &#x3D; 预留块数量 × 块大小<br>在这种情况下，预留空间大小 &#x3D; 2555891 × 4096 &#x3D; 10,484,299,136 字节 或 9.77GB。<br>通过这个计算，您可以知道文件系统上的预留空间的实际大小。请注意，这个值是以字节为单位的，如果需要以其他单位表示，可以进行适当的转换。</li>
-</ul>
-<h5 id="如何调整这个预留空间的大小"><a href="#如何调整这个预留空间的大小" class="headerlink" title="如何调整这个预留空间的大小"></a>如何调整这个预留空间的大小</h5><p>使用 tune2fs 命令可以调整文件系统的预留空间大小。预留空间是为了给文件系统保留一些空间供系统管理员使用，在磁盘空间快满的时候防止系统崩溃。<br>以下是通过 tune2fs 命令来调整文件系统预留空间大小的步骤：</p>
-<p>1.打开终端或命令行界面。<br>2.运行以下命令，其中 &#x2F;dev&#x2F;sdX 是文件系统所在的磁盘设备。请将其替换为您实际使用的设备名称。</p>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">tune2fs -m &lt;percentage&gt; <span class="regexp">/dev/</span>sdX</span><br></pre></td></tr></table></figure>
-<p>是您想要设置的预留空间的百分比。例如，如果您想要将预留空间设置为 10%，则将 替换为 10。</p>
-<p>3.输入管理员密码并确认命令。<br>4.命令执行成功后，文件系统的预留空间大小将被调整。</p>
-<p>请注意，调整文件系统的预留空间可能会对系统的稳定性和性能产生影响。建议在进行此操作之前备份重要数据，并仔细评估所需的空间和系统需求。<br>此外，不同的文件系统可能具有不同的默认预留空间大小。您可以使用 tune2fs -l 命令查看当前文件系统的预留空间大小，并据此进行调整。</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux 网络错误 TCP:too many orphaned sockets 分析与解决</title>
     <url>/2024/10/12/Linux%20%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF%20TCP%20too%20many%20orphaned%20sockets%20%E5%88%86%E6%9E%90%E4%B8%8E%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[<h5 id="Linux-网络错误-TCP-too-many-orphaned-sockets-分析与解决"><a href="#Linux-网络错误-TCP-too-many-orphaned-sockets-分析与解决" class="headerlink" title="Linux 网络错误 TCP:too many orphaned sockets 分析与解决"></a>Linux 网络错误 TCP:too many orphaned sockets 分析与解决</h5><span id="more"></span>
@@ -205,6 +104,107 @@ $sent_http_transfer_encoding```
       </categories>
       <tags>
         <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux文件系统预留空间</title>
+    <url>/2024/05/10/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A2%84%E7%95%99%E7%A9%BA%E9%97%B4/</url>
+    <content><![CDATA[<blockquote>
+<p>如果磁盘是ext2，ext3，ext4文件格式，系统默认会为磁盘保留5%的预留空间，这样能保证有些关键应用（比如数据库）在硬盘满的时候有点余地，不致于马上就 crash，给监控系统和管理员一点时间去察觉。<br>xfs文件格式的磁盘不会划分预留空间</p>
+</blockquote>
+<span id="more"></span>
+
+<p>在Linux系统中，磁盘的可用空间、已用空间和容量之间的关系是相互依赖的，但也可能存在一些差异。主要的原因包括：</p>
+<ul>
+<li>文件系统的格式化和分配：在格式化磁盘并创建文件系统时，会为文件系统分配一部分空间作为文件系统的元数据、inode 表、日志等。这些分配给文件系统的空间将从总容量中减去，因此可用空间会小于磁盘的实际容量。</li>
+<li>保留空间：文件系统通常会保留一部分空间，用于特定操作和系统的需要。这些保留空间用于存储特殊文件、文件系统元数据或者为写入操作提供缓冲空间。因此，这部分空间不包含在可用空间中。</li>
+<li>超级用户权限：磁盘配额和权限设置可能导致某些空间仅对特定的用户或用户组可见和可用。超级用户(root)具有更高的权限，可能可以访问和使用其他用户没有权限的空间。<br>块大小：磁盘上的数据存储以块为单位进行管理。块大小的设置可能导致存储空间的浪费。当一个文件的大小不是块大小的整数倍时，将会浪费部分空间。<br><strong>这些因素导致可用空间、已用空间和容量之间存在差异。要了解更准确的磁盘使用情况，可以使用命令行工具如 df 命令来查看文件系统的实际使用情况，它会提供关于可用空间、已用空间和总容量的详细信息</strong><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">tune2fs -l <span class="regexp">/dev/</span>sda2</span><br></pre></td></tr></table></figure>
+<img src="/2024/05/10/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A2%84%E7%95%99%E7%A9%BA%E9%97%B4/20240510120122.jpg"><br>根据提供的输出，我可以看到以下关于文件系统的预留空间大小的信息：<br>文件系统位于 &#x2F;dev&#x2F;sda2 磁盘分区上。<br>预留块数量为 2555891。<br>块大小为 4096 字节。<br>要计算预留空间的实际大小，您可以使用以下公式：<br>预留空间大小 &#x3D; 预留块数量 × 块大小<br>在这种情况下，预留空间大小 &#x3D; 2555891 × 4096 &#x3D; 10,484,299,136 字节 或 9.77GB。<br>通过这个计算，您可以知道文件系统上的预留空间的实际大小。请注意，这个值是以字节为单位的，如果需要以其他单位表示，可以进行适当的转换。</li>
+</ul>
+<h5 id="如何调整这个预留空间的大小"><a href="#如何调整这个预留空间的大小" class="headerlink" title="如何调整这个预留空间的大小"></a>如何调整这个预留空间的大小</h5><p>使用 tune2fs 命令可以调整文件系统的预留空间大小。预留空间是为了给文件系统保留一些空间供系统管理员使用，在磁盘空间快满的时候防止系统崩溃。<br>以下是通过 tune2fs 命令来调整文件系统预留空间大小的步骤：</p>
+<p>1.打开终端或命令行界面。<br>2.运行以下命令，其中 &#x2F;dev&#x2F;sdX 是文件系统所在的磁盘设备。请将其替换为您实际使用的设备名称。</p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">tune2fs -m &lt;percentage&gt; <span class="regexp">/dev/</span>sdX</span><br></pre></td></tr></table></figure>
+<p>是您想要设置的预留空间的百分比。例如，如果您想要将预留空间设置为 10%，则将 替换为 10。</p>
+<p>3.输入管理员密码并确认命令。<br>4.命令执行成功后，文件系统的预留空间大小将被调整。</p>
+<p>请注意，调整文件系统的预留空间可能会对系统的稳定性和性能产生影响。建议在进行此操作之前备份重要数据，并仔细评估所需的空间和系统需求。<br>此外，不同的文件系统可能具有不同的默认预留空间大小。您可以使用 tune2fs -l 命令查看当前文件系统的预留空间大小，并据此进行调整。</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Nginx内置变量</title>
+    <url>/2023/12/15/Nginx%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F/</url>
+    <content><![CDATA[<h2 id="Nginx内置变量"><a href="#Nginx内置变量" class="headerlink" title="Nginx内置变量"></a>Nginx内置变量</h2><span id="more"></span>
+<pre><code class="$args">$query_string            #同 $args
+$arg_NAME                #GET请求中NAME的值
+$is_args                 #如果请求中有参数，值为&quot;?&quot;，否则为空字符串
+$uri                     #请求中的当前URI(不带请求参数，参数位于$args)，可以不同于浏览器传递的$request_uri的值，它可以通过内部重定向，或者使用index指令进行修改，$uri不包含主机名，如&quot;/foo/bar.html&quot;。
+$document_uri            #同 $uri
+$document_root           #当前请求的文档根目录或别名
+$host                    #优先级：HTTP请求行的主机名&gt;&quot;HOST&quot;请求头字段&gt;符合请求的服务器名
+$hostname                #主机名
+$https                   #如果开启了SSL安全模式，值为&quot;on&quot;，否则为空字符串。
+$binary_remote_addr      #客户端地址的二进制形式，固定长度为4个字节
+$body_bytes_sent         #传输给客户端的字节数，响应头不计算在内；这个变量和Apache的mod_log_config模块中的&quot;%B&quot;参数保持兼容
+$bytes_sent              #传输给客户端的字节数
+$connection              #TCP连接的序列号
+$connection_requests     #TCP连接当前的请求数量
+$content_length          #&quot;Content-Length&quot; 请求头字段
+$content_type            #&quot;Content-Type&quot; 请求头字段
+$cookie_name             #cookie名称
+$limit_rate              #用于设置响应的速度限制
+$msec                    #当前的Unix时间戳
+$nginx_version           #nginx版本
+$pid                     #工作进程的PID
+$pipe                    #如果请求来自管道通信，值为&quot;p&quot;，否则为&quot;.&quot;
+$proxy_protocol_addr     #获取代理访问服务器的客户端地址，如果是直接访问，该值为空字符串
+$realpath_root           #当前请求的文档根目录或别名的真实路径，会将所有符号连接转换为真实路径
+$remote_addr             #客户端地址
+$remote_port             #客户端端口
+$remote_user             #用于HTTP基础认证服务的用户名
+$request                 #代表客户端的请求地址
+$request_body            #客户端的请求主体：此变量可在location中使用，将请求主体通过proxy_pass，fastcgi_pass，uwsgi_pass和scgi_pass传递给下一级的代理服务器
+$request_body_file       #将客户端请求主体保存在临时文件中。文件处理结束后，此文件需删除。如果需要之一开启此功能，需要设置client_body_in_file_only。如果将次文件传递给后端的代理服务器，需要禁用request body，即设置proxy_pass_request_body off，fastcgi_pass_request_body off，uwsgi_pass_request_body off，or scgi_pass_request_body off
+$request_completion      #如果请求成功，值为&quot;OK&quot;，如果请求未完成或者请求不是一个范围请求的最后一部分，则为空
+$request_filename        #当前连接请求的文件路径，由root或alias指令与URI请求生成
+$request_length          #请求的长度 (包括请求的地址，http请求头和请求主体)
+$request_method          #HTTP请求方法，通常为&quot;GET&quot;或&quot;POST&quot;
+$request_time            #处理客户端请求使用的时间; 从读取客户端的第一个字节开始计时
+$request_uri             #这个变量等于包含一些客户端请求参数的原始URI，它无法修改，请查看$uri更改或重写URI，不包含主机名，例如：&quot;/cnphp/test.php?arg=freemouse&quot;
+$scheme                  #请求使用的Web协议，&quot;http&quot; 或 &quot;https&quot;
+$server_addr             #服务器端地址，需要注意的是：为了避免访问linux系统内核，应将ip地址提前设置在配置文件中
+$server_name             #服务器名
+$server_port             #服务器端口
+$server_protocol         #服务器的HTTP版本，通常为 &quot;HTTP/1.0&quot; 或 &quot;HTTP/1.1&quot;
+$status                  #HTTP响应代码
+$time_iso8601            #服务器时间的ISO 8610格式
+$time_local              #服务器时间（LOG Format 格式）
+$cookie_NAME             #客户端请求Header头中的cookie变量，前缀&quot;$cookie_&quot;加上cookie名称的变量，该变量的值即为cookie名称的值
+$http_NAME               #匹配任意请求头字段；变量名中的后半部分NAME可以替换成任意请求头字段，如在配置文件中需要获取http请求头：&quot;Accept-Language&quot;，$http_accept_language即可
+$http_cookie
+$http_post
+$http_referer
+$http_user_agent
+$http_x_forwarded_for
+$sent_http_NAME          #可以设置任意http响应头字段；变量名中的后半部分NAME可以替换成任意响应头字段，如需要设置响应头Content-length，$sent_http_content_length即可
+$sent_http_cache_control
+$sent_http_connection
+$sent_http_content_type
+$sent_http_keep_alive
+$sent_http_last_modified
+$sent_http_location
+$sent_http_transfer_encoding```
+</code></pre>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -320,20 +320,6 @@ $sent_http_transfer_encoding```
       </tags>
   </entry>
   <entry>
-    <title>mysql占用库占用内存情况</title>
-    <url>/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/</url>
-    <content><![CDATA[<span id="more"></span>
-<h3 id="查看哪个库占用内存情况"><a href="#查看哪个库占用内存情况" class="headerlink" title="查看哪个库占用内存情况"></a>查看哪个库占用内存情况</h3><figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> <span class="symbol">`Database`</span>,</span><br><span class="line"><span class="built_in">SUM</span>(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> <span class="symbol">`Size (MB)`</span></span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.TABLES</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> </span><br><span class="line">table_schema;</span><br></pre></td></tr></table></figure>
-<h3 id="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："><a href="#如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：" class="headerlink" title="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："></a>如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：</h3><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> `<span class="keyword">Database</span>`,</span><br><span class="line"><span class="built_in">table_name</span> <span class="keyword">AS</span> `<span class="keyword">Table</span>`,</span><br><span class="line">(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> `Size (MB)`</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.<span class="keyword">TABLES</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> </span><br><span class="line">(data_length + index_length) <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>docker的安装和应用</title>
     <url>/2025/03/17/docker%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%BA%94%E7%94%A8/</url>
     <content><![CDATA[<blockquote>
@@ -389,6 +375,20 @@ $sent_http_transfer_encoding```
 <figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="variable">$</span> docker <span class="built_in">rm</span> <span class="operator">-f</span> <span class="number">1</span>e560fca3906</span><br></pre></td></tr></table></figure>
 <p>下面的命令可以清理掉所有处于终止状态的容器。</p>
 <figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line">$ docker <span class="built_in">container</span> prune</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>mysql占用库占用内存情况</title>
+    <url>/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/</url>
+    <content><![CDATA[<span id="more"></span>
+<h3 id="查看哪个库占用内存情况"><a href="#查看哪个库占用内存情况" class="headerlink" title="查看哪个库占用内存情况"></a>查看哪个库占用内存情况</h3><figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> <span class="symbol">`Database`</span>,</span><br><span class="line"><span class="built_in">SUM</span>(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> <span class="symbol">`Size (MB)`</span></span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.TABLES</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> </span><br><span class="line">table_schema;</span><br></pre></td></tr></table></figure>
+<h3 id="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："><a href="#如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：" class="headerlink" title="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："></a>如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：</h3><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> `<span class="keyword">Database</span>`,</span><br><span class="line"><span class="built_in">table_name</span> <span class="keyword">AS</span> `<span class="keyword">Table</span>`,</span><br><span class="line">(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> `Size (MB)`</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.<span class="keyword">TABLES</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> </span><br><span class="line">(data_length + index_length) <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
   </entry>
   <entry>
     <title>mysql的proxy机制实现读写分离和主从同步</title>
@@ -680,6 +680,18 @@ xtrabackup 进行增量备份<figure class="highlight mel"><table><tr><td class=
       </tags>
   </entry>
   <entry>
+    <title>shell安装脚本</title>
+    <url>/2023/12/15/shell%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</url>
+    <content><![CDATA[<h4 id="shell安装脚本"><a href="#shell安装脚本" class="headerlink" title="shell安装脚本"></a>shell安装脚本</h4><span id="more"></span>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#! /bin/bash</span></span><br><span class="line"><span class="comment">#nginx 安装脚本</span></span><br><span class="line"><span class="comment">#解压和编译不能是同一个目录</span></span><br><span class="line"></span><br><span class="line">basedir=<span class="string">&#x27;/usr/local/&#x27;</span></span><br><span class="line">user=nginx</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">Echo</span></span>()&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">    success)  flag=<span class="string">&quot;\033[1;32m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">    failure)  flag=<span class="string">&quot;\033[1;31m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">    warning)  flag=<span class="string">&quot;\033[1;33m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">    msg)  flag=<span class="string">&quot;\033[1;34m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">    *)  flag=<span class="string">&quot;\033[1;34m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">checkenv</span></span>()&#123;</span><br><span class="line">    <span class="comment">#环境预安装</span></span><br><span class="line">    yum -y install gcc gcc-c++ automake pcre pcre-devel zlib-devel openssl openssl-devel</span><br><span class="line">    <span class="built_in">mkdir</span> -p /var/tmp/nginx/client</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">install</span></span>()&#123;</span><br><span class="line">    <span class="comment">#编译安装</span></span><br><span class="line">    checkenv</span><br><span class="line">    <span class="keyword">for</span> file <span class="keyword">in</span> $(<span class="built_in">ls</span> ./)</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">if</span>  [ <span class="string">&quot;<span class="variable">$&#123;file:0:5&#125;</span>&quot;</span> = <span class="string">&quot;nginx&quot;</span> ];<span class="keyword">then</span></span><br><span class="line">                nginxdir=<span class="variable">$&#123;file&#125;</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">    wget -O nginx.tar.gz http://nginx.org/download/nginx-1.20.1.tar.gz &amp;&amp; tar -zxvf nginx.tar.gz &amp;&amp; <span class="built_in">rm</span> -rf nginx.tar.gz</span><br><span class="line">    <span class="built_in">pushd</span> <span class="variable">$&#123;nginxdir&#125;</span></span><br><span class="line">    ./configure --prefix=<span class="variable">$basedir</span>/nginx --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module\</span><br><span class="line">    --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module\</span><br><span class="line">    --with-http_stub_status_module --with-http_auth_request_module --with-threads --with-stream --with-stream_ssl_module --with-http_slice_module --with-mail --with-mail_ssl_module\</span><br><span class="line">    --with-file-aio --with-http_v2_module --with-pcre</span><br><span class="line"></span><br><span class="line">    make -j<span class="variable">$&#123;Thread:-4&#125;</span> &amp;&amp; make install</span><br><span class="line">    <span class="built_in">ln</span> -sf <span class="variable">$basedir</span>/nginx/sbin/nginx /sbin/nginx</span><br><span class="line">    useradd -s /sbin/nologin -M <span class="variable">$user</span></span><br><span class="line">    <span class="comment">##启动脚本</span></span><br><span class="line">    <span class="built_in">cat</span> &gt; /usr/lib/systemd/system/nginx.service &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">    [Unit]</span></span><br><span class="line"><span class="string">    Description=nginx.service</span></span><br><span class="line"><span class="string">    After=network.target</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    [Service]</span></span><br><span class="line"><span class="string">    Type=forking</span></span><br><span class="line"><span class="string">    ExecStart=/usr/local/nginx/sbin/nginx</span></span><br><span class="line"><span class="string">    ExecReload=/usr/local/nginx/sbin/nginx -s reload</span></span><br><span class="line"><span class="string">    ExecStop=/usr/local/nginx/sbin/nginx -s stop</span></span><br><span class="line"><span class="string">    PrivateTmp=true</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    [Install]</span></span><br><span class="line"><span class="string">    WantedBy=multi-user.target</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">    <span class="comment">##开机启动</span></span><br><span class="line">    systemctl <span class="built_in">enable</span> nginx.service</span><br><span class="line">    systemctl start nginx.service</span><br><span class="line">    <span class="comment">## 更改/etc/profile文件</span></span><br><span class="line">    [ -z <span class="string">&quot;`grep ^&#x27;export PATH=&#x27; /etc/profile`&quot;</span> ] &amp;&amp; <span class="built_in">echo</span> <span class="string">&quot;export PATH=<span class="variable">$&#123;basedir&#125;</span>/nginx/sbin:\$PATH&quot;</span> &gt;&gt; /etc/profile</span><br><span class="line">    <span class="built_in">sleep</span> 1</span><br><span class="line">    <span class="keyword">if</span> [ $? -ne 0 ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;nginx install success&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;error，安装失败！&quot;</span></span><br><span class="line">        make clean</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line">install</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>shell中${}和()的使用</title>
     <url>/2023/12/15/shell%E4%B8%AD$%7B%7D%E5%92%8C()%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<p>shell中${}和()的使用</p>
@@ -786,18 +798,6 @@ fi
       </categories>
       <tags>
         <tag>shell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>shell安装脚本</title>
-    <url>/2023/12/15/shell%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC/</url>
-    <content><![CDATA[<h4 id="shell安装脚本"><a href="#shell安装脚本" class="headerlink" title="shell安装脚本"></a>shell安装脚本</h4><span id="more"></span>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#! /bin/bash</span></span><br><span class="line"><span class="comment">#nginx 安装脚本</span></span><br><span class="line"><span class="comment">#解压和编译不能是同一个目录</span></span><br><span class="line"></span><br><span class="line">basedir=<span class="string">&#x27;/usr/local/&#x27;</span></span><br><span class="line">user=nginx</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">Echo</span></span>()&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="variable">$1</span> <span class="keyword">in</span></span><br><span class="line">    success)  flag=<span class="string">&quot;\033[1;32m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">    failure)  flag=<span class="string">&quot;\033[1;31m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">    warning)  flag=<span class="string">&quot;\033[1;33m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">    msg)  flag=<span class="string">&quot;\033[1;34m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">    *)  flag=<span class="string">&quot;\033[1;34m&quot;</span></span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="title">checkenv</span></span>()&#123;</span><br><span class="line">    <span class="comment">#环境预安装</span></span><br><span class="line">    yum -y install gcc gcc-c++ automake pcre pcre-devel zlib-devel openssl openssl-devel</span><br><span class="line">    <span class="built_in">mkdir</span> -p /var/tmp/nginx/client</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">install</span></span>()&#123;</span><br><span class="line">    <span class="comment">#编译安装</span></span><br><span class="line">    checkenv</span><br><span class="line">    <span class="keyword">for</span> file <span class="keyword">in</span> $(<span class="built_in">ls</span> ./)</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">if</span>  [ <span class="string">&quot;<span class="variable">$&#123;file:0:5&#125;</span>&quot;</span> = <span class="string">&quot;nginx&quot;</span> ];<span class="keyword">then</span></span><br><span class="line">                nginxdir=<span class="variable">$&#123;file&#125;</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">    wget -O nginx.tar.gz http://nginx.org/download/nginx-1.20.1.tar.gz &amp;&amp; tar -zxvf nginx.tar.gz &amp;&amp; <span class="built_in">rm</span> -rf nginx.tar.gz</span><br><span class="line">    <span class="built_in">pushd</span> <span class="variable">$&#123;nginxdir&#125;</span></span><br><span class="line">    ./configure --prefix=<span class="variable">$basedir</span>/nginx --with-http_ssl_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module\</span><br><span class="line">    --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module\</span><br><span class="line">    --with-http_stub_status_module --with-http_auth_request_module --with-threads --with-stream --with-stream_ssl_module --with-http_slice_module --with-mail --with-mail_ssl_module\</span><br><span class="line">    --with-file-aio --with-http_v2_module --with-pcre</span><br><span class="line"></span><br><span class="line">    make -j<span class="variable">$&#123;Thread:-4&#125;</span> &amp;&amp; make install</span><br><span class="line">    <span class="built_in">ln</span> -sf <span class="variable">$basedir</span>/nginx/sbin/nginx /sbin/nginx</span><br><span class="line">    useradd -s /sbin/nologin -M <span class="variable">$user</span></span><br><span class="line">    <span class="comment">##启动脚本</span></span><br><span class="line">    <span class="built_in">cat</span> &gt; /usr/lib/systemd/system/nginx.service &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">    [Unit]</span></span><br><span class="line"><span class="string">    Description=nginx.service</span></span><br><span class="line"><span class="string">    After=network.target</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    [Service]</span></span><br><span class="line"><span class="string">    Type=forking</span></span><br><span class="line"><span class="string">    ExecStart=/usr/local/nginx/sbin/nginx</span></span><br><span class="line"><span class="string">    ExecReload=/usr/local/nginx/sbin/nginx -s reload</span></span><br><span class="line"><span class="string">    ExecStop=/usr/local/nginx/sbin/nginx -s stop</span></span><br><span class="line"><span class="string">    PrivateTmp=true</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    [Install]</span></span><br><span class="line"><span class="string">    WantedBy=multi-user.target</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">    <span class="comment">##开机启动</span></span><br><span class="line">    systemctl <span class="built_in">enable</span> nginx.service</span><br><span class="line">    systemctl start nginx.service</span><br><span class="line">    <span class="comment">## 更改/etc/profile文件</span></span><br><span class="line">    [ -z <span class="string">&quot;`grep ^&#x27;export PATH=&#x27; /etc/profile`&quot;</span> ] &amp;&amp; <span class="built_in">echo</span> <span class="string">&quot;export PATH=<span class="variable">$&#123;basedir&#125;</span>/nginx/sbin:\$PATH&quot;</span> &gt;&gt; /etc/profile</span><br><span class="line">    <span class="built_in">sleep</span> 1</span><br><span class="line">    <span class="keyword">if</span> [ $? -ne 0 ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;nginx install success&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;error，安装失败！&quot;</span></span><br><span class="line">        make clean</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line">install</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>

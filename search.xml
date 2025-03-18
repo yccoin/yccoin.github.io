@@ -53,6 +53,164 @@
       </tags>
   </entry>
   <entry>
+    <title>Nginx内置变量</title>
+    <url>/2023/12/15/Nginx%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F/</url>
+    <content><![CDATA[<h2 id="Nginx内置变量"><a href="#Nginx内置变量" class="headerlink" title="Nginx内置变量"></a>Nginx内置变量</h2><span id="more"></span>
+<pre><code class="$args">$query_string            #同 $args
+$arg_NAME                #GET请求中NAME的值
+$is_args                 #如果请求中有参数，值为&quot;?&quot;，否则为空字符串
+$uri                     #请求中的当前URI(不带请求参数，参数位于$args)，可以不同于浏览器传递的$request_uri的值，它可以通过内部重定向，或者使用index指令进行修改，$uri不包含主机名，如&quot;/foo/bar.html&quot;。
+$document_uri            #同 $uri
+$document_root           #当前请求的文档根目录或别名
+$host                    #优先级：HTTP请求行的主机名&gt;&quot;HOST&quot;请求头字段&gt;符合请求的服务器名
+$hostname                #主机名
+$https                   #如果开启了SSL安全模式，值为&quot;on&quot;，否则为空字符串。
+$binary_remote_addr      #客户端地址的二进制形式，固定长度为4个字节
+$body_bytes_sent         #传输给客户端的字节数，响应头不计算在内；这个变量和Apache的mod_log_config模块中的&quot;%B&quot;参数保持兼容
+$bytes_sent              #传输给客户端的字节数
+$connection              #TCP连接的序列号
+$connection_requests     #TCP连接当前的请求数量
+$content_length          #&quot;Content-Length&quot; 请求头字段
+$content_type            #&quot;Content-Type&quot; 请求头字段
+$cookie_name             #cookie名称
+$limit_rate              #用于设置响应的速度限制
+$msec                    #当前的Unix时间戳
+$nginx_version           #nginx版本
+$pid                     #工作进程的PID
+$pipe                    #如果请求来自管道通信，值为&quot;p&quot;，否则为&quot;.&quot;
+$proxy_protocol_addr     #获取代理访问服务器的客户端地址，如果是直接访问，该值为空字符串
+$realpath_root           #当前请求的文档根目录或别名的真实路径，会将所有符号连接转换为真实路径
+$remote_addr             #客户端地址
+$remote_port             #客户端端口
+$remote_user             #用于HTTP基础认证服务的用户名
+$request                 #代表客户端的请求地址
+$request_body            #客户端的请求主体：此变量可在location中使用，将请求主体通过proxy_pass，fastcgi_pass，uwsgi_pass和scgi_pass传递给下一级的代理服务器
+$request_body_file       #将客户端请求主体保存在临时文件中。文件处理结束后，此文件需删除。如果需要之一开启此功能，需要设置client_body_in_file_only。如果将次文件传递给后端的代理服务器，需要禁用request body，即设置proxy_pass_request_body off，fastcgi_pass_request_body off，uwsgi_pass_request_body off，or scgi_pass_request_body off
+$request_completion      #如果请求成功，值为&quot;OK&quot;，如果请求未完成或者请求不是一个范围请求的最后一部分，则为空
+$request_filename        #当前连接请求的文件路径，由root或alias指令与URI请求生成
+$request_length          #请求的长度 (包括请求的地址，http请求头和请求主体)
+$request_method          #HTTP请求方法，通常为&quot;GET&quot;或&quot;POST&quot;
+$request_time            #处理客户端请求使用的时间; 从读取客户端的第一个字节开始计时
+$request_uri             #这个变量等于包含一些客户端请求参数的原始URI，它无法修改，请查看$uri更改或重写URI，不包含主机名，例如：&quot;/cnphp/test.php?arg=freemouse&quot;
+$scheme                  #请求使用的Web协议，&quot;http&quot; 或 &quot;https&quot;
+$server_addr             #服务器端地址，需要注意的是：为了避免访问linux系统内核，应将ip地址提前设置在配置文件中
+$server_name             #服务器名
+$server_port             #服务器端口
+$server_protocol         #服务器的HTTP版本，通常为 &quot;HTTP/1.0&quot; 或 &quot;HTTP/1.1&quot;
+$status                  #HTTP响应代码
+$time_iso8601            #服务器时间的ISO 8610格式
+$time_local              #服务器时间（LOG Format 格式）
+$cookie_NAME             #客户端请求Header头中的cookie变量，前缀&quot;$cookie_&quot;加上cookie名称的变量，该变量的值即为cookie名称的值
+$http_NAME               #匹配任意请求头字段；变量名中的后半部分NAME可以替换成任意请求头字段，如在配置文件中需要获取http请求头：&quot;Accept-Language&quot;，$http_accept_language即可
+$http_cookie
+$http_post
+$http_referer
+$http_user_agent
+$http_x_forwarded_for
+$sent_http_NAME          #可以设置任意http响应头字段；变量名中的后半部分NAME可以替换成任意响应头字段，如需要设置响应头Content-length，$sent_http_content_length即可
+$sent_http_cache_control
+$sent_http_connection
+$sent_http_content_type
+$sent_http_keep_alive
+$sent_http_last_modified
+$sent_http_location
+$sent_http_transfer_encoding```
+</code></pre>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>centos 7.9更换阿里源</title>
+    <url>/2024/10/12/centos%207.9%E6%9B%B4%E6%8D%A2%E9%98%BF%E9%87%8C%E6%BA%90/</url>
+    <content><![CDATA[<h5 id="centos-7-9更换阿里源"><a href="#centos-7-9更换阿里源" class="headerlink" title="centos 7.9更换阿里源"></a>centos 7.9更换阿里源</h5><span id="more"></span>
+<p>在CentOS 7.9上更换为阿里云源的步骤如下：</p>
+<h5 id="备份原有的YUM源配置文件"><a href="#备份原有的YUM源配置文件" class="headerlink" title="备份原有的YUM源配置文件"></a>备份原有的YUM源配置文件</h5><p><code>sudo cp -a /etc/yum.repos.d /etc/yum.repos.d.backup</code></p>
+<h5 id="清理原有的YUM源配置文件"><a href="#清理原有的YUM源配置文件" class="headerlink" title="清理原有的YUM源配置文件"></a>清理原有的YUM源配置文件</h5><p><code>sudo rm -f /etc/yum.repos.d/*.repo</code></p>
+<h5 id="下载阿里云CentOS-7源配置文件"><a href="#下载阿里云CentOS-7源配置文件" class="headerlink" title="下载阿里云CentOS 7源配置文件"></a>下载阿里云CentOS 7源配置文件</h5><p><code>sudo curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</code></p>
+<h5 id="清除缓存并生成新的缓存"><a href="#清除缓存并生成新的缓存" class="headerlink" title="清除缓存并生成新的缓存"></a>清除缓存并生成新的缓存</h5><figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">sudo yum clean <span class="keyword">all</span></span><br><span class="line">sudo yum makecache</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>centos 8安装mysql</title>
+    <url>/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/</url>
+    <content><![CDATA[<h5 id="centos-8-安装mysql"><a href="#centos-8-安装mysql" class="headerlink" title="centos 8 安装mysql"></a>centos 8 安装mysql</h5><span id="more"></span>
+<h5 id="添加-MySQL-Yum-存储库"><a href="#添加-MySQL-Yum-存储库" class="headerlink" title="添加 MySQL Yum 存储库"></a>添加 MySQL Yum 存储库</h5><p>首先，将 MySQL Yum 存储库添加到系统的存储库列表中。这是一次性操作，可以通过安装 MySQL 提供的 RPM 来执行。按着这些次序:  </p>
+<ol>
+<li>转到 MySQL 开发人员专区中的下载 MySQL Yum 存储库页面(官方存储库)</li>
+<li>为您的平台选择并下载发布包<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">wget https://link.zhihu.com/?<span class="keyword">target</span><span class="operator">=</span>https<span class="variable">%3</span>A//repo.mysql.com//mysql<span class="number">80</span>-community-<span class="keyword">release</span>-el<span class="number">7</span><span class="number">-1</span>.noarch.rpm</span><br><span class="line">rpm -ivh mysql<span class="number">80</span>-community-<span class="keyword">release</span>-el<span class="number">7</span><span class="number">-1</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">yum repolist <span class="keyword">all</span> |<span class="keyword">grep</span> mysql</span><br></pre></td></tr></table></figure>
+<img src="/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/1703038728264.jpg"><br>上面可以看到,默认启用的是80,因为我是要57版本的所以要设置一下,启用57,禁用80  <figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">[root<span class="symbol">@ebs</span><span class="number">-132999</span> mysql]<span class="meta"># dnf config-manager --disable mysql80-community</span></span><br><span class="line">[root<span class="symbol">@ebs</span><span class="number">-132999</span> mysql]<span class="meta"># dnf config-manager --enable mysql57-community</span></span><br></pre></td></tr></table></figure>
+<img src="/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/1703038804134.jpg"></li>
+</ol>
+<h5 id="禁用默认-MySQL-模块"><a href="#禁用默认-MySQL-模块" class="headerlink" title="禁用默认 MySQL 模块"></a>禁用默认 MySQL 模块</h5><blockquote>
+<p>官方解释<br>(仅限 EL8 系统）基于 EL8 的系统（例如 RHEL8 和 Oracle Linux 8）包含默认启用的 MySQL 模块。除非禁用此模块，否则它会屏蔽 MySQL 存储库提供的包。要禁用包含的模块并使 MySQL 存储库包可见，请使用以下命令（对于启用 dnf 的系统， 将命令中的 yum替换为dnf）：</p>
+</blockquote>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">yum module <span class="built_in">disable</span> mysql</span><br></pre></td></tr></table></figure>
+<p>安装mysql  </p>
+<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line">dnf install  mysql-community-<span class="keyword">server</span></span><br></pre></td></tr></table></figure>
+<p>安装时提示证书异常<br><img src="/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/1703038858140.jpg"></p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">rpm --<span class="keyword">import</span> https:<span class="comment">//repo.mysql.com/RPM-GPG-KEY-mysql-2022</span></span><br></pre></td></tr></table></figure>
+<p>官方解决办法(<a href="https://dev.mysql.com/doc/refman/8.0/en/checking-rpm-signature.html">https://dev.mysql.com/doc/refman/8.0/en/checking-rpm-signature.html</a>)</p>
+<h5 id="启动并修改设置"><a href="#启动并修改设置" class="headerlink" title="启动并修改设置"></a>启动并修改设置</h5><p>修改data目录路径指向home  </p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">datadir</span>=/home/mysql</span><br><span class="line"><span class="attr">socket</span>=/home/mysql/mysql.sock</span><br><span class="line"></span><br><span class="line"><span class="comment"># Disabling symbolic-links is recommended to prevent assorted security risks</span></span><br><span class="line"><span class="attr">symbolic-links</span>=<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="attr">log-error</span>=/home/mysql/log/mysqld.log</span><br><span class="line"><span class="attr">pid-file</span>=/home/mysql/run/mysqld/mysqld.pid</span><br></pre></td></tr></table></figure>
+<p>查看root初始密码  </p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">grep <span class="string">&#x27;password&#x27;</span> /<span class="keyword">var</span>/<span class="built_in">log</span>/mysqld.<span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+<p>本地或者远程连接不上，提示socket错误，注意是my.cnf中没有配置client  </p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[client]</span></span><br><span class="line"><span class="attr">socket</span>=/home/mysql/mysql.sock</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>centos 8安装php-fpm</title>
+    <url>/2023/12/25/centos%208%E5%AE%89%E8%A3%85php-fpm/</url>
+    <content><![CDATA[<p>centos 8安装php-fpm</p>
+<span id="more"></span>
+<h6 id="1-安装依赖包"><a href="#1-安装依赖包" class="headerlink" title="1. 安装依赖包"></a>1. 安装依赖包</h6><figure class="highlight nsis"><table><tr><td class="code"><pre><span class="line">yum install -y gcc gcc-c++  make <span class="literal">zlib</span> <span class="literal">zlib</span>-devel pcre pcre-devel  libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel glibc glibc-devel glib2 glib2-devel <span class="literal">bzip2</span> <span class="literal">bzip2</span>-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel openssl openssl-devel openldap openldap-devel nss_ldap openldap-clients openldap-servers automake libtool</span><br></pre></td></tr></table></figure>
+<h6 id="2-解压安装php"><a href="#2-解压安装php" class="headerlink" title="2. 解压安装php"></a>2. 解压安装php</h6><p>下载php</p>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="symbol">https:</span><span class="comment">//www.php.net/downloads.php)</span></span><br></pre></td></tr></table></figure>
+<p>编译时出错oniguruma<br>Centos 8 安装 oniguruma</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://down.24kplus.com/linux/oniguruma/oniguruma-6.9.4.tar.gz</span><br><span class="line">tar -zxf oniguruma-6.9.4.tar.gz</span><br><span class="line"><span class="built_in">cd</span> oniguruma-6.9.4</span><br><span class="line">./autogen.sh &amp;&amp; ./configure --prefix=/usr</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h6 id="3-编译php"><a href="#3-编译php" class="headerlink" title="3.编译php"></a>3.编译php</h6><figure class="highlight crystal"><table><tr><td class="code"><pre><span class="line">./configure \</span><br><span class="line">--prefix=<span class="regexp">/usr/local</span><span class="regexp">/php \</span></span><br><span class="line"><span class="regexp">--exec-prefix=/usr</span><span class="regexp">/local/php</span> \</span><br><span class="line">--bindir=<span class="regexp">/usr/local</span><span class="regexp">/php/bin</span> \</span><br><span class="line">--sbindir=<span class="regexp">/usr/local</span><span class="regexp">/php/sbin</span> \</span><br><span class="line">--includedir=<span class="regexp">/usr/local</span><span class="regexp">/php/include</span> \</span><br><span class="line">--libdir=<span class="regexp">/usr/local</span><span class="regexp">/php/lib</span><span class="regexp">/php \</span></span><br><span class="line"><span class="regexp">--mandir=/usr</span><span class="regexp">/local/php</span><span class="regexp">/php/man</span> \</span><br><span class="line">--<span class="keyword">with</span>-config-file-path=<span class="regexp">/usr/local</span><span class="regexp">/php/etc</span> \</span><br><span class="line">--<span class="keyword">with</span>-openssl \</span><br><span class="line">--enable-mbstring \</span><br><span class="line">--enable-fpm</span><br></pre></td></tr></table></figure>
+<figure class="highlight gauss"><table><tr><td class="code"><pre><span class="line"><span class="built_in">make</span> &amp;&amp; <span class="built_in">make</span> install</span><br></pre></td></tr></table></figure>
+<p>在之前编译的源码包中，找到 php.ini-production，复制到&#x2F;usr&#x2F;local&#x2F;php&#x2F;etc下，并改名为php.ini：</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">cp php.ini-production <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>etc/php.ini</span><br></pre></td></tr></table></figure>
+<p>将php源码编译目录下的 sapi&#x2F;fpm&#x2F;init.d.php-fpm 文件拷贝到系统配置 &#x2F;etc&#x2F;init.d 目录下并重命名为 php-fpm</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">[root<span class="meta">@localhost</span> php<span class="operator">-</span><span class="number">7.3</span>.<span class="number">4</span>]# cp sapi<span class="regexp">/fpm/</span><span class="keyword">init</span>.d.php<span class="operator">-</span>fpm <span class="regexp">/etc/</span><span class="keyword">init</span>.d<span class="operator">/</span>php<span class="operator">-</span>fpm </span><br><span class="line">[root<span class="meta">@localhost</span> php<span class="operator">-</span><span class="number">7.3</span>.<span class="number">4</span>]# chmod <span class="operator">+</span>x <span class="regexp">/etc/</span><span class="keyword">init</span>.d<span class="operator">/</span>php<span class="operator">-</span>fpm</span><br></pre></td></tr></table></figure>
+<h6 id="4-添加-php-fpm-配置文件"><a href="#4-添加-php-fpm-配置文件" class="headerlink" title="4.添加 php-fpm 配置文件"></a>4.添加 php-fpm 配置文件</h6><p>将php安装目录下的 &#x2F;usr&#x2F;local&#x2F;php&#x2F;etc&#x2F;php-fpm.conf.default 文件拷贝同目录下并重命名为 php-fpm.conf</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">[root<span class="meta">@localhost</span> php<span class="operator">-</span><span class="number">7.3</span>.<span class="number">4</span>]# cp <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>etc<span class="regexp">/php-fpm.conf.default /</span>usr<span class="regexp">/local/</span>php<span class="regexp">/etc/</span>php<span class="operator">-</span>fpm.conf</span><br></pre></td></tr></table></figure>
+<p>添加 <a href="http://www.conf/">www.conf</a> 配置文件<br>将php安装目录下的 &#x2F;usr&#x2F;local&#x2F;php&#x2F;etc&#x2F;php-fpm.d&#x2F;<a href="http://www.conf.default/">www.conf.default</a> 文件拷贝同目录下并重命名为 <a href="http://www.conf/">www.conf</a></p>
+<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">[root@localhost php-<span class="number">7.3</span>.<span class="number">4</span>]# cp <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>etc<span class="regexp">/php-fpm.d/</span>www.conf.<span class="keyword">default</span> <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>etc<span class="regexp">/php-fpm.d/</span>www.conf </span><br></pre></td></tr></table></figure>
+<h6 id="5-添加php安装目录到系统环境变量"><a href="#5-添加php安装目录到系统环境变量" class="headerlink" title="5.添加php安装目录到系统环境变量"></a>5.添加php安装目录到系统环境变量</h6><p>创建并打开文件php.sh<br>[root@localhost php-7.3.4]# vim &#x2F;etc&#x2F;profile.d&#x2F;php.sh<br>添加内容如下:</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">export <span class="title class_">PATH</span>=<span class="variable">$PATH</span><span class="symbol">:/usr/local/php/bin/</span><span class="symbol">:/usr/local/php/sbin/</span> </span><br></pre></td></tr></table></figure>
+<h6 id="6-使用source立即生效刚刚添加的php环境变量"><a href="#6-使用source立即生效刚刚添加的php环境变量" class="headerlink" title="6.使用source立即生效刚刚添加的php环境变量"></a>6.使用source立即生效刚刚添加的php环境变量</h6><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">[root@localhost php-<span class="number">7.3</span>.<span class="number">4</span>]# <span class="keyword">source</span> /etc/<span class="keyword">profile</span>.d/php.<span class="keyword">sh</span> </span><br></pre></td></tr></table></figure>
+<h6 id="7-启动php-fpm"><a href="#7-启动php-fpm" class="headerlink" title="7.启动php-fpm"></a>7.启动php-fpm</h6><figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> php<span class="number">-7.3</span><span class="number">.4</span>]<span class="meta"># service php-fpm start</span></span><br></pre></td></tr></table></figure>
+<p>看到9000端口也就成功了！！！<br>设置php开机启动</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> php-fpm</span><br></pre></td></tr></table></figure>
+<p>重启后查看端口看看是否存在！<br>然后php中添加如下内容</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">location</span> <span class="regexp">~ \.php$</span> &#123;</span><br><span class="line">    <span class="attribute">root</span>           html;</span><br><span class="line">    <span class="attribute">fastcgi_pass</span>   <span class="number">127.0.0.1:9000</span>;</span><br><span class="line">    <span class="attribute">fastcgi_index</span>  index.php;</span><br><span class="line">    <span class="attribute">fastcgi_param</span>  SCRIPT_FILENAME  <span class="variable">$document_root</span><span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">    <span class="attribute">include</span>        fastcgi_params;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>php</category>
+      </categories>
+      <tags>
+        <tag>php</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux 网络错误 TCP:too many orphaned sockets 分析与解决</title>
     <url>/2024/10/12/Linux%20%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF%20TCP%20too%20many%20orphaned%20sockets%20%E5%88%86%E6%9E%90%E4%B8%8E%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[<h5 id="Linux-网络错误-TCP-too-many-orphaned-sockets-分析与解决"><a href="#Linux-网络错误-TCP-too-many-orphaned-sockets-分析与解决" class="headerlink" title="Linux 网络错误 TCP:too many orphaned sockets 分析与解决"></a>Linux 网络错误 TCP:too many orphaned sockets 分析与解决</h5><span id="more"></span>
@@ -136,164 +294,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Nginx内置变量</title>
-    <url>/2023/12/15/Nginx%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F/</url>
-    <content><![CDATA[<h2 id="Nginx内置变量"><a href="#Nginx内置变量" class="headerlink" title="Nginx内置变量"></a>Nginx内置变量</h2><span id="more"></span>
-<pre><code class="$args">$query_string            #同 $args
-$arg_NAME                #GET请求中NAME的值
-$is_args                 #如果请求中有参数，值为&quot;?&quot;，否则为空字符串
-$uri                     #请求中的当前URI(不带请求参数，参数位于$args)，可以不同于浏览器传递的$request_uri的值，它可以通过内部重定向，或者使用index指令进行修改，$uri不包含主机名，如&quot;/foo/bar.html&quot;。
-$document_uri            #同 $uri
-$document_root           #当前请求的文档根目录或别名
-$host                    #优先级：HTTP请求行的主机名&gt;&quot;HOST&quot;请求头字段&gt;符合请求的服务器名
-$hostname                #主机名
-$https                   #如果开启了SSL安全模式，值为&quot;on&quot;，否则为空字符串。
-$binary_remote_addr      #客户端地址的二进制形式，固定长度为4个字节
-$body_bytes_sent         #传输给客户端的字节数，响应头不计算在内；这个变量和Apache的mod_log_config模块中的&quot;%B&quot;参数保持兼容
-$bytes_sent              #传输给客户端的字节数
-$connection              #TCP连接的序列号
-$connection_requests     #TCP连接当前的请求数量
-$content_length          #&quot;Content-Length&quot; 请求头字段
-$content_type            #&quot;Content-Type&quot; 请求头字段
-$cookie_name             #cookie名称
-$limit_rate              #用于设置响应的速度限制
-$msec                    #当前的Unix时间戳
-$nginx_version           #nginx版本
-$pid                     #工作进程的PID
-$pipe                    #如果请求来自管道通信，值为&quot;p&quot;，否则为&quot;.&quot;
-$proxy_protocol_addr     #获取代理访问服务器的客户端地址，如果是直接访问，该值为空字符串
-$realpath_root           #当前请求的文档根目录或别名的真实路径，会将所有符号连接转换为真实路径
-$remote_addr             #客户端地址
-$remote_port             #客户端端口
-$remote_user             #用于HTTP基础认证服务的用户名
-$request                 #代表客户端的请求地址
-$request_body            #客户端的请求主体：此变量可在location中使用，将请求主体通过proxy_pass，fastcgi_pass，uwsgi_pass和scgi_pass传递给下一级的代理服务器
-$request_body_file       #将客户端请求主体保存在临时文件中。文件处理结束后，此文件需删除。如果需要之一开启此功能，需要设置client_body_in_file_only。如果将次文件传递给后端的代理服务器，需要禁用request body，即设置proxy_pass_request_body off，fastcgi_pass_request_body off，uwsgi_pass_request_body off，or scgi_pass_request_body off
-$request_completion      #如果请求成功，值为&quot;OK&quot;，如果请求未完成或者请求不是一个范围请求的最后一部分，则为空
-$request_filename        #当前连接请求的文件路径，由root或alias指令与URI请求生成
-$request_length          #请求的长度 (包括请求的地址，http请求头和请求主体)
-$request_method          #HTTP请求方法，通常为&quot;GET&quot;或&quot;POST&quot;
-$request_time            #处理客户端请求使用的时间; 从读取客户端的第一个字节开始计时
-$request_uri             #这个变量等于包含一些客户端请求参数的原始URI，它无法修改，请查看$uri更改或重写URI，不包含主机名，例如：&quot;/cnphp/test.php?arg=freemouse&quot;
-$scheme                  #请求使用的Web协议，&quot;http&quot; 或 &quot;https&quot;
-$server_addr             #服务器端地址，需要注意的是：为了避免访问linux系统内核，应将ip地址提前设置在配置文件中
-$server_name             #服务器名
-$server_port             #服务器端口
-$server_protocol         #服务器的HTTP版本，通常为 &quot;HTTP/1.0&quot; 或 &quot;HTTP/1.1&quot;
-$status                  #HTTP响应代码
-$time_iso8601            #服务器时间的ISO 8610格式
-$time_local              #服务器时间（LOG Format 格式）
-$cookie_NAME             #客户端请求Header头中的cookie变量，前缀&quot;$cookie_&quot;加上cookie名称的变量，该变量的值即为cookie名称的值
-$http_NAME               #匹配任意请求头字段；变量名中的后半部分NAME可以替换成任意请求头字段，如在配置文件中需要获取http请求头：&quot;Accept-Language&quot;，$http_accept_language即可
-$http_cookie
-$http_post
-$http_referer
-$http_user_agent
-$http_x_forwarded_for
-$sent_http_NAME          #可以设置任意http响应头字段；变量名中的后半部分NAME可以替换成任意响应头字段，如需要设置响应头Content-length，$sent_http_content_length即可
-$sent_http_cache_control
-$sent_http_connection
-$sent_http_content_type
-$sent_http_keep_alive
-$sent_http_last_modified
-$sent_http_location
-$sent_http_transfer_encoding```
-</code></pre>
-]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>centos 8安装mysql</title>
-    <url>/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/</url>
-    <content><![CDATA[<h5 id="centos-8-安装mysql"><a href="#centos-8-安装mysql" class="headerlink" title="centos 8 安装mysql"></a>centos 8 安装mysql</h5><span id="more"></span>
-<h5 id="添加-MySQL-Yum-存储库"><a href="#添加-MySQL-Yum-存储库" class="headerlink" title="添加 MySQL Yum 存储库"></a>添加 MySQL Yum 存储库</h5><p>首先，将 MySQL Yum 存储库添加到系统的存储库列表中。这是一次性操作，可以通过安装 MySQL 提供的 RPM 来执行。按着这些次序:  </p>
-<ol>
-<li>转到 MySQL 开发人员专区中的下载 MySQL Yum 存储库页面(官方存储库)</li>
-<li>为您的平台选择并下载发布包<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">wget https://link.zhihu.com/?<span class="keyword">target</span><span class="operator">=</span>https<span class="variable">%3</span>A//repo.mysql.com//mysql<span class="number">80</span>-community-<span class="keyword">release</span>-el<span class="number">7</span><span class="number">-1</span>.noarch.rpm</span><br><span class="line">rpm -ivh mysql<span class="number">80</span>-community-<span class="keyword">release</span>-el<span class="number">7</span><span class="number">-1</span>.noarch.rpm</span><br></pre></td></tr></table></figure>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">yum repolist <span class="keyword">all</span> |<span class="keyword">grep</span> mysql</span><br></pre></td></tr></table></figure>
-<img src="/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/1703038728264.jpg"><br>上面可以看到,默认启用的是80,因为我是要57版本的所以要设置一下,启用57,禁用80  <figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">[root<span class="symbol">@ebs</span><span class="number">-132999</span> mysql]<span class="meta"># dnf config-manager --disable mysql80-community</span></span><br><span class="line">[root<span class="symbol">@ebs</span><span class="number">-132999</span> mysql]<span class="meta"># dnf config-manager --enable mysql57-community</span></span><br></pre></td></tr></table></figure>
-<img src="/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/1703038804134.jpg"></li>
-</ol>
-<h5 id="禁用默认-MySQL-模块"><a href="#禁用默认-MySQL-模块" class="headerlink" title="禁用默认 MySQL 模块"></a>禁用默认 MySQL 模块</h5><blockquote>
-<p>官方解释<br>(仅限 EL8 系统）基于 EL8 的系统（例如 RHEL8 和 Oracle Linux 8）包含默认启用的 MySQL 模块。除非禁用此模块，否则它会屏蔽 MySQL 存储库提供的包。要禁用包含的模块并使 MySQL 存储库包可见，请使用以下命令（对于启用 dnf 的系统， 将命令中的 yum替换为dnf）：</p>
-</blockquote>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">yum module <span class="built_in">disable</span> mysql</span><br></pre></td></tr></table></figure>
-<p>安装mysql  </p>
-<figure class="highlight axapta"><table><tr><td class="code"><pre><span class="line">dnf install  mysql-community-<span class="keyword">server</span></span><br></pre></td></tr></table></figure>
-<p>安装时提示证书异常<br><img src="/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/1703038858140.jpg"></p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">rpm --<span class="keyword">import</span> https:<span class="comment">//repo.mysql.com/RPM-GPG-KEY-mysql-2022</span></span><br></pre></td></tr></table></figure>
-<p>官方解决办法(<a href="https://dev.mysql.com/doc/refman/8.0/en/checking-rpm-signature.html">https://dev.mysql.com/doc/refman/8.0/en/checking-rpm-signature.html</a>)</p>
-<h5 id="启动并修改设置"><a href="#启动并修改设置" class="headerlink" title="启动并修改设置"></a>启动并修改设置</h5><p>修改data目录路径指向home  </p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">datadir</span>=/home/mysql</span><br><span class="line"><span class="attr">socket</span>=/home/mysql/mysql.sock</span><br><span class="line"></span><br><span class="line"><span class="comment"># Disabling symbolic-links is recommended to prevent assorted security risks</span></span><br><span class="line"><span class="attr">symbolic-links</span>=<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="attr">log-error</span>=/home/mysql/log/mysqld.log</span><br><span class="line"><span class="attr">pid-file</span>=/home/mysql/run/mysqld/mysqld.pid</span><br></pre></td></tr></table></figure>
-<p>查看root初始密码  </p>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">grep <span class="string">&#x27;password&#x27;</span> /<span class="keyword">var</span>/<span class="built_in">log</span>/mysqld.<span class="built_in">log</span></span><br></pre></td></tr></table></figure>
-<p>本地或者远程连接不上，提示socket错误，注意是my.cnf中没有配置client  </p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[client]</span></span><br><span class="line"><span class="attr">socket</span>=/home/mysql/mysql.sock</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>centos 7.9更换阿里源</title>
-    <url>/2024/10/12/centos%207.9%E6%9B%B4%E6%8D%A2%E9%98%BF%E9%87%8C%E6%BA%90/</url>
-    <content><![CDATA[<h5 id="centos-7-9更换阿里源"><a href="#centos-7-9更换阿里源" class="headerlink" title="centos 7.9更换阿里源"></a>centos 7.9更换阿里源</h5><span id="more"></span>
-<p>在CentOS 7.9上更换为阿里云源的步骤如下：</p>
-<h5 id="备份原有的YUM源配置文件"><a href="#备份原有的YUM源配置文件" class="headerlink" title="备份原有的YUM源配置文件"></a>备份原有的YUM源配置文件</h5><p><code>sudo cp -a /etc/yum.repos.d /etc/yum.repos.d.backup</code></p>
-<h5 id="清理原有的YUM源配置文件"><a href="#清理原有的YUM源配置文件" class="headerlink" title="清理原有的YUM源配置文件"></a>清理原有的YUM源配置文件</h5><p><code>sudo rm -f /etc/yum.repos.d/*.repo</code></p>
-<h5 id="下载阿里云CentOS-7源配置文件"><a href="#下载阿里云CentOS-7源配置文件" class="headerlink" title="下载阿里云CentOS 7源配置文件"></a>下载阿里云CentOS 7源配置文件</h5><p><code>sudo curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</code></p>
-<h5 id="清除缓存并生成新的缓存"><a href="#清除缓存并生成新的缓存" class="headerlink" title="清除缓存并生成新的缓存"></a>清除缓存并生成新的缓存</h5><figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">sudo yum clean <span class="keyword">all</span></span><br><span class="line">sudo yum makecache</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>centos 8安装php-fpm</title>
-    <url>/2023/12/25/centos%208%E5%AE%89%E8%A3%85php-fpm/</url>
-    <content><![CDATA[<p>centos 8安装php-fpm</p>
-<span id="more"></span>
-<h6 id="1-安装依赖包"><a href="#1-安装依赖包" class="headerlink" title="1. 安装依赖包"></a>1. 安装依赖包</h6><figure class="highlight nsis"><table><tr><td class="code"><pre><span class="line">yum install -y gcc gcc-c++  make <span class="literal">zlib</span> <span class="literal">zlib</span>-devel pcre pcre-devel  libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel glibc glibc-devel glib2 glib2-devel <span class="literal">bzip2</span> <span class="literal">bzip2</span>-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel openssl openssl-devel openldap openldap-devel nss_ldap openldap-clients openldap-servers automake libtool</span><br></pre></td></tr></table></figure>
-<h6 id="2-解压安装php"><a href="#2-解压安装php" class="headerlink" title="2. 解压安装php"></a>2. 解压安装php</h6><p>下载php</p>
-<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="symbol">https:</span><span class="comment">//www.php.net/downloads.php)</span></span><br></pre></td></tr></table></figure>
-<p>编译时出错oniguruma<br>Centos 8 安装 oniguruma</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://down.24kplus.com/linux/oniguruma/oniguruma-6.9.4.tar.gz</span><br><span class="line">tar -zxf oniguruma-6.9.4.tar.gz</span><br><span class="line"><span class="built_in">cd</span> oniguruma-6.9.4</span><br><span class="line">./autogen.sh &amp;&amp; ./configure --prefix=/usr</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-<h6 id="3-编译php"><a href="#3-编译php" class="headerlink" title="3.编译php"></a>3.编译php</h6><figure class="highlight crystal"><table><tr><td class="code"><pre><span class="line">./configure \</span><br><span class="line">--prefix=<span class="regexp">/usr/local</span><span class="regexp">/php \</span></span><br><span class="line"><span class="regexp">--exec-prefix=/usr</span><span class="regexp">/local/php</span> \</span><br><span class="line">--bindir=<span class="regexp">/usr/local</span><span class="regexp">/php/bin</span> \</span><br><span class="line">--sbindir=<span class="regexp">/usr/local</span><span class="regexp">/php/sbin</span> \</span><br><span class="line">--includedir=<span class="regexp">/usr/local</span><span class="regexp">/php/include</span> \</span><br><span class="line">--libdir=<span class="regexp">/usr/local</span><span class="regexp">/php/lib</span><span class="regexp">/php \</span></span><br><span class="line"><span class="regexp">--mandir=/usr</span><span class="regexp">/local/php</span><span class="regexp">/php/man</span> \</span><br><span class="line">--<span class="keyword">with</span>-config-file-path=<span class="regexp">/usr/local</span><span class="regexp">/php/etc</span> \</span><br><span class="line">--<span class="keyword">with</span>-openssl \</span><br><span class="line">--enable-mbstring \</span><br><span class="line">--enable-fpm</span><br></pre></td></tr></table></figure>
-<figure class="highlight gauss"><table><tr><td class="code"><pre><span class="line"><span class="built_in">make</span> &amp;&amp; <span class="built_in">make</span> install</span><br></pre></td></tr></table></figure>
-<p>在之前编译的源码包中，找到 php.ini-production，复制到&#x2F;usr&#x2F;local&#x2F;php&#x2F;etc下，并改名为php.ini：</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">cp php.ini-production <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>etc/php.ini</span><br></pre></td></tr></table></figure>
-<p>将php源码编译目录下的 sapi&#x2F;fpm&#x2F;init.d.php-fpm 文件拷贝到系统配置 &#x2F;etc&#x2F;init.d 目录下并重命名为 php-fpm</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">[root<span class="meta">@localhost</span> php<span class="operator">-</span><span class="number">7.3</span>.<span class="number">4</span>]# cp sapi<span class="regexp">/fpm/</span><span class="keyword">init</span>.d.php<span class="operator">-</span>fpm <span class="regexp">/etc/</span><span class="keyword">init</span>.d<span class="operator">/</span>php<span class="operator">-</span>fpm </span><br><span class="line">[root<span class="meta">@localhost</span> php<span class="operator">-</span><span class="number">7.3</span>.<span class="number">4</span>]# chmod <span class="operator">+</span>x <span class="regexp">/etc/</span><span class="keyword">init</span>.d<span class="operator">/</span>php<span class="operator">-</span>fpm</span><br></pre></td></tr></table></figure>
-<h6 id="4-添加-php-fpm-配置文件"><a href="#4-添加-php-fpm-配置文件" class="headerlink" title="4.添加 php-fpm 配置文件"></a>4.添加 php-fpm 配置文件</h6><p>将php安装目录下的 &#x2F;usr&#x2F;local&#x2F;php&#x2F;etc&#x2F;php-fpm.conf.default 文件拷贝同目录下并重命名为 php-fpm.conf</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">[root<span class="meta">@localhost</span> php<span class="operator">-</span><span class="number">7.3</span>.<span class="number">4</span>]# cp <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>etc<span class="regexp">/php-fpm.conf.default /</span>usr<span class="regexp">/local/</span>php<span class="regexp">/etc/</span>php<span class="operator">-</span>fpm.conf</span><br></pre></td></tr></table></figure>
-<p>添加 <a href="http://www.conf/">www.conf</a> 配置文件<br>将php安装目录下的 &#x2F;usr&#x2F;local&#x2F;php&#x2F;etc&#x2F;php-fpm.d&#x2F;<a href="http://www.conf.default/">www.conf.default</a> 文件拷贝同目录下并重命名为 <a href="http://www.conf/">www.conf</a></p>
-<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">[root@localhost php-<span class="number">7.3</span>.<span class="number">4</span>]# cp <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>etc<span class="regexp">/php-fpm.d/</span>www.conf.<span class="keyword">default</span> <span class="regexp">/usr/</span>local<span class="regexp">/php/</span>etc<span class="regexp">/php-fpm.d/</span>www.conf </span><br></pre></td></tr></table></figure>
-<h6 id="5-添加php安装目录到系统环境变量"><a href="#5-添加php安装目录到系统环境变量" class="headerlink" title="5.添加php安装目录到系统环境变量"></a>5.添加php安装目录到系统环境变量</h6><p>创建并打开文件php.sh<br>[root@localhost php-7.3.4]# vim &#x2F;etc&#x2F;profile.d&#x2F;php.sh<br>添加内容如下:</p>
-<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">export <span class="title class_">PATH</span>=<span class="variable">$PATH</span><span class="symbol">:/usr/local/php/bin/</span><span class="symbol">:/usr/local/php/sbin/</span> </span><br></pre></td></tr></table></figure>
-<h6 id="6-使用source立即生效刚刚添加的php环境变量"><a href="#6-使用source立即生效刚刚添加的php环境变量" class="headerlink" title="6.使用source立即生效刚刚添加的php环境变量"></a>6.使用source立即生效刚刚添加的php环境变量</h6><figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">[root@localhost php-<span class="number">7.3</span>.<span class="number">4</span>]# <span class="keyword">source</span> /etc/<span class="keyword">profile</span>.d/php.<span class="keyword">sh</span> </span><br></pre></td></tr></table></figure>
-<h6 id="7-启动php-fpm"><a href="#7-启动php-fpm" class="headerlink" title="7.启动php-fpm"></a>7.启动php-fpm</h6><figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> php<span class="number">-7.3</span><span class="number">.4</span>]<span class="meta"># service php-fpm start</span></span><br></pre></td></tr></table></figure>
-<p>看到9000端口也就成功了！！！<br>设置php开机启动</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> php-fpm</span><br></pre></td></tr></table></figure>
-<p>重启后查看端口看看是否存在！<br>然后php中添加如下内容</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">location</span> <span class="regexp">~ \.php$</span> &#123;</span><br><span class="line">    <span class="attribute">root</span>           html;</span><br><span class="line">    <span class="attribute">fastcgi_pass</span>   <span class="number">127.0.0.1:9000</span>;</span><br><span class="line">    <span class="attribute">fastcgi_index</span>  index.php;</span><br><span class="line">    <span class="attribute">fastcgi_param</span>  SCRIPT_FILENAME  <span class="variable">$document_root</span><span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">    <span class="attribute">include</span>        fastcgi_params;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>php</category>
-      </categories>
-      <tags>
-        <tag>php</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>centos nginx安装</title>
     <url>/2023/12/25/centos%20nginx%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<p>centos nginx安装</p>
@@ -317,20 +317,6 @@ $sent_http_transfer_encoding```
       </categories>
       <tags>
         <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mysql占用库占用内存情况</title>
-    <url>/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/</url>
-    <content><![CDATA[<span id="more"></span>
-<h3 id="查看哪个库占用内存情况"><a href="#查看哪个库占用内存情况" class="headerlink" title="查看哪个库占用内存情况"></a>查看哪个库占用内存情况</h3><figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> <span class="symbol">`Database`</span>,</span><br><span class="line"><span class="built_in">SUM</span>(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> <span class="symbol">`Size (MB)`</span></span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.TABLES</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> </span><br><span class="line">table_schema;</span><br></pre></td></tr></table></figure>
-<h3 id="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："><a href="#如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：" class="headerlink" title="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："></a>如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：</h3><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> `<span class="keyword">Database</span>`,</span><br><span class="line"><span class="built_in">table_name</span> <span class="keyword">AS</span> `<span class="keyword">Table</span>`,</span><br><span class="line">(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> `Size (MB)`</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.<span class="keyword">TABLES</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> </span><br><span class="line">(data_length + index_length) <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
@@ -422,6 +408,54 @@ $sent_http_transfer_encoding```
 <li>使用link选项链接的主机ip不需要固定，因为每次新建容器都会检查所链接容器的ip，在&#x2F;etc&#x2F;hosts里生成新的alias 名称对应的ip<br>docker –link 使用了link机制后，可以通过指定的名字来和目标容器通信，这其实是通过给&#x2F;etc&#x2F;hosts中加入名称和IP的解析关系来实现的。</li>
 </ul>
 ]]></content>
+  </entry>
+  <entry>
+    <title>mysql占用库占用内存情况</title>
+    <url>/2024/04/02/mysql%E5%8D%A0%E7%94%A8%E5%BA%93%E5%8D%A0%E7%94%A8%E5%86%85%E5%AD%98%E6%83%85%E5%86%B5/</url>
+    <content><![CDATA[<span id="more"></span>
+<h3 id="查看哪个库占用内存情况"><a href="#查看哪个库占用内存情况" class="headerlink" title="查看哪个库占用内存情况"></a>查看哪个库占用内存情况</h3><figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> <span class="symbol">`Database`</span>,</span><br><span class="line"><span class="built_in">SUM</span>(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> <span class="symbol">`Size (MB)`</span></span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.TABLES</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> </span><br><span class="line">table_schema;</span><br></pre></td></tr></table></figure>
+<h3 id="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："><a href="#如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：" class="headerlink" title="如果你想要查看具体是哪些表占用了内存，可以进一步加入表名："></a>如果你想要查看具体是哪些表占用了内存，可以进一步加入表名：</h3><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">table_schema <span class="keyword">AS</span> `<span class="keyword">Database</span>`,</span><br><span class="line"><span class="built_in">table_name</span> <span class="keyword">AS</span> `<span class="keyword">Table</span>`,</span><br><span class="line">(data_length + index_length) / <span class="number">1024</span> / <span class="number">1024</span> <span class="keyword">AS</span> `Size (MB)`</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">information_schema.<span class="keyword">TABLES</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> </span><br><span class="line">(data_length + index_length) <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql的proxy机制实现读写分离和主从同步</title>
+    <url>/2023/12/25/mysql%E7%9A%84proxy%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E5%92%8C%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</url>
+    <content><![CDATA[<blockquote>
+<p>实现对两台mysql服务器的读写分离操作，两台mysql提供的测试数据库内容一致(这里主要通过手工同步两台mysql测试数据库的内容，没有使用mysql主从，主要是方便测试)<br><img src="/2023/12/25/mysql%E7%9A%84proxy%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E5%92%8C%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/1703465991108.jpg"></p>
+</blockquote>
+<span id="more"></span>
+<h5 id="mysql-proxy部署"><a href="#mysql-proxy部署" class="headerlink" title="mysql-proxy部署"></a>mysql-proxy部署</h5><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">tar zxf mysql-proxy-0.8.5-linux-el6-x86-64bit.tar.gz -C /usr/local    #解压到指定目录</span><br><span class="line">cd /usr/local</span><br><span class="line">mv mysql-proxy-0.8.5-linux-el6-x86-64bit mysql-proxy    #重命名，方便管理</span><br><span class="line">cd mysql-proxy/</span><br><span class="line">mkdir conf    #创建配置文件目录</span><br><span class="line">mkdir log     #创建日志文件目录</span><br><span class="line">vim conf/mysql-proxy.conf    #编写配置文件, 添加如下</span><br><span class="line"></span><br><span class="line">[mysql-proxy]</span><br><span class="line"><span class="attribute">user</span>=root</span><br><span class="line"><span class="attribute">admin-username</span>=root</span><br><span class="line"><span class="attribute">admin-password</span>=root</span><br><span class="line"><span class="comment"># 监听代理地址</span></span><br><span class="line"><span class="attribute">proxy-address</span>=192.168.108.102:4040</span><br><span class="line"><span class="comment"># 写的地址</span></span><br><span class="line"><span class="attribute">proxy-backend-addresses</span>=192.168.108.100:3306</span><br><span class="line"><span class="comment"># 读的地址</span></span><br><span class="line"><span class="attribute">proxy-read-only-backend-addresses</span>=192.168.108.101:3306</span><br><span class="line"><span class="comment"># 读写脚本</span></span><br><span class="line"><span class="attribute">proxy-lua-script</span>=/usr/local/mysql-proxy/share/doc/mysql-proxy/rw-splitting.lua</span><br><span class="line"><span class="attribute">admin-lua-script</span>=/usr/local/mysql-proxy/share/doc/mysql-proxy/admin.lua</span><br><span class="line"><span class="comment"># 日志存放位置</span></span><br><span class="line"><span class="attribute">log-file</span>=/usr/local/mysql-proxy/log/mysql-proxy.log</span><br><span class="line"><span class="comment"># 日志等级 info, debug</span></span><br><span class="line"><span class="attribute">log-level</span>=info</span><br><span class="line"><span class="comment"># 守护进程</span></span><br><span class="line"><span class="attribute">daemon</span>=1</span><br><span class="line"><span class="comment"># 心跳检测</span></span><br><span class="line"><span class="attribute">keepalive</span>=1</span><br></pre></td></tr></table></figure>
+<p>修改lua脚本，默认超过4个连接才会启用读写分离，改为超过2个连接启用读写分离</p>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line">vim <span class="keyword">/usr/</span>local<span class="keyword">/mysql-proxy/</span>share<span class="keyword">/doc/</span>mysql-proxy/rw-splitting.lua</span><br><span class="line">min_idle_<span class="attr">connections</span> <span class="operator">=</span> <span class="number">1</span>,</span><br><span class="line">max_idle_<span class="attr">connections</span> <span class="operator">=</span> <span class="number">2</span>,</span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">ps:</span>我测试都改为了<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>在启动前我们需要为配置文件加上660权限，没有修改权限，则会报错</p>
+<h5 id="mysql主从配置"><a href="#mysql主从配置" class="headerlink" title="mysql主从配置"></a>mysql主从配置</h5><p><img src="/2023/12/25/mysql%E7%9A%84proxy%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E5%92%8C%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/1703466094951.jpg"></p>
+<h6 id="主数据库"><a href="#主数据库" class="headerlink" title="- 主数据库"></a>- 主数据库</h6><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 服务的唯一编号</span></span><br><span class="line"><span class="attr">server-id</span> = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启mysql binlog功能</span></span><br><span class="line"><span class="attr">log-bin</span> = mysql-bin</span><br><span class="line"></span><br><span class="line"><span class="comment"># binlog记录内容的方式，记录被操作的每一行</span></span><br><span class="line"><span class="attr">binlog_format</span> = ROW</span><br><span class="line"></span><br><span class="line"><span class="comment"># 减少记录日志的内容，只记录受影响的列</span></span><br><span class="line"><span class="attr">binlog_row_image</span> = minimal</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定需要复制的数据库名为jgyw</span></span><br><span class="line"><span class="attr">binlog-do-db</span> = jgyw</span><br></pre></td></tr></table></figure>
+<h6 id="修改好配置文件，重启mysql服务"><a href="#修改好配置文件，重启mysql服务" class="headerlink" title="- 修改好配置文件，重启mysql服务"></a>- 修改好配置文件，重启mysql服务</h6><figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">service mysqld restart</span></span><br></pre></td></tr></table></figure>
+<h6 id="创建从库同步数据的账号"><a href="#创建从库同步数据的账号" class="headerlink" title="- 创建从库同步数据的账号"></a>- 创建从库同步数据的账号</h6><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">$ <span class="keyword">grant</span> <span class="keyword">replication</span> slave <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">&#x27;jgyw&#x27;</span>@<span class="string">&#x27;192.168.197.136&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;jgyw@123&#x27;</span>;</span><br><span class="line">$ flush <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：上面这两个命令是在mysql的终端执行的。</strong></p>
+<h6 id="查看主库的状态"><a href="#查看主库的状态" class="headerlink" title="- 查看主库的状态"></a>- 查看主库的状态</h6><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">show master status\G;</span><br><span class="line"> </span><br><span class="line">返回的信息为：</span><br><span class="line"><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">*** 1. row **</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span><br><span class="line"><span class="code">             File: mysql-bin.000002</span></span><br><span class="line"><span class="code">         Position: 2380</span></span><br><span class="line"><span class="code">     Binlog_Do_DB: jgyw</span></span><br><span class="line"><span class="code"> Binlog_Ignore_DB: </span></span><br><span class="line"><span class="code">Executed_Gtid_Set: </span></span><br><span class="line"><span class="code">1 row in set (0.00 sec)</span></span><br></pre></td></tr></table></figure>
+<h6 id="配置从库"><a href="#配置从库" class="headerlink" title="- 配置从库"></a>- 配置从库</h6><p> 修改my.cnf文件，在[mysqld]加入下面的内容：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 服务的唯一编号</span></span><br><span class="line"><span class="attr">server-id</span> = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启mysql binlog功能</span></span><br><span class="line"><span class="attr">log-bin</span> = mysql-bin</span><br><span class="line"></span><br><span class="line"><span class="comment"># binlog记录内容的方式，记录被操作的每一行</span></span><br><span class="line"><span class="attr">binlog_format</span> = ROW</span><br><span class="line"></span><br><span class="line"><span class="comment"># 减少记录日志的内容，只记录受影响的列</span></span><br><span class="line"><span class="attr">binlog_row_image</span> = minimal</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定需要复制的数据库名为jgyw</span></span><br><span class="line"><span class="attr">replicate-do-db</span> = jgyw</span><br></pre></td></tr></table></figure>
+<h6 id="修改好配置文件，重启mysql服务-1"><a href="#修改好配置文件，重启mysql服务-1" class="headerlink" title="- 修改好配置文件，重启mysql服务"></a>- 修改好配置文件，重启mysql服务</h6><figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">service mysqld restart</span></span><br></pre></td></tr></table></figure>
+<h6 id="执行同步命令"><a href="#执行同步命令" class="headerlink" title="- 执行同步命令"></a>- 执行同步命令</h6><p>mysql的终端执行:</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 设置主服务器ip，同步账号密码，同步位置</span></span><br><span class="line"><span class="attribute">change</span> master to master_host=<span class="string">&#x27;192.168.197.135&#x27;</span>,master_user=<span class="string">&#x27;jgyw&#x27;</span>,master_password=<span class="string">&#x27;jgyw@123&#x27;</span>,master_log_file=<span class="string">&#x27;mysql-bin.000002&#x27;</span>,master_log_pos=<span class="number">2380</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启同步功能</span></span><br><span class="line"><span class="attribute">start</span> slave;</span><br></pre></td></tr></table></figure>
+<h6 id="查看从库的状态"><a href="#查看从库的状态" class="headerlink" title="- 查看从库的状态"></a>- 查看从库的状态</h6><p>mysql的终端执行:</p>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line"><span class="built_in">show</span> slave <span class="built_in">status</span>\G;</span><br></pre></td></tr></table></figure>
+<p><img src="/2023/12/25/mysql%E7%9A%84proxy%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E5%92%8C%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/1703466380225.jpg"></p>
+<p>注意：Slave_IO_Running和Slave_SQL_Running的状态都为Yes时，说明从库配置成功。<br><a href="https://blog.csdn.net/haoding205/article/details/81459153">https://blog.csdn.net/haoding205/article/details/81459153</a></p>
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
   </entry>
   <entry>
     <title>mysql 相关问题以及备份常用方法</title>
@@ -550,40 +584,6 @@ xtrabackup 进行增量备份<figure class="highlight mel"><table><tr><td class=
       </tags>
   </entry>
   <entry>
-    <title>mysql的proxy机制实现读写分离和主从同步</title>
-    <url>/2023/12/25/mysql%E7%9A%84proxy%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E5%92%8C%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</url>
-    <content><![CDATA[<blockquote>
-<p>实现对两台mysql服务器的读写分离操作，两台mysql提供的测试数据库内容一致(这里主要通过手工同步两台mysql测试数据库的内容，没有使用mysql主从，主要是方便测试)<br><img src="/2023/12/25/mysql%E7%9A%84proxy%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E5%92%8C%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/1703465991108.jpg"></p>
-</blockquote>
-<span id="more"></span>
-<h5 id="mysql-proxy部署"><a href="#mysql-proxy部署" class="headerlink" title="mysql-proxy部署"></a>mysql-proxy部署</h5><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">tar zxf mysql-proxy-0.8.5-linux-el6-x86-64bit.tar.gz -C /usr/local    #解压到指定目录</span><br><span class="line">cd /usr/local</span><br><span class="line">mv mysql-proxy-0.8.5-linux-el6-x86-64bit mysql-proxy    #重命名，方便管理</span><br><span class="line">cd mysql-proxy/</span><br><span class="line">mkdir conf    #创建配置文件目录</span><br><span class="line">mkdir log     #创建日志文件目录</span><br><span class="line">vim conf/mysql-proxy.conf    #编写配置文件, 添加如下</span><br><span class="line"></span><br><span class="line">[mysql-proxy]</span><br><span class="line"><span class="attribute">user</span>=root</span><br><span class="line"><span class="attribute">admin-username</span>=root</span><br><span class="line"><span class="attribute">admin-password</span>=root</span><br><span class="line"><span class="comment"># 监听代理地址</span></span><br><span class="line"><span class="attribute">proxy-address</span>=192.168.108.102:4040</span><br><span class="line"><span class="comment"># 写的地址</span></span><br><span class="line"><span class="attribute">proxy-backend-addresses</span>=192.168.108.100:3306</span><br><span class="line"><span class="comment"># 读的地址</span></span><br><span class="line"><span class="attribute">proxy-read-only-backend-addresses</span>=192.168.108.101:3306</span><br><span class="line"><span class="comment"># 读写脚本</span></span><br><span class="line"><span class="attribute">proxy-lua-script</span>=/usr/local/mysql-proxy/share/doc/mysql-proxy/rw-splitting.lua</span><br><span class="line"><span class="attribute">admin-lua-script</span>=/usr/local/mysql-proxy/share/doc/mysql-proxy/admin.lua</span><br><span class="line"><span class="comment"># 日志存放位置</span></span><br><span class="line"><span class="attribute">log-file</span>=/usr/local/mysql-proxy/log/mysql-proxy.log</span><br><span class="line"><span class="comment"># 日志等级 info, debug</span></span><br><span class="line"><span class="attribute">log-level</span>=info</span><br><span class="line"><span class="comment"># 守护进程</span></span><br><span class="line"><span class="attribute">daemon</span>=1</span><br><span class="line"><span class="comment"># 心跳检测</span></span><br><span class="line"><span class="attribute">keepalive</span>=1</span><br></pre></td></tr></table></figure>
-<p>修改lua脚本，默认超过4个连接才会启用读写分离，改为超过2个连接启用读写分离</p>
-<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line">vim <span class="keyword">/usr/</span>local<span class="keyword">/mysql-proxy/</span>share<span class="keyword">/doc/</span>mysql-proxy/rw-splitting.lua</span><br><span class="line">min_idle_<span class="attr">connections</span> <span class="operator">=</span> <span class="number">1</span>,</span><br><span class="line">max_idle_<span class="attr">connections</span> <span class="operator">=</span> <span class="number">2</span>,</span><br><span class="line"><span class="symbol"></span></span><br><span class="line"><span class="symbol">ps:</span>我测试都改为了<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>在启动前我们需要为配置文件加上660权限，没有修改权限，则会报错</p>
-<h5 id="mysql主从配置"><a href="#mysql主从配置" class="headerlink" title="mysql主从配置"></a>mysql主从配置</h5><p><img src="/2023/12/25/mysql%E7%9A%84proxy%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E5%92%8C%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/1703466094951.jpg"></p>
-<h6 id="主数据库"><a href="#主数据库" class="headerlink" title="- 主数据库"></a>- 主数据库</h6><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 服务的唯一编号</span></span><br><span class="line"><span class="attr">server-id</span> = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启mysql binlog功能</span></span><br><span class="line"><span class="attr">log-bin</span> = mysql-bin</span><br><span class="line"></span><br><span class="line"><span class="comment"># binlog记录内容的方式，记录被操作的每一行</span></span><br><span class="line"><span class="attr">binlog_format</span> = ROW</span><br><span class="line"></span><br><span class="line"><span class="comment"># 减少记录日志的内容，只记录受影响的列</span></span><br><span class="line"><span class="attr">binlog_row_image</span> = minimal</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定需要复制的数据库名为jgyw</span></span><br><span class="line"><span class="attr">binlog-do-db</span> = jgyw</span><br></pre></td></tr></table></figure>
-<h6 id="修改好配置文件，重启mysql服务"><a href="#修改好配置文件，重启mysql服务" class="headerlink" title="- 修改好配置文件，重启mysql服务"></a>- 修改好配置文件，重启mysql服务</h6><figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">service mysqld restart</span></span><br></pre></td></tr></table></figure>
-<h6 id="创建从库同步数据的账号"><a href="#创建从库同步数据的账号" class="headerlink" title="- 创建从库同步数据的账号"></a>- 创建从库同步数据的账号</h6><figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">$ <span class="keyword">grant</span> <span class="keyword">replication</span> slave <span class="keyword">on</span> *.* <span class="keyword">to</span> <span class="string">&#x27;jgyw&#x27;</span>@<span class="string">&#x27;192.168.197.136&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;jgyw@123&#x27;</span>;</span><br><span class="line">$ flush <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
-<p><strong>注意：上面这两个命令是在mysql的终端执行的。</strong></p>
-<h6 id="查看主库的状态"><a href="#查看主库的状态" class="headerlink" title="- 查看主库的状态"></a>- 查看主库的状态</h6><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">show master status\G;</span><br><span class="line"> </span><br><span class="line">返回的信息为：</span><br><span class="line"><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">*** 1. row **</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span><span class="strong">****</span>*</span><br><span class="line"><span class="code">             File: mysql-bin.000002</span></span><br><span class="line"><span class="code">         Position: 2380</span></span><br><span class="line"><span class="code">     Binlog_Do_DB: jgyw</span></span><br><span class="line"><span class="code"> Binlog_Ignore_DB: </span></span><br><span class="line"><span class="code">Executed_Gtid_Set: </span></span><br><span class="line"><span class="code">1 row in set (0.00 sec)</span></span><br></pre></td></tr></table></figure>
-<h6 id="配置从库"><a href="#配置从库" class="headerlink" title="- 配置从库"></a>- 配置从库</h6><p> 修改my.cnf文件，在[mysqld]加入下面的内容：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 服务的唯一编号</span></span><br><span class="line"><span class="attr">server-id</span> = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启mysql binlog功能</span></span><br><span class="line"><span class="attr">log-bin</span> = mysql-bin</span><br><span class="line"></span><br><span class="line"><span class="comment"># binlog记录内容的方式，记录被操作的每一行</span></span><br><span class="line"><span class="attr">binlog_format</span> = ROW</span><br><span class="line"></span><br><span class="line"><span class="comment"># 减少记录日志的内容，只记录受影响的列</span></span><br><span class="line"><span class="attr">binlog_row_image</span> = minimal</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定需要复制的数据库名为jgyw</span></span><br><span class="line"><span class="attr">replicate-do-db</span> = jgyw</span><br></pre></td></tr></table></figure>
-<h6 id="修改好配置文件，重启mysql服务-1"><a href="#修改好配置文件，重启mysql服务-1" class="headerlink" title="- 修改好配置文件，重启mysql服务"></a>- 修改好配置文件，重启mysql服务</h6><figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">service mysqld restart</span></span><br></pre></td></tr></table></figure>
-<h6 id="执行同步命令"><a href="#执行同步命令" class="headerlink" title="- 执行同步命令"></a>- 执行同步命令</h6><p>mysql的终端执行:</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 设置主服务器ip，同步账号密码，同步位置</span></span><br><span class="line"><span class="attribute">change</span> master to master_host=<span class="string">&#x27;192.168.197.135&#x27;</span>,master_user=<span class="string">&#x27;jgyw&#x27;</span>,master_password=<span class="string">&#x27;jgyw@123&#x27;</span>,master_log_file=<span class="string">&#x27;mysql-bin.000002&#x27;</span>,master_log_pos=<span class="number">2380</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启同步功能</span></span><br><span class="line"><span class="attribute">start</span> slave;</span><br></pre></td></tr></table></figure>
-<h6 id="查看从库的状态"><a href="#查看从库的状态" class="headerlink" title="- 查看从库的状态"></a>- 查看从库的状态</h6><p>mysql的终端执行:</p>
-<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line"><span class="built_in">show</span> slave <span class="built_in">status</span>\G;</span><br></pre></td></tr></table></figure>
-<p><img src="/2023/12/25/mysql%E7%9A%84proxy%E6%9C%BA%E5%88%B6%E5%AE%9E%E7%8E%B0%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB%E5%92%8C%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/1703466380225.jpg"></p>
-<p>注意：Slave_IO_Running和Slave_SQL_Running的状态都为Yes时，说明从库配置成功。<br><a href="https://blog.csdn.net/haoding205/article/details/81459153">https://blog.csdn.net/haoding205/article/details/81459153</a></p>
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>nginx和php-fpm两种通信方式对比UnixSocket和TcpSocket</title>
     <url>/2023/12/25/nginx%E5%92%8Cphp-fpm%E4%B8%A4%E7%A7%8D%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94UnixSocket%E5%92%8CTcpSocket/</url>
     <content><![CDATA[<blockquote>
@@ -599,22 +599,6 @@ xtrabackup 进行增量备份<figure class="highlight mel"><table><tr><td class=
       </categories>
       <tags>
         <tag>php</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>shell 脚本整理</title>
-    <url>/2023/12/29/shell%20%E8%84%9A%E6%9C%AC%E6%95%B4%E7%90%86/</url>
-    <content><![CDATA[<blockquote>
-<p>整理一些日常shell脚本</p>
-</blockquote>
-<span id="more"></span>
-<h6 id="centos-自动同步时间"><a href="#centos-自动同步时间" class="headerlink" title="centos 自动同步时间"></a>centos 自动同步时间</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#author:yc</span></span><br><span class="line"><span class="comment">#自动同步北京时间</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;当前时间:`date`&quot;</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;是否确认更新时间y/n？&quot;</span> st</span><br><span class="line"><span class="keyword">if</span> [ -f /usr/sbin/ntpdate ];<span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;ntpdate已经安装&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        yum install -y ntpdate</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$st</span> = <span class="string">&quot;y&quot;</span> ];<span class="keyword">then</span></span><br><span class="line">        /etc/init.d/iptables stop</span><br><span class="line">        sed -i <span class="string">&quot;/udp -j DROP/i\-A OUTPUT -p udp -m udp --dport 123 -j ACCEPT&quot;</span> /etc/sysconfig/iptables</span><br><span class="line">        /etc/init.d/iptables starta</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ $? -ne 0 ];<span class="keyword">then</span></span><br><span class="line">        ntpdate time2.aliyun.com</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;时间同步成功&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>shell</category>
-      </categories>
-      <tags>
-        <tag>shell</tag>
       </tags>
   </entry>
   <entry>
@@ -710,6 +694,22 @@ xtrabackup 进行增量备份<figure class="highlight mel"><table><tr><td class=
       </categories>
       <tags>
         <tag>rewrite</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>shell 脚本整理</title>
+    <url>/2023/12/29/shell%20%E8%84%9A%E6%9C%AC%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<blockquote>
+<p>整理一些日常shell脚本</p>
+</blockquote>
+<span id="more"></span>
+<h6 id="centos-自动同步时间"><a href="#centos-自动同步时间" class="headerlink" title="centos 自动同步时间"></a>centos 自动同步时间</h6><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#author:yc</span></span><br><span class="line"><span class="comment">#自动同步北京时间</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;当前时间:`date`&quot;</span></span><br><span class="line"><span class="built_in">read</span> -p <span class="string">&quot;是否确认更新时间y/n？&quot;</span> st</span><br><span class="line"><span class="keyword">if</span> [ -f /usr/sbin/ntpdate ];<span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;ntpdate已经安装&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        yum install -y ntpdate</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$st</span> = <span class="string">&quot;y&quot;</span> ];<span class="keyword">then</span></span><br><span class="line">        /etc/init.d/iptables stop</span><br><span class="line">        sed -i <span class="string">&quot;/udp -j DROP/i\-A OUTPUT -p udp -m udp --dport 123 -j ACCEPT&quot;</span> /etc/sysconfig/iptables</span><br><span class="line">        /etc/init.d/iptables starta</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ $? -ne 0 ];<span class="keyword">then</span></span><br><span class="line">        ntpdate time2.aliyun.com</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;时间同步成功&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>shell</category>
+      </categories>
+      <tags>
+        <tag>shell</tag>
       </tags>
   </entry>
   <entry>
@@ -831,21 +831,6 @@ fi
       </categories>
       <tags>
         <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>tcp,ip原理和抓包</title>
-    <url>/2023/12/25/tcp-ip%E5%8E%9F%E7%90%86%E5%92%8C%E6%8A%93%E5%8C%85/</url>
-    <content><![CDATA[<p><img src="/2023/12/25/tcp-ip%E5%8E%9F%E7%90%86%E5%92%8C%E6%8A%93%E5%8C%85/1703464967937.jpg"></p>
-<span id="more"></span>
-<h5 id="TCP连接-SYN-ACK-RST-UTG-PSH-FIN"><a href="#TCP连接-SYN-ACK-RST-UTG-PSH-FIN" class="headerlink" title="TCP连接:SYN ACK RST UTG PSH FIN"></a>TCP连接:SYN ACK RST UTG PSH FIN</h5><p>三次握手：发送端发送一个SYN&#x3D;1，ACK&#x3D;0标志的数据包给接收端，请求进行连接，这是第一次握手；<br>接收端收到请求并且允许连接的话，就会发送一个SYN&#x3D;1，ACK&#x3D;1标志的数据包给发送端，告诉它，可以通讯了，并且让发送端发送一个确认数据包，这是第二次握手；<br>最后，发送端发送一个SYN&#x3D;0，ACK&#x3D;1的数据包给接收端，告诉它连接已被确认，这就是第三次握手。之后，一个TCP连接建立，开始通讯。<br>*<strong>SYN：同步标志</strong><br>同步序列编号(Synchronize Sequence Numbers)栏有效。该标志仅在三次握手建立TCP连接时有效。它提示TCP连接的服务端检查序列编号，该序列编号为TCP连接初始端(一般是客户端)的初始序列编号。<br>在这里，可以把 TCP序列编号看作是一个范围从0到4，294，967，295的32位计数器。通过TCP连接交换的数据中每一个字节都经过序列编号。<br>在TCP报头中的序列编号栏包括了TCP分段中第一个字节的序列编号。</p>
-<p>*<strong>ACK：确认标志</strong><br>确认编号(Acknowledgement Number)栏有效。大多数情况下该标志位是置位的。TCP报头内的确认编号栏内包含的确认编号(w+1，Figure-1)为下一个预期的序列编号，同时提示远端系统已经成功接收所有数据。<br>*<strong>RST：复位标志</strong><br>复位标志有效。用于复位相应的TCP连接。<br>*<strong>URG：紧急标志</strong><br>紧急(The urgent pointer) 标志有效。紧急标志置位，<br>*<strong>PSH：推标志</strong><br>该标志置位时，接收端不将该数据进行队列处理，而是尽可能快将数据转由应用处理。在处理 telnet 或 rlogin 等交互模式的连接时，该标志总是置位的。<br>*<strong>FIN：结束标志</strong><br>带有该标志置位的数据包用来结束一个TCP回话，但对应端口仍处于开放状态，准备接收后续数据。<br>TCP的几个状态对于我们分析所起的作用。在TCP层，有个FLAGS字段，这个字段有以下几个标识：SYN, FIN, ACK, PSH, RST, URG.其中，对于我们日常的分析有用的就是前面的五个字段。它们的含义是：SYN表示建立连接，FIN表示关闭连接，ACK表示响应，PSH表示有 DATA数据传输，RST表示连接重置。<br>其中，ACK是可能与SYN，FIN等同时使用的，比如SYN和ACK可能同时为1，它表示的就是建立连接之后的响应，如果只是单个的一个SYN，它表示的只是建立连接。<br>TCP的几次握手就是通过这样的ACK表现出来的。但SYN与FIN是不会同时为1的，因为前者表示的是建立连接，而后者表示的是断开连接。<br>RST一般是在FIN之后才会出现为1的情况，表示的是连接重置。一般地，当出现FIN包或RST包时，我们便认为客户端与服务器端断开了连接；<br>而当出现SYN和SYN＋ACK包时，我们认为客户端与服务器建立了一个连接。<br>PSH为1的情况，一般只出现在DATA内容不为0的包中，也就是说PSH为1表示的是有真正的TCP数据包内容被传递。TCP的连接建立和连接关闭，都是通过请求－响应的模式完成的。</p>
-]]></content>
-      <categories>
-        <category>system</category>
-      </categories>
-      <tags>
-        <tag>system</tag>
       </tags>
   </entry>
   <entry>
@@ -987,6 +972,21 @@ fi
       </tags>
   </entry>
   <entry>
+    <title>tcp,ip原理和抓包</title>
+    <url>/2023/12/25/tcp-ip%E5%8E%9F%E7%90%86%E5%92%8C%E6%8A%93%E5%8C%85/</url>
+    <content><![CDATA[<p><img src="/2023/12/25/tcp-ip%E5%8E%9F%E7%90%86%E5%92%8C%E6%8A%93%E5%8C%85/1703464967937.jpg"></p>
+<span id="more"></span>
+<h5 id="TCP连接-SYN-ACK-RST-UTG-PSH-FIN"><a href="#TCP连接-SYN-ACK-RST-UTG-PSH-FIN" class="headerlink" title="TCP连接:SYN ACK RST UTG PSH FIN"></a>TCP连接:SYN ACK RST UTG PSH FIN</h5><p>三次握手：发送端发送一个SYN&#x3D;1，ACK&#x3D;0标志的数据包给接收端，请求进行连接，这是第一次握手；<br>接收端收到请求并且允许连接的话，就会发送一个SYN&#x3D;1，ACK&#x3D;1标志的数据包给发送端，告诉它，可以通讯了，并且让发送端发送一个确认数据包，这是第二次握手；<br>最后，发送端发送一个SYN&#x3D;0，ACK&#x3D;1的数据包给接收端，告诉它连接已被确认，这就是第三次握手。之后，一个TCP连接建立，开始通讯。<br>*<strong>SYN：同步标志</strong><br>同步序列编号(Synchronize Sequence Numbers)栏有效。该标志仅在三次握手建立TCP连接时有效。它提示TCP连接的服务端检查序列编号，该序列编号为TCP连接初始端(一般是客户端)的初始序列编号。<br>在这里，可以把 TCP序列编号看作是一个范围从0到4，294，967，295的32位计数器。通过TCP连接交换的数据中每一个字节都经过序列编号。<br>在TCP报头中的序列编号栏包括了TCP分段中第一个字节的序列编号。</p>
+<p>*<strong>ACK：确认标志</strong><br>确认编号(Acknowledgement Number)栏有效。大多数情况下该标志位是置位的。TCP报头内的确认编号栏内包含的确认编号(w+1，Figure-1)为下一个预期的序列编号，同时提示远端系统已经成功接收所有数据。<br>*<strong>RST：复位标志</strong><br>复位标志有效。用于复位相应的TCP连接。<br>*<strong>URG：紧急标志</strong><br>紧急(The urgent pointer) 标志有效。紧急标志置位，<br>*<strong>PSH：推标志</strong><br>该标志置位时，接收端不将该数据进行队列处理，而是尽可能快将数据转由应用处理。在处理 telnet 或 rlogin 等交互模式的连接时，该标志总是置位的。<br>*<strong>FIN：结束标志</strong><br>带有该标志置位的数据包用来结束一个TCP回话，但对应端口仍处于开放状态，准备接收后续数据。<br>TCP的几个状态对于我们分析所起的作用。在TCP层，有个FLAGS字段，这个字段有以下几个标识：SYN, FIN, ACK, PSH, RST, URG.其中，对于我们日常的分析有用的就是前面的五个字段。它们的含义是：SYN表示建立连接，FIN表示关闭连接，ACK表示响应，PSH表示有 DATA数据传输，RST表示连接重置。<br>其中，ACK是可能与SYN，FIN等同时使用的，比如SYN和ACK可能同时为1，它表示的就是建立连接之后的响应，如果只是单个的一个SYN，它表示的只是建立连接。<br>TCP的几次握手就是通过这样的ACK表现出来的。但SYN与FIN是不会同时为1的，因为前者表示的是建立连接，而后者表示的是断开连接。<br>RST一般是在FIN之后才会出现为1的情况，表示的是连接重置。一般地，当出现FIN包或RST包时，我们便认为客户端与服务器端断开了连接；<br>而当出现SYN和SYN＋ACK包时，我们认为客户端与服务器建立了一个连接。<br>PSH为1的情况，一般只出现在DATA内容不为0的包中，也就是说PSH为1表示的是有真正的TCP数据包内容被传递。TCP的连接建立和连接关闭，都是通过请求－响应的模式完成的。</p>
+]]></content>
+      <categories>
+        <category>system</category>
+      </categories>
+      <tags>
+        <tag>system</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何在 Linux/Unix/Windows 中发现隐藏的进程和端口</title>
     <url>/2023/12/15/%E5%A6%82%E4%BD%95%E5%9C%A8%20LinuxUnixWindows%20%E4%B8%AD%E5%8F%91%E7%8E%B0%E9%9A%90%E8%97%8F%E7%9A%84%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%AB%AF%E5%8F%A3/</url>
     <content><![CDATA[<h4 id="如何在-Linux-Unix-Windows-中发现隐藏的进程和端口"><a href="#如何在-Linux-Unix-Windows-中发现隐藏的进程和端口" class="headerlink" title="如何在 Linux&#x2F;Unix&#x2F;Windows 中发现隐藏的进程和端口"></a>如何在 Linux&#x2F;Unix&#x2F;Windows 中发现隐藏的进程和端口</h4><span id="more"></span>
@@ -1023,22 +1023,6 @@ fi
       </tags>
   </entry>
   <entry>
-    <title>宝塔任务计划不执行原因排查</title>
-    <url>/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/</url>
-    <content><![CDATA[<blockquote>
-<p>宝塔设置任务计划以后不执行，手动执行是成功的</p>
-</blockquote>
-<span id="more"></span>
-<h4 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h4><p>vi &#x2F;var&#x2F;log&#x2F;cron 查看任务计划执行日志如下<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132221.png"><br><strong>(root) FAILED to authorize user with PAM (Authentication token is no longer valid; new one required)</strong><br>发现是认证过期了，通过chage -l root可以查看到如下内容<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132530.png"><br>如果不需要设置过期可以使用chage -M 99999 root为永不过期<br>修改密码以后再测试cron执行成功了</p>
-]]></content>
-      <categories>
-        <category>software</category>
-      </categories>
-      <tags>
-        <tag>software</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>宝塔面板环境站点开启CDN后如何获取真实IP地址（多设置方法）</title>
     <url>/2024/09/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E7%8E%AF%E5%A2%83%E7%AB%99%E7%82%B9%E5%BC%80%E5%90%AFCDN%E5%90%8E%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80%EF%BC%88%E5%A4%9A%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%89/</url>
     <content><![CDATA[<blockquote>
@@ -1065,6 +1049,22 @@ fi
       </categories>
       <tags>
         <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>宝塔任务计划不执行原因排查</title>
+    <url>/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/</url>
+    <content><![CDATA[<blockquote>
+<p>宝塔设置任务计划以后不执行，手动执行是成功的</p>
+</blockquote>
+<span id="more"></span>
+<h4 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h4><p>vi &#x2F;var&#x2F;log&#x2F;cron 查看任务计划执行日志如下<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132221.png"><br><strong>(root) FAILED to authorize user with PAM (Authentication token is no longer valid; new one required)</strong><br>发现是认证过期了，通过chage -l root可以查看到如下内容<br><img src="/2024/09/20/%E5%AE%9D%E5%A1%94%E4%BB%BB%E5%8A%A1%E8%AE%A1%E5%88%92%E4%B8%8D%E6%89%A7%E8%A1%8C%E5%8E%9F%E5%9B%A0%E6%8E%92%E6%9F%A5/QQ20240920-132530.png"><br>如果不需要设置过期可以使用chage -M 99999 root为永不过期<br>修改密码以后再测试cron执行成功了</p>
+]]></content>
+      <categories>
+        <category>software</category>
+      </categories>
+      <tags>
+        <tag>software</tag>
       </tags>
   </entry>
   <entry>

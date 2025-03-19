@@ -30,7 +30,7 @@
 <meta property="og:description" content="docker volume 命令用于管理 Docker 卷（volume）。卷是用于持久化数据的文件系统，可以在容器之间共享和重用。通过使用卷，数据可以在容器停止或删除时仍然保留。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-03-18T09:37:53.000Z">
-<meta property="article:modified_time" content="2025-03-18T09:41:02.251Z">
+<meta property="article:modified_time" content="2025-03-19T06:55:19.367Z">
 <meta property="article:author" content="yccoin">
 <meta property="article:tag" content="我们不生产技术，只是技术的搬运工">
 <meta name="twitter:card" content="summary">
@@ -130,7 +130,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -143,6 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8-docker-volume-%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">常用 docker volume 命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8D%B7%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">数据卷的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8C%82%E8%BD%BD%E5%8D%B7volume"><span class="nav-number">2.1.</span> <span class="nav-text">挂载卷volume</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8C%BF%E5%90%8D%E5%8D%B7"><span class="nav-number">2.1.1.</span> <span class="nav-text">匿名卷</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%85%B7%E5%90%8D%E5%8D%B7"><span class="nav-number">2.1.2.</span> <span class="nav-text">具名卷</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E6%8C%82%E8%BD%BD-bind"><span class="nav-number">2.2.</span> <span class="nav-text">绑定挂载(bind)</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -236,9 +237,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-03-18 17:37:53 / 修改时间：17:41:02" itemprop="dateCreated datePublished" datetime="2025-03-18T17:37:53+08:00">2025-03-18</time>
+      <time title="创建时间：2025-03-18 17:37:53" itemprop="dateCreated datePublished" datetime="2025-03-18T17:37:53+08:00">2025-03-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-03-19 14:55:19" itemprop="dateModified" datetime="2025-03-19T14:55:19+08:00">2025-03-19</time>
     </span>
 
   
@@ -254,14 +261,40 @@
 <p>docker volume 命令用于管理 Docker 卷（volume）。卷是用于持久化数据的文件系统，可以在容器之间共享和重用。通过使用卷，数据可以在容器停止或删除时仍然保留。</p>
 </blockquote>
 <span id="more"></span>
-<p>常用 docker volume 命令</p>
-<ul>
+<h4 id="常用-docker-volume-命令"><a href="#常用-docker-volume-命令" class="headerlink" title="常用 docker volume 命令"></a>常用 docker volume 命令</h4><ul>
 <li>docker volume ls: 列出所有卷</li>
 <li>docker volume inspect: 查看卷的详细信息</li>
 <li>docker volume create: 创建一个新卷</li>
 <li>docker volume rm: 删除一个或多个卷</li>
 <li>docker volume prune: 删除未使用的卷</li>
 </ul>
+<h4 id="数据卷的特点"><a href="#数据卷的特点" class="headerlink" title="数据卷的特点"></a><strong>数据卷的特点</strong></h4><p>Docker 数据卷是 Docker 容器中持久存储数据的机制，具有以下特点：</p>
+<ol>
+<li>持久性：数据卷独立于容器的生命周期，容器删除后数据卷仍然存在，可以被其他容器挂载和使用。</li>
+<li>共享性：多个容器可以共享同一个数据卷，实现数据在容器之间的共享和传递。</li>
+<li>数据卷可以提供外部数据：可以将主机文件系统的目录或文件挂载为数据卷，容器可以直接访问主机上的数据。</li>
+<li>容器之间隔离：即使多个容器共享同一个数据卷，它们之间的操作仍然是相互隔离的，不会相互影响。</li>
+<li>高性能：与将数据存储在容器内部相比，使用数据卷通常具有更高的性能，因为数据卷可以利用主机文件系统的优势。</li>
+<li>可备份和恢复：可以轻松备份和恢复数据卷中的数据，方便进行数据管理和迁移。</li>
+</ol>
+<hr>
+<p>一般有两种方式volume和bind<br>区别就是volume是创建具体卷，然后docker run时挂载，bind是映射本地路径到docker内部</p>
+<h5 id="挂载卷volume"><a href="#挂载卷volume" class="headerlink" title="挂载卷volume"></a>挂载卷volume</h5><h6 id="匿名卷"><a href="#匿名卷" class="headerlink" title="匿名卷"></a>匿名卷</h6><p>什么也不需要写，也不要加冒号，直接写容器内的目录 实际上是系统自动生成一个卷的名字</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d <span class="attr">--name</span> nginx -<span class="selector-tag">P</span> -v /usr/share/nginx/<span class="selector-tag">html</span> nginx</span><br></pre></td></tr></table></figure>
+<p>docker inspect nginx</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;Mounts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;Type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;volume&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;Name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;6cdfbbd3af615d05c810683e6769dc546339a72f59a1afecc42e2b272b092c1f&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;Source&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/var/lib/docker/volumes/6cdfbbd3af615d05c810683e6769dc546339a72f59a1afecc42e2b272b092c1f/_data&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;Destination&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/usr/share/nginx/html&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;Driver&quot;</span><span class="punctuation">:</span> <span class="string">&quot;local&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;Mode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;RW&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;Propagation&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+<p>测试持久化</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">入容器内目录创建<span class="built_in">test</span>文件</span><br><span class="line">docker <span class="built_in">exec</span> -it e58f27acf6a9 bash</span><br><span class="line"><span class="built_in">touch</span> test.html</span><br></pre></td></tr></table></figure>
+<h6 id="具名卷"><a href="#具名卷" class="headerlink" title="具名卷"></a>具名卷</h6><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">首先创建一个 <span class="keyword">volume</span><span class="language-bash"> nginx</span></span><br></pre></td></tr></table></figure>
+<p>docker volume create nginx</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用具名卷映射</span><br></pre></td></tr></table></figure>
+<p> docker run -d –name nginx -P -v nginx:&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html nginx<br> <figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">        <span class="string">&quot;Mounts&quot;</span>: [</span><br><span class="line">           &#123;</span><br><span class="line">               <span class="string">&quot;Type&quot;</span>: <span class="string">&quot;volume&quot;</span>,</span><br><span class="line">               <span class="string">&quot;Name&quot;</span>: <span class="string">&quot;nginx&quot;</span>,</span><br><span class="line">               <span class="string">&quot;Source&quot;</span>: <span class="string">&quot;/var/lib/docker/volumes/nginx/_data&quot;</span>,</span><br><span class="line">               <span class="string">&quot;Destination&quot;</span>: <span class="string">&quot;/usr/share/nginx/html&quot;</span>,</span><br><span class="line">               <span class="string">&quot;Driver&quot;</span>: <span class="string">&quot;local&quot;</span>,</span><br><span class="line">               <span class="string">&quot;Mode&quot;</span>: <span class="string">&quot;z&quot;</span>,</span><br><span class="line">               <span class="string">&quot;RW&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">               <span class="string">&quot;Propagation&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">           &#125;</span><br><span class="line">       ],</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h5 id="绑定挂载-bind"><a href="#绑定挂载-bind" class="headerlink" title="绑定挂载(bind)"></a>绑定挂载(bind)</h5><p>将本地主机的 path 映射到 容器里</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name nginx -P -v /tmp/nginx:/usr/share/nginx/html nginx</span><br><span class="line"><span class="number">290</span>dc<span class="number">693</span><span class="keyword">c</span><span class="number">156</span>a<span class="number">28e34160</span>fbce<span class="number">8</span>d<span class="number">222</span><span class="keyword">c</span><span class="number">7</span>f<span class="number">4</span><span class="keyword">c</span><span class="number">4</span>fc<span class="number">01</span>ecfc<span class="number">670628</span><span class="keyword">c</span><span class="number">6</span>d<span class="number">41517</span>ea<span class="number">532</span>b</span><br></pre></td></tr></table></figure>
+<p>查看容器</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]~ docker inspect nginx</span><br><span class="line">...</span><br><span class="line"><span class="string">&quot;Mounts&quot;</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;Type&quot;</span>: <span class="string">&quot;bind&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Source&quot;</span>: <span class="string">&quot;/tmp/nginx&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Destination&quot;</span>: <span class="string">&quot;/usr/share/nginx/html&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Mode&quot;</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">                <span class="string">&quot;RW&quot;</span>: true,</span><br><span class="line">                <span class="string">&quot;Propagation&quot;</span>: <span class="string">&quot;rprivate&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>查看所有volume，可以看出来没有多出来的 volume name</p>
+<p>使用 bind 方式做数据卷的映射时，首次 docker run -v 运行，如果本机的文件夹是没有内容的，docker容器中的文件夹是有内容的，则本机的会覆盖dokcer容器中的，也就是容器中原本有内容的也会没有内容<br>如果本机的文件夹是有内容的，docker容器中的文件夹是有内容的，则本机的会覆盖dokcer容器中的 由于宿主机上 &#x2F;tmp&#x2F;nginx 这个目录底下没有文件，所以容器内的数据会被主机目录覆盖清空。</p>
 
     </div>
 

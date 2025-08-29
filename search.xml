@@ -979,6 +979,60 @@ fi
       </tags>
   </entry>
   <entry>
+    <title>两台主机通过rsync同步数据</title>
+    <url>/2025/08/29/%E4%B8%A4%E5%8F%B0%E4%B8%BB%E6%9C%BA%E9%80%9A%E8%BF%87rsync%E5%90%8C%E6%AD%A5%E6%95%B0%E6%8D%AE/</url>
+    <content><![CDATA[<blockquote>
+<p>rsync 是一种高效的文件同步工具，能够通过网络在两台服务器之间进行增量数据同步</p>
+</blockquote>
+<span id="more"></span>
+<ul>
+<li>SSH 模式（推荐新手）：A 和 B 都安装 rsync 工具（无需启动服务），通过 SSH 通信。</li>
+<li>daemon 模式（适合大规模部署）：仅 B 安装并启动 rsync 服务，A 作为客户端安装 rsync 工具即可。</li>
+</ul>
+<h3 id="daemon-模式"><a href="#daemon-模式" class="headerlink" title="daemon 模式"></a>daemon 模式</h3><blockquote>
+<p>A,B两台服务器同步数据，其中A作为服务端，B拉取A上数据</p>
+</blockquote>
+<h4 id="源服务器-A-配置-rsync-服务"><a href="#源服务器-A-配置-rsync-服务" class="headerlink" title="源服务器 A 配置 rsync 服务"></a>源服务器 A 配置 rsync 服务</h4><h5 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h5><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">uid = root</span><br><span class="line">gid = root</span><br><span class="line">use chroot = no</span><br><span class="line">max connections = <span class="number">5</span></span><br><span class="line">pid <span class="built_in">file</span> = /var/<span class="built_in">run</span>/rsyncd.pid</span><br><span class="line"><span class="built_in">log</span> <span class="built_in">file</span> = /var/<span class="built_in">log</span>/rsyncd.<span class="built_in">log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 模块配置（A 上需要被 B 拉取的目录）</span></span><br><span class="line">[aaa]               <span class="comment"># 模块名（B 拉取时需要指定）</span></span><br><span class="line">path = /home/     <span class="comment"># A 上的源数据目录</span></span><br><span class="line">comment = Data <span class="keyword">to</span> be pulled <span class="keyword">by</span> B</span><br><span class="line"><span class="built_in">read</span> only = yes             <span class="comment"># 只读（防止 B 意外修改 A 的数据）</span></span><br><span class="line"><span class="built_in">list</span> = yes</span><br><span class="line">auth users = testtest     <span class="comment"># 允许 B 访问的用户</span></span><br><span class="line">secrets <span class="built_in">file</span> = /etc/rsyncd.passwd  <span class="comment"># A 上的密码文件</span></span><br><span class="line">hosts allow = <span class="number">211.149</span><span class="number">.227</span><span class="number">.160</span>          <span class="comment"># 仅允许 B 的 IP 访问</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="创建密码文件"><a href="#创建密码文件" class="headerlink" title="创建密码文件"></a>创建密码文件</h5><p>在 A 上设置授权用户和密码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;rsync_user:your_password&quot;</span> &gt; /etc/rsyncd.passwd</span><br><span class="line"><span class="built_in">chmod</span> 600 /etc/rsyncd.passwd  <span class="comment"># 必须设置 600 权限</span></span><br></pre></td></tr></table></figure>
+<h5 id="启动-rsync-服务"><a href="#启动-rsync-服务" class="headerlink" title="启动 rsync 服务"></a>启动 rsync 服务</h5><figure class="highlight nsis"><table><tr><td class="code"><pre><span class="line"><span class="params">system</span>ctl start rsyncd</span><br><span class="line"><span class="params">system</span>ctl enable rsyncd</span><br><span class="line"><span class="comment"># 开放 873 端口（防火墙配置同前）</span></span><br></pre></td></tr></table></figure>
+<h5 id="防火墙配置（如果启用）"><a href="#防火墙配置（如果启用）" class="headerlink" title="防火墙配置（如果启用）"></a>防火墙配置（如果启用）</h5><figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="comment"># CentOS/RHEL</span></span><br><span class="line">firewall-cmd <span class="params">--add-port=873/tcp</span> <span class="params">--permanent</span></span><br><span class="line">firewall-cmd <span class="params">--reload</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Ubuntu/Debian</span></span><br><span class="line">ufw allow 873/tcp</span><br><span class="line">ufw <span class="keyword">reload</span></span><br></pre></td></tr></table></figure>
+<h4 id="目标服务器-B-配置（客户端，主动拉取）"><a href="#目标服务器-B-配置（客户端，主动拉取）" class="headerlink" title="目标服务器 B 配置（客户端，主动拉取）"></a>目标服务器 B 配置（客户端，主动拉取）</h4><h5 id="安装-rsync-工具（无需启动服务"><a href="#安装-rsync-工具（无需启动服务" class="headerlink" title="安装 rsync 工具（无需启动服务)"></a>安装 rsync 工具（无需启动服务)</h5><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="comment"># CentOS/RHEL</span></span><br><span class="line">yum <span class="keyword">install</span> rsync -y</span><br><span class="line"><span class="comment"># Ubuntu/Debian</span></span><br><span class="line">apt-get <span class="keyword">install</span> rsync -y</span><br></pre></td></tr></table></figure>
+<h5 id="创建密码文件（仅包含密码，与-A-一致）"><a href="#创建密码文件（仅包含密码，与-A-一致）" class="headerlink" title="创建密码文件（仅包含密码，与 A 一致）"></a>创建密码文件（仅包含密码，与 A 一致）</h5><p>echo “your_password” &gt; &#x2F;etc&#x2F;rsync_client.pass<br>chmod 600 &#x2F;etc&#x2F;rsync_client.pass</p>
+<h5 id="测试拉取命令"><a href="#测试拉取命令" class="headerlink" title="测试拉取命令"></a>测试拉取命令</h5><p>rsync -avz –password-file&#x3D;&#x2F;etc&#x2F;rsync_client.pass rsync_user@A_IP::source_data &#x2F;B的目标目录&#x2F;</p>
+<ul>
+<li>source_data 是 A 上配置的模块名</li>
+<li>&#x2F;B的目标目录&#x2F; 是 B 上存储拉取数据的路径</li>
+</ul>
+<h5 id="自动化拉取（B-定时任务）"><a href="#自动化拉取（B-定时任务）" class="headerlink" title="自动化拉取（B 定时任务）"></a>自动化拉取（B 定时任务）</h5><figure class="highlight dts"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br><span class="line"><span class="meta"># 添加任务（每天凌晨 4 点从 A 拉取数据）</span></span><br><span class="line"><span class="number">0</span> <span class="number">4</span> * * * rsync -avz --<span class="attr">password-file</span><span class="operator">=</span><span class="keyword">/etc/</span>rsync_client.pass rsync_user@A_IP::source_data /B的目标目录/ &gt;&gt; <span class="keyword">/var/</span>log/rsync_pull.log <span class="number">2</span>&gt;<span class="variable">&amp;1</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>如果B作为rsync服务器，A同步数据到B，服务安装到B上，安装方式和之前一样<br>从服务器 A 同步数据到服务器 B，命令格式：</p>
+<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">rsync -avz --password-<span class="keyword">file</span>=<span class="regexp">/etc/</span>rsync_client.pass <span class="regexp">/本地需要同步的目录/</span> rsync_user@B_IP::sync_data</span><br><span class="line"># 同步 <span class="regexp">/data/</span><span class="keyword">source</span> 目录到服务器 B 的 sync_data 模块（对应 <span class="regexp">/data/</span>to/sync 目录）</span><br><span class="line">rsync -avz --password-<span class="keyword">file</span>=<span class="regexp">/etc/</span>rsync_client.pass <span class="regexp">/data/</span><span class="keyword">source</span>/ rsync_user@<span class="number">192.168</span>.<span class="number">1.100</span>::sync_data</span><br></pre></td></tr></table></figure>
+<ul>
+<li>–password-file：指定密码文件，避免手动输入密码</li>
+<li>B_IP::sync_data：sync_data 是服务器 B 配置文件中定义的模块名</li>
+</ul>
+<h3 id="SSH-模式"><a href="#SSH-模式" class="headerlink" title="SSH 模式"></a>SSH 模式</h3><blockquote>
+<p>两台服务器（源服务器 A 和目标服务器 B）需安装 rsync<br>确保服务器之间网络互通（默认使用 SSH 端口 22）<br>推荐使用 SSH 密钥认证实现免密登录（提高安全性和自动化能力）</p>
+</blockquote>
+<h5 id="安装-rsync"><a href="#安装-rsync" class="headerlink" title="安装 rsync"></a>安装 rsync</h5><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="comment"># CentOS/RHEL 系统</span></span><br><span class="line">yum <span class="keyword">install</span> rsync -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># Ubuntu/Debian 系统</span></span><br><span class="line">apt-get <span class="keyword">install</span> rsync -y</span><br></pre></td></tr></table></figure>
+<h5 id="配置-SSH-免密登录（推荐）"><a href="#配置-SSH-免密登录（推荐）" class="headerlink" title="配置 SSH 免密登录（推荐）"></a>配置 SSH 免密登录（推荐）</h5><p>在源服务器 A 生成密钥对：</p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -P <span class="string">&quot;&quot;</span>  <span class="meta"># 一路回车，生成无密码密钥对</span></span><br></pre></td></tr></table></figure>
+<p>将公钥复制到目标服务器 B</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">ssh<span class="operator">-</span><span class="keyword">copy</span><span class="operator">-</span>id <span class="keyword">user</span><span class="variable">@B_IP</span>  # <span class="keyword">user</span> 是服务器 B 的用户名，B_IP 是服务器 B 的 IP 地址</span><br></pre></td></tr></table></figure>
+<p>验证免密登录</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ssh</span> user<span class="variable">@B_IP</span>  <span class="comment"># 无需输入密码即可登录则配置成功</span></span><br></pre></td></tr></table></figure>
+<h5 id="rsync-同步命令及常用场景"><a href="#rsync-同步命令及常用场景" class="headerlink" title="rsync 同步命令及常用场景"></a>rsync 同步命令及常用场景</h5><p>基础同步命令格式</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">rsync <span class="selector-attr">[选项]</span> 源路径 目标路径</span><br></pre></td></tr></table></figure>
+<h5 id="常用场景示例"><a href="#常用场景示例" class="headerlink" title="常用场景示例"></a>常用场景示例</h5><p>从本地（A）同步到远程（B）</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 同步单个文件</span></span><br><span class="line">rsync -avz /local/path/file.txt user<span class="variable">@B_IP</span><span class="symbol">:/remote/path/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同步目录（注意源目录后是否带 / 的区别）</span></span><br><span class="line">rsync -avz /local/dir/ user<span class="variable">@B_IP</span><span class="symbol">:/remote/dir/</span>  <span class="comment"># 同步目录内内容（不含目录本身）</span></span><br><span class="line">rsync -avz /local/dir user<span class="variable">@B_IP</span><span class="symbol">:/remote/</span>       <span class="comment"># 同步目录本身及内容</span></span><br></pre></td></tr></table></figure>
+<h5 id="从远程（B）同步到本地（A）"><a href="#从远程（B）同步到本地（A）" class="headerlink" title="从远程（B）同步到本地（A）"></a>从远程（B）同步到本地（A）</h5><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">rsync -avz user<span class="variable">@B_IP</span><span class="symbol">:/remote/path/</span> /local/path/</span><br></pre></td></tr></table></figure>
+<h5 id="常用选项说明"><a href="#常用选项说明" class="headerlink" title="常用选项说明"></a>常用选项说明</h5><p>-a：归档模式（递归同步并保留几乎所有文件属性）<br>-v：显示详细同步过程<br>-z：传输时压缩数据（节省带宽）<br>-delete：删除目标端存在但源端不存在的文件（保持完全一致）<br>-P：断点续传（显示进度并保留部分传输的文件）</p>
+<h5 id="自动化同步配置（定时任务）"><a href="#自动化同步配置（定时任务）" class="headerlink" title="自动化同步配置（定时任务）"></a>自动化同步配置（定时任务）</h5><p>如果需要定期自动同步，可通过 crontab 设置定时任务</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br><span class="line"><span class="comment"># 每天凌晨 2 点同步本地目录到远程服务器</span></span><br><span class="line"><span class="number">0</span> <span class="number">2</span> * * * rsync -avz --delete /local/dir/ user<span class="variable">@B_IP</span><span class="symbol">:/remote/dir/</span> &gt;&gt; <span class="regexp">/var/log</span><span class="regexp">/rsync.log 2&gt;&amp;1</span></span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
     <title>多线程，多进程，携程，异步</title>
     <url>/2023/12/18/%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%EF%BC%8C%E6%90%BA%E7%A8%8B%EF%BC%8C%E5%BC%82%E6%AD%A5/</url>
     <content><![CDATA[<h4 id="multiprocessing-多进程"><a href="#multiprocessing-多进程" class="headerlink" title="multiprocessing 多进程"></a>multiprocessing 多进程</h4><blockquote>

@@ -1240,19 +1240,6 @@ fi
       </tags>
   </entry>
   <entry>
-    <title>批处理查找畸形文件并删除</title>
-    <url>/2023/12/15/%E6%89%B9%E5%A4%84%E7%90%86%E6%9F%A5%E6%89%BE%E7%95%B8%E5%BD%A2%E6%96%87%E4%BB%B6%E5%B9%B6%E5%88%A0%E9%99%A4/</url>
-    <content><![CDATA[<h3 id="批处理查找畸形文件并删除"><a href="#批处理查找畸形文件并删除" class="headerlink" title="批处理查找畸形文件并删除"></a>批处理查找畸形文件并删除</h3><span id="more"></span>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@echo off</span><br><span class="line">setlocal enabledelayedexpansion</span><br><span class="line">title 畸形文件查杀</span><br><span class="line">::文件匹配正则</span><br><span class="line">set &quot;reg=\\nul \\nul\.[^\\]* \\com[1-9] \\com[1-9]\.[^\\]* \\aux \\aux\.[^\\]* \\con \\con\.[^\\]* \\prn \\prn\.[^\\]* \.&quot;</span><br><span class="line">::设置窗口颜色</span><br><span class="line">color 6b</span><br><span class="line">::检测路径是否存在</span><br><span class="line">:checkexist</span><br><span class="line">set /p dir=请输入需要查杀的路径:</span><br><span class="line">if &quot;%dir%&quot; ==&quot;&quot; (</span><br><span class="line">echo 输入为空，请重新输入</span><br><span class="line">call :checkexist</span><br><span class="line">)else (</span><br><span class="line">call :listdir</span><br><span class="line">)</span><br><span class="line">::列出畸形文件名和所在目录</span><br><span class="line">:listdir</span><br><span class="line">cd /d %dir%</span><br><span class="line">for /f &quot;delims=&quot; %%i in (&#x27;dir /b /a /s ^| findstr /i /r /e &quot;%reg%&quot;&#x27;) do (</span><br><span class="line">    echo  &quot;%%i&quot;</span><br><span class="line">    rd /s /q &quot;\\?\%%i&quot;</span><br><span class="line">    del /q /f /a &quot;\\?\%%i&quot;</span><br><span class="line">    echo 已经删除</span><br><span class="line">    pause</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>bat</category>
-      </categories>
-      <tags>
-        <tag>bat</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>帝国CMS从HTTP升级到HTTPS 登录网站后台空白</title>
     <url>/2024/05/08/%E5%B8%9D%E5%9B%BDCMS%E4%BB%8EHTTP%E5%8D%87%E7%BA%A7%E5%88%B0HTTPS%20%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E7%A9%BA%E7%99%BD/</url>
     <content><![CDATA[<blockquote>
@@ -1275,6 +1262,36 @@ fi
       </categories>
       <tags>
         <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>批处理查找畸形文件并删除</title>
+    <url>/2023/12/15/%E6%89%B9%E5%A4%84%E7%90%86%E6%9F%A5%E6%89%BE%E7%95%B8%E5%BD%A2%E6%96%87%E4%BB%B6%E5%B9%B6%E5%88%A0%E9%99%A4/</url>
+    <content><![CDATA[<h3 id="批处理查找畸形文件并删除"><a href="#批处理查找畸形文件并删除" class="headerlink" title="批处理查找畸形文件并删除"></a>批处理查找畸形文件并删除</h3><span id="more"></span>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@echo off</span><br><span class="line">setlocal enabledelayedexpansion</span><br><span class="line">title 畸形文件查杀</span><br><span class="line">::文件匹配正则</span><br><span class="line">set &quot;reg=\\nul \\nul\.[^\\]* \\com[1-9] \\com[1-9]\.[^\\]* \\aux \\aux\.[^\\]* \\con \\con\.[^\\]* \\prn \\prn\.[^\\]* \.&quot;</span><br><span class="line">::设置窗口颜色</span><br><span class="line">color 6b</span><br><span class="line">::检测路径是否存在</span><br><span class="line">:checkexist</span><br><span class="line">set /p dir=请输入需要查杀的路径:</span><br><span class="line">if &quot;%dir%&quot; ==&quot;&quot; (</span><br><span class="line">echo 输入为空，请重新输入</span><br><span class="line">call :checkexist</span><br><span class="line">)else (</span><br><span class="line">call :listdir</span><br><span class="line">)</span><br><span class="line">::列出畸形文件名和所在目录</span><br><span class="line">:listdir</span><br><span class="line">cd /d %dir%</span><br><span class="line">for /f &quot;delims=&quot; %%i in (&#x27;dir /b /a /s ^| findstr /i /r /e &quot;%reg%&quot;&#x27;) do (</span><br><span class="line">    echo  &quot;%%i&quot;</span><br><span class="line">    rd /s /q &quot;\\?\%%i&quot;</span><br><span class="line">    del /q /f /a &quot;\\?\%%i&quot;</span><br><span class="line">    echo 已经删除</span><br><span class="line">    pause</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>bat</category>
+      </categories>
+      <tags>
+        <tag>bat</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>查询mssql对应bak版本</title>
+    <url>/2023/12/18/%E6%9F%A5%E8%AF%A2mssql%E5%AF%B9%E5%BA%94bak%E7%89%88%E6%9C%AC/</url>
+    <content><![CDATA[<blockquote>
+<p>SQLServer 的备份文件是以.bak 为后缀的文件，如果想要通过备份文件查看数据库版本，通常的做法就是把数据库还原，但是在还原的过程，如果不是相同的数据库版本，就会导致无法还原；<br>在数据库中，低版本的备份文件是可以还原到高版本的数据库中，高的就不可以了，比如SQLSERVER 2008 的备份文件可以在SQLSERVER 2012 中还原，2012就不能在2008中还原</p>
+</blockquote>
+<span id="more"></span>
+
+<p>这时候，我们就可以用一段脚本来查看，如下：<br><code>RESTORE HEADERONLY  FROM DISK =&#39;D:\mssqlupload\53office_data.bak&#39; WITH NOUNLOAD;</code><br><img src="/2023/12/18/%E6%9F%A5%E8%AF%A2mssql%E5%AF%B9%E5%BA%94bak%E7%89%88%E6%9C%AC/image.jpg"></p>
+]]></content>
+      <categories>
+        <category>mssql</category>
+      </categories>
+      <tags>
+        <tag>mssql</tag>
       </tags>
   </entry>
   <entry>
@@ -1380,23 +1397,6 @@ fi
       </categories>
       <tags>
         <tag>windows</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>查询mssql对应bak版本</title>
-    <url>/2023/12/18/%E6%9F%A5%E8%AF%A2mssql%E5%AF%B9%E5%BA%94bak%E7%89%88%E6%9C%AC/</url>
-    <content><![CDATA[<blockquote>
-<p>SQLServer 的备份文件是以.bak 为后缀的文件，如果想要通过备份文件查看数据库版本，通常的做法就是把数据库还原，但是在还原的过程，如果不是相同的数据库版本，就会导致无法还原；<br>在数据库中，低版本的备份文件是可以还原到高版本的数据库中，高的就不可以了，比如SQLSERVER 2008 的备份文件可以在SQLSERVER 2012 中还原，2012就不能在2008中还原</p>
-</blockquote>
-<span id="more"></span>
-
-<p>这时候，我们就可以用一段脚本来查看，如下：<br><code>RESTORE HEADERONLY  FROM DISK =&#39;D:\mssqlupload\53office_data.bak&#39; WITH NOUNLOAD;</code><br><img src="/2023/12/18/%E6%9F%A5%E8%AF%A2mssql%E5%AF%B9%E5%BA%94bak%E7%89%88%E6%9C%AC/image.jpg"></p>
-]]></content>
-      <categories>
-        <category>mssql</category>
-      </categories>
-      <tags>
-        <tag>mssql</tag>
       </tags>
   </entry>
   <entry>

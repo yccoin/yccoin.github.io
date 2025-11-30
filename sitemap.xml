@@ -405,14 +405,14 @@
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/tags/nginx/</loc>
+    <loc>https://yccoin.github.io/tags/linux/</loc>
     <lastmod>2025-11-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/tags/linux/</loc>
+    <loc>https://yccoin.github.io/tags/nginx/</loc>
     <lastmod>2025-11-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -568,14 +568,14 @@
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/categories/ngnix/</loc>
+    <loc>https://yccoin.github.io/categories/bat/</loc>
     <lastmod>2025-11-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/categories/bat/</loc>
+    <loc>https://yccoin.github.io/categories/ngnix/</loc>
     <lastmod>2025-11-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

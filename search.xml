@@ -24,35 +24,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux文件系统预留空间</title>
-    <url>/2024/05/10/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A2%84%E7%95%99%E7%A9%BA%E9%97%B4/</url>
-    <content><![CDATA[<blockquote>
-<p>如果磁盘是ext2，ext3，ext4文件格式，系统默认会为磁盘保留5%的预留空间，这样能保证有些关键应用（比如数据库）在硬盘满的时候有点余地，不致于马上就 crash，给监控系统和管理员一点时间去察觉。<br>xfs文件格式的磁盘不会划分预留空间</p>
-</blockquote>
-<span id="more"></span>
-
-<p>在Linux系统中，磁盘的可用空间、已用空间和容量之间的关系是相互依赖的，但也可能存在一些差异。主要的原因包括：</p>
-<ul>
-<li>文件系统的格式化和分配：在格式化磁盘并创建文件系统时，会为文件系统分配一部分空间作为文件系统的元数据、inode 表、日志等。这些分配给文件系统的空间将从总容量中减去，因此可用空间会小于磁盘的实际容量。</li>
-<li>保留空间：文件系统通常会保留一部分空间，用于特定操作和系统的需要。这些保留空间用于存储特殊文件、文件系统元数据或者为写入操作提供缓冲空间。因此，这部分空间不包含在可用空间中。</li>
-<li>超级用户权限：磁盘配额和权限设置可能导致某些空间仅对特定的用户或用户组可见和可用。超级用户(root)具有更高的权限，可能可以访问和使用其他用户没有权限的空间。<br>块大小：磁盘上的数据存储以块为单位进行管理。块大小的设置可能导致存储空间的浪费。当一个文件的大小不是块大小的整数倍时，将会浪费部分空间。<br><strong>这些因素导致可用空间、已用空间和容量之间存在差异。要了解更准确的磁盘使用情况，可以使用命令行工具如 df 命令来查看文件系统的实际使用情况，它会提供关于可用空间、已用空间和总容量的详细信息</strong><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">tune2fs -l <span class="regexp">/dev/</span>sda2</span><br></pre></td></tr></table></figure>
-<img src="/2024/05/10/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A2%84%E7%95%99%E7%A9%BA%E9%97%B4/20240510120122.jpg"><br>根据提供的输出，我可以看到以下关于文件系统的预留空间大小的信息：<br>文件系统位于 &#x2F;dev&#x2F;sda2 磁盘分区上。<br>预留块数量为 2555891。<br>块大小为 4096 字节。<br>要计算预留空间的实际大小，您可以使用以下公式：<br>预留空间大小 &#x3D; 预留块数量 × 块大小<br>在这种情况下，预留空间大小 &#x3D; 2555891 × 4096 &#x3D; 10,484,299,136 字节 或 9.77GB。<br>通过这个计算，您可以知道文件系统上的预留空间的实际大小。请注意，这个值是以字节为单位的，如果需要以其他单位表示，可以进行适当的转换。</li>
-</ul>
-<h5 id="如何调整这个预留空间的大小"><a href="#如何调整这个预留空间的大小" class="headerlink" title="如何调整这个预留空间的大小"></a>如何调整这个预留空间的大小</h5><p>使用 tune2fs 命令可以调整文件系统的预留空间大小。预留空间是为了给文件系统保留一些空间供系统管理员使用，在磁盘空间快满的时候防止系统崩溃。<br>以下是通过 tune2fs 命令来调整文件系统预留空间大小的步骤：</p>
-<p>1.打开终端或命令行界面。<br>2.运行以下命令，其中 &#x2F;dev&#x2F;sdX 是文件系统所在的磁盘设备。请将其替换为您实际使用的设备名称。</p>
-<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">tune2fs -m &lt;percentage&gt; <span class="regexp">/dev/</span>sdX</span><br></pre></td></tr></table></figure>
-<p>是您想要设置的预留空间的百分比。例如，如果您想要将预留空间设置为 10%，则将 替换为 10。</p>
-<p>3.输入管理员密码并确认命令。<br>4.命令执行成功后，文件系统的预留空间大小将被调整。</p>
-<p>请注意，调整文件系统的预留空间可能会对系统的稳定性和性能产生影响。建议在进行此操作之前备份重要数据，并仔细评估所需的空间和系统需求。<br>此外，不同的文件系统可能具有不同的默认预留空间大小。您可以使用 tune2fs -l 命令查看当前文件系统的预留空间大小，并据此进行调整。</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux 网络错误 TCP:too many orphaned sockets 分析与解决</title>
     <url>/2024/10/12/Linux%20%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF%20TCP%20too%20many%20orphaned%20sockets%20%E5%88%86%E6%9E%90%E4%B8%8E%E8%A7%A3%E5%86%B3/</url>
     <content><![CDATA[<h5 id="Linux-网络错误-TCP-too-many-orphaned-sockets-分析与解决"><a href="#Linux-网络错误-TCP-too-many-orphaned-sockets-分析与解决" class="headerlink" title="Linux 网络错误 TCP:too many orphaned sockets 分析与解决"></a>Linux 网络错误 TCP:too many orphaned sockets 分析与解决</h5><span id="more"></span>
@@ -136,6 +107,35 @@
       </tags>
   </entry>
   <entry>
+    <title>Linux文件系统预留空间</title>
+    <url>/2024/05/10/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A2%84%E7%95%99%E7%A9%BA%E9%97%B4/</url>
+    <content><![CDATA[<blockquote>
+<p>如果磁盘是ext2，ext3，ext4文件格式，系统默认会为磁盘保留5%的预留空间，这样能保证有些关键应用（比如数据库）在硬盘满的时候有点余地，不致于马上就 crash，给监控系统和管理员一点时间去察觉。<br>xfs文件格式的磁盘不会划分预留空间</p>
+</blockquote>
+<span id="more"></span>
+
+<p>在Linux系统中，磁盘的可用空间、已用空间和容量之间的关系是相互依赖的，但也可能存在一些差异。主要的原因包括：</p>
+<ul>
+<li>文件系统的格式化和分配：在格式化磁盘并创建文件系统时，会为文件系统分配一部分空间作为文件系统的元数据、inode 表、日志等。这些分配给文件系统的空间将从总容量中减去，因此可用空间会小于磁盘的实际容量。</li>
+<li>保留空间：文件系统通常会保留一部分空间，用于特定操作和系统的需要。这些保留空间用于存储特殊文件、文件系统元数据或者为写入操作提供缓冲空间。因此，这部分空间不包含在可用空间中。</li>
+<li>超级用户权限：磁盘配额和权限设置可能导致某些空间仅对特定的用户或用户组可见和可用。超级用户(root)具有更高的权限，可能可以访问和使用其他用户没有权限的空间。<br>块大小：磁盘上的数据存储以块为单位进行管理。块大小的设置可能导致存储空间的浪费。当一个文件的大小不是块大小的整数倍时，将会浪费部分空间。<br><strong>这些因素导致可用空间、已用空间和容量之间存在差异。要了解更准确的磁盘使用情况，可以使用命令行工具如 df 命令来查看文件系统的实际使用情况，它会提供关于可用空间、已用空间和总容量的详细信息</strong><figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">tune2fs -l <span class="regexp">/dev/</span>sda2</span><br></pre></td></tr></table></figure>
+<img src="/2024/05/10/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%A2%84%E7%95%99%E7%A9%BA%E9%97%B4/20240510120122.jpg"><br>根据提供的输出，我可以看到以下关于文件系统的预留空间大小的信息：<br>文件系统位于 &#x2F;dev&#x2F;sda2 磁盘分区上。<br>预留块数量为 2555891。<br>块大小为 4096 字节。<br>要计算预留空间的实际大小，您可以使用以下公式：<br>预留空间大小 &#x3D; 预留块数量 × 块大小<br>在这种情况下，预留空间大小 &#x3D; 2555891 × 4096 &#x3D; 10,484,299,136 字节 或 9.77GB。<br>通过这个计算，您可以知道文件系统上的预留空间的实际大小。请注意，这个值是以字节为单位的，如果需要以其他单位表示，可以进行适当的转换。</li>
+</ul>
+<h5 id="如何调整这个预留空间的大小"><a href="#如何调整这个预留空间的大小" class="headerlink" title="如何调整这个预留空间的大小"></a>如何调整这个预留空间的大小</h5><p>使用 tune2fs 命令可以调整文件系统的预留空间大小。预留空间是为了给文件系统保留一些空间供系统管理员使用，在磁盘空间快满的时候防止系统崩溃。<br>以下是通过 tune2fs 命令来调整文件系统预留空间大小的步骤：</p>
+<p>1.打开终端或命令行界面。<br>2.运行以下命令，其中 &#x2F;dev&#x2F;sdX 是文件系统所在的磁盘设备。请将其替换为您实际使用的设备名称。</p>
+<figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">tune2fs -m &lt;percentage&gt; <span class="regexp">/dev/</span>sdX</span><br></pre></td></tr></table></figure>
+<p>是您想要设置的预留空间的百分比。例如，如果您想要将预留空间设置为 10%，则将 替换为 10。</p>
+<p>3.输入管理员密码并确认命令。<br>4.命令执行成功后，文件系统的预留空间大小将被调整。</p>
+<p>请注意，调整文件系统的预留空间可能会对系统的稳定性和性能产生影响。建议在进行此操作之前备份重要数据，并仔细评估所需的空间和系统需求。<br>此外，不同的文件系统可能具有不同的默认预留空间大小。您可以使用 tune2fs -l 命令查看当前文件系统的预留空间大小，并据此进行调整。</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Nginx内置变量</title>
     <url>/2023/12/15/Nginx%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F/</url>
     <content><![CDATA[<h2 id="Nginx内置变量"><a href="#Nginx内置变量" class="headerlink" title="Nginx内置变量"></a>Nginx内置变量</h2><span id="more"></span>
@@ -208,6 +208,22 @@ $sent_http_transfer_encoding```
       </tags>
   </entry>
   <entry>
+    <title>centos 7.9更换阿里源</title>
+    <url>/2024/10/12/centos%207.9%E6%9B%B4%E6%8D%A2%E9%98%BF%E9%87%8C%E6%BA%90/</url>
+    <content><![CDATA[<h5 id="centos-7-9更换阿里源"><a href="#centos-7-9更换阿里源" class="headerlink" title="centos 7.9更换阿里源"></a>centos 7.9更换阿里源</h5><span id="more"></span>
+<p>在CentOS 7.9上更换为阿里云源的步骤如下：</p>
+<h5 id="备份原有的YUM源配置文件"><a href="#备份原有的YUM源配置文件" class="headerlink" title="备份原有的YUM源配置文件"></a>备份原有的YUM源配置文件</h5><p><code>sudo cp -a /etc/yum.repos.d /etc/yum.repos.d.backup</code></p>
+<h5 id="清理原有的YUM源配置文件"><a href="#清理原有的YUM源配置文件" class="headerlink" title="清理原有的YUM源配置文件"></a>清理原有的YUM源配置文件</h5><p><code>sudo rm -f /etc/yum.repos.d/*.repo</code></p>
+<h5 id="下载阿里云CentOS-7源配置文件"><a href="#下载阿里云CentOS-7源配置文件" class="headerlink" title="下载阿里云CentOS 7源配置文件"></a>下载阿里云CentOS 7源配置文件</h5><p><code>sudo curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</code></p>
+<h5 id="清除缓存并生成新的缓存"><a href="#清除缓存并生成新的缓存" class="headerlink" title="清除缓存并生成新的缓存"></a>清除缓存并生成新的缓存</h5><figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">sudo yum clean <span class="keyword">all</span></span><br><span class="line">sudo yum makecache</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>centos 8安装mysql</title>
     <url>/2023/12/20/centos%208%E5%AE%89%E8%A3%85mysql/</url>
     <content><![CDATA[<h5 id="centos-8-安装mysql"><a href="#centos-8-安装mysql" class="headerlink" title="centos 8 安装mysql"></a>centos 8 安装mysql</h5><span id="more"></span>
@@ -234,22 +250,6 @@ $sent_http_transfer_encoding```
 <figure class="highlight arcade"><table><tr><td class="code"><pre><span class="line">grep <span class="string">&#x27;password&#x27;</span> /<span class="keyword">var</span>/<span class="built_in">log</span>/mysqld.<span class="built_in">log</span></span><br></pre></td></tr></table></figure>
 <p>本地或者远程连接不上，提示socket错误，注意是my.cnf中没有配置client  </p>
 <figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[client]</span></span><br><span class="line"><span class="attr">socket</span>=/home/mysql/mysql.sock</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>centos 7.9更换阿里源</title>
-    <url>/2024/10/12/centos%207.9%E6%9B%B4%E6%8D%A2%E9%98%BF%E9%87%8C%E6%BA%90/</url>
-    <content><![CDATA[<h5 id="centos-7-9更换阿里源"><a href="#centos-7-9更换阿里源" class="headerlink" title="centos 7.9更换阿里源"></a>centos 7.9更换阿里源</h5><span id="more"></span>
-<p>在CentOS 7.9上更换为阿里云源的步骤如下：</p>
-<h5 id="备份原有的YUM源配置文件"><a href="#备份原有的YUM源配置文件" class="headerlink" title="备份原有的YUM源配置文件"></a>备份原有的YUM源配置文件</h5><p><code>sudo cp -a /etc/yum.repos.d /etc/yum.repos.d.backup</code></p>
-<h5 id="清理原有的YUM源配置文件"><a href="#清理原有的YUM源配置文件" class="headerlink" title="清理原有的YUM源配置文件"></a>清理原有的YUM源配置文件</h5><p><code>sudo rm -f /etc/yum.repos.d/*.repo</code></p>
-<h5 id="下载阿里云CentOS-7源配置文件"><a href="#下载阿里云CentOS-7源配置文件" class="headerlink" title="下载阿里云CentOS 7源配置文件"></a>下载阿里云CentOS 7源配置文件</h5><p><code>sudo curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</code></p>
-<h5 id="清除缓存并生成新的缓存"><a href="#清除缓存并生成新的缓存" class="headerlink" title="清除缓存并生成新的缓存"></a>清除缓存并生成新的缓存</h5><figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">sudo yum clean <span class="keyword">all</span></span><br><span class="line">sudo yum makecache</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>linux</category>
       </categories>
@@ -524,28 +524,6 @@ $sent_http_transfer_encoding```
       </tags>
   </entry>
   <entry>
-    <title>set指令的作用</title>
-    <url>/2024/09/28/nginx%20set%E6%8C%87%E4%BB%A4%E7%9A%84%E4%BD%9C%E7%94%A8/</url>
-    <content><![CDATA[<blockquote>
-<p>在配置文件中通常是在server{}中，要基于多条件判断进行跳转&#x2F;拦截&#x2F;回源等需求时，可以通过使用nginx set指令来实现。<br>set指令是用于定义一个变量，并且赋值。<br>条件判断可以根据nginx内置的全局变量进行判断然后使用set 赋值。</p>
-</blockquote>
-<span id="more"></span>
-<h4 id="在nginx配置文件中使用如下："><a href="#在nginx配置文件中使用如下：" class="headerlink" title="在nginx配置文件中使用如下："></a>在nginx配置文件中使用如下：</h4><p><code>set $rewriteFlag 0;</code></p>
-<p>#这里可以加上条件判断，比如客户端ip为12.34.56.78&#x2F;24时set 1<br><code>set $rewriteFlag &#39;$&#123;rewriteFlag&#125;1&#39;;</code></p>
-<p>#这里可以加上条件判断，比如根据$http_referer&#x2F;$cookie_name&#x2F;$request_uri等判断进行赋值set 2<br><code>set $rewriteFlag &#39;$&#123;rewriteFlag&#125;2&#39;;</code></p>
-<p>#这里的意思是当请求ip为12.34.56.78&#x2F;24，且$http_referer&#x2F;$cookie_name&#x2F;$request_uri为你设置的条件</p>
-<p>#那么进行跳转，看见了吧这就是利用多条件进行操作的过程。更复杂的多条件情况下可以自行判断构造。</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">if</span> (<span class="variable">$rewriteFlag</span>= <span class="string">&#x27;012&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">#    rewrite ^(.*) https://www.mywebsite.com$request_uri break;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>举例</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">if</span> (<span class="variable">$http_user_agent</span> <span class="regexp">~ &quot;CensysInspect|meta-externalagent|facebookexternalhit|DotBot|YisouSpider|PetalBot|GPTBot|serpstatbot|BLEXBot|bingbot|DataForSeoBot|Friendly_Crawler|Go-http-client|Bytespider|Java|PhantomJS|SemrushBot|Scrapy|Webdup|AcoonBot|AhrefsBot|Ezooms|EdisterBot|EC2LinkFinder|jikespider|Purebot|MJ12bot|WangIDSpider|WBSearchBot|Wotbox|xbfMozilla|Yottaa|YandexBot|Jorgee|SWEBot|spbot|TurnitinBot-Agent|mail.RU|perl|Python|Wget|Xenu|ZmEu|Googlebot|facebookexternalhit|^$&quot;</span>   )</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="attribute">set</span> <span class="variable">$flag</span> <span class="string">&quot;<span class="variable">$&#123;flag&#125;</span>1&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="attribute">if</span> ( <span class="variable">$remote_addr</span> !<span class="regexp">~* &#x27;60.247.158.19|127.0.0.1&#x27;)</span> </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attribute">set</span> <span class="variable">$flag</span> <span class="string">&quot;<span class="variable">$&#123;flag&#125;</span>1&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="attribute">if</span> (<span class="variable">$flag</span> = <span class="string">&quot;011&quot;</span>)&#123;</span><br><span class="line">      <span class="attribute">return</span> <span class="number">444</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>mysql 相关问题以及备份常用方法</title>
     <url>/2025/03/13/mysql%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E4%BB%A5%E5%8F%8A%E5%A4%87%E4%BB%BD%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<blockquote>
@@ -628,6 +606,28 @@ xtrabackup 进行增量备份<figure class="highlight mel"><table><tr><td class=
       </categories>
       <tags>
         <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>set指令的作用</title>
+    <url>/2024/09/28/nginx%20set%E6%8C%87%E4%BB%A4%E7%9A%84%E4%BD%9C%E7%94%A8/</url>
+    <content><![CDATA[<blockquote>
+<p>在配置文件中通常是在server{}中，要基于多条件判断进行跳转&#x2F;拦截&#x2F;回源等需求时，可以通过使用nginx set指令来实现。<br>set指令是用于定义一个变量，并且赋值。<br>条件判断可以根据nginx内置的全局变量进行判断然后使用set 赋值。</p>
+</blockquote>
+<span id="more"></span>
+<h4 id="在nginx配置文件中使用如下："><a href="#在nginx配置文件中使用如下：" class="headerlink" title="在nginx配置文件中使用如下："></a>在nginx配置文件中使用如下：</h4><p><code>set $rewriteFlag 0;</code></p>
+<p>#这里可以加上条件判断，比如客户端ip为12.34.56.78&#x2F;24时set 1<br><code>set $rewriteFlag &#39;$&#123;rewriteFlag&#125;1&#39;;</code></p>
+<p>#这里可以加上条件判断，比如根据$http_referer&#x2F;$cookie_name&#x2F;$request_uri等判断进行赋值set 2<br><code>set $rewriteFlag &#39;$&#123;rewriteFlag&#125;2&#39;;</code></p>
+<p>#这里的意思是当请求ip为12.34.56.78&#x2F;24，且$http_referer&#x2F;$cookie_name&#x2F;$request_uri为你设置的条件</p>
+<p>#那么进行跳转，看见了吧这就是利用多条件进行操作的过程。更复杂的多条件情况下可以自行判断构造。</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">if</span> (<span class="variable">$rewriteFlag</span>= <span class="string">&#x27;012&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">#    rewrite ^(.*) https://www.mywebsite.com$request_uri break;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>举例</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">if</span> (<span class="variable">$http_user_agent</span> <span class="regexp">~ &quot;CensysInspect|meta-externalagent|facebookexternalhit|DotBot|YisouSpider|PetalBot|GPTBot|serpstatbot|BLEXBot|bingbot|DataForSeoBot|Friendly_Crawler|Go-http-client|Bytespider|Java|PhantomJS|SemrushBot|Scrapy|Webdup|AcoonBot|AhrefsBot|Ezooms|EdisterBot|EC2LinkFinder|jikespider|Purebot|MJ12bot|WangIDSpider|WBSearchBot|Wotbox|xbfMozilla|Yottaa|YandexBot|Jorgee|SWEBot|spbot|TurnitinBot-Agent|mail.RU|perl|Python|Wget|Xenu|ZmEu|Googlebot|facebookexternalhit|^$&quot;</span>   )</span><br><span class="line">  &#123;</span><br><span class="line">   <span class="attribute">set</span> <span class="variable">$flag</span> <span class="string">&quot;<span class="variable">$&#123;flag&#125;</span>1&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="attribute">if</span> ( <span class="variable">$remote_addr</span> !<span class="regexp">~* &#x27;60.247.158.19|127.0.0.1&#x27;)</span> </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attribute">set</span> <span class="variable">$flag</span> <span class="string">&quot;<span class="variable">$&#123;flag&#125;</span>1&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="attribute">if</span> (<span class="variable">$flag</span> = <span class="string">&quot;011&quot;</span>)&#123;</span><br><span class="line">      <span class="attribute">return</span> <span class="number">444</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -1002,6 +1002,60 @@ fi
       </tags>
   </entry>
   <entry>
+    <title>两台主机通过rsync同步数据</title>
+    <url>/2025/08/29/%E4%B8%A4%E5%8F%B0%E4%B8%BB%E6%9C%BA%E9%80%9A%E8%BF%87rsync%E5%90%8C%E6%AD%A5%E6%95%B0%E6%8D%AE/</url>
+    <content><![CDATA[<blockquote>
+<p>rsync 是一种高效的文件同步工具，能够通过网络在两台服务器之间进行增量数据同步</p>
+</blockquote>
+<span id="more"></span>
+<ul>
+<li>SSH 模式（推荐新手）：A 和 B 都安装 rsync 工具（无需启动服务），通过 SSH 通信。</li>
+<li>daemon 模式（适合大规模部署）：仅 B 安装并启动 rsync 服务，A 作为客户端安装 rsync 工具即可。</li>
+</ul>
+<h3 id="daemon-模式"><a href="#daemon-模式" class="headerlink" title="daemon 模式"></a>daemon 模式</h3><blockquote>
+<p>A,B两台服务器同步数据，其中A作为服务端，B拉取A上数据</p>
+</blockquote>
+<h4 id="源服务器-A-配置-rsync-服务"><a href="#源服务器-A-配置-rsync-服务" class="headerlink" title="源服务器 A 配置 rsync 服务"></a>源服务器 A 配置 rsync 服务</h4><h5 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h5><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">uid = root</span><br><span class="line">gid = root</span><br><span class="line">use chroot = no</span><br><span class="line">max connections = <span class="number">5</span></span><br><span class="line">pid <span class="built_in">file</span> = /var/<span class="built_in">run</span>/rsyncd.pid</span><br><span class="line"><span class="built_in">log</span> <span class="built_in">file</span> = /var/<span class="built_in">log</span>/rsyncd.<span class="built_in">log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 模块配置（A 上需要被 B 拉取的目录）</span></span><br><span class="line">[aaa]               <span class="comment"># 模块名（B 拉取时需要指定）</span></span><br><span class="line">path = /home/     <span class="comment"># A 上的源数据目录</span></span><br><span class="line">comment = Data <span class="keyword">to</span> be pulled <span class="keyword">by</span> B</span><br><span class="line"><span class="built_in">read</span> only = yes             <span class="comment"># 只读（防止 B 意外修改 A 的数据）</span></span><br><span class="line"><span class="built_in">list</span> = yes</span><br><span class="line">auth users = testtest     <span class="comment"># 允许 B 访问的用户</span></span><br><span class="line">secrets <span class="built_in">file</span> = /etc/rsyncd.passwd  <span class="comment"># A 上的密码文件</span></span><br><span class="line">hosts allow = <span class="number">211.149</span><span class="number">.227</span><span class="number">.160</span>          <span class="comment"># 仅允许 B 的 IP 访问</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="创建密码文件"><a href="#创建密码文件" class="headerlink" title="创建密码文件"></a>创建密码文件</h5><p>在 A 上设置授权用户和密码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;rsync_user:your_password&quot;</span> &gt; /etc/rsyncd.passwd</span><br><span class="line"><span class="built_in">chmod</span> 600 /etc/rsyncd.passwd  <span class="comment"># 必须设置 600 权限</span></span><br></pre></td></tr></table></figure>
+<h5 id="启动-rsync-服务"><a href="#启动-rsync-服务" class="headerlink" title="启动 rsync 服务"></a>启动 rsync 服务</h5><figure class="highlight nsis"><table><tr><td class="code"><pre><span class="line"><span class="params">system</span>ctl start rsyncd</span><br><span class="line"><span class="params">system</span>ctl enable rsyncd</span><br><span class="line"><span class="comment"># 开放 873 端口（防火墙配置同前）</span></span><br></pre></td></tr></table></figure>
+<h5 id="防火墙配置（如果启用）"><a href="#防火墙配置（如果启用）" class="headerlink" title="防火墙配置（如果启用）"></a>防火墙配置（如果启用）</h5><figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="comment"># CentOS/RHEL</span></span><br><span class="line">firewall-cmd <span class="params">--add-port=873/tcp</span> <span class="params">--permanent</span></span><br><span class="line">firewall-cmd <span class="params">--reload</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Ubuntu/Debian</span></span><br><span class="line">ufw allow 873/tcp</span><br><span class="line">ufw <span class="keyword">reload</span></span><br></pre></td></tr></table></figure>
+<h4 id="目标服务器-B-配置（客户端，主动拉取）"><a href="#目标服务器-B-配置（客户端，主动拉取）" class="headerlink" title="目标服务器 B 配置（客户端，主动拉取）"></a>目标服务器 B 配置（客户端，主动拉取）</h4><h5 id="安装-rsync-工具（无需启动服务"><a href="#安装-rsync-工具（无需启动服务" class="headerlink" title="安装 rsync 工具（无需启动服务)"></a>安装 rsync 工具（无需启动服务)</h5><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="comment"># CentOS/RHEL</span></span><br><span class="line">yum <span class="keyword">install</span> rsync -y</span><br><span class="line"><span class="comment"># Ubuntu/Debian</span></span><br><span class="line">apt-get <span class="keyword">install</span> rsync -y</span><br></pre></td></tr></table></figure>
+<h5 id="创建密码文件（仅包含密码，与-A-一致）"><a href="#创建密码文件（仅包含密码，与-A-一致）" class="headerlink" title="创建密码文件（仅包含密码，与 A 一致）"></a>创建密码文件（仅包含密码，与 A 一致）</h5><p>echo “your_password” &gt; &#x2F;etc&#x2F;rsync_client.pass<br>chmod 600 &#x2F;etc&#x2F;rsync_client.pass</p>
+<h5 id="测试拉取命令"><a href="#测试拉取命令" class="headerlink" title="测试拉取命令"></a>测试拉取命令</h5><p>rsync -avz –password-file&#x3D;&#x2F;etc&#x2F;rsync_client.pass rsync_user@A_IP::source_data &#x2F;B的目标目录&#x2F;</p>
+<ul>
+<li>source_data 是 A 上配置的模块名</li>
+<li>&#x2F;B的目标目录&#x2F; 是 B 上存储拉取数据的路径</li>
+</ul>
+<h5 id="自动化拉取（B-定时任务）"><a href="#自动化拉取（B-定时任务）" class="headerlink" title="自动化拉取（B 定时任务）"></a>自动化拉取（B 定时任务）</h5><figure class="highlight dts"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br><span class="line"><span class="meta"># 添加任务（每天凌晨 4 点从 A 拉取数据）</span></span><br><span class="line"><span class="number">0</span> <span class="number">4</span> * * * rsync -avz --<span class="attr">password-file</span><span class="operator">=</span><span class="keyword">/etc/</span>rsync_client.pass rsync_user@A_IP::source_data /B的目标目录/ &gt;&gt; <span class="keyword">/var/</span>log/rsync_pull.log <span class="number">2</span>&gt;<span class="variable">&amp;1</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>如果B作为rsync服务器，A同步数据到B，服务安装到B上，安装方式和之前一样<br>从服务器 A 同步数据到服务器 B，命令格式：</p>
+<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">rsync -avz --password-<span class="keyword">file</span>=<span class="regexp">/etc/</span>rsync_client.pass <span class="regexp">/本地需要同步的目录/</span> rsync_user@B_IP::sync_data</span><br><span class="line"># 同步 <span class="regexp">/data/</span><span class="keyword">source</span> 目录到服务器 B 的 sync_data 模块（对应 <span class="regexp">/data/</span>to/sync 目录）</span><br><span class="line">rsync -avz --password-<span class="keyword">file</span>=<span class="regexp">/etc/</span>rsync_client.pass <span class="regexp">/data/</span><span class="keyword">source</span>/ rsync_user@<span class="number">192.168</span>.<span class="number">1.100</span>::sync_data</span><br></pre></td></tr></table></figure>
+<ul>
+<li>–password-file：指定密码文件，避免手动输入密码</li>
+<li>B_IP::sync_data：sync_data 是服务器 B 配置文件中定义的模块名</li>
+</ul>
+<h3 id="SSH-模式"><a href="#SSH-模式" class="headerlink" title="SSH 模式"></a>SSH 模式</h3><blockquote>
+<p>两台服务器（源服务器 A 和目标服务器 B）需安装 rsync<br>确保服务器之间网络互通（默认使用 SSH 端口 22）<br>推荐使用 SSH 密钥认证实现免密登录（提高安全性和自动化能力）</p>
+</blockquote>
+<h5 id="安装-rsync"><a href="#安装-rsync" class="headerlink" title="安装 rsync"></a>安装 rsync</h5><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="comment"># CentOS/RHEL 系统</span></span><br><span class="line">yum <span class="keyword">install</span> rsync -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># Ubuntu/Debian 系统</span></span><br><span class="line">apt-get <span class="keyword">install</span> rsync -y</span><br></pre></td></tr></table></figure>
+<h5 id="配置-SSH-免密登录（推荐）"><a href="#配置-SSH-免密登录（推荐）" class="headerlink" title="配置 SSH 免密登录（推荐）"></a>配置 SSH 免密登录（推荐）</h5><p>在源服务器 A 生成密钥对：</p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -P <span class="string">&quot;&quot;</span>  <span class="meta"># 一路回车，生成无密码密钥对</span></span><br></pre></td></tr></table></figure>
+<p>将公钥复制到目标服务器 B</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">ssh<span class="operator">-</span><span class="keyword">copy</span><span class="operator">-</span>id <span class="keyword">user</span><span class="variable">@B_IP</span>  # <span class="keyword">user</span> 是服务器 B 的用户名，B_IP 是服务器 B 的 IP 地址</span><br></pre></td></tr></table></figure>
+<p>验证免密登录</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ssh</span> user<span class="variable">@B_IP</span>  <span class="comment"># 无需输入密码即可登录则配置成功</span></span><br></pre></td></tr></table></figure>
+<h5 id="rsync-同步命令及常用场景"><a href="#rsync-同步命令及常用场景" class="headerlink" title="rsync 同步命令及常用场景"></a>rsync 同步命令及常用场景</h5><p>基础同步命令格式</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">rsync <span class="selector-attr">[选项]</span> 源路径 目标路径</span><br></pre></td></tr></table></figure>
+<h5 id="常用场景示例"><a href="#常用场景示例" class="headerlink" title="常用场景示例"></a>常用场景示例</h5><p>从本地（A）同步到远程（B）</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 同步单个文件</span></span><br><span class="line">rsync -avz /local/path/file.txt user<span class="variable">@B_IP</span><span class="symbol">:/remote/path/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同步目录（注意源目录后是否带 / 的区别）</span></span><br><span class="line">rsync -avz /local/dir/ user<span class="variable">@B_IP</span><span class="symbol">:/remote/dir/</span>  <span class="comment"># 同步目录内内容（不含目录本身）</span></span><br><span class="line">rsync -avz /local/dir user<span class="variable">@B_IP</span><span class="symbol">:/remote/</span>       <span class="comment"># 同步目录本身及内容</span></span><br></pre></td></tr></table></figure>
+<h5 id="从远程（B）同步到本地（A）"><a href="#从远程（B）同步到本地（A）" class="headerlink" title="从远程（B）同步到本地（A）"></a>从远程（B）同步到本地（A）</h5><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">rsync -avz user<span class="variable">@B_IP</span><span class="symbol">:/remote/path/</span> /local/path/</span><br></pre></td></tr></table></figure>
+<h5 id="常用选项说明"><a href="#常用选项说明" class="headerlink" title="常用选项说明"></a>常用选项说明</h5><p>-a：归档模式（递归同步并保留几乎所有文件属性）<br>-v：显示详细同步过程<br>-z：传输时压缩数据（节省带宽）<br>-delete：删除目标端存在但源端不存在的文件（保持完全一致）<br>-P：断点续传（显示进度并保留部分传输的文件）</p>
+<h5 id="自动化同步配置（定时任务）"><a href="#自动化同步配置（定时任务）" class="headerlink" title="自动化同步配置（定时任务）"></a>自动化同步配置（定时任务）</h5><p>如果需要定期自动同步，可通过 crontab 设置定时任务</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br><span class="line"><span class="comment"># 每天凌晨 2 点同步本地目录到远程服务器</span></span><br><span class="line"><span class="number">0</span> <span class="number">2</span> * * * rsync -avz --delete /local/dir/ user<span class="variable">@B_IP</span><span class="symbol">:/remote/dir/</span> &gt;&gt; <span class="regexp">/var/log</span><span class="regexp">/rsync.log 2&gt;&amp;1</span></span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
     <title>云锁安装后nginx防护状态关闭如何处理</title>
     <url>/2025/09/01/%E4%BA%91%E9%94%81%E5%AE%89%E8%A3%85%E5%90%8Enginx%E9%98%B2%E6%8A%A4%E7%8A%B6%E6%80%81%E5%85%B3%E9%97%AD%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86/</url>
     <content><![CDATA[<blockquote>
@@ -1186,6 +1240,19 @@ fi
       </tags>
   </entry>
   <entry>
+    <title>批处理查找畸形文件并删除</title>
+    <url>/2023/12/15/%E6%89%B9%E5%A4%84%E7%90%86%E6%9F%A5%E6%89%BE%E7%95%B8%E5%BD%A2%E6%96%87%E4%BB%B6%E5%B9%B6%E5%88%A0%E9%99%A4/</url>
+    <content><![CDATA[<h3 id="批处理查找畸形文件并删除"><a href="#批处理查找畸形文件并删除" class="headerlink" title="批处理查找畸形文件并删除"></a>批处理查找畸形文件并删除</h3><span id="more"></span>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@echo off</span><br><span class="line">setlocal enabledelayedexpansion</span><br><span class="line">title 畸形文件查杀</span><br><span class="line">::文件匹配正则</span><br><span class="line">set &quot;reg=\\nul \\nul\.[^\\]* \\com[1-9] \\com[1-9]\.[^\\]* \\aux \\aux\.[^\\]* \\con \\con\.[^\\]* \\prn \\prn\.[^\\]* \.&quot;</span><br><span class="line">::设置窗口颜色</span><br><span class="line">color 6b</span><br><span class="line">::检测路径是否存在</span><br><span class="line">:checkexist</span><br><span class="line">set /p dir=请输入需要查杀的路径:</span><br><span class="line">if &quot;%dir%&quot; ==&quot;&quot; (</span><br><span class="line">echo 输入为空，请重新输入</span><br><span class="line">call :checkexist</span><br><span class="line">)else (</span><br><span class="line">call :listdir</span><br><span class="line">)</span><br><span class="line">::列出畸形文件名和所在目录</span><br><span class="line">:listdir</span><br><span class="line">cd /d %dir%</span><br><span class="line">for /f &quot;delims=&quot; %%i in (&#x27;dir /b /a /s ^| findstr /i /r /e &quot;%reg%&quot;&#x27;) do (</span><br><span class="line">    echo  &quot;%%i&quot;</span><br><span class="line">    rd /s /q &quot;\\?\%%i&quot;</span><br><span class="line">    del /q /f /a &quot;\\?\%%i&quot;</span><br><span class="line">    echo 已经删除</span><br><span class="line">    pause</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>bat</category>
+      </categories>
+      <tags>
+        <tag>bat</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>帝国CMS从HTTP升级到HTTPS 登录网站后台空白</title>
     <url>/2024/05/08/%E5%B8%9D%E5%9B%BDCMS%E4%BB%8EHTTP%E5%8D%87%E7%BA%A7%E5%88%B0HTTPS%20%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99%E5%90%8E%E5%8F%B0%E7%A9%BA%E7%99%BD/</url>
     <content><![CDATA[<blockquote>
@@ -1209,73 +1276,6 @@ fi
       <tags>
         <tag>nginx</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>批处理查找畸形文件并删除</title>
-    <url>/2023/12/15/%E6%89%B9%E5%A4%84%E7%90%86%E6%9F%A5%E6%89%BE%E7%95%B8%E5%BD%A2%E6%96%87%E4%BB%B6%E5%B9%B6%E5%88%A0%E9%99%A4/</url>
-    <content><![CDATA[<h3 id="批处理查找畸形文件并删除"><a href="#批处理查找畸形文件并删除" class="headerlink" title="批处理查找畸形文件并删除"></a>批处理查找畸形文件并删除</h3><span id="more"></span>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@echo off</span><br><span class="line">setlocal enabledelayedexpansion</span><br><span class="line">title 畸形文件查杀</span><br><span class="line">::文件匹配正则</span><br><span class="line">set &quot;reg=\\nul \\nul\.[^\\]* \\com[1-9] \\com[1-9]\.[^\\]* \\aux \\aux\.[^\\]* \\con \\con\.[^\\]* \\prn \\prn\.[^\\]* \.&quot;</span><br><span class="line">::设置窗口颜色</span><br><span class="line">color 6b</span><br><span class="line">::检测路径是否存在</span><br><span class="line">:checkexist</span><br><span class="line">set /p dir=请输入需要查杀的路径:</span><br><span class="line">if &quot;%dir%&quot; ==&quot;&quot; (</span><br><span class="line">echo 输入为空，请重新输入</span><br><span class="line">call :checkexist</span><br><span class="line">)else (</span><br><span class="line">call :listdir</span><br><span class="line">)</span><br><span class="line">::列出畸形文件名和所在目录</span><br><span class="line">:listdir</span><br><span class="line">cd /d %dir%</span><br><span class="line">for /f &quot;delims=&quot; %%i in (&#x27;dir /b /a /s ^| findstr /i /r /e &quot;%reg%&quot;&#x27;) do (</span><br><span class="line">    echo  &quot;%%i&quot;</span><br><span class="line">    rd /s /q &quot;\\?\%%i&quot;</span><br><span class="line">    del /q /f /a &quot;\\?\%%i&quot;</span><br><span class="line">    echo 已经删除</span><br><span class="line">    pause</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>bat</category>
-      </categories>
-      <tags>
-        <tag>bat</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>两台主机通过rsync同步数据</title>
-    <url>/2025/08/29/%E4%B8%A4%E5%8F%B0%E4%B8%BB%E6%9C%BA%E9%80%9A%E8%BF%87rsync%E5%90%8C%E6%AD%A5%E6%95%B0%E6%8D%AE/</url>
-    <content><![CDATA[<blockquote>
-<p>rsync 是一种高效的文件同步工具，能够通过网络在两台服务器之间进行增量数据同步</p>
-</blockquote>
-<span id="more"></span>
-<ul>
-<li>SSH 模式（推荐新手）：A 和 B 都安装 rsync 工具（无需启动服务），通过 SSH 通信。</li>
-<li>daemon 模式（适合大规模部署）：仅 B 安装并启动 rsync 服务，A 作为客户端安装 rsync 工具即可。</li>
-</ul>
-<h3 id="daemon-模式"><a href="#daemon-模式" class="headerlink" title="daemon 模式"></a>daemon 模式</h3><blockquote>
-<p>A,B两台服务器同步数据，其中A作为服务端，B拉取A上数据</p>
-</blockquote>
-<h4 id="源服务器-A-配置-rsync-服务"><a href="#源服务器-A-配置-rsync-服务" class="headerlink" title="源服务器 A 配置 rsync 服务"></a>源服务器 A 配置 rsync 服务</h4><h5 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h5><figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">uid = root</span><br><span class="line">gid = root</span><br><span class="line">use chroot = no</span><br><span class="line">max connections = <span class="number">5</span></span><br><span class="line">pid <span class="built_in">file</span> = /var/<span class="built_in">run</span>/rsyncd.pid</span><br><span class="line"><span class="built_in">log</span> <span class="built_in">file</span> = /var/<span class="built_in">log</span>/rsyncd.<span class="built_in">log</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 模块配置（A 上需要被 B 拉取的目录）</span></span><br><span class="line">[aaa]               <span class="comment"># 模块名（B 拉取时需要指定）</span></span><br><span class="line">path = /home/     <span class="comment"># A 上的源数据目录</span></span><br><span class="line">comment = Data <span class="keyword">to</span> be pulled <span class="keyword">by</span> B</span><br><span class="line"><span class="built_in">read</span> only = yes             <span class="comment"># 只读（防止 B 意外修改 A 的数据）</span></span><br><span class="line"><span class="built_in">list</span> = yes</span><br><span class="line">auth users = testtest     <span class="comment"># 允许 B 访问的用户</span></span><br><span class="line">secrets <span class="built_in">file</span> = /etc/rsyncd.passwd  <span class="comment"># A 上的密码文件</span></span><br><span class="line">hosts allow = <span class="number">211.149</span><span class="number">.227</span><span class="number">.160</span>          <span class="comment"># 仅允许 B 的 IP 访问</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="创建密码文件"><a href="#创建密码文件" class="headerlink" title="创建密码文件"></a>创建密码文件</h5><p>在 A 上设置授权用户和密码</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;rsync_user:your_password&quot;</span> &gt; /etc/rsyncd.passwd</span><br><span class="line"><span class="built_in">chmod</span> 600 /etc/rsyncd.passwd  <span class="comment"># 必须设置 600 权限</span></span><br></pre></td></tr></table></figure>
-<h5 id="启动-rsync-服务"><a href="#启动-rsync-服务" class="headerlink" title="启动 rsync 服务"></a>启动 rsync 服务</h5><figure class="highlight nsis"><table><tr><td class="code"><pre><span class="line"><span class="params">system</span>ctl start rsyncd</span><br><span class="line"><span class="params">system</span>ctl enable rsyncd</span><br><span class="line"><span class="comment"># 开放 873 端口（防火墙配置同前）</span></span><br></pre></td></tr></table></figure>
-<h5 id="防火墙配置（如果启用）"><a href="#防火墙配置（如果启用）" class="headerlink" title="防火墙配置（如果启用）"></a>防火墙配置（如果启用）</h5><figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="comment"># CentOS/RHEL</span></span><br><span class="line">firewall-cmd <span class="params">--add-port=873/tcp</span> <span class="params">--permanent</span></span><br><span class="line">firewall-cmd <span class="params">--reload</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Ubuntu/Debian</span></span><br><span class="line">ufw allow 873/tcp</span><br><span class="line">ufw <span class="keyword">reload</span></span><br></pre></td></tr></table></figure>
-<h4 id="目标服务器-B-配置（客户端，主动拉取）"><a href="#目标服务器-B-配置（客户端，主动拉取）" class="headerlink" title="目标服务器 B 配置（客户端，主动拉取）"></a>目标服务器 B 配置（客户端，主动拉取）</h4><h5 id="安装-rsync-工具（无需启动服务"><a href="#安装-rsync-工具（无需启动服务" class="headerlink" title="安装 rsync 工具（无需启动服务)"></a>安装 rsync 工具（无需启动服务)</h5><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="comment"># CentOS/RHEL</span></span><br><span class="line">yum <span class="keyword">install</span> rsync -y</span><br><span class="line"><span class="comment"># Ubuntu/Debian</span></span><br><span class="line">apt-get <span class="keyword">install</span> rsync -y</span><br></pre></td></tr></table></figure>
-<h5 id="创建密码文件（仅包含密码，与-A-一致）"><a href="#创建密码文件（仅包含密码，与-A-一致）" class="headerlink" title="创建密码文件（仅包含密码，与 A 一致）"></a>创建密码文件（仅包含密码，与 A 一致）</h5><p>echo “your_password” &gt; &#x2F;etc&#x2F;rsync_client.pass<br>chmod 600 &#x2F;etc&#x2F;rsync_client.pass</p>
-<h5 id="测试拉取命令"><a href="#测试拉取命令" class="headerlink" title="测试拉取命令"></a>测试拉取命令</h5><p>rsync -avz –password-file&#x3D;&#x2F;etc&#x2F;rsync_client.pass rsync_user@A_IP::source_data &#x2F;B的目标目录&#x2F;</p>
-<ul>
-<li>source_data 是 A 上配置的模块名</li>
-<li>&#x2F;B的目标目录&#x2F; 是 B 上存储拉取数据的路径</li>
-</ul>
-<h5 id="自动化拉取（B-定时任务）"><a href="#自动化拉取（B-定时任务）" class="headerlink" title="自动化拉取（B 定时任务）"></a>自动化拉取（B 定时任务）</h5><figure class="highlight dts"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br><span class="line"><span class="meta"># 添加任务（每天凌晨 4 点从 A 拉取数据）</span></span><br><span class="line"><span class="number">0</span> <span class="number">4</span> * * * rsync -avz --<span class="attr">password-file</span><span class="operator">=</span><span class="keyword">/etc/</span>rsync_client.pass rsync_user@A_IP::source_data /B的目标目录/ &gt;&gt; <span class="keyword">/var/</span>log/rsync_pull.log <span class="number">2</span>&gt;<span class="variable">&amp;1</span></span><br></pre></td></tr></table></figure>
-<hr>
-<p>如果B作为rsync服务器，A同步数据到B，服务安装到B上，安装方式和之前一样<br>从服务器 A 同步数据到服务器 B，命令格式：</p>
-<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">rsync -avz --password-<span class="keyword">file</span>=<span class="regexp">/etc/</span>rsync_client.pass <span class="regexp">/本地需要同步的目录/</span> rsync_user@B_IP::sync_data</span><br><span class="line"># 同步 <span class="regexp">/data/</span><span class="keyword">source</span> 目录到服务器 B 的 sync_data 模块（对应 <span class="regexp">/data/</span>to/sync 目录）</span><br><span class="line">rsync -avz --password-<span class="keyword">file</span>=<span class="regexp">/etc/</span>rsync_client.pass <span class="regexp">/data/</span><span class="keyword">source</span>/ rsync_user@<span class="number">192.168</span>.<span class="number">1.100</span>::sync_data</span><br></pre></td></tr></table></figure>
-<ul>
-<li>–password-file：指定密码文件，避免手动输入密码</li>
-<li>B_IP::sync_data：sync_data 是服务器 B 配置文件中定义的模块名</li>
-</ul>
-<h3 id="SSH-模式"><a href="#SSH-模式" class="headerlink" title="SSH 模式"></a>SSH 模式</h3><blockquote>
-<p>两台服务器（源服务器 A 和目标服务器 B）需安装 rsync<br>确保服务器之间网络互通（默认使用 SSH 端口 22）<br>推荐使用 SSH 密钥认证实现免密登录（提高安全性和自动化能力）</p>
-</blockquote>
-<h5 id="安装-rsync"><a href="#安装-rsync" class="headerlink" title="安装 rsync"></a>安装 rsync</h5><figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="comment"># CentOS/RHEL 系统</span></span><br><span class="line">yum <span class="keyword">install</span> rsync -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># Ubuntu/Debian 系统</span></span><br><span class="line">apt-get <span class="keyword">install</span> rsync -y</span><br></pre></td></tr></table></figure>
-<h5 id="配置-SSH-免密登录（推荐）"><a href="#配置-SSH-免密登录（推荐）" class="headerlink" title="配置 SSH 免密登录（推荐）"></a>配置 SSH 免密登录（推荐）</h5><p>在源服务器 A 生成密钥对：</p>
-<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -P <span class="string">&quot;&quot;</span>  <span class="meta"># 一路回车，生成无密码密钥对</span></span><br></pre></td></tr></table></figure>
-<p>将公钥复制到目标服务器 B</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">ssh<span class="operator">-</span><span class="keyword">copy</span><span class="operator">-</span>id <span class="keyword">user</span><span class="variable">@B_IP</span>  # <span class="keyword">user</span> 是服务器 B 的用户名，B_IP 是服务器 B 的 IP 地址</span><br></pre></td></tr></table></figure>
-<p>验证免密登录</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ssh</span> user<span class="variable">@B_IP</span>  <span class="comment"># 无需输入密码即可登录则配置成功</span></span><br></pre></td></tr></table></figure>
-<h5 id="rsync-同步命令及常用场景"><a href="#rsync-同步命令及常用场景" class="headerlink" title="rsync 同步命令及常用场景"></a>rsync 同步命令及常用场景</h5><p>基础同步命令格式</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">rsync <span class="selector-attr">[选项]</span> 源路径 目标路径</span><br></pre></td></tr></table></figure>
-<h5 id="常用场景示例"><a href="#常用场景示例" class="headerlink" title="常用场景示例"></a>常用场景示例</h5><p>从本地（A）同步到远程（B）</p>
-<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 同步单个文件</span></span><br><span class="line">rsync -avz /local/path/file.txt user<span class="variable">@B_IP</span><span class="symbol">:/remote/path/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 同步目录（注意源目录后是否带 / 的区别）</span></span><br><span class="line">rsync -avz /local/dir/ user<span class="variable">@B_IP</span><span class="symbol">:/remote/dir/</span>  <span class="comment"># 同步目录内内容（不含目录本身）</span></span><br><span class="line">rsync -avz /local/dir user<span class="variable">@B_IP</span><span class="symbol">:/remote/</span>       <span class="comment"># 同步目录本身及内容</span></span><br></pre></td></tr></table></figure>
-<h5 id="从远程（B）同步到本地（A）"><a href="#从远程（B）同步到本地（A）" class="headerlink" title="从远程（B）同步到本地（A）"></a>从远程（B）同步到本地（A）</h5><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">rsync -avz user<span class="variable">@B_IP</span><span class="symbol">:/remote/path/</span> /local/path/</span><br></pre></td></tr></table></figure>
-<h5 id="常用选项说明"><a href="#常用选项说明" class="headerlink" title="常用选项说明"></a>常用选项说明</h5><p>-a：归档模式（递归同步并保留几乎所有文件属性）<br>-v：显示详细同步过程<br>-z：传输时压缩数据（节省带宽）<br>-delete：删除目标端存在但源端不存在的文件（保持完全一致）<br>-P：断点续传（显示进度并保留部分传输的文件）</p>
-<h5 id="自动化同步配置（定时任务）"><a href="#自动化同步配置（定时任务）" class="headerlink" title="自动化同步配置（定时任务）"></a>自动化同步配置（定时任务）</h5><p>如果需要定期自动同步，可通过 crontab 设置定时任务</p>
-<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br><span class="line"><span class="comment"># 每天凌晨 2 点同步本地目录到远程服务器</span></span><br><span class="line"><span class="number">0</span> <span class="number">2</span> * * * rsync -avz --delete /local/dir/ user<span class="variable">@B_IP</span><span class="symbol">:/remote/dir/</span> &gt;&gt; <span class="regexp">/var/log</span><span class="regexp">/rsync.log 2&gt;&amp;1</span></span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>装饰器</title>
@@ -1326,20 +1326,29 @@ fi
       </tags>
   </entry>
   <entry>
-    <title>查询mssql对应bak版本</title>
-    <url>/2023/12/18/%E6%9F%A5%E8%AF%A2mssql%E5%AF%B9%E5%BA%94bak%E7%89%88%E6%9C%AC/</url>
+    <title>部署https后有资源使用http时解决办法</title>
+    <url>/2024/09/06/%E9%83%A8%E7%BD%B2https%E5%90%8E%E6%9C%89%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8http%E6%97%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
     <content><![CDATA[<blockquote>
-<p>SQLServer 的备份文件是以.bak 为后缀的文件，如果想要通过备份文件查看数据库版本，通常的做法就是把数据库还原，但是在还原的过程，如果不是相同的数据库版本，就会导致无法还原；<br>在数据库中，低版本的备份文件是可以还原到高版本的数据库中，高的就不可以了，比如SQLSERVER 2008 的备份文件可以在SQLSERVER 2012 中还原，2012就不能在2008中还原</p>
+<p>HTTPS 是 HTTP over Secure Socket Layer，以安全为目标的 HTTP 通道，所以在 HTTPS 承载的页面上不允许出现 http 请求，一旦出现就是提示或报错：</p>
+<blockquote>
+<p>Mixed Content: The page at ‘<a href="https://www.taobao.com/%E2%80%98">https://www.taobao.com/‘</a> was loaded over HTTPS, but requested an insecure image ‘<a href="http://g.alicdn.com/s.gif%E2%80%99">http://g.alicdn.com/s.gif’</a>. This content should also be served over HTTPS.<br>upgrade-insecure-requests CSP 指令的作用就是让浏览器自动升级请求，防止访问者访问不安全的内容。<br>该指令用于让浏览器自动升级请求从http到https,用于大量包含http资源的http网页直接升级到https而不会报错.简洁的来讲,就相当于在http和https之间起的一个过渡作用.</p>
+</blockquote>
 </blockquote>
 <span id="more"></span>
+<h3 id="处理办法"><a href="#处理办法" class="headerlink" title="处理办法"></a>处理办法</h3><h5 id="html强制让http的访问Https"><a href="#html强制让http的访问Https" class="headerlink" title="html强制让http的访问Https"></a>html强制让http的访问Https</h5><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">&lt;meta <span class="attribute">http-equiv</span>=<span class="string">&quot;Content-Security-Policy&quot;</span> <span class="attribute">content</span>=<span class="string">&quot;upgrade-insecure-requests&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="php强制让http的访问Https"><a href="#php强制让http的访问Https" class="headerlink" title="php强制让http的访问Https"></a>php强制让http的访问Https</h5><figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">header(<span class="string">&quot;Content-Security-Policy: upgrade-insecure-requests&quot;</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 
-<p>这时候，我们就可以用一段脚本来查看，如下：<br><code>RESTORE HEADERONLY  FROM DISK =&#39;D:\mssqlupload\53office_data.bak&#39; WITH NOUNLOAD;</code><br><img src="/2023/12/18/%E6%9F%A5%E8%AF%A2mssql%E5%AF%B9%E5%BA%94bak%E7%89%88%E6%9C%AC/image.jpg"></p>
-]]></content>
+<h5 id="nginx-强制让http的访问Https"><a href="#nginx-强制让http的访问Https" class="headerlink" title="nginx 强制让http的访问Https"></a>nginx 强制让http的访问Https</h5><figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">#HTTP_TO_HTTPS_END</span></span><br><span class="line">    <span class="attribute">ssl_certificate</span>    /etc/letsencrypt/live/yogayx.com/fullchain.pem;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span>    /etc/letsencrypt/live/yogayx.com/privkey.pem;</span><br><span class="line">    <span class="attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</span><br><span class="line">    <span class="attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;</span><br><span class="line">    <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">ssl_session_cache</span> shared:SSL:<span class="number">10m</span>;</span><br><span class="line">    <span class="attribute">ssl_session_timeout</span> <span class="number">10m</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">add_header</span> Content-Security-Policy <span class="string">&quot;upgrade-insecure-requests;connect-src *&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">error_page</span> <span class="number">497</span>  https://<span class="variable">$host</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">add_header Content-<span class="keyword">Security</span>-<span class="keyword">Policy</span> &quot;upgrade-insecure-requests;connect-src *&quot;;</span><br></pre></td></tr></table></figure>
+<h5 id="IIS"><a href="#IIS" class="headerlink" title="IIS"></a>IIS</h5><p><img src="/2024/09/06/%E9%83%A8%E7%BD%B2https%E5%90%8E%E6%9C%89%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8http%E6%97%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/15925431862952238.png"></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span>   </span><br><span class="line">      <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">system.webServer</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">httpProtocol</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">customHeaders</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">add</span> <span class="attr">name</span>=<span class="string">&quot;Content-Security-Policy&quot;</span> <span class="attr">value</span>=<span class="string">&quot;upgrade-insecure-requests&quot;</span> /&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">customHeaders</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">httpProtocol</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">system.webServer</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h5><p>可直接在网站根目录.htaccess中定义</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">&lt;IFModule mod_headers.c&gt;     </span><br><span class="line">    <span class="keyword">Header</span> <span class="keyword">add</span> Content-<span class="keyword">Security</span>-<span class="keyword">Policy</span> upgrade-insecure-requests</span><br><span class="line">&lt;/IFModule&gt;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>mssql</category>
+        <category>nginx</category>
       </categories>
       <tags>
-        <tag>mssql</tag>
+        <tag>nginx</tag>
       </tags>
   </entry>
   <entry>
@@ -1371,6 +1380,23 @@ fi
       </categories>
       <tags>
         <tag>windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>查询mssql对应bak版本</title>
+    <url>/2023/12/18/%E6%9F%A5%E8%AF%A2mssql%E5%AF%B9%E5%BA%94bak%E7%89%88%E6%9C%AC/</url>
+    <content><![CDATA[<blockquote>
+<p>SQLServer 的备份文件是以.bak 为后缀的文件，如果想要通过备份文件查看数据库版本，通常的做法就是把数据库还原，但是在还原的过程，如果不是相同的数据库版本，就会导致无法还原；<br>在数据库中，低版本的备份文件是可以还原到高版本的数据库中，高的就不可以了，比如SQLSERVER 2008 的备份文件可以在SQLSERVER 2012 中还原，2012就不能在2008中还原</p>
+</blockquote>
+<span id="more"></span>
+
+<p>这时候，我们就可以用一段脚本来查看，如下：<br><code>RESTORE HEADERONLY  FROM DISK =&#39;D:\mssqlupload\53office_data.bak&#39; WITH NOUNLOAD;</code><br><img src="/2023/12/18/%E6%9F%A5%E8%AF%A2mssql%E5%AF%B9%E5%BA%94bak%E7%89%88%E6%9C%AC/image.jpg"></p>
+]]></content>
+      <categories>
+        <category>mssql</category>
+      </categories>
+      <tags>
+        <tag>mssql</tag>
       </tags>
   </entry>
   <entry>
@@ -1415,32 +1441,6 @@ fi
       </categories>
       <tags>
         <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>部署https后有资源使用http时解决办法</title>
-    <url>/2024/09/06/%E9%83%A8%E7%BD%B2https%E5%90%8E%E6%9C%89%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8http%E6%97%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</url>
-    <content><![CDATA[<blockquote>
-<p>HTTPS 是 HTTP over Secure Socket Layer，以安全为目标的 HTTP 通道，所以在 HTTPS 承载的页面上不允许出现 http 请求，一旦出现就是提示或报错：</p>
-<blockquote>
-<p>Mixed Content: The page at ‘<a href="https://www.taobao.com/%E2%80%98">https://www.taobao.com/‘</a> was loaded over HTTPS, but requested an insecure image ‘<a href="http://g.alicdn.com/s.gif%E2%80%99">http://g.alicdn.com/s.gif’</a>. This content should also be served over HTTPS.<br>upgrade-insecure-requests CSP 指令的作用就是让浏览器自动升级请求，防止访问者访问不安全的内容。<br>该指令用于让浏览器自动升级请求从http到https,用于大量包含http资源的http网页直接升级到https而不会报错.简洁的来讲,就相当于在http和https之间起的一个过渡作用.</p>
-</blockquote>
-</blockquote>
-<span id="more"></span>
-<h3 id="处理办法"><a href="#处理办法" class="headerlink" title="处理办法"></a>处理办法</h3><h5 id="html强制让http的访问Https"><a href="#html强制让http的访问Https" class="headerlink" title="html强制让http的访问Https"></a>html强制让http的访问Https</h5><figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">&lt;meta <span class="attribute">http-equiv</span>=<span class="string">&quot;Content-Security-Policy&quot;</span> <span class="attribute">content</span>=<span class="string">&quot;upgrade-insecure-requests&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
-<h5 id="php强制让http的访问Https"><a href="#php强制让http的访问Https" class="headerlink" title="php强制让http的访问Https"></a>php强制让http的访问Https</h5><figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">header(<span class="string">&quot;Content-Security-Policy: upgrade-insecure-requests&quot;</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="nginx-强制让http的访问Https"><a href="#nginx-强制让http的访问Https" class="headerlink" title="nginx 强制让http的访问Https"></a>nginx 强制让http的访问Https</h5><figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">#HTTP_TO_HTTPS_END</span></span><br><span class="line">    <span class="attribute">ssl_certificate</span>    /etc/letsencrypt/live/yogayx.com/fullchain.pem;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span>    /etc/letsencrypt/live/yogayx.com/privkey.pem;</span><br><span class="line">    <span class="attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span>;</span><br><span class="line">    <span class="attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;</span><br><span class="line">    <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">ssl_session_cache</span> shared:SSL:<span class="number">10m</span>;</span><br><span class="line">    <span class="attribute">ssl_session_timeout</span> <span class="number">10m</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">add_header</span> Content-Security-Policy <span class="string">&quot;upgrade-insecure-requests;connect-src *&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">error_page</span> <span class="number">497</span>  https://<span class="variable">$host</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">add_header Content-<span class="keyword">Security</span>-<span class="keyword">Policy</span> &quot;upgrade-insecure-requests;connect-src *&quot;;</span><br></pre></td></tr></table></figure>
-<h5 id="IIS"><a href="#IIS" class="headerlink" title="IIS"></a>IIS</h5><p><img src="/2024/09/06/%E9%83%A8%E7%BD%B2https%E5%90%8E%E6%9C%89%E8%B5%84%E6%BA%90%E4%BD%BF%E7%94%A8http%E6%97%B6%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/15925431862952238.png"></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span>   </span><br><span class="line">      <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">system.webServer</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">httpProtocol</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">customHeaders</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">add</span> <span class="attr">name</span>=<span class="string">&quot;Content-Security-Policy&quot;</span> <span class="attr">value</span>=<span class="string">&quot;upgrade-insecure-requests&quot;</span> /&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">customHeaders</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">httpProtocol</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">system.webServer</span>&gt;</span> </span><br><span class="line">        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h5 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h5><p>可直接在网站根目录.htaccess中定义</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">&lt;IFModule mod_headers.c&gt;     </span><br><span class="line">    <span class="keyword">Header</span> <span class="keyword">add</span> Content-<span class="keyword">Security</span>-<span class="keyword">Policy</span> upgrade-insecure-requests</span><br><span class="line">&lt;/IFModule&gt;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>nginx</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
       </tags>
   </entry>
 </search>

@@ -1,6 +1,6 @@
+https://yccoin.github.io/2025/11/28/%E4%BC%AA%E9%9D%99%E6%80%81%E5%B1%8F%E8%94%BD%E5%BC%82%E5%B8%B8%E8%AF%B7%E6%B1%82/
 https://yccoin.github.io/2025/12/22/msxm13-dll%E9%94%99%E8%AF%AF%E2%80%9C80070005%E2%80%9D/
 https://yccoin.github.io/2025/12/06/wordpress%20%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98%E6%88%96%E8%80%85%E6%8F%92%E4%BB%B6%E6%8A%A5%E9%94%99curl%20error%2060/
-https://yccoin.github.io/2025/11/28/%E4%BC%AA%E9%9D%99%E6%80%81%E5%B1%8F%E8%94%BD%E5%BC%82%E5%B8%B8%E8%AF%B7%E6%B1%82/
 https://yccoin.github.io/2025/10/29/centos8%20steam%E6%9B%B4%E6%8D%A2%E6%BA%90/
 https://yccoin.github.io/2025/09/01/%E4%BA%91%E9%94%81%E5%AE%89%E8%A3%85%E5%90%8Enginx%E9%98%B2%E6%8A%A4%E7%8A%B6%E6%80%81%E5%85%B3%E9%97%AD%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86/
 https://yccoin.github.io/2025/08/29/%E4%B8%A4%E5%8F%B0%E4%B8%BB%E6%9C%BA%E9%80%9A%E8%BF%87rsync%E5%90%8C%E6%AD%A5%E6%95%B0%E6%8D%AE/
@@ -45,8 +45,8 @@ https://yccoin.github.io/categories/index.html
 https://yccoin.github.io/tags/index.html
 https://yccoin.github.io/
 https://yccoin.github.io/tags/software/
-https://yccoin.github.io/tags/linux/
 https://yccoin.github.io/tags/nginx/
+https://yccoin.github.io/tags/linux/
 https://yccoin.github.io/tags/php/
 https://yccoin.github.io/tags/mysql/
 https://yccoin.github.io/tags/rewrite/

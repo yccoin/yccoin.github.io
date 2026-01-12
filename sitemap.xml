@@ -423,14 +423,14 @@
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/tags/nginx/</loc>
+    <loc>https://yccoin.github.io/tags/linux/</loc>
     <lastmod>2026-01-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/tags/linux/</loc>
+    <loc>https://yccoin.github.io/tags/nginx/</loc>
     <lastmod>2026-01-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -451,14 +451,14 @@
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/tags/rewrite/</loc>
+    <loc>https://yccoin.github.io/tags/shell/</loc>
     <lastmod>2026-01-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/tags/shell/</loc>
+    <loc>https://yccoin.github.io/tags/rewrite/</loc>
     <lastmod>2026-01-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -544,14 +544,14 @@
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/categories/rewrite/</loc>
+    <loc>https://yccoin.github.io/categories/shell/</loc>
     <lastmod>2026-01-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yccoin.github.io/categories/shell/</loc>
+    <loc>https://yccoin.github.io/categories/rewrite/</loc>
     <lastmod>2026-01-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
